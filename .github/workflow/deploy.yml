@@ -27,9 +27,9 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << EOF
             cd apps
-            cd nextjs-folder-structure-example
+            cd natalia-epic-movie-quotes-front
             git pull
             npm ci
             npm run build
-            pm2 restart nextjs-example-process
+            pm2 restart natalia-epic-movie-quotes-front
           EOF

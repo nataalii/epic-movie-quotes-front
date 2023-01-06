@@ -4,5 +4,10 @@
 
 @font-face {
     font-family: 'Helvetica';
-    src: url('../public/fonts/Helvetica\ Neue\ UltraLight.ttf');
+    src: url('../public/fonts/Helvetica.ttf');
+}
+
+.bg-linear-gradient {
+    background: linear-gradient(180deg, #11101A 0%, rgba(71, 71, 71, 0) 30%,  rgba(0, 0, 0, 0) 100%),
+    linear-gradient(90deg, #11101A 0%, rgba(71, 71, 71, 0) 30%, rgba(17, 16, 26, 0) 40%, rgba(0, 0, 0, 0) 100%);
 }

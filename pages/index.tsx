@@ -1,24 +1,31 @@
-import Arrow from '../components/icons/Arrow';
-import Button from '../components/button/Button';
+import { Button, BackgroundImage, Footer, Header } from 'components';
 export default function Home() {
   return (
-    <>
-      <header className=' w-5/6 m-auto bg-blue-900 font-helvetica'>
-        <div className='flex justify-between items-center py-6 '>
-          <h2 className='uppercase text-[#DDCCAA] font-extrabold'>
-            movie quotes
-          </h2>
-          <div className='flex justify-center items-center gap-4 text-white font-extrabold'>
-            <ul className='w-24 text-center hidden md:block'>
-              <li className='flex flex-row justify-center items-center gap-3'>
-                Eng <Arrow />
-              </li>
-            </ul>
-            <Button item='Sign Up' color='red' />
-            <Button item='Log in' color='transparent' />
-          </div>
-        </div>
-      </header>
-    </>
+    <div className='bg-[#11101A] text-[#DDCCAA] font-helvetica '>
+      <Header />
+      <div className='flex justify-center items-center gap-6 flex-col h-[37rem]'>
+        <h1 className='lg:w-[42rem] text-2xl lg:text-[4rem] text-center font-semibold leading-normal whitespace-pre-wrap'>
+          Find any quote in <br /> millions of movie lines
+        </h1>
+        <Button item='Get Started' color='red' size='lg:text-2xl' />
+      </div>
+      <BackgroundImage
+        img='bg-interstellar bg-linear-top-left  '
+        quote='“You have to leave somethig behind to go forward”'
+        movieName='Interstellar, 2014'
+      />
+
+      <BackgroundImage
+        img='bg-tenebaums lg:bg-fixed'
+        quote='“I think we’re just gonna have to be secretly in love with earch other and leave it that“'
+        movieName='The Royal Tenenbaums, 2001'
+      />
+      <BackgroundImage
+        img='bg-lord-of-rings  lg:bg-fixed'
+        quote='“Even the smallest person can change the course of the future”'
+        movieName='The Lord of the Rings, 2001'
+      />
+      <Footer />
+    </div>
   );
 }

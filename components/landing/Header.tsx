@@ -1,8 +1,8 @@
 import { Button } from 'components';
-import LocaleSwitcher from 'components/localSwitcher/LocalSwitcher';
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { LocalSwitcher } from 'components';
 
 const Header = () => {
   const router = useRouter();
@@ -16,7 +16,7 @@ const Header = () => {
       <div className='flex justify-between items-center py-6 '>
         <h2 className='uppercase font-bold '>{t('movie_quotes')}</h2>
         <div className='flex justify-center items-center gap-4 '>
-          <LocaleSwitcher selected={selected} setSelected={setSelected} />
+          <LocalSwitcher selected={selected} setSelected={setSelected} />
           <Button item={t('sign_up')} color='red' size='hidden ' />
           <Button item={t('log_in')} color='transparent' />
         </div>

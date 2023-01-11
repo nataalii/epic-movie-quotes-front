@@ -1,4 +1,4 @@
-import { FieldError } from 'react-hook-form';
+import { TextInput } from 'types';
 
 const TextInput = ({
   label,
@@ -7,14 +7,7 @@ const TextInput = ({
   register,
   errors,
   errorMessage,
-}: {
-  label: string;
-  name: string;
-  placeholder: string;
-  register: Object;
-  errors?: string | undefined | FieldError;
-  errorMessage?: string;
-}) => {
+}: TextInput) => {
   return (
     <div className='flex flex-col mt-6 sm:max-w-[22rem] w-[90%] m-auto text-[#6C757D]'>
       <label htmlFor={name} className='mb-2 text-white text-4'>

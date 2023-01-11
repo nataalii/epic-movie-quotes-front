@@ -1,17 +1,15 @@
-import { Button } from 'components/button';
-// import { ErrorMessage } from 'components/ErrorMessage';
-import TextInput from 'components/form/TextInput';
+import { Button, TextInput } from 'components';
 import useTranslation from 'next-translate/useTranslation';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { RegisterModal } from 'types';
 
-type FormValues = {
-  name: string;
-  email: string;
-  password: string;
-  confirm_password: string;
-};
-
-const RegisterFormModal = () => {
+const RegisterModal = ({
+  isVisible,
+  onClose,
+}: {
+  isVisible: boolean;
+  onClose: any;
+}) => {
   const { t } = useTranslation('common');
   const {
     register,
@@ -19,15 +17,26 @@ const RegisterFormModal = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<FormValues>({ mode: 'all', defaultValues: { name: '' } });
+  } = useForm<RegisterModal>({ mode: 'all' });
 
   console.log(control);
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<RegisterModal> = (data) => console.log(data);
 
+  if (!isVisible) return null;
   return (
-    <div className=' inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '>
-      <div className=' sm:w-[35rem] sm:h-auto sm:pb-14 w-screen h-screen  bg-[#222030] m-auto rounded-xl'>
+    <div
+      className=' inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
+      onClick={() => {
+        onClose();
+      }}
+    >
+      <div
+        className=' sm:w-[35rem] sm:h-auto sm:pb-14 w-screen h-screen  bg-[#222030] m-auto rounded-xl'
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <form className=' sm:mt-[6rem]' onSubmit={handleSubmit(onSubmit)}>
           <div className='text-center p-1 '>
             <h1 className='text-white text-2xl sm:text-[2rem]  mb-3 mt-20 sm:mt-8 '>
@@ -139,4 +148,4 @@ const RegisterFormModal = () => {
   );
 };
 
-export default RegisterFormModal;
+export default RegisterModal;

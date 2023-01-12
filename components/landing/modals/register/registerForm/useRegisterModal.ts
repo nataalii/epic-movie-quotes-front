@@ -12,8 +12,6 @@ const useRegisterModal = () => {
     formState: { errors },
   } = useForm<RegisterModalTypes>({ mode: 'all' });
 
-  console.log(control);
-
   const onSubmit: SubmitHandler<RegisterModalTypes> = (data) =>
     console.log(data);
 

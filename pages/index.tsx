@@ -1,14 +1,19 @@
 import { Button, BackgroundImage, Footer, Header } from 'components';
-import RegisterModal from 'components/modals/register/registerForm/registerModal';
+import { RegisterModal, LoginModal } from 'components';
 import useTranslation from 'next-translate/useTranslation';
 import { Fragment, useState } from 'react';
 export default function Home() {
   const { t } = useTranslation('common');
-  const [showModal, setShowModal] = useState(false);
+
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   return (
     <Fragment>
       <div className='bg-[#11101A] text-[#DDCCAA] font-helvetica '>
-        <Header />
+        <Header
+          setShowLoginModal={setShowLoginModal}
+          setShowRegisterModal={setShowRegisterModal}
+        />
         <div className='flex justify-center items-center gap-6 flex-col h-[42rem]  '>
           <h1 className='lg:max-w-[42rem] max-w-[20rem] w-[80%] text-2xl lg:text-[3.7rem] text-center font-semibold leading-normal whitespace-pre-wrap'>
             {t('welcome_text')}
@@ -17,7 +22,7 @@ export default function Home() {
             item={t('get_started')}
             color='red'
             size='lg:text-2xl'
-            onClick={() => setShowModal(true)}
+            onClick={() => setShowRegisterModal(true)}
           />
         </div>
         <BackgroundImage
@@ -39,8 +44,12 @@ export default function Home() {
         <Footer />
 
         <RegisterModal
-          isVisible={showModal}
-          onClose={() => setShowModal(false)}
+          isVisible={showRegisterModal}
+          onClose={() => setShowRegisterModal(false)}
+        />
+        <LoginModal
+          isVisible={showLoginModal}
+          onClose={() => setShowLoginModal(false)}
         />
       </div>
     </Fragment>

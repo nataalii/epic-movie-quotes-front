@@ -3,4 +3,4 @@ export * from './landing';
 export * from './button';
 export * from './form';
 export * from './localSwitcher';
-export * from './modals';
+export * from './landing/modals';

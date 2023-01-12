@@ -1,10 +1,16 @@
 import { Button } from 'components';
 import useTranslation from 'next-translate/useTranslation';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/router';
 import { LocalSwitcher } from 'components';
 
-const Header = () => {
+const Header = ({
+  setShowRegisterModal,
+  setShowLoginModal,
+}: {
+  setShowRegisterModal: Dispatch<SetStateAction<boolean>>;
+  setShowLoginModal: Dispatch<SetStateAction<boolean>>;
+}) => {
   const router = useRouter();
   const [selected, setSelected] = useState(
     router.locale === 'en' ? 'Eng' : 'ქართ'
@@ -17,8 +23,17 @@ const Header = () => {
         <h2 className='uppercase font-bold '>{t('movie_quotes')}</h2>
         <div className='flex justify-center items-center gap-4 '>
           <LocalSwitcher selected={selected} setSelected={setSelected} />
-          <Button item={t('sign_up')} color='red' size='hidden ' />
-          <Button item={t('log_in')} color='transparent' />
+          <Button
+            item={t('sign_up')}
+            color='red'
+            size='hidden '
+            onClick={() => setShowRegisterModal(true)}
+          />
+          <Button
+            item={t('log_in')}
+            color='transparent'
+            onClick={() => setShowLoginModal(true)}
+          />
         </div>
       </div>
     </header>

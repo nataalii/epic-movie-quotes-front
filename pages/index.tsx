@@ -1,31 +1,48 @@
 import { Button, BackgroundImage, Footer, Header } from 'components';
+import RegisterModal from 'components/modals/register/registerForm/registerModal';
+import useTranslation from 'next-translate/useTranslation';
+import { Fragment, useState } from 'react';
 export default function Home() {
+  const { t } = useTranslation('common');
+  const [showModal, setShowModal] = useState(false);
   return (
-    <div className='bg-[#11101A] text-[#DDCCAA] font-helvetica '>
-      <Header />
-      <div className='flex justify-center items-center gap-6 flex-col h-[37rem]'>
-        <h1 className='lg:w-[42rem] text-2xl lg:text-[4rem] text-center font-semibold leading-normal whitespace-pre-wrap'>
-          Find any quote in <br /> millions of movie lines
-        </h1>
-        <Button item='Get Started' color='red' size='lg:text-2xl' />
-      </div>
-      <BackgroundImage
-        img='bg-interstellar bg-linear-top-left  '
-        quote='“You have to leave somethig behind to go forward”'
-        movieName='Interstellar, 2014'
-      />
+    <Fragment>
+      <div className='bg-[#11101A] text-[#DDCCAA] font-helvetica '>
+        <Header />
+        <div className='flex justify-center items-center gap-6 flex-col h-[42rem]  '>
+          <h1 className='lg:max-w-[42rem] max-w-[20rem] w-[80%] text-2xl lg:text-[3.7rem] text-center font-semibold leading-normal whitespace-pre-wrap'>
+            {t('welcome_text')}
+          </h1>
+          <Button
+            item={t('get_started')}
+            color='red'
+            size='lg:text-2xl'
+            onClick={() => setShowModal(true)}
+          />
+        </div>
+        <BackgroundImage
+          img='bg-interstellar bg-linear-top-left  '
+          quote={t('interstellar_quote')}
+          movieName={t('interstellar_title')}
+        />
 
-      <BackgroundImage
-        img='bg-tenebaums lg:bg-fixed'
-        quote='“I think we’re just gonna have to be secretly in love with earch other and leave it that“'
-        movieName='The Royal Tenenbaums, 2001'
-      />
-      <BackgroundImage
-        img='bg-lord-of-rings  lg:bg-fixed'
-        quote='“Even the smallest person can change the course of the future”'
-        movieName='The Lord of the Rings, 2001'
-      />
-      <Footer />
-    </div>
+        <BackgroundImage
+          img='bg-tenebaums lg:bg-fixed'
+          quote={t('tenenbaums_quote')}
+          movieName={t('tenenbaums_title')}
+        />
+        <BackgroundImage
+          img='bg-lord-of-rings  lg:bg-fixed'
+          quote={t('lotr_quote')}
+          movieName={t('lotr_title')}
+        />
+        <Footer />
+
+        <RegisterModal
+          isVisible={showModal}
+          onClose={() => setShowModal(false)}
+        />
+      </div>
+    </Fragment>
   );
 }

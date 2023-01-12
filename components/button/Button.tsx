@@ -1,8 +1,7 @@
 import React from 'react';
+import { ButtonProps } from 'types';
 
-const Button: React.FC<{ item: string; color: string; size?: string }> = (
-  props
-) => {
+const Button: React.FC<ButtonProps> = (props) => {
   return (
     <button
       className={
@@ -13,6 +12,7 @@ const Button: React.FC<{ item: string; color: string; size?: string }> = (
           ? ' px-6 py-2 text-white rounded-md outline-1 outline-white outline -outline-offset-1'
           : '')
       }
+      onClick={props.onClick}
     >
       {props.item}
     </button>

@@ -1,4 +1,4 @@
-export type RegisterModal = {
+export type RegisterModalTypes = {
   name: string;
   email: string;
   password: string;

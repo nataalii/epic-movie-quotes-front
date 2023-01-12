@@ -1,7 +1,5 @@
 import { Button, TextInput } from 'components';
-import useTranslation from 'next-translate/useTranslation';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { RegisterModal } from 'types';
+import useRegisterModal from './useRegisterModal';
 
 const RegisterModal = ({
   isVisible,
@@ -10,18 +8,8 @@ const RegisterModal = ({
   isVisible: boolean;
   onClose: any;
 }) => {
-  const { t } = useTranslation('common');
-  const {
-    register,
-    getValues,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<RegisterModal>({ mode: 'all' });
-
-  console.log(control);
-
-  const onSubmit: SubmitHandler<RegisterModal> = (data) => console.log(data);
+  const { t, register, getValues, handleSubmit, errors, onSubmit } =
+    useRegisterModal();
 
   if (!isVisible) return null;
   return (

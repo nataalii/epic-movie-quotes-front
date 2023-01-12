@@ -4,3 +4,8 @@ export type RegisterModalTypes = {
   password: string;
   confirm_password: string;
 };
+
+export type LoginModalTypes = {
+  email: string;
+  password: string;
+};

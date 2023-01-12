@@ -17,7 +17,7 @@ const TextInput = ({
         {...register}
         placeholder={placeholder}
         className={
-          'bg-[#CED4DA] pl-3 border-solid border-[0.12rem] p-[0.44rem] rounded-md ' +
+          'bg-[#CED4DA] pl-3 border-solid border-[0.15rem] p-[0.44rem] rounded-md ' +
           (errors
             ? 'border-danger'
             : name !== '' && !errors

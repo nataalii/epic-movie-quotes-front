@@ -1,5 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { registerRequest } from 'services';
 import { RegisterModalTypes } from 'types';
 
 const useRegisterModal = () => {
@@ -12,10 +13,9 @@ const useRegisterModal = () => {
     formState: { errors },
   } = useForm<RegisterModalTypes>({ mode: 'all' });
 
-  console.log(control);
-
-  const onSubmit: SubmitHandler<RegisterModalTypes> = (data) =>
-    console.log(data);
+  const onSubmit: SubmitHandler<RegisterModalTypes> = (data) => {
+    registerRequest(data);
+  };
 
   return { t, register, getValues, handleSubmit, control, errors, onSubmit };
 };

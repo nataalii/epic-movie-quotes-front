@@ -1,16 +1,27 @@
-import { RegisterModalTypes } from 'types';
-import axios from './axios';
+import { LoginModalTypes, RegisterModalTypes } from 'types';
+import instance from './axios';
 
 export const registerRequest = async (data: RegisterModalTypes) => {
-  try {
-    const response = await axios.post('/api/register', {
-      name: data.name,
-      email: data.email,
-      password: data.password,
-      confirm_password: data.confirm_password,
-    });
-    console.log(JSON.stringify(response));
-  } catch (err) {
-    console.log(err);
-  }
+  const response = await instance.post('/api/register', data);
+  console.log(response);
+};
+
+export const login = async (data: LoginModalTypes) => {
+  const loginResponse = await instance.post('/api/login', data);
+  return loginResponse;
+};
+
+export const fetchCSRFToken = async () => {
+  const csrfResponse = await instance.get('/sanctum/csrf-cookie');
+  return csrfResponse;
+};
+
+export const getUser = async () => {
+  const response = await instance.get('/api/user');
+  return response;
+};
+
+export const logout = async () => {
+  const response = await instance.get('api/logout');
+  return response;
 };

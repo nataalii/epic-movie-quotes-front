@@ -19,18 +19,17 @@ const useRegisterModal = () => {
       await fetchCSRFToken();
       await registerRequest(data);
     } catch (error: any) {
-      const nameError = error.response.data.errors.name;
-      const emailError = error.response.data.errors.email;
-      if (nameError) {
+      const errors = error.response.data.errors;
+      if (errors.name) {
         setError('name', {
           type: 'nameExists',
-          message: nameError[0],
+          message: errors.name[0],
         });
       }
-      if (emailError) {
+      if (errors.email) {
         setError('email', {
           type: 'emailExists',
-          message: emailError[0],
+          message: errors.email[0],
         });
       }
     }

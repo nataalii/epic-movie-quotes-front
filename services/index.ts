@@ -3,7 +3,7 @@ import instance from './axios';
 
 export const registerRequest = async (data: RegisterModalTypes) => {
   const response = await instance.post('/api/register', data);
-  console.log(response);
+  return response;
 };
 
 export const login = async (data: LoginModalTypes) => {

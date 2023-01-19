@@ -1,12 +1,15 @@
 import { Button, TextInput } from 'components';
+// import { Dispatch, SetStateAction } from 'react';
 import useRegisterModal from './useRegisterModal';
 
 const RegisterModal = ({
   isVisible,
   onClose,
-}: {
+}: // setShowLoginModal,
+{
   isVisible: boolean;
   onClose: any;
+  // setShowLoginModal: Dispatch<SetStateAction<boolean>>;
 }) => {
   const { t, register, getValues, handleSubmit, errors, onSubmit } =
     useRegisterModal();
@@ -53,7 +56,10 @@ const RegisterModal = ({
                 },
               })}
               errors={errors.name}
-              errorMessage={errors.name?.message}
+              errorMessage={
+                errors.name?.message ||
+                (errors.name?.type === 'nameExists' && errors.name.message)
+              }
             />
 
             <TextInput
@@ -68,7 +74,10 @@ const RegisterModal = ({
                 },
               })}
               errors={errors.email}
-              errorMessage={errors.email?.message}
+              errorMessage={
+                errors.email?.message ||
+                (errors.email?.type === 'emailExists' && errors.email.message)
+              }
             />
 
             <TextInput
@@ -125,7 +134,12 @@ const RegisterModal = ({
 
             <h1 className=' text-[#6C757D] before:content-[url("../components/icons/Google.tsx")] before:w-10'>
               Already have an account?
-              <a href='' className='text-[#0D6EFD] underline ml-2   '>
+              <a
+                className='text-[#0D6EFD] underline ml-2 '
+                onClick={() => {
+                  onClose();
+                }}
+              >
                 Log In
               </a>
             </h1>

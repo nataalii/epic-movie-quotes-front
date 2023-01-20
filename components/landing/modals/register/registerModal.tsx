@@ -1,15 +1,12 @@
 import { Button, TextInput } from 'components';
-// import { Dispatch, SetStateAction } from 'react';
 import useRegisterModal from './useRegisterModal';
 
 const RegisterModal = ({
   isVisible,
   onClose,
-}: // setShowLoginModal,
-{
+}: {
   isVisible: boolean;
   onClose: any;
-  // setShowLoginModal: Dispatch<SetStateAction<boolean>>;
 }) => {
   const { t, register, getValues, handleSubmit, errors, onSubmit } =
     useRegisterModal();
@@ -17,7 +14,7 @@ const RegisterModal = ({
   if (!isVisible) return null;
   return (
     <div
-      className=' inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
+      className=' flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
       onClick={() => {
         onClose();
       }}
@@ -28,7 +25,7 @@ const RegisterModal = ({
           e.stopPropagation();
         }}
       >
-        <form className=' sm:mt-[6rem]' onSubmit={handleSubmit(onSubmit)}>
+        <form className=' sm:mt-[1rem]' onSubmit={handleSubmit(onSubmit)}>
           <div className='text-center p-1 '>
             <h1 className='text-white text-2xl sm:text-[2rem]  mb-3 mt-20 sm:mt-8 '>
               Create an account

@@ -13,18 +13,18 @@ const LoginModal = ({
   if (!isVisible) return null;
   return (
     <div
-      className=' inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
+      className=' flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
       onClick={() => {
         onClose();
       }}
     >
       <div
-        className=' sm:w-[35rem] sm:h-auto sm:pb-14 w-screen h-screen  bg-[#222030] m-auto rounded-xl'
+        className=' sm:w-[35rem] sm:h-auto sm:pb-10 w-screen h-screen  bg-[#222030] m-auto rounded-xl'
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
-        <form className=' sm:mt-[9rem]' onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className='text-center p-1 '>
             <h1 className='text-white text-2xl sm:text-[2rem]  mb-3 mt-20 sm:mt-12 '>
               Log in to your account

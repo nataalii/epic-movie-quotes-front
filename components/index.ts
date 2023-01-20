@@ -1,5 +1,6 @@
 export * from './icons';
 export * from './landing';
+export * from './layout';
 export * from './button';
 export * from './form';
 export * from './localSwitcher';

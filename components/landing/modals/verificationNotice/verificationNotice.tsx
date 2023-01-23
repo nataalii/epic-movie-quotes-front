@@ -1,6 +1,14 @@
 import { Button, EmailSent, ModalLayout } from 'components';
 
-const VerificationNotice = () => {
+const VerificationNotice = ({
+  isVisible,
+  onClose,
+}: {
+  isVisible: boolean;
+  onClose: any;
+}) => {
+  if (!isVisible) return null;
+
   return (
     <ModalLayout
       image={<EmailSent />}
@@ -19,6 +27,9 @@ const VerificationNotice = () => {
           }}
         />
       }
+      onClose={() => {
+        onClose();
+      }}
     ></ModalLayout>
   );
 };

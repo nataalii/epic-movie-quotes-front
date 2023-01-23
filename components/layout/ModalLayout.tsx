@@ -5,6 +5,7 @@ const ModalLayout = (props: {
   title: string;
   text: string;
   button: any;
+  onClose: any;
 }) => {
   return (
     <Fragment>

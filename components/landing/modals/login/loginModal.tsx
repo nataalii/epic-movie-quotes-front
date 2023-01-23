@@ -1,4 +1,5 @@
-import { Button, TextInput } from 'components';
+import { Button, EyeClosed, EyeOpen, TextInput, Google } from 'components';
+import { useState } from 'react';
 import useLoginModal from './useLoginModal';
 
 const LoginModal = ({
@@ -8,7 +9,9 @@ const LoginModal = ({
   isVisible: boolean;
   onClose: any;
 }) => {
-  const { register, handleSubmit, errors, onSubmit } = useLoginModal();
+  const { register, getFieldState, handleSubmit, errors, onSubmit } =
+    useLoginModal();
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
 
   if (!isVisible) return null;
   return (
@@ -45,6 +48,7 @@ const LoginModal = ({
                   message: 'Email should contain min 3 symbols',
                 },
               })}
+              isDirty={getFieldState('email').isDirty}
               errors={errors.email}
               errorMessage={errors.email?.message}
             />
@@ -52,13 +56,25 @@ const LoginModal = ({
             <TextInput
               name='password'
               placeholder='Password'
+              type={passwordVisibility ? 'text' : 'password'}
               label={'Password'}
               register={register('password', {
                 required: 'Password field is required',
               })}
+              isDirty={getFieldState('password').isDirty}
               errors={errors.password}
               errorMessage={errors.password?.message}
             />
+            <div className='relative'>
+              <div
+                className='absolute bottom-3 right-[6%] sm:right-28 cursor-pointer'
+                onClick={() =>
+                  setPasswordVisibility((visibility) => !visibility)
+                }
+              >
+                {passwordVisibility ? <EyeOpen /> : <EyeClosed />}
+              </div>
+            </div>
           </div>
           <div className=' flex justify-between sm:max-w-[22rem] w-[90%] m-auto text-white mt-6 '>
             <div className='flex items-center'>
@@ -76,20 +92,18 @@ const LoginModal = ({
             </a>
           </div>
 
-          <div className=' flex flex-col gap-4 mt-4 items-center'>
+          <div className=' flex flex-col gap-4 mt-4 items-center relative'>
             <Button
               item={'Sign in'}
               color='red'
               size='sm:max-w-[22rem] w-[90%]'
             />
+            <div className='sm:max-w-[22rem] w-[90%] flex justify-center gap-2 px-6 py-2 text-white rounded-md outline-1 outline-white outline -outline-offset-1'>
+              <Google />
+              Sign in With Google
+            </div>
 
-            <Button
-              item={'Sign in With google'}
-              color='transparent'
-              size='sm:max-w-[22rem] w-[90%] '
-            />
-
-            <h1 className=' text-[#6C757D] before:content-[url("../components/icons/Google.tsx")] before:w-10'>
+            <h1 className=' text-[#6C757D]'>
               Dont have an account?
               <a href='' className='text-[#0D6EFD] underline ml-2'>
                 Sign up

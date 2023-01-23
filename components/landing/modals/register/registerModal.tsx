@@ -1,15 +1,30 @@
-import { Button, TextInput } from 'components';
+import { Button, EyeClosed, EyeOpen, TextInput } from 'components';
+import Google from 'components/icons/Google';
+import { useState } from 'react';
+import VerificationNotice from '../verificationNotice/verificationNotice';
 import useRegisterModal from './useRegisterModal';
 
 const RegisterModal = ({
   isVisible,
   onClose,
 }: {
-  isVisible: boolean;
-  onClose: any;
+  isVisible?: boolean;
+  onClose?: any;
 }) => {
-  const { t, register, getValues, handleSubmit, errors, onSubmit } =
-    useRegisterModal();
+  const {
+    t,
+    register,
+    getValues,
+    getFieldState,
+    handleSubmit,
+    errors,
+    onSubmit,
+    showNoticeModal,
+    setShowNoticeModal,
+  } = useRegisterModal();
+
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [passConfVisbility, setConfPassVisibility] = useState(false);
 
   if (!isVisible) return null;
   return (
@@ -37,6 +52,7 @@ const RegisterModal = ({
               name='name'
               placeholder='At least 3 & max.15 lower case characters'
               label={'Name'}
+              isDirty={getFieldState('name').isDirty}
               register={register('name', {
                 required: 'Field is required',
                 minLength: {
@@ -63,6 +79,7 @@ const RegisterModal = ({
               name='email'
               placeholder='Enter your email'
               label={'Email'}
+              isDirty={getFieldState('email').isDirty}
               register={register('email', {
                 required: 'Email field is required',
                 pattern: {
@@ -81,6 +98,8 @@ const RegisterModal = ({
               name='password'
               placeholder='At least 8 & max.15 lower case characters'
               label={'Password'}
+              type={passwordVisibility ? 'text' : 'password'}
+              isDirty={getFieldState('password').isDirty}
               register={register('password', {
                 required: 'password field is required',
                 minLength: {
@@ -95,11 +114,23 @@ const RegisterModal = ({
               errors={errors.password}
               errorMessage={errors.password?.message}
             />
+            <div className='relative'>
+              <div
+                className='absolute bottom-3 right-[6%] sm:right-28 cursor-pointer'
+                onClick={() =>
+                  setPasswordVisibility((visibility) => !visibility)
+                }
+              >
+                {passwordVisibility ? <EyeOpen /> : <EyeClosed />}
+              </div>
+            </div>
 
             <TextInput
               name='confirm_password'
               placeholder='Password'
+              type={passConfVisbility ? 'text' : 'password'}
               label={'Confirm password'}
+              isDirty={getFieldState('confirm_password').isDirty}
               register={register('confirm_password', {
                 required: 'Password field is required',
                 minLength: {
@@ -114,6 +145,16 @@ const RegisterModal = ({
               errors={errors.confirm_password}
               errorMessage={errors.confirm_password?.message}
             />
+            <div className='relative'>
+              <div
+                className='absolute bottom-3 right-[6%] sm:right-28 cursor-pointer'
+                onClick={() =>
+                  setConfPassVisibility((visibility) => !visibility)
+                }
+              >
+                {passConfVisbility ? <EyeOpen /> : <EyeClosed />}
+              </div>
+            </div>
           </div>
 
           <div className=' flex flex-col gap-4 mt-6 items-center'>
@@ -123,12 +164,10 @@ const RegisterModal = ({
               size='sm:max-w-[22rem] w-[90%]'
             />
 
-            <Button
-              item={t('google_sign_up')}
-              color='transparent'
-              size='sm:max-w-[22rem] w-[90%] '
-            />
-
+            <div className='sm:max-w-[22rem] w-[90%] flex justify-center gap-2 px-6 py-2 text-white rounded-md outline-1 outline-white outline -outline-offset-1'>
+              <Google />
+              {t('google_sign_up')}
+            </div>
             <h1 className=' text-[#6C757D] before:content-[url("../components/icons/Google.tsx")] before:w-10'>
               Already have an account?
               <a
@@ -143,6 +182,10 @@ const RegisterModal = ({
           </div>
         </form>
       </div>
+      <VerificationNotice
+        isVisible={showNoticeModal}
+        onClose={() => setShowNoticeModal(false)}
+      />
     </div>
   );
 };

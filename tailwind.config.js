@@ -18,6 +18,7 @@ module.exports = {
       colors: {
         danger: '#DC3545',
         success: '#198754',
+        gray: '#6C757D',
       },
     },
   },

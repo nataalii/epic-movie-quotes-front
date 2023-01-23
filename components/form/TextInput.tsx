@@ -12,7 +12,7 @@ const TextInput = ({
   errorMessage,
 }: TextInput) => {
   return (
-    <div className='flex flex-col mt-6 sm:max-w-[22rem] w-[90%] m-auto text-[#6C757D]'>
+    <div className='flex flex-col mt-6 sm:max-w-[22rem] w-[90%] m-auto text-gray'>
       <label htmlFor={name} className='mb-2 text-white text-4'>
         {label} <span className=' text-danger'>*</span>
       </label>

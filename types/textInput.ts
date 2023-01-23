@@ -1,5 +1,3 @@
-import { FieldError } from 'react-hook-form';
-
 export type TextInput = {
   label: string;
   name: string;
@@ -7,6 +5,6 @@ export type TextInput = {
   register: Object;
   isDirty: Boolean;
   type?: string;
-  errors?: string | undefined | FieldError;
+  errors?: any;
   errorMessage?: any;
 };

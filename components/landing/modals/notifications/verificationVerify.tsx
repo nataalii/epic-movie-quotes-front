@@ -1,7 +1,7 @@
 import { Button, ModalLayout, Success } from 'components';
 import { useRouter } from 'next/router';
 
-const VerificationVerify = () => {
+const VerificationVerify = ({ onClose }: { onClose: any }) => {
   const router = useRouter();
   return (
     <ModalLayout
@@ -19,6 +19,9 @@ const VerificationVerify = () => {
           }}
         />
       }
+      onClose={() => {
+        onClose();
+      }}
     ></ModalLayout>
   );
 };

@@ -1,7 +1,7 @@
 import { Button, EyeClosed, EyeOpen, TextInput, Google } from 'components';
 import { useState } from 'react';
 import useLoginModal from './useLoginModal';
-
+import Link from 'next/link';
 const LoginModal = ({
   isVisible,
   onClose,
@@ -32,7 +32,7 @@ const LoginModal = ({
             <h1 className='text-white text-2xl sm:text-[2rem]  mb-3 mt-20 sm:mt-12 '>
               Log in to your account
             </h1>
-            <p className='text-[#6C757D]'>
+            <p className='text-gray'>
               Welcome back! Please enter your details.
             </p>
           </div>
@@ -87,9 +87,9 @@ const LoginModal = ({
               <label htmlFor='remember'> Remeber me</label>
             </div>
 
-            <a href='' className='text-[#0D6EFD] underline ml-2'>
-              Forgot password?
-            </a>
+            <Link href='/forgot-password'>
+              <p className='text-[#0D6EFD] underline ml-2'>Forgot password?</p>
+            </Link>
           </div>
 
           <div className=' flex flex-col gap-4 mt-4 items-center relative'>
@@ -103,7 +103,7 @@ const LoginModal = ({
               Sign in With Google
             </div>
 
-            <h1 className=' text-[#6C757D]'>
+            <h1 className=' text-gray'>
               Dont have an account?
               <a href='' className='text-[#0D6EFD] underline ml-2'>
                 Sign up

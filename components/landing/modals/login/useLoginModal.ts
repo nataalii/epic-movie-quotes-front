@@ -14,6 +14,7 @@ const useLoginModal = () => {
   const {
     register,
     getValues,
+    getFieldState,
     handleSubmit,
     control,
     formState: { errors },
@@ -29,7 +30,16 @@ const useLoginModal = () => {
     }
   };
 
-  return { t, register, getValues, handleSubmit, control, errors, onSubmit };
+  return {
+    t,
+    register,
+    getFieldState,
+    getValues,
+    handleSubmit,
+    control,
+    errors,
+    onSubmit,
+  };
 };
 
 export default useLoginModal;

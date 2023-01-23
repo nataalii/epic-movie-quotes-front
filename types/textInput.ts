@@ -5,6 +5,8 @@ export type TextInput = {
   name: string;
   placeholder: string;
   register: Object;
+  isDirty: Boolean;
+  type?: string;
   errors?: string | undefined | FieldError;
-  errorMessage?: string;
+  errorMessage?: any;
 };

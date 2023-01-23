@@ -1,1 +1,2 @@
-export * from './registerForm';
+export { default as RegisterModal } from './registerModal';
+export { default as useRegisterModal } from './useRegisterModal';

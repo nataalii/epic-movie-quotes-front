@@ -7,6 +7,7 @@ export default function Home() {
 
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+
   return (
     <Fragment>
       <div className='bg-[#11101A] text-[#DDCCAA] font-helvetica '>

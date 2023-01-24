@@ -9,3 +9,10 @@ export type LoginModalTypes = {
   email: string;
   password: string;
 };
+
+export type ResetPasswordTypes = {
+  email: string;
+  token: string;
+  password: string;
+  confirm_password: string;
+};

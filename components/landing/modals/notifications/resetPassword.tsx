@@ -1,17 +1,41 @@
 import { BackArrow, Button, EyeClosed, EyeOpen, TextInput } from 'components';
-import { Fragment, useState } from 'react';
+import { useRouter } from 'next/router';
+import { Fragment, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { fetchCSRFToken, resetPassword } from 'services';
+import { ResetPasswordTypes } from 'types';
 
 const ResetPassword = () => {
   const {
     register,
     getFieldState,
     getValues,
+    handleSubmit,
     formState: { errors },
   } = useForm({ mode: 'all' });
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [passConfVisbility, setConfPassVisibility] = useState(false);
 
+  const [email, setEmail] = useState('');
+  const [token, setToken] = useState('');
+  const router = useRouter();
+  useEffect(() => {
+    const { email, token } = router.query;
+    setEmail(email as string);
+    setToken(token as string);
+  }, [router.query]);
+
+  const onSubmit = async (data: ResetPasswordTypes) => {
+    try {
+      data['token'] = token;
+      data['email'] = email;
+      console.log(data);
+      await fetchCSRFToken();
+      await resetPassword(data);
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
   return (
     <Fragment>
       <div className=' flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed'>
@@ -22,7 +46,10 @@ const ResetPassword = () => {
           }}
         >
           <div className='mt-28 sm:mt-10 flex flex-col justify-center items-center gap-5'>
-            <form className=' flex flex-col items-center sm:max-w-[23rem] w-[90%] '>
+            <form
+              className=' flex flex-col items-center sm:max-w-[23rem] w-[90%] '
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <h1 className='text-3xl font-bold text-white '>
                 Create new password
               </h1>

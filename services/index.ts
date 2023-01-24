@@ -1,4 +1,4 @@
-import { LoginModalTypes, RegisterModalTypes } from 'types';
+import { LoginModalTypes, RegisterModalTypes, ResetPasswordTypes } from 'types';
 import instance from './axios';
 
 export const registerRequest = async (data: RegisterModalTypes) => {
@@ -23,5 +23,15 @@ export const getUser = async () => {
 
 export const logout = async () => {
   const response = await instance.get('api/logout');
+  return response;
+};
+
+export const forgotPassword = async (email: any) => {
+  const response = await instance.post('api/forgot-password/', email);
+  return response;
+};
+
+export const resetPassword = async (data: ResetPasswordTypes) => {
+  const response = await instance.post('api/reset-password/', data);
   return response;
 };

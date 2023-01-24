@@ -1,14 +1,34 @@
 import { BackArrow, Button, TextInput } from 'components';
 import { Fragment } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
+import { fetchCSRFToken, forgotPassword } from 'services';
 
 const ForgotPassword = () => {
   const {
     register,
     getFieldState,
-    // control,
+    handleSubmit,
+    control,
+    setError,
     formState: { errors },
   } = useForm({ mode: 'all' });
+
+  const email = useWatch({
+    control,
+    name: 'email',
+  });
+  const onSubmit = async () => {
+    try {
+      await fetchCSRFToken();
+      await forgotPassword({ email: email });
+    } catch (error: any) {
+      const emailError = error.response.data.errors.email;
+      setError('email', {
+        type: 'notExist',
+        message: emailError,
+      });
+    }
+  };
   return (
     <Fragment>
       <div className=' flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed'>
@@ -25,7 +45,10 @@ const ForgotPassword = () => {
               your password
             </h2>
 
-            <form className='flex flex-col items-center gap-6 sm:max-w-[25rem] w-[90%]'>
+            <form
+              className='flex flex-col items-center gap-6 sm:max-w-[25rem] w-[90%]'
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <TextInput
                 name='email'
                 placeholder='Enter Your email'
@@ -39,7 +62,10 @@ const ForgotPassword = () => {
                 })}
                 isDirty={getFieldState('email').isDirty}
                 errors={errors.email}
-                errorMessage={errors.email?.message}
+                errorMessage={
+                  errors.email?.message ||
+                  (errors.email?.type === 'notExist' && errors.email.message)
+                }
               />
               <Button item='Send Instructions' color='red' size='w-[89%]  ' />
             </form>

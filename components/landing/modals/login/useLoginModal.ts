@@ -2,13 +2,31 @@ import { deleteCookie } from 'cookies-next';
 import useAuth from 'hooks/useAuth';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { fetchCSRFToken, login } from 'services';
 import { LoginModalTypes } from 'types';
-
+import {
+  closeLoginModal,
+  openForgotPassword,
+  openRegisterModal,
+} from 'stores/modalSlice';
+import { useDispatch } from 'react-redux';
 const useLoginModal = () => {
   const { t } = useTranslation('common');
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const hideLoginModalHandler = () => {
+    dispatch(closeLoginModal());
+  };
+  const showRegisterModalHandler = () => {
+    dispatch(openRegisterModal());
+  };
+  const showForgotPasswordHandler = () => {
+    dispatch(openForgotPassword());
+  };
   useAuth();
 
   const {
@@ -39,6 +57,11 @@ const useLoginModal = () => {
     control,
     errors,
     onSubmit,
+    passwordVisibility,
+    setPasswordVisibility,
+    hideLoginModalHandler,
+    showRegisterModalHandler,
+    showForgotPasswordHandler,
   };
 };
 

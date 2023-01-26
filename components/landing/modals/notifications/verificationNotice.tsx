@@ -1,14 +1,12 @@
 import { Button, EmailSent, ModalLayout } from 'components';
+import { useDispatch } from 'react-redux';
+import { closeVerificationNotif } from 'stores/modalSlice';
 
-const VerificationNotice = ({
-  isVisible,
-  onClose,
-}: {
-  isVisible: boolean;
-  onClose: any;
-}) => {
-  if (!isVisible) return null;
-
+const VerificationNotice = () => {
+  const dispatch = useDispatch();
+  const hideVerificationNotiHandler = () => {
+    dispatch(closeVerificationNotif());
+  };
   return (
     <ModalLayout
       image={<EmailSent />}
@@ -27,9 +25,7 @@ const VerificationNotice = ({
           }}
         />
       }
-      onClose={() => {
-        onClose();
-      }}
+      onClose={hideVerificationNotiHandler}
     ></ModalLayout>
   );
 };

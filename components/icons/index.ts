@@ -10,3 +10,4 @@ export { default as EyeClosed } from './EyeClosed';
 export { default as Invalid } from './Invalid';
 export { default as Valid } from './Valid';
 export { default as Google } from './Google';
+export { default as BackArrow } from './BackArrow';

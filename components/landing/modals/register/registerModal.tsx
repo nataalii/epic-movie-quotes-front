@@ -1,16 +1,8 @@
 import { Button, EyeClosed, EyeOpen, TextInput } from 'components';
 import Google from 'components/icons/Google';
-import { useState } from 'react';
-import VerificationNotice from '../verificationNotice/verificationNotice';
 import useRegisterModal from './useRegisterModal';
 
-const RegisterModal = ({
-  isVisible,
-  onClose,
-}: {
-  isVisible?: boolean;
-  onClose?: any;
-}) => {
+const RegisterModal = () => {
   const {
     t,
     register,
@@ -19,20 +11,18 @@ const RegisterModal = ({
     handleSubmit,
     errors,
     onSubmit,
-    showNoticeModal,
-    setShowNoticeModal,
+    hideRegisterModalHandler,
+    showLoginModalHandler,
+    passwordVisibility,
+    setPasswordVisibility,
+    passConfVisbility,
+    setConfPassVisibility,
   } = useRegisterModal();
 
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const [passConfVisbility, setConfPassVisibility] = useState(false);
-
-  if (!isVisible) return null;
   return (
     <div
       className=' flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
-      onClick={() => {
-        onClose();
-      }}
+      onClick={hideRegisterModalHandler}
     >
       <div
         className=' sm:w-[35rem] sm:h-auto sm:pb-14 w-screen h-screen  bg-[#222030] m-auto rounded-xl'
@@ -45,7 +35,7 @@ const RegisterModal = ({
             <h1 className='text-white text-2xl sm:text-[2rem]  mb-3 mt-20 sm:mt-8 '>
               Create an account
             </h1>
-            <p className='text-[#6C757D]'>Start your journey!</p>
+            <p className='text-gray'>Start your journey!</p>
           </div>
           <div>
             <TextInput
@@ -168,12 +158,13 @@ const RegisterModal = ({
               <Google />
               {t('google_sign_up')}
             </div>
-            <h1 className=' text-[#6C757D] before:content-[url("../components/icons/Google.tsx")] before:w-10'>
+            <h1 className=' text-gray before:content-[url("../components/icons/Google.tsx")] before:w-10'>
               Already have an account?
               <a
-                className='text-[#0D6EFD] underline ml-2 '
+                className='text-[#0D6EFD] underline ml-2 cursor-pointer '
                 onClick={() => {
-                  onClose();
+                  hideRegisterModalHandler();
+                  showLoginModalHandler();
                 }}
               >
                 Log In
@@ -182,10 +173,6 @@ const RegisterModal = ({
           </div>
         </form>
       </div>
-      <VerificationNotice
-        isVisible={showNoticeModal}
-        onClose={() => setShowNoticeModal(false)}
-      />
     </div>
   );
 };

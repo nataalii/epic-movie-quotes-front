@@ -1,11 +1,18 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { fetchCSRFToken, registerRequest } from 'services';
+import {
+  closeRegisterModal,
+  openLoginModal,
+  openVerificationNotif,
+} from 'stores/modalSlice';
 import { RegisterModalTypes } from 'types';
 
 const useRegisterModal = () => {
   const { t } = useTranslation('common');
+  const dispatch = useDispatch();
   const {
     register,
     getValues,
@@ -18,14 +25,24 @@ const useRegisterModal = () => {
     mode: 'all',
     defaultValues: { name: '', email: '', password: '', confirm_password: '' },
   });
-  const [showNoticeModal, setShowNoticeModal] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [passConfVisbility, setConfPassVisibility] = useState(false);
+
+  const hideRegisterModalHandler = () => {
+    dispatch(closeRegisterModal());
+  };
+  const showLoginModalHandler = () => {
+    dispatch(openLoginModal());
+  };
+  const openVerificationNotifHandler = () => {
+    dispatch(openVerificationNotif());
+  };
   const onSubmit: SubmitHandler<RegisterModalTypes> = async (data) => {
     try {
       await fetchCSRFToken();
-      const registered = await registerRequest(data);
-      if (registered) {
-        setShowNoticeModal(true);
-      }
+      await registerRequest(data);
+      hideRegisterModalHandler();
+      openVerificationNotifHandler();
     } catch (error: any) {
       const errors = error.response.data.errors;
       if (errors.name) {
@@ -52,8 +69,12 @@ const useRegisterModal = () => {
     control,
     errors,
     onSubmit,
-    showNoticeModal,
-    setShowNoticeModal,
+    hideRegisterModalHandler,
+    showLoginModalHandler,
+    passwordVisibility,
+    setPasswordVisibility,
+    passConfVisbility,
+    setConfPassVisibility,
   };
 };
 

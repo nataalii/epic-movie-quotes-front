@@ -1,8 +1,12 @@
 import { Button, ModalLayout, Success } from 'components';
-import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { closeVerificationVerify } from 'stores/modalSlice';
 
-const VerificationVerify = ({ onClose }: { onClose: any }) => {
-  const router = useRouter();
+const VerificationVerify = () => {
+  const dispatch = useDispatch();
+  const closeVerificationVerifyHandler = () => {
+    dispatch(closeVerificationVerify());
+  };
   return (
     <ModalLayout
       image={<Success />}
@@ -13,15 +17,10 @@ const VerificationVerify = ({ onClose }: { onClose: any }) => {
           item='Return Home'
           color='red'
           size='sm:max-w-[25rem] w-[90%]  '
-          onClick={(e: { preventDefault: () => void }) => {
-            e.preventDefault();
-            router.push('/');
-          }}
+          onClick={closeVerificationVerifyHandler}
         />
       }
-      onClose={() => {
-        onClose();
-      }}
+      onClose={closeVerificationVerifyHandler}
     ></ModalLayout>
   );
 };

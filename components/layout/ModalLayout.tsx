@@ -9,7 +9,10 @@ const ModalLayout = (props: {
 }) => {
   return (
     <Fragment>
-      <div className=' flex justify-center inset-0 bg-[#181623]  sm:bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '>
+      <div
+        className=' flex justify-center inset-0 bg-[#181623]  sm:bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
+        onClick={props.onClose}
+      >
         <div
           className=' max-w-[35rem] w-[85%] h-auto pb-20  bg-[#222030] mt-32 md:mt-auto m-auto rounded-xl '
           onClick={(e) => {

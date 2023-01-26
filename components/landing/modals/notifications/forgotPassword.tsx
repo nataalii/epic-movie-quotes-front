@@ -1,7 +1,13 @@
 import { BackArrow, Button, TextInput } from 'components';
 import { Fragment } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { fetchCSRFToken, forgotPassword } from 'services';
+import {
+  closeForgotPassword,
+  openCheckEmail,
+  openLoginModal,
+} from 'stores/modalSlice';
 
 const ForgotPassword = () => {
   const {
@@ -12,6 +18,17 @@ const ForgotPassword = () => {
     setError,
     formState: { errors },
   } = useForm({ mode: 'all' });
+  const dispatch = useDispatch();
+  const hideForgotPasswordHandler = () => {
+    dispatch(closeForgotPassword());
+  };
+  const showLoginModalHandler = () => {
+    dispatch(openLoginModal());
+  };
+
+  const showCheckEmailHandler = () => {
+    dispatch(openCheckEmail());
+  };
 
   const email = useWatch({
     control,
@@ -21,6 +38,8 @@ const ForgotPassword = () => {
     try {
       await fetchCSRFToken();
       await forgotPassword({ email: email });
+      hideForgotPasswordHandler();
+      showCheckEmailHandler();
     } catch (error: any) {
       const emailError = error.response.data.errors.email;
       setError('email', {
@@ -31,7 +50,10 @@ const ForgotPassword = () => {
   };
   return (
     <Fragment>
-      <div className=' flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed'>
+      <div
+        className=' flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed'
+        onClick={hideForgotPasswordHandler}
+      >
         <div
           className='  sm:w-[35rem] sm:h-auto sm:pb-10 w-screen h-screen  bg-[#222030] m-auto rounded-xl'
           onClick={(e) => {
@@ -69,11 +91,17 @@ const ForgotPassword = () => {
               />
               <Button item='Send Instructions' color='red' size='w-[89%]  ' />
             </form>
-            <div className='flex gap-4 justify-center items-center text-gray'>
-              <span className='cursor-pointer'>
+            <div
+              className='flex gap-4 justify-center items-center text-gray cursor-pointer '
+              onClick={() => {
+                hideForgotPasswordHandler();
+                showLoginModalHandler();
+              }}
+            >
+              <span>
                 <BackArrow />
               </span>
-              <p className='cursor-pointer '>Back to login</p>
+              <p>Back to login</p>
             </div>
           </div>
         </div>

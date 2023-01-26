@@ -1,6 +1,12 @@
 import { Button, ModalLayout, EmailSent } from 'components';
+import { useDispatch } from 'react-redux';
+import { closeCheckEmail } from 'stores/modalSlice';
 
 const CheckEmail = () => {
+  const dispatch = useDispatch();
+  const hideCheckEmailVerification = () => {
+    dispatch(closeCheckEmail());
+  };
   return (
     <ModalLayout
       image={<EmailSent />}
@@ -9,7 +15,7 @@ const CheckEmail = () => {
       button={
         <div className='flex flex-col gap-5 sm:max-w-[25rem] w-[90%] text-center '>
           <Button
-            item='Return Home'
+            item='Go to my email'
             color='red'
             size=' '
             onClick={(e: { preventDefault: () => void }) => {
@@ -17,12 +23,12 @@ const CheckEmail = () => {
               window.open('https://gmail.com');
             }}
           />
-          <a className=' text-gray'>Skip, I&apos;ll confirm later </a>
+          <a className=' text-gray' onClick={hideCheckEmailVerification}>
+            Skip, I&apos;ll confirm later
+          </a>
         </div>
       }
-      onClose={() => {
-        // onClose();
-      }}
+      onClose={hideCheckEmailVerification}
     ></ModalLayout>
   );
 };

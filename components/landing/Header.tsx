@@ -1,20 +1,23 @@
 import { Button } from 'components';
 import useTranslation from 'next-translate/useTranslation';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { LocalSwitcher } from 'components';
+import { useDispatch } from 'react-redux';
+import { openLoginModal, openRegisterModal } from 'stores/modalSlice';
 
-const Header = ({
-  setShowRegisterModal,
-  setShowLoginModal,
-}: {
-  setShowRegisterModal: Dispatch<SetStateAction<boolean>>;
-  setShowLoginModal: Dispatch<SetStateAction<boolean>>;
-}) => {
+const Header = () => {
   const router = useRouter();
   const [selected, setSelected] = useState(
     router.locale === 'en' ? 'Eng' : 'ქართ'
   );
+  const dispatch = useDispatch();
+  const showRegisterModalHandler = () => {
+    dispatch(openRegisterModal());
+  };
+  const showLoginModalHandler = () => {
+    dispatch(openLoginModal());
+  };
 
   const { t } = useTranslation('common');
   return (
@@ -27,12 +30,12 @@ const Header = ({
             item={t('sign_up')}
             color='red'
             size='hidden '
-            onClick={() => setShowRegisterModal(true)}
+            onClick={showRegisterModalHandler}
           />
           <Button
             item={t('log_in')}
             color='transparent'
-            onClick={() => setShowLoginModal(true)}
+            onClick={showLoginModalHandler}
           />
         </div>
       </div>

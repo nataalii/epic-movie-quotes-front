@@ -30,7 +30,6 @@ export const forgotPassword = async (email: any) => {
   const response = await instance.post('api/forgot-password/', email);
   return response;
 };
-
 export const resetPassword = async (data: ResetPasswordTypes) => {
   const response = await instance.post('api/reset-password/', data);
   return response;

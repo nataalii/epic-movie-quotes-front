@@ -5,21 +5,34 @@ import {
   Header,
   RegisterModal,
   LoginModal,
+  ForgotPassword,
+  CheckEmail,
+  ResetPassword,
+  PasswordChanged,
+  VerificationVerify,
 } from 'components';
+import VerificationNotice from 'components/landing/modals/notifications/verificationNotice';
 import useTranslation from 'next-translate/useTranslation';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { openRegisterModal } from 'stores/modalSlice';
 export default function Home() {
   const { t } = useTranslation('common');
-
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
+  const dispatch = useDispatch();
+  const {
+    registerModal,
+    loginModal,
+    forgotPassword,
+    checkEmail,
+    resetPassword,
+    passwordChanged,
+    verificationNotif,
+    verificationVerify,
+  } = useSelector((store: any) => store.modal);
   return (
     <Fragment>
       <div className='bg-[#11101A] text-[#DDCCAA] font-helvetica '>
-        <Header
-          setShowLoginModal={setShowLoginModal}
-          setShowRegisterModal={setShowRegisterModal}
-        />
+        <Header />
         <div className='flex justify-center items-center gap-6 flex-col h-[42rem]  '>
           <h1 className='lg:max-w-[42rem] max-w-[20rem] w-[80%] text-2xl lg:text-[3.7rem] text-center font-semibold leading-normal whitespace-pre-wrap'>
             {t('welcome_text')}
@@ -28,7 +41,7 @@ export default function Home() {
             item={t('get_started')}
             color='red'
             size='lg:text-2xl'
-            onClick={() => setShowRegisterModal(true)}
+            onClick={() => dispatch(openRegisterModal())}
           />
         </div>
         <BackgroundImage
@@ -47,14 +60,14 @@ export default function Home() {
           movieName={t('lotr_title')}
         />
         <Footer />
-        <RegisterModal
-          isVisible={showRegisterModal}
-          onClose={() => setShowRegisterModal(false)}
-        />
-        <LoginModal
-          isVisible={showLoginModal}
-          onClose={() => setShowLoginModal(false)}
-        />
+        {registerModal && <RegisterModal />}
+        {loginModal && <LoginModal />}
+        {forgotPassword && <ForgotPassword />}
+        {resetPassword && <ResetPassword />}
+        {checkEmail && <CheckEmail />}
+        {passwordChanged && <PasswordChanged />}
+        {verificationNotif && <VerificationNotice />}
+        {verificationVerify && <VerificationVerify />}
       </div>
     </Fragment>
   );

@@ -2,7 +2,14 @@ import { BackArrow, Button, EyeClosed, EyeOpen, TextInput } from 'components';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { fetchCSRFToken, resetPassword } from 'services';
+import {
+  closeResetPassword,
+  openLoginModal,
+  openPasswordChanged,
+  openResetPassword,
+} from 'stores/modalSlice';
 import { ResetPasswordTypes } from 'types';
 
 const ResetPassword = () => {
@@ -19,6 +26,20 @@ const ResetPassword = () => {
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const openRresetPasswordHandler = () => {
+    dispatch(openResetPassword());
+  };
+  const hideResetPasswordHandler = () => {
+    dispatch(closeResetPassword());
+  };
+  const showPasswordChangedHandler = () => {
+    dispatch(openPasswordChanged());
+  };
+  const showLoginModalHandler = () => {
+    dispatch(openLoginModal());
+  };
   useEffect(() => {
     const { email, token } = router.query;
     setEmail(email as string);
@@ -32,13 +53,18 @@ const ResetPassword = () => {
       console.log(data);
       await fetchCSRFToken();
       await resetPassword(data);
+      hideResetPasswordHandler();
+      showPasswordChangedHandler();
     } catch (error: any) {
       console.log(error);
     }
   };
   return (
     <Fragment>
-      <div className=' flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed'>
+      <div
+        className=' flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed'
+        onClick={hideResetPasswordHandler}
+      >
         <div
           className='  sm:w-[35rem] sm:h-auto sm:pb-10 w-screen h-screen  bg-[#222030] m-auto rounded-xl'
           onClick={(e) => {
@@ -127,11 +153,17 @@ const ResetPassword = () => {
               />
             </form>
 
-            <div className='flex gap-4 justify-center items-center text-gray'>
-              <span className='cursor-pointer'>
+            <div
+              className='flex gap-4 justify-center items-center text-gray cursor-pointer '
+              onClick={() => {
+                hideResetPasswordHandler();
+                showLoginModalHandler();
+              }}
+            >
+              <span>
                 <BackArrow />
               </span>
-              <p className='cursor-pointer '>Back to login</p>
+              <p>Back to login</p>
             </div>
           </div>
         </div>

@@ -1,25 +1,24 @@
 import { Button, EyeClosed, EyeOpen, TextInput, Google } from 'components';
-import { useState } from 'react';
 import useLoginModal from './useLoginModal';
-import Link from 'next/link';
-const LoginModal = ({
-  isVisible,
-  onClose,
-}: {
-  isVisible: boolean;
-  onClose: any;
-}) => {
-  const { register, getFieldState, handleSubmit, errors, onSubmit } =
-    useLoginModal();
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
 
-  if (!isVisible) return null;
+const LoginModal = () => {
+  const {
+    register,
+    getFieldState,
+    handleSubmit,
+    errors,
+    onSubmit,
+    passwordVisibility,
+    setPasswordVisibility,
+    hideLoginModalHandler,
+    showRegisterModalHandler,
+    showForgotPasswordHandler,
+  } = useLoginModal();
+
   return (
     <div
       className=' flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
-      onClick={() => {
-        onClose();
-      }}
+      onClick={hideLoginModalHandler}
     >
       <div
         className=' sm:w-[35rem] sm:h-auto sm:pb-10 w-screen h-screen  bg-[#222030] m-auto rounded-xl'
@@ -87,9 +86,15 @@ const LoginModal = ({
               <label htmlFor='remember'> Remeber me</label>
             </div>
 
-            <Link href='/forgot-password'>
-              <p className='text-[#0D6EFD] underline ml-2'>Forgot password?</p>
-            </Link>
+            <p
+              className='text-[#0D6EFD] underline ml-2 cursor-pointer'
+              onClick={() => {
+                hideLoginModalHandler();
+                showForgotPasswordHandler();
+              }}
+            >
+              Forgot password?
+            </p>
           </div>
 
           <div className=' flex flex-col gap-4 mt-4 items-center relative'>
@@ -105,7 +110,13 @@ const LoginModal = ({
 
             <h1 className=' text-gray'>
               Dont have an account?
-              <a href='' className='text-[#0D6EFD] underline ml-2'>
+              <a
+                className='text-[#0D6EFD] underline ml-2 cursor-pointer'
+                onClick={() => {
+                  hideLoginModalHandler();
+                  showRegisterModalHandler();
+                }}
+              >
                 Sign up
               </a>
             </h1>

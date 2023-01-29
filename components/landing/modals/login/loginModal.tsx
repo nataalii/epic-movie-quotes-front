@@ -103,10 +103,15 @@ const LoginModal = () => {
               color='red'
               size='sm:max-w-[22rem] w-[90%]'
             />
-            <div className='sm:max-w-[22rem] w-[90%] flex justify-center gap-2 px-6 py-2 text-white rounded-md outline-1 outline-white outline -outline-offset-1'>
-              <Google />
-              Sign in With Google
-            </div>
+            <a
+              href='http://localhost:8000/api/google/auth/redirect'
+              className='sm:max-w-[22rem] w-[90%] '
+            >
+              <div className='flex justify-center gap-2 px-6 py-2 text-white rounded-md outline-1 outline-white outline -outline-offset-1'>
+                <Google />
+                Sign in With Google
+              </div>
+            </a>
 
             <h1 className=' text-gray'>
               Dont have an account?

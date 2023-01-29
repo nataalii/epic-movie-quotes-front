@@ -34,3 +34,8 @@ export const resetPassword = async (data: ResetPasswordTypes) => {
   const response = await instance.post('api/reset-password/', data);
   return response;
 };
+
+export const handleGoogleCallback = async () => {
+  const response = await instance.get('api/google/auth/callback/');
+  return response;
+};

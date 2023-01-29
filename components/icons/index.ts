@@ -18,3 +18,4 @@ export { default as Movie } from './Movie';
 export { default as SearchIcon } from './SearchIcon';
 export { default as Notification } from './Notification';
 export { default as Profile } from './Profile';
+export { default as AddMovieIcon } from './AddMovieIcon';

@@ -23,7 +23,6 @@ const useAuth = () => {
       checkAuth();
     }
   }, [router]);
-
   return user;
 };
 

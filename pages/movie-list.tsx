@@ -1,13 +1,14 @@
+import { MovieListHeader } from 'components';
 import { NavBar } from 'components/navBar';
 import { SideNavBar } from 'components/sideNavBar';
 
 export default function MovieList() {
   return (
-    <div className='text-white bg-[#181623]'>
+    <div className='text-white min-h-screen bg-[#181623]'>
       <NavBar />
-      <div className='flex'>
-        <SideNavBar />
-        <div className=' h-96 bg-slate-500'>Movie list</div>
+      <SideNavBar />
+      <div className=' lg:ml-96 mt-8 flex justify-center items-center'>
+        <MovieListHeader />
       </div>
     </div>
   );

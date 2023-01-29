@@ -24,11 +24,13 @@ const NavBar = () => {
         <div className='flex justify-center items-center gap-10 '>
           <Notification />
           <LocalSwitcher selected={selected} setSelected={setSelected} />
-          <Button
-            item='Log out'
-            color='transparent'
-            onClick={logoutHandler}
-          ></Button>
+          <div className='hidden lg:block'>
+            <Button
+              item='Log out'
+              color='transparent'
+              onClick={logoutHandler}
+            ></Button>
+          </div>
         </div>
       </div>
     </header>

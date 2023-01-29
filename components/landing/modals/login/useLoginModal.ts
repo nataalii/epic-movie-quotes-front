@@ -1,4 +1,4 @@
-import { deleteCookie } from 'cookies-next';
+import { deleteCookie, setCookie } from 'cookies-next';
 import useAuth from 'hooks/useAuth';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -43,6 +43,7 @@ const useLoginModal = () => {
     try {
       await fetchCSRFToken();
       await login(data);
+      setCookie('email', data.email);
       router.push('/news-feed');
     } catch (errors: any) {
       const error = errors.response.data.message;

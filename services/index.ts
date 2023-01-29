@@ -22,7 +22,7 @@ export const getUser = async () => {
 };
 
 export const logout = async () => {
-  const response = await instance.get('api/logout');
+  const response = await instance.post('api/logout');
   return response;
 };
 

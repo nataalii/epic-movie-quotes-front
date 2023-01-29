@@ -49,7 +49,11 @@ const LoginModal = () => {
               })}
               isDirty={getFieldState('email').isDirty}
               errors={errors.email}
-              errorMessage={errors.email?.message}
+              errorMessage={
+                errors.email?.message ||
+                (errors.email?.type === 'invalidCredentials' &&
+                  errors.email.message)
+              }
             />
 
             <TextInput
@@ -62,7 +66,11 @@ const LoginModal = () => {
               })}
               isDirty={getFieldState('password').isDirty}
               errors={errors.password}
-              errorMessage={errors.password?.message}
+              errorMessage={
+                errors.password?.message ||
+                (errors.password?.type === 'invalidCredentials' &&
+                  errors.password.message)
+              }
             />
             <div className='relative'>
               <div

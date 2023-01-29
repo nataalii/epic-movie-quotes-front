@@ -34,6 +34,7 @@ const useLoginModal = () => {
     getValues,
     getFieldState,
     handleSubmit,
+    setError,
     control,
     formState: { errors },
   } = useForm<LoginModalTypes>({ mode: 'all' });
@@ -42,9 +43,19 @@ const useLoginModal = () => {
     try {
       await fetchCSRFToken();
       await login(data);
-      router.push('/admin');
+      router.push('/news-feed');
     } catch (errors: any) {
-      deleteCookie('XSRF_TOKEN');
+      const error = errors.response.data.message;
+      if (error) {
+        setError('email', {
+          type: 'invalidCredentials',
+          message: error,
+        });
+        setError('password', {
+          type: 'invalidCredentials',
+        });
+      }
+      deleteCookie('XSRF-TOKEN');
     }
   };
 

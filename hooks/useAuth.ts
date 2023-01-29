@@ -13,8 +13,9 @@ const useAuth = () => {
         const response = await getUser();
         setUser(response.data.user);
       } catch (error) {
-        if (router.pathname === '/admin') {
-          router.push('/login');
+        console.log(error);
+        if (router.pathname === '/news-feed') {
+          router.push('/');
         }
       }
     };

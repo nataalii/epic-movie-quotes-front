@@ -5,7 +5,7 @@ const initialState = {
   loginModal: false,
   forgotPassword: false,
   checkEmail: false,
-  resetPassword: true,
+  resetPassword: false,
   passwordChanged: false,
   verificationNotif: false,
   verificationVerify: false,

@@ -49,7 +49,11 @@ const LoginModal = () => {
               })}
               isDirty={getFieldState('email').isDirty}
               errors={errors.email}
-              errorMessage={errors.email?.message}
+              errorMessage={
+                errors.email?.message ||
+                (errors.email?.type === 'invalidCredentials' &&
+                  errors.email.message)
+              }
             />
 
             <TextInput
@@ -62,7 +66,11 @@ const LoginModal = () => {
               })}
               isDirty={getFieldState('password').isDirty}
               errors={errors.password}
-              errorMessage={errors.password?.message}
+              errorMessage={
+                errors.password?.message ||
+                (errors.password?.type === 'invalidCredentials' &&
+                  errors.password.message)
+              }
             />
             <div className='relative'>
               <div
@@ -103,10 +111,15 @@ const LoginModal = () => {
               color='red'
               size='sm:max-w-[22rem] w-[90%]'
             />
-            <div className='sm:max-w-[22rem] w-[90%] flex justify-center gap-2 px-6 py-2 text-white rounded-md outline-1 outline-white outline -outline-offset-1'>
-              <Google />
-              Sign in With Google
-            </div>
+            <a
+              href='http://localhost:8000/api/google/auth/redirect'
+              className='sm:max-w-[22rem] w-[90%] '
+            >
+              <div className='flex justify-center gap-2 px-6 py-2 text-white rounded-md outline-1 outline-white outline -outline-offset-1'>
+                <Google />
+                Sign in With Google
+              </div>
+            </a>
 
             <h1 className=' text-gray'>
               Dont have an account?

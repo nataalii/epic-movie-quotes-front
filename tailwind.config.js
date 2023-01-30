@@ -19,6 +19,12 @@ module.exports = {
         danger: '#DC3545',
         success: '#198754',
         gray: '#6C757D',
+        'light-gray': '#CED4DA',
+        'blue-500': '#24222F',
+        'blue-600': '#11101A',
+      },
+      borderColor: {
+        'light-gray': '#CED4DA',
       },
     },
   },

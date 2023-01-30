@@ -22,7 +22,7 @@ export const getUser = async () => {
 };
 
 export const logout = async () => {
-  const response = await instance.get('api/logout');
+  const response = await instance.post('api/logout');
   return response;
 };
 
@@ -32,5 +32,10 @@ export const forgotPassword = async (email: any) => {
 };
 export const resetPassword = async (data: ResetPasswordTypes) => {
   const response = await instance.post('api/reset-password/', data);
+  return response;
+};
+
+export const handleGoogleCallback = async () => {
+  const response = await instance.get('api/google/auth/callback/');
   return response;
 };

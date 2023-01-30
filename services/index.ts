@@ -39,3 +39,13 @@ export const handleGoogleCallback = async () => {
   const response = await instance.get('api/google/auth/callback/');
   return response;
 };
+
+export const addMovie = async (data: any) => {
+  const response = await instance.post('/api/movies', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
+  return response;
+};

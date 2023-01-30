@@ -1,6 +1,9 @@
 import { AddMovieIcon, Button, SearchIcon } from 'components';
+import { useDispatch } from 'react-redux';
+import { openAddMovieModal } from 'stores/modalSlice';
 
 const MovieList = () => {
+  const dispatch = useDispatch();
   return (
     <div className=' flex justify-between lg:items-center max-w-[90rem] w-[90%]'>
       <div className='flex lg:flex-row flex-col  gap-3'>
@@ -17,7 +20,11 @@ const MovieList = () => {
           />
         </div>
         <div className='relative '>
-          <Button item={<AddMovieIcon /> && <h1>Add Movie</h1>} color='red' />
+          <Button
+            item={<AddMovieIcon /> && <h1>Add Movie</h1>}
+            color='red'
+            onClick={() => dispatch(openAddMovieModal())}
+          />
         </div>
       </div>
     </div>

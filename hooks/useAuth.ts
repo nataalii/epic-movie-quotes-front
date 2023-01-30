@@ -11,7 +11,8 @@ const useAuth = () => {
     const checkAuth = async () => {
       try {
         const response = await getUser();
-        setUser(response.data.user);
+        console.log(response);
+        setUser(response.data);
       } catch (error) {
         console.log(error);
         if (router.pathname === '/news-feed') {

@@ -1,1 +1,2 @@
-export { default as MovieListHeader } from './movieListHeader';
+export * from './header';
+export * from './modals';

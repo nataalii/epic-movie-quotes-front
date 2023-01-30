@@ -1,4 +1,4 @@
-import { deleteCookie, setCookie } from 'cookies-next';
+import { deleteCookie } from 'cookies-next';
 import useAuth from 'hooks/useAuth';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -27,7 +27,6 @@ const useLoginModal = () => {
   const showForgotPasswordHandler = () => {
     dispatch(openForgotPassword());
   };
-  useAuth();
 
   const {
     register,
@@ -38,12 +37,14 @@ const useLoginModal = () => {
     control,
     formState: { errors },
   } = useForm<LoginModalTypes>({ mode: 'all' });
+  useAuth();
 
   const onSubmit = async (data: LoginModalTypes) => {
     try {
       await fetchCSRFToken();
-      await login(data);
-      setCookie('email', data.email);
+      const response = await login(data);
+      console.log(response.data.user);
+
       router.push('/news-feed');
     } catch (errors: any) {
       const error = errors.response.data.message;

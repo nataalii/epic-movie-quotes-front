@@ -1,11 +1,13 @@
 import { Button } from 'components/button';
-import { Exit } from 'components/icons';
-import { InputFile, InputText } from 'components/movieList/form';
+import { Exit, ProfileIcon } from 'components/icons';
+import { InputFile, InputText, InputTextArea } from 'components/movieList/form';
 import { closeAddMovieModal } from 'stores/modalSlice';
 import useAddMovie from './useAddMovie';
 
 const AddMovie = () => {
-  const { dispatch, errors, onSubmit, handleSubmit, register } = useAddMovie();
+  const { dispatch, errors, onSubmit, handleSubmit, register, name } =
+    useAddMovie();
+
   return (
     <div
       className=' mt-20 flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
@@ -30,10 +32,15 @@ const AddMovie = () => {
 
         <div className='flex justify-center'>
           <form
-            className='mt-10 w-3/4'
+            className=' w-3/4'
             encType='multipart/form-data'
             onSubmit={handleSubmit(onSubmit)}
           >
+            <div className=' flex gap-3 items-center my-7'>
+              <ProfileIcon />
+              <h1>{name}</h1>
+            </div>
+
             <div className='flex flex-col gap-1'>
               <div className='relative'>
                 <InputText
@@ -90,7 +97,7 @@ const AddMovie = () => {
                 />
               </div>
               <div className='relative'>
-                <InputText
+                <InputTextArea
                   placeholder='Movie description'
                   language='En'
                   name='description_en'
@@ -101,7 +108,7 @@ const AddMovie = () => {
                 />
               </div>
               <div className='relative'>
-                <InputText
+                <InputTextArea
                   placeholder='ფილმის აღწერა'
                   language='ქარ'
                   name='description_ka'
@@ -134,7 +141,12 @@ const AddMovie = () => {
                 />
               </div>
               <div className='relative'>
-                <InputFile />
+                <InputFile
+                  errors={errors.image}
+                  register={register('image', {
+                    required: 'Field is required',
+                  })}
+                />
               </div>
 
               <Button item='Add Movie' color='red' />

@@ -1,3 +1,3 @@
 export * from './formFields';
-export * from './textInput';
+export * from './InputTypes';
 export * from './buttonProps';

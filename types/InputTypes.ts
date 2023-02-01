@@ -8,3 +8,12 @@ export type TextInput = {
   errors?: any;
   errorMessage?: any;
 };
+
+export type TextAreaInput = {
+  language?: string;
+  placeholder: string;
+  name?: string;
+  register: object;
+  type?: string;
+  errors?: any;
+};

@@ -1,15 +1,17 @@
-import { CommentIcon, Like, Profile } from 'components/icons';
+import { CommentIcon, Like, ProfileIcon } from 'components/icons';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
 import { Comment } from '../comment';
 
 const Post = () => {
+  const { name } = useSelector((store: any) => store.user);
   return (
     <div className='flex lg:ml-[500px] lg:mx-10 mx-5'>
       <div className=' lg:bg-[#11101A] lg:rounded-xl lg:mb-4 mt-10'>
         <div className='lg:mx-6'>
           <div className='flex items-center gap-4 lg:pt-6'>
-            <Profile />
-            <p>Natali Charkviani</p>
+            <ProfileIcon />
+            <p>{name}</p>
           </div>
           <div className='mt-4'>
             <h4 className='text-sm sm:text-base mb-4'>
@@ -38,7 +40,7 @@ const Post = () => {
             <Comment />
           </section>
           <section className='mt-4 flex  mb-4 lg:pb-6'>
-            <Profile />
+            <ProfileIcon />
             <input
               placeholder='Write a comment'
               className='block ml-3 pl-4 w-full bg-[#24222F] rounded-lg'

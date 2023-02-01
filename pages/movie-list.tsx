@@ -2,10 +2,13 @@ import { MovieListHeader } from 'components';
 import { AddMovie } from 'components/movieList';
 import { NavBar } from 'components/navBar';
 import { SideNavBar } from 'components/sideNavBar';
+import useAuth from 'hooks/useAuth';
 import { useSelector } from 'react-redux';
 
 export default function MovieList() {
+  useAuth();
   const { addMovieModal } = useSelector((store: any) => store.modal);
+
   return (
     <div className='text-white min-h-screen bg-[#181623]'>
       <NavBar />

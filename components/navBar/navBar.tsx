@@ -2,7 +2,7 @@ import { Button, LocalSwitcher, Notification } from 'components';
 import { deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { fetchCSRFToken, logout } from 'services';
+import { logout } from 'services';
 
 const NavBar = () => {
   const router = useRouter();
@@ -11,7 +11,6 @@ const NavBar = () => {
   );
   const logoutHandler = async () => {
     try {
-      await fetchCSRFToken();
       await logout();
       deleteCookie('XSRF-TOKEN');
       router.push('/');

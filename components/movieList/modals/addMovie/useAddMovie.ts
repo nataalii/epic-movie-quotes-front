@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { addMovie } from 'services';
+import { useDispatch, useSelector } from 'react-redux';
+import { addMovie, fetchCSRFToken } from 'services';
 
 const useAddMovie = () => {
   const dispatch = useDispatch();
+  const { name } = useSelector((store: any) => store.user);
   const router = useRouter();
   const {
     register,
@@ -14,16 +15,20 @@ const useAddMovie = () => {
     mode: 'all',
   });
   const onSubmit = async (data: object) => {
-    console.log(data);
+    const updatedData = {
+      ...data,
+      image: data.image[0],
+    };
+    router.reload();
     try {
-      await addMovie(data);
-      router.reload();
+      await fetchCSRFToken();
+      await addMovie(updatedData);
     } catch (errors: any) {
       console.log(errors);
     }
   };
 
-  return { dispatch, errors, register, onSubmit, handleSubmit };
+  return { dispatch, errors, register, onSubmit, handleSubmit, name };
 };
 
 export default useAddMovie;

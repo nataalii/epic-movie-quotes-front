@@ -17,7 +17,7 @@ const InputText = ({
     <div>
       <input
         className=' bg-transparent px-4 h-12 placeholder:text-white text-lg
-        text-white relative w-full rounded-md outline outline-1 outline-[#6C757D]'
+        text-white relative w-full rounded-[4px] outline outline-1 outline-[#6C757D]'
         placeholder={placeholder}
         type={type}
         name={name}

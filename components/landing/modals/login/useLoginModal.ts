@@ -1,5 +1,4 @@
-import { deleteCookie, setCookie } from 'cookies-next';
-import useAuth from 'hooks/useAuth';
+import { deleteCookie } from 'cookies-next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -12,11 +11,12 @@ import {
   openRegisterModal,
 } from 'stores/modalSlice';
 import { useDispatch } from 'react-redux';
+import useAuth from 'hooks/useAuth';
 const useLoginModal = () => {
   const { t } = useTranslation('common');
   const router = useRouter();
   const dispatch = useDispatch();
-
+  useAuth();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const hideLoginModalHandler = () => {
     dispatch(closeLoginModal());
@@ -27,7 +27,6 @@ const useLoginModal = () => {
   const showForgotPasswordHandler = () => {
     dispatch(openForgotPassword());
   };
-  useAuth();
 
   const {
     register,
@@ -38,12 +37,10 @@ const useLoginModal = () => {
     control,
     formState: { errors },
   } = useForm<LoginModalTypes>({ mode: 'all' });
-
   const onSubmit = async (data: LoginModalTypes) => {
     try {
       await fetchCSRFToken();
       await login(data);
-      setCookie('email', data.email);
       router.push('/news-feed');
     } catch (errors: any) {
       const error = errors.response.data.message;

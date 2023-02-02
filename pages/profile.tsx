@@ -1,7 +1,9 @@
 import { NavBar } from 'components/navBar';
 import { SideNavBar } from 'components/sideNavBar';
+import useAuth from 'hooks/useAuth';
 
 export default function Profile() {
+  useAuth();
   return (
     <div className='text-white bg-[#181623]'>
       <NavBar></NavBar>

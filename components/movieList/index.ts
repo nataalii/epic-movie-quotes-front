@@ -1,1 +1,3 @@
-export { default as MovieListHeader } from './movieListHeader';
+export * from './modals';
+export * from './form';
+export * from './movies';

@@ -1,10 +1,10 @@
-import { Profile } from 'components/icons';
+import { ProfileIcon } from 'components/icons';
 
 const Comment = () => {
   return (
     <div className='max-w-[56rem]'>
       <div className='mt-7 flex items-center gap-4 '>
-        <Profile />
+        <ProfileIcon />
         <p>Natali charkviani</p>
       </div>
       <p className=' lg:ml-20 '>

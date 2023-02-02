@@ -9,6 +9,7 @@ const initialState = {
   passwordChanged: false,
   verificationNotif: false,
   verificationVerify: false,
+  addMovieModal: false,
 };
 
 const modalSlice = createSlice({
@@ -63,6 +64,12 @@ const modalSlice = createSlice({
     closeVerificationVerify: (state) => {
       state.verificationVerify = false;
     },
+    openAddMovieModal: (state) => {
+      state.addMovieModal = true;
+    },
+    closeAddMovieModal: (state) => {
+      state.addMovieModal = false;
+    },
   },
 });
 
@@ -83,6 +90,8 @@ export const {
   closeVerificationNotif,
   closeVerificationVerify,
   openVerificationVerify,
+  openAddMovieModal,
+  closeAddMovieModal,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

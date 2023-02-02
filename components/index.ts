@@ -6,4 +6,3 @@ export * from './landing/form';
 export * from './localSwitcher';
 export * from './landing/modals';
 export * from './newsFeed';
-export * from './movieList';

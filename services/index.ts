@@ -39,3 +39,36 @@ export const handleGoogleCallback = async () => {
   const response = await instance.get('api/google/auth/callback/');
   return response;
 };
+export const getMovieList = async () => {
+  const response = await instance.get('/api/movie-list');
+  return response;
+};
+
+export const addMovie = async (data: any) => {
+  const response = await instance.post('/api/movies', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
+  return response;
+};
+export const getMovie = async (movie: any) => {
+  const response = await instance.get(`/api/movies/${movie.id}`, movie);
+
+  return response;
+};
+export const updateMovie = async (movie: any) => {
+  const response = await instance.post(`/api/movies/${movie.id}`, movie, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
+  return response;
+};
+
+export const deleteMovie = async (id: any) => {
+  const response = await instance.post(`/api/movies/${id}`);
+  return response;
+};

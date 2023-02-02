@@ -39,8 +39,8 @@ export const handleGoogleCallback = async () => {
   const response = await instance.get('api/google/auth/callback/');
   return response;
 };
-export const getMovieList = async (data: any) => {
-  const response = await instance.get('/api/movie-list', data);
+export const getMovieList = async () => {
+  const response = await instance.get('/api/movie-list');
   return response;
 };
 

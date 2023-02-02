@@ -2,16 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @font-face {
     font-family: 'Helvetica';
     src: url('../public/fonts/Helvetica.ttf');
 }
 
-body{
-    background-color: #11101A;
+
+body {
+    background-color: #181623;
     font-family: 'Helvetica';
 }
+
 .bg-linear-gradient {
-    background: linear-gradient(180deg, #11101A 0%, rgba(71, 71, 71, 0) 30%,  rgba(0, 0, 0, 0) 100%),
-    linear-gradient(90deg, #11101A 0%, rgba(71, 71, 71, 0) 30%, rgba(17, 16, 26, 0) 40%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(180deg, #11101A 0%, rgba(71, 71, 71, 0) 30%, rgba(0, 0, 0, 0) 100%),
+        linear-gradient(90deg, #11101A 0%, rgba(71, 71, 71, 0) 30%, rgba(17, 16, 26, 0) 40%, rgba(0, 0, 0, 0) 100%);
 }

@@ -7,7 +7,7 @@ const NewsFeed = () => {
   useAuth();
 
   return (
-    <div className='text-white min-h-screen  bg-[#181623]'>
+    <div className='text-white'>
       <NavBar />
       <SideNavBar />
       <Search />

@@ -37,7 +37,7 @@ const AddMovie = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className=' flex gap-3 items-center my-7'>
-              <ProfileIcon />
+              <ProfileIcon size={60} />
               <h1>{name}</h1>
             </div>
 

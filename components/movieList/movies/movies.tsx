@@ -25,7 +25,12 @@ const Movies = () => {
           </div>
           <div>
             <Button
-              item={<AddMovieIcon /> && <h1>Add Movie</h1>}
+              item={
+                <div className='flex items-center gap-2'>
+                  <AddMovieIcon />
+                  {'Add Movie'}
+                </div>
+              }
               color='red'
               onClick={() => dispatch(openAddMovieModal())}
             />

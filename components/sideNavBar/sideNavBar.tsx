@@ -12,10 +12,10 @@ const SideNavBar = () => {
         <div className='flex items-center gap-5'>
           {router.asPath === '/profile' ? (
             <div className=' w-16 h-16 bg-red-600 rounded-full flex justify-center items-center'>
-              <ProfileIcon />
+              <ProfileIcon size={60} />
             </div>
           ) : (
-            <ProfileIcon />
+            <ProfileIcon size={60} />
           )}
           <div>
             <p className='text-2xl'>{name}</p>

@@ -17,7 +17,7 @@ const NavBar = () => {
     } catch (error) {}
   };
   return (
-    <header className=' h-20 bg-[#24222F] flex sticky top-0'>
+    <header className=' h-20 bg-[#24222F] flex sticky top-0 z-30'>
       <div className='flex justify-between items-center m-auto max-w-[120rem] w-[93%]'>
         <h3 className=' text-[#DDCCAA] '>MOVIE QUOTES</h3>
         <div className='flex justify-center items-center gap-10 '>

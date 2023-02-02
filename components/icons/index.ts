@@ -21,3 +21,4 @@ export { default as ProfileIcon } from './ProfileIcon';
 export { default as AddMovieIcon } from './AddMovieIcon';
 export { default as Exit } from './Exit';
 export { default as Photo } from './Photo';
+export { default as Quotes } from './Quotes';

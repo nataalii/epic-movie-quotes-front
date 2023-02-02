@@ -23,7 +23,7 @@ const Movies = () => {
               className=' bg-transparent w-20 outline-none text-xl'
             />
           </div>
-          <div className=' '>
+          <div>
             <Button
               item={<AddMovieIcon /> && <h1>Add Movie</h1>}
               color='red'
@@ -34,15 +34,13 @@ const Movies = () => {
       </div>
       <div className=' flex flex-wrap gap-16  max-w-[90rem]  '>
         {movies?.map((movie: any) => (
-          <>
-            <div
-              key={movie.id}
-              className='flex flex-col gap-3 w-96 h-[450px] mt-14'
-            >
+          // eslint-disable-next-line react/jsx-key
+          <div key={movie.id}>
+            <div className='flex flex-col gap-3 w-96 h-[450px] mt-14'>
               <img
                 src={`${movie.image}`}
                 alt='movie image'
-                className='w-96 h-[400px] object-cover rounded-lg'
+                className='w-96 h-[27rem] object-cover rounded-lg'
               />
               <Link className='' href={`/movie/${movie.id}`}>
                 {`${movie.title.en} (${movie.year})`}
@@ -54,7 +52,7 @@ const Movies = () => {
                 <Quotes />
               </div>
             </div>
-          </>
+          </div>
         ))}
       </div>
     </div>

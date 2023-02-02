@@ -1,17 +1,12 @@
-const InputText = ({
+import { addMovieInputTypes } from 'types';
+
+const InputText: React.FC<addMovieInputTypes> = ({
   language,
   placeholder,
   name,
   register,
   type,
   errors,
-}: {
-  language?: string;
-  placeholder: string;
-  name?: string;
-  register: object;
-  type?: string;
-  errors?: any;
 }) => {
   return (
     <div>

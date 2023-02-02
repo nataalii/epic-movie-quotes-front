@@ -17,3 +17,12 @@ export type TextAreaInput = {
   type?: string;
   errors?: any;
 };
+
+export type addMovieInputTypes = {
+  language?: string;
+  placeholder: string;
+  name?: string;
+  register: object;
+  type?: string;
+  errors?: any;
+};

@@ -6,4 +6,4 @@ export * from './landing/form';
 export * from './localSwitcher';
 export * from './landing/modals';
 export * from './newsFeed';
-export * from './profile/emailProfile';
+export * from './profile/emailProfile/myProfile';

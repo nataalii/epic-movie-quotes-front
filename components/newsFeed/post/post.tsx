@@ -41,7 +41,11 @@ const Post = () => {
             <Comment />
           </section>
           <section className='mt-4 flex  mb-4 lg:pb-6'>
-            <img src={`${image}`} alt='' className=' w-[3.8rem]' />
+            <img
+              src={`${image}`}
+              alt='user avatar'
+              className=' w-[3.8rem] h-[3.8rem] rounded-full object-cover'
+            />
             <input
               placeholder='Write a comment'
               className=' outline-none block ml-3 pl-4 w-full bg-[#24222F] rounded-lg'

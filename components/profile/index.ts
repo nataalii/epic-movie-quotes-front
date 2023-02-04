@@ -1,1 +1,1 @@
-export * from './emailProfile';
+export * from './emailProfile/myProfile';

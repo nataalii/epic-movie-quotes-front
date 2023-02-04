@@ -38,7 +38,11 @@ const AddMovie = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className=' flex gap-3 items-center my-7'>
-              <img src={`${image}`} alt='' className=' w-[3.8rem]' />
+              <img
+                src={`${image}`}
+                alt='user avatar'
+                className=' w-20 h-20 rounded-full object-cover'
+              />
               <h1>{name}</h1>
             </div>
 

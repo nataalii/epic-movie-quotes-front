@@ -25,6 +25,7 @@ const useAddMovie = () => {
       ...data,
       image: data.image[0],
     };
+    console.log(updatedData);
     submitForm(updatedData, {
       onError: () => {},
     });

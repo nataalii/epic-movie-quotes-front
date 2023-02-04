@@ -8,65 +8,36 @@ import {
   PrimaryEmail,
 } from 'components/icons';
 import NotVerifiedEmail from 'components/icons/NotVerifiedEmail';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from 'react-query';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateUser } from 'services';
 import { openAddEmailModal } from 'stores/modalSlice';
 import AddEmail from './addEmail/addEmail';
 import useMyProfile from './useMyProfile';
 
 const MyProfile = () => {
-  const dispatch = useDispatch();
-  const { addEmailModal } = useSelector((store: any) => store.modal);
   const {
     name,
     email,
+    image,
     passwordVisibility,
     setPasswordVisibility,
     passConfVisbility,
     setConfPassVisibility,
-  } = useMyProfile();
-  const [isReadOnly, setIsReadOnly] = useState(true);
-  const [resetPassword, setResetPassword] = useState(false);
-  const handleEdit = () => {
-    setIsReadOnly(false);
-  };
-  const {
+    addEmailModal,
+    dispatch,
+    isReadOnly,
+    resetPassword,
+    editAvatar,
+    setEditAvatar,
+    selectedImage,
+    setSelectedImage,
+    handleEdit,
     register,
     handleSubmit,
+    errors,
+    onSubmit,
+    setResetPassword,
     getValues,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    mode: 'all',
-  });
-  const cancelButtonHandler = () => {
-    setValue('name', name);
-    setValue('newPassword', '');
-    setValue('confNewPassword', '');
-    setResetPassword(false);
-    setIsReadOnly(true);
-  };
-  const queryClient = useQueryClient();
-  const { mutate: submitForm } = useMutation(updateUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('users');
-    },
-  });
-  const onSubmit = async () => {
-    const data = {
-      name: getValues('name'),
-      password: getValues('newPassword'),
-      thumbnail: getValues('avatar'),
-    };
-    submitForm(data, {
-      onError: () => {},
-    });
-    cancelButtonHandler();
-  };
-  const { image } = useSelector((store: any) => store.user);
+    cancelButtonHandler,
+  } = useMyProfile();
   return (
     <div className='w-[90rem] '>
       {addEmailModal && <AddEmail />}
@@ -75,8 +46,27 @@ const MyProfile = () => {
       <div className='max-w-[60rem] bg-blue-600 rounded-2xl my-28 m-10 pb-16'>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className=' flex flex-col gap-2 items-center justify-center -translate-y-16 z-0'>
-            <img src={`${image}`} alt='avatar' className=' w-40' />
-            <input type='file' className='hidden' name='avatar' id='avatar' />
+            <img
+              src={selectedImage || `${image}`}
+              alt='avatar'
+              className=' w-40 h-40 rounded-full object-cover'
+            />
+            <input
+              type='file'
+              className='hidden'
+              id='avatar'
+              {...register('avatar', {
+                onChange(event) {
+                  const file = event.target.files[0];
+                  const reader = new FileReader();
+                  reader.onload = (e: any) => {
+                    setSelectedImage(e.target.result);
+                  };
+                  reader.readAsDataURL(file);
+                  setEditAvatar(true);
+                },
+              })}
+            />
             <label className='text-xl cursor-pointer' htmlFor='avatar'>
               Upload new Photo
             </label>
@@ -92,15 +82,22 @@ const MyProfile = () => {
                   readOnly={isReadOnly}
                   defaultValue={name}
                   {...register('name', {
-                    required: 'Username field is required',
+                    required: !isReadOnly
+                      ? 'Username field is required'
+                      : undefined,
                     minLength: {
                       value: 4,
                       message: 'Username should contain min 3 symbols',
                     },
                   })}
                 />
-                {errors.name?.message}
-                <hr className='h-px mt-8 bg-gray border-0' />
+                <div className='relative'>
+                  <p className=' text-danger h-5 font-normal text-base my-1 '>
+                    {errors.name?.message as string}
+                  </p>
+                </div>
+
+                <hr className='h-px bg-gray border-0' />
               </div>
               {isReadOnly && (
                 <h1
@@ -200,16 +197,43 @@ const MyProfile = () => {
                 <div className=' flex flex-col gap-3 w-[55%] bg-transparent border-[1px] border-gray border-opacity-70 rounded-md p-5'>
                   <h1>Passwords should contain:</h1>
                   <ul>
-                    <li className='flex items-center gap-2 text-[#9C9A9A] text-sm '>
-                      <Circle color='gray' />8 or more characters
+                    <li
+                      className={`flex items-center gap-2 text-sm ${
+                        getValues('newPassword')?.length >= 8
+                          ? 'text-white'
+                          : 'text-[#9C9A9A]'
+                      }`}
+                    >
+                      <Circle
+                        color={`${
+                          getValues('newPassword')?.length >= 8
+                            ? '#198754'
+                            : 'gray'
+                        }`}
+                      />
+                      8 or more characters
                     </li>
-                    <li className='flex items-center gap-2 text-sm'>
-                      <Circle color='#198754' />
-                      15 lowercase characters
+                    <li
+                      className={`flex items-center gap-2 text-sm ${
+                        getValues('newPassword')?.length <= 15 &&
+                        /^[a-z0-9]*$/.test(getValues('newPassword'))
+                          ? 'text-white'
+                          : 'text-[#9C9A9A]'
+                      }`}
+                    >
+                      <Circle
+                        color={`${
+                          getValues('newPassword')?.length <= 15 &&
+                          /^[a-z0-9]*$/.test(getValues('newPassword'))
+                            ? '#198754'
+                            : 'gray'
+                        }`}
+                      />
+                      15 lowercase character
                     </li>
                   </ul>
                 </div>
-                <div className='flex flex-col w-[55%] gap-8'>
+                <div className='flex flex-col w-[55%] '>
                   <div className='flex flex-col gap-2 relative'>
                     <label htmlFor='newPassword'>New Password</label>
                     <input
@@ -236,7 +260,11 @@ const MyProfile = () => {
                     >
                       {passwordVisibility ? <EyeOpen /> : <EyeClosed />}
                     </div>
-                    {errors.newPassword?.message}
+                    <div className='relative'>
+                      <p className=' text-danger h-5 font-normal text-base mb-1 '>
+                        {errors.newPassword?.message as string}
+                      </p>
+                    </div>
                   </div>
                   <div className='flex flex-col gap-2 relative'>
                     <label htmlFor='confNewPassword'>
@@ -258,6 +286,16 @@ const MyProfile = () => {
                           message:
                             'Confirm password  should contain max 15 symbols',
                         },
+                        pattern: {
+                          value: /^[a-z0-9]*$/,
+                          message: 'Enter only lowercase letters ans numbers ',
+                        },
+                        validate: (value) => {
+                          const { newPassword } = getValues();
+                          return (
+                            newPassword === value || 'Passwords should match!'
+                          );
+                        },
                       })}
                     />
                     <div
@@ -268,12 +306,16 @@ const MyProfile = () => {
                     >
                       {passConfVisbility ? <EyeOpen /> : <EyeClosed />}
                     </div>
-                    {errors.confNewPassword?.message}
+                    <div className='relative'>
+                      <p className=' text-danger h-5 font-normal text-base mb-1 '>
+                        {errors.confNewPassword?.message as string}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </>
             )}
-            {(resetPassword || !isReadOnly) && (
+            {(resetPassword || !isReadOnly || editAvatar) && (
               <div className='relative '>
                 <div className='absolute right-0 mt-24 flex gap-5 items-center cursor-pointer'>
                   <h1 onClick={() => cancelButtonHandler()}>Cancel</h1>

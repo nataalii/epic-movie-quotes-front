@@ -13,10 +13,18 @@ const SideNavBar = () => {
         <div className='flex items-center gap-5'>
           {router.asPath === '/profile' ? (
             <div className=' w-16 h-16 bg-red-600 rounded-full flex justify-center items-center'>
-              <img src={`${image}`} alt='avatar' className='w-[3.8rem]' />
+              <img
+                src={`${image}`}
+                alt='avatar'
+                className=' w-[3.8rem] h-[3.8rem] rounded-full object-cover'
+              />
             </div>
           ) : (
-            <img src={`${image}`} alt='avatar' className='w-[3.8rem]' />
+            <img
+              src={`${image}`}
+              alt='avatar'
+              className=' w-[3.8rem] h-[3.8rem] rounded-full object-cover'
+            />
           )}
           <div>
             <p className='text-2xl'>{name}</p>

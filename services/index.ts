@@ -20,6 +20,14 @@ export const getUser = async () => {
   const response = await instance.get('/api/user');
   return response;
 };
+export const updateUser = async (data: any) => {
+  const response = await instance.post('/api/user-update', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response;
+};
 
 export const logout = async () => {
   const response = await instance.post('api/logout');

@@ -1,10 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 import { CommentIcon, Like, ProfileIcon } from 'components/icons';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { Comment } from '../comment';
 
 const Post = () => {
-  const { name } = useSelector((store: any) => store.user);
+  const { name, image } = useSelector((store: any) => store.user);
   return (
     <div className='flex lg:ml-[500px] lg:mx-10 mx-5'>
       <div className=' lg:bg-[#11101A] lg:rounded-xl lg:mb-4 mt-10'>
@@ -40,7 +41,7 @@ const Post = () => {
             <Comment />
           </section>
           <section className='mt-4 flex  mb-4 lg:pb-6'>
-            <ProfileIcon size={60} />
+            <img src={`${image}`} alt='' className=' w-[3.8rem]' />
             <input
               placeholder='Write a comment'
               className=' outline-none block ml-3 pl-4 w-full bg-[#24222F] rounded-lg'

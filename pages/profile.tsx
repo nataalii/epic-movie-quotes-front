@@ -1,5 +1,5 @@
-import { MyProfile } from 'components';
 import { NavBar } from 'components/navBar';
+import { MyProfile } from 'components';
 import { SideNavBar } from 'components/sideNavBar';
 import useAuth from 'hooks/useAuth';
 

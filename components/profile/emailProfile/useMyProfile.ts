@@ -17,6 +17,7 @@ const useMyProfile = () => {
 
   const handleEdit = () => {
     setIsReadOnly(false);
+    setValue('name', name);
   };
   const {
     register,
@@ -44,6 +45,13 @@ const useMyProfile = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('users');
       cancelButtonHandler();
+    },
+    onError: (errors: any) => {
+      const error = errors.response.data.errors?.name;
+      setError('name', {
+        type: 'nameExists',
+        message: error[0],
+      });
     },
   });
   const onSubmit = async () => {

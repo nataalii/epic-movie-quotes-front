@@ -1,9 +1,28 @@
 import { Button } from 'components/button';
+import ProfileInput from 'components/profile/profileInput/profileInput';
+import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch } from 'react-redux';
+import { addEmail } from 'services';
 import { closeAddEmailModal } from 'stores/modalSlice';
 
 const AddEmail = () => {
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: 'all' });
+  const { mutate: submitForm } = useMutation(addEmail, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('emails');
+      dispatch(closeAddEmailModal());
+    },
+  });
+  const onSubmit = async (data: any) => {
+    submitForm(data);
+  };
   return (
     <div
       className=' mt-20 flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
@@ -17,20 +36,29 @@ const AddEmail = () => {
       >
         <h1 className='w-[90%] m-auto mt-5'>Add New Email</h1>
         <hr className='w-full border-[#efefef4d] ' />
-        <div className='flex flex-col w-[90%] m-auto gap-2'>
-          <label htmlFor='newEmail'> New Email</label>
-          <input
-            type='text'
-            className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <ProfileInput
+            label='New Email'
+            name='newEmail'
             placeholder='Enter new email'
+            register={register('email', {
+              required: 'Field is required',
+              pattern: {
+                value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                message: 'Email should be valid',
+              },
+            })}
+            error={errors.email}
+            serverError='emailExists'
           />
-        </div>
-        <div className=' relative'>
-          <div className='flex items-center gap-4 absolute right-6 -top-1'>
-            <p onClick={() => dispatch(closeAddEmailModal())}>Cancel</p>
-            <Button item='Add' color='red' size='w-18' />
+
+          <div className=' relative mt-5'>
+            <div className='flex items-center gap-4 absolute right-6 -top-1 cursor-pointer'>
+              <p onClick={() => dispatch(closeAddEmailModal())}>Cancel</p>
+              <Button item='Add' color='red' size='w-18' />
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

@@ -51,6 +51,10 @@ export const getMovieList = async () => {
   const response = await instance.get('/api/movie-list');
   return response;
 };
+export const addEmail = async (email: string) => {
+  const response = await instance.post('/api/email-create', email);
+  return response;
+};
 
 export const addMovie = async (data: any) => {
   const response = await instance.post('/api/movies', data, {

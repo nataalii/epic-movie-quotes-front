@@ -62,7 +62,9 @@ const MyProfile = () => {
                   reader.onload = (e: any) => {
                     setSelectedImage(e.target.result);
                   };
-                  reader.readAsDataURL(file);
+                  if (file && file.type.match('image.*')) {
+                    reader.readAsDataURL(file);
+                  }
                   setEditAvatar(true);
                 },
               })}
@@ -86,14 +88,16 @@ const MyProfile = () => {
                       ? 'Username field is required'
                       : undefined,
                     minLength: {
-                      value: 4,
+                      value: 3,
                       message: 'Username should contain min 3 symbols',
                     },
                   })}
                 />
                 <div className='relative'>
                   <p className=' text-danger h-5 font-normal text-base my-1 '>
-                    {errors.name?.message as string}
+                    {(errors.name?.type === 'nameExists' &&
+                      (errors.name?.message as string)) ||
+                      (errors.name?.message as string)}
                   </p>
                 </div>
 

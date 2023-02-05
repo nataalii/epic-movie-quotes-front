@@ -37,7 +37,10 @@ const MyProfile = () => {
     setResetPassword,
     getValues,
     cancelButtonHandler,
+    emails,
+    deleteEmail,
   } = useMyProfile();
+
   return (
     <div className='w-[90rem] '>
       {addEmailModal && <AddEmail />}
@@ -129,27 +132,34 @@ const MyProfile = () => {
               </div>
               <h2 className=' mt-10  text-light-gray'>Primary Email</h2>
             </div>
-            <div className='flex w-full gap-5  '>
-              <div className='flex flex-col w-[55%] gap-2 relative'>
-                <label htmlFor='notVerifiedEmail'>Email</label>
-                <input
-                  type='text'
-                  id='notVerifiedEmail'
-                  name='notVerifiedEmail'
-                  className=' p-2 border-[#EC9524] border bg-yellow-700 bg-opacity-20 rounded-md  outline-none'
-                  readOnly
-                  value={email}
-                />
-                <div className='absolute right-4 top-[47px]'>
-                  <NotVerifiedEmail />
+            {emails?.map((email: any) => (
+              <div className='flex w-full gap-5  ' key={email.id}>
+                <div className='flex flex-col w-[55%] gap-2 relative'>
+                  <label>Email</label>
+                  <input
+                    type='text'
+                    name='notVerifiedEmail'
+                    className=' p-2 border-[#EC9524] border bg-yellow-700 bg-opacity-20 rounded-md  outline-none'
+                    readOnly
+                    value={email.email}
+                  />
+                  <div className='absolute right-4 top-[47px]'>
+                    <NotVerifiedEmail />
+                  </div>
+                </div>
+                <div className=' mt-10 text-light-gray flex gap-5'>
+                  <h2>Not verified</h2>
+                  <h2
+                    className=' cursor-pointer'
+                    onClick={() => deleteEmail(email.id)}
+                  >
+                    Remove
+                  </h2>
                 </div>
               </div>
-              <div className=' mt-10 text-light-gray flex gap-5'>
-                <h2>Not verified</h2>
-                <h2 className=''>Remove</h2>
-              </div>
-            </div>
-            <div className='flex w-full gap-5 '>
+            ))}
+
+            {/* <div className='flex w-full gap-5 '>
               <div className='flex flex-col w-[55%] gap-2'>
                 <label htmlFor='email'>Email</label>
                 <input
@@ -165,7 +175,7 @@ const MyProfile = () => {
                 <h2>Make this Primary</h2>
                 <h2>Remove</h2>
               </div>
-            </div>
+            </div> */}
 
             <div className='flex flex-col w-[55%] gap-7'>
               <div

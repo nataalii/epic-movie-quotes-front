@@ -29,6 +29,21 @@ export const updateUser = async (data: any) => {
   return response;
 };
 
+export const addEmail = async (email: string) => {
+  const response = await instance.post('/api/email-create', email);
+  return response;
+};
+
+export const getEmails = async () => {
+  const response = await instance.get('/api/emails');
+  return response;
+};
+
+export const removeEmail = async (id: string) => {
+  const response = await instance.delete(`/api/email-destroy/${id}`);
+  return response;
+};
+
 export const logout = async () => {
   const response = await instance.post('api/logout');
   return response;
@@ -49,10 +64,6 @@ export const handleGoogleCallback = async () => {
 };
 export const getMovieList = async () => {
   const response = await instance.get('/api/movie-list');
-  return response;
-};
-export const addEmail = async (email: string) => {
-  const response = await instance.post('/api/email-create', email);
   return response;
 };
 

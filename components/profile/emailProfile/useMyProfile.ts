@@ -1,8 +1,9 @@
+import useEmails from 'hooks/useEmails';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUser } from 'services';
+import { removeEmail, updateUser } from 'services';
 
 const useMyProfile = () => {
   const { name, email, image } = useSelector((store: any) => store.user);
@@ -40,6 +41,7 @@ const useMyProfile = () => {
     setEditAvatar(false);
     setSelectedImage(image);
   };
+  const { emails } = useEmails();
   const queryClient = useQueryClient();
   const { mutate: submitForm } = useMutation(updateUser, {
     onSuccess: () => {
@@ -54,6 +56,7 @@ const useMyProfile = () => {
       });
     },
   });
+
   const onSubmit = async () => {
     const data = {
       name: getValues('name'),
@@ -63,6 +66,14 @@ const useMyProfile = () => {
     console.log(data);
 
     submitForm(data, {});
+  };
+  const { mutate: remove } = useMutation(removeEmail, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('emails');
+    },
+  });
+  const deleteEmail = async (id: string) => {
+    remove(id);
   };
   return {
     name,
@@ -88,6 +99,8 @@ const useMyProfile = () => {
     setResetPassword,
     getValues,
     cancelButtonHandler,
+    emails,
+    deleteEmail,
   };
 };
 

@@ -1,21 +1,30 @@
-import { Home, Movie, ProfileIcon } from 'components';
+/* eslint-disable @next/next/no-img-element */
+import { Home, Movie } from 'components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 const SideNavBar = () => {
   const router = useRouter();
-  const { name } = useSelector((store: any) => store.user);
+  const { name, image } = useSelector((store: any) => store.user);
   return (
     <div>
       <div className='hidden lg:flex lg:flex-col h-20 fixed top-28 left-16 gap-8'>
         <div className='flex items-center gap-5'>
           {router.asPath === '/profile' ? (
             <div className=' w-16 h-16 bg-red-600 rounded-full flex justify-center items-center'>
-              <ProfileIcon />
+              <img
+                src={`${image}`}
+                alt='avatar'
+                className=' w-[3.8rem] h-[3.8rem] rounded-full object-cover'
+              />
             </div>
           ) : (
-            <ProfileIcon />
+            <img
+              src={`${image}`}
+              alt='avatar'
+              className=' w-[3.8rem] h-[3.8rem] rounded-full object-cover'
+            />
           )}
           <div>
             <p className='text-2xl'>{name}</p>

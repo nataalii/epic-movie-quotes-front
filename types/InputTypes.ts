@@ -26,3 +26,11 @@ export type addMovieInputTypes = {
   type?: string;
   errors?: any;
 };
+
+export type profileInputTypes = {
+  label: string;
+  name: string;
+  placeholder: string;
+  error?: any;
+  serverError?: string;
+};

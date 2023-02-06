@@ -1,11 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
 import { Button } from 'components/button';
-import { Exit, ProfileIcon } from 'components/icons';
+import { Exit } from 'components/icons';
 import { InputFile, InputText, InputTextArea } from 'components/movieList/form';
 import { closeAddMovieModal } from 'stores/modalSlice';
 import useAddMovie from './useAddMovie';
 
 const AddMovie = () => {
-  const { dispatch, errors, onSubmit, handleSubmit, register, name } =
+  const { dispatch, errors, onSubmit, handleSubmit, register, name, image } =
     useAddMovie();
 
   return (
@@ -37,7 +38,11 @@ const AddMovie = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className=' flex gap-3 items-center my-7'>
-              <ProfileIcon />
+              <img
+                src={`${image}`}
+                alt='user avatar'
+                className=' w-20 h-20 rounded-full object-cover'
+              />
               <h1>{name}</h1>
             </div>
 

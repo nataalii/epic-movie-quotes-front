@@ -20,6 +20,37 @@ export const getUser = async () => {
   const response = await instance.get('/api/user');
   return response;
 };
+export const updateUser = async (data: any) => {
+  const response = await instance.post('/api/user-update', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response;
+};
+
+export const addEmail = async (email: string) => {
+  const response = await instance.post('/api/email-create', email);
+  return response;
+};
+
+export const getEmails = async () => {
+  const response = await instance.get('/api/emails');
+  return response;
+};
+export const verifyEmail = async (token: any) => {
+  const response = await instance.post('/api/secondary-email-verify', token);
+  return response;
+};
+export const removeEmail = async (id: string) => {
+  const response = await instance.delete(`/api/email-destroy/${id}`);
+  return response;
+};
+
+export const makePrimaryEmail = async (id: string) => {
+  const response = await instance.post(`/api/make-email-primary/${id}`);
+  return response;
+};
 
 export const logout = async () => {
   const response = await instance.post('api/logout');

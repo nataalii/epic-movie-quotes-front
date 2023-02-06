@@ -4,7 +4,7 @@ const Comment = () => {
   return (
     <div className='max-w-[56rem]'>
       <div className='mt-7 flex items-center gap-4 '>
-        <ProfileIcon />
+        <ProfileIcon size={60} />
         <p>Natali charkviani</p>
       </div>
       <p className=' lg:ml-20 '>

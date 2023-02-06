@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Button } from 'components/button';
 import { AddMovieIcon, Quotes, SearchIcon } from 'components/icons';
 import Link from 'next/link';
@@ -25,7 +26,12 @@ const Movies = () => {
           </div>
           <div>
             <Button
-              item={<AddMovieIcon /> && <h1>Add Movie</h1>}
+              item={
+                <div className='flex items-center gap-2'>
+                  <AddMovieIcon />
+                  {'Add Movie'}
+                </div>
+              }
               color='red'
               onClick={() => dispatch(openAddMovieModal())}
             />
@@ -34,7 +40,6 @@ const Movies = () => {
       </div>
       <div className=' flex flex-wrap gap-16  max-w-[90rem]  '>
         {movies?.map((movie: any) => (
-          // eslint-disable-next-line react/jsx-key
           <div key={movie.id}>
             <div className='flex flex-col gap-3 w-96 h-[450px] mt-14'>
               <img

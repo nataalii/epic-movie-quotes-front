@@ -10,7 +10,7 @@ export default function MovieList() {
   const { addMovieModal } = useSelector((store: any) => store.modal);
 
   return (
-    <div className='text-white h-full bg-[#181623]'>
+    <div className='text-white h-full'>
       <NavBar />
       <SideNavBar />
       <div className=' lg:ml-96 mt-8 flex justify-center items-center'>

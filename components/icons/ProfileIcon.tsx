@@ -1,12 +1,12 @@
 import React from 'react';
 
-function ProfileIcon() {
+function ProfileIcon(props: any) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       xmlnsXlink='http://www.w3.org/1999/xlink'
-      width='60'
-      height='60'
+      width={props.size}
+      height={props.size}
       fill='none'
       viewBox='0 0 60 60'
     >

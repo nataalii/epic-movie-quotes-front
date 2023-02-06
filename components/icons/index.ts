@@ -22,3 +22,6 @@ export { default as AddMovieIcon } from './AddMovieIcon';
 export { default as Exit } from './Exit';
 export { default as Photo } from './Photo';
 export { default as Quotes } from './Quotes';
+export { default as PrimaryEmail } from './PrimaryEmail';
+export { default as Circle } from './Circle';
+export { default as BackArrow } from './BackArrow';

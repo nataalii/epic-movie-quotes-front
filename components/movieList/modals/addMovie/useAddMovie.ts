@@ -6,7 +6,7 @@ import { closeAddMovieModal } from 'stores/modalSlice';
 const useAddMovie = () => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
-  const { name } = useSelector((store: any) => store.user);
+  const { name, image } = useSelector((store: any) => store.user);
   const {
     register,
     handleSubmit,
@@ -25,12 +25,13 @@ const useAddMovie = () => {
       ...data,
       image: data.image[0],
     };
+    console.log(updatedData);
     submitForm(updatedData, {
       onError: () => {},
     });
   };
 
-  return { dispatch, errors, register, onSubmit, handleSubmit, name };
+  return { dispatch, errors, register, onSubmit, handleSubmit, name, image };
 };
 
 export default useAddMovie;

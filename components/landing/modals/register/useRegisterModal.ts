@@ -45,13 +45,13 @@ const useRegisterModal = () => {
       openVerificationNotifHandler();
     } catch (error: any) {
       const errors = error.response.data.errors;
-      if (errors.name) {
+      if (errors?.name) {
         setError('name', {
           type: 'nameExists',
           message: errors.name[0],
         });
       }
-      if (errors.email) {
+      if (errors?.email) {
         setError('email', {
           type: 'emailExists',
           message: errors.email[0],

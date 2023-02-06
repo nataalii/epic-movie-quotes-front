@@ -39,6 +39,7 @@ const MyProfile = () => {
     cancelButtonHandler,
     emails,
     deleteEmail,
+    makePrimary,
   } = useMyProfile();
 
   return (
@@ -170,8 +171,10 @@ const MyProfile = () => {
                       value={email.email}
                     />
                   </div>
-                  <div className='mt-10  text-light-gray flex gap-4'>
-                    <h2>Make this Primary</h2>
+                  <div className='mt-10  text-light-gray flex gap-4 cursor-pointer'>
+                    <h2 onClick={() => makePrimary(email.id)}>
+                      Make this Primary
+                    </h2>
                     <h2
                       className=' cursor-pointer'
                       onClick={() => deleteEmail(email.id)}

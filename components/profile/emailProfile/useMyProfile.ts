@@ -4,7 +4,12 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeEmail, updateUser, verifyEmail } from 'services';
+import {
+  makePrimaryEmail,
+  removeEmail,
+  updateUser,
+  verifyEmail,
+} from 'services';
 
 const useMyProfile = () => {
   const { name, email, image } = useSelector((store: any) => store.user);
@@ -86,7 +91,6 @@ const useMyProfile = () => {
       router.push('/profile');
     },
   });
-
   useEffect(() => {
     const verify = async () => {
       if (router.query?.token) {
@@ -96,6 +100,13 @@ const useMyProfile = () => {
 
     verify();
   }, [router, router.query, submit]);
+
+  //make email primary
+  const { mutate: makePrimary } = useMutation(makePrimaryEmail, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('emails');
+    },
+  });
 
   return {
     name,
@@ -123,6 +134,7 @@ const useMyProfile = () => {
     cancelButtonHandler,
     emails,
     deleteEmail,
+    makePrimary,
   };
 };
 

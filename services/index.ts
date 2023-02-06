@@ -47,6 +47,11 @@ export const removeEmail = async (id: string) => {
   return response;
 };
 
+export const makePrimaryEmail = async (id: string) => {
+  const response = await instance.post(`/api/make-email-primary/${id}`);
+  return response;
+};
+
 export const logout = async () => {
   const response = await instance.post('api/logout');
   return response;

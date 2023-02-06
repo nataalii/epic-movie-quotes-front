@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const Schema = yup
+const schema = yup
   .object()
   .shape({
     newEmail: yup
@@ -24,4 +24,4 @@ const Schema = yup
   })
   .required();
 
-export default Schema;
+export default schema;

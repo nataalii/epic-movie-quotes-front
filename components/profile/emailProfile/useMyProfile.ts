@@ -11,7 +11,7 @@ import {
   updateUser,
   verifyEmail,
 } from 'services';
-import { Schema } from 'validations';
+import { schema } from 'validations';
 
 const useMyProfile = () => {
   const { name, email, image } = useSelector((store: any) => store.user);
@@ -39,7 +39,7 @@ const useMyProfile = () => {
     formState: { errors },
   } = useForm({
     mode: 'all',
-    resolver: yupResolver(Schema),
+    resolver: yupResolver(schema),
   });
   const cancelButtonHandler = () => {
     setValue('name', name);

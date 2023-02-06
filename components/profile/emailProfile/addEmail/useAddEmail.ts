@@ -4,12 +4,12 @@ import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { addEmail } from 'services';
 import { closeAddEmailModal } from 'stores/modalSlice';
-import { Schema } from 'validations';
+import { schema } from 'validations';
 
 const useAddEmail = () => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
-  const methods = useForm({ mode: 'all', resolver: yupResolver(Schema) });
+  const methods = useForm({ mode: 'all', resolver: yupResolver(schema) });
 
   const { mutate: submitForm } = useMutation(addEmail, {
     onSuccess: () => {

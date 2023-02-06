@@ -1,26 +1,22 @@
+import { useFormContext } from 'react-hook-form';
 import { profileInputTypes } from 'types';
 
-const ProfileInput: React.FC<profileInputTypes> = ({
-  label,
-  name,
-  placeholder,
-  register,
-  error,
-  serverError,
-}) => {
+const ProfileInput: React.FC<profileInputTypes> = (props) => {
+  const form = useFormContext();
   return (
     <div className='flex flex-col w-[90%] m-auto  gap-4'>
-      <label htmlFor={name}> {label}</label>
+      <label htmlFor={props.name}> {props.label}</label>
       <input
         type='text'
         className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
-        placeholder={placeholder}
-        {...register}
+        placeholder={props.placeholder}
+        {...form.register(props.name)}
       />
       <div className='relative'>
         <p className=' text-danger h-1 font-normal text-base '>
-          {(error?.type === serverError && (error?.message as string)) ||
-            (error?.message as string)}
+          {(props.error?.type === props.serverError &&
+            (props.error?.message as string)) ||
+            (props.error?.message as string)}
         </p>
       </div>
     </div>

@@ -263,17 +263,7 @@ const MyProfile = () => {
                       type={passwordVisibility ? 'text' : 'password'}
                       id='newPassword'
                       className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
-                      {...register('newPassword', {
-                        required: 'password field is required',
-                        minLength: {
-                          value: 8,
-                          message: 'password should contain min 8 symbols',
-                        },
-                        maxLength: {
-                          value: 15,
-                          message: 'password should contain max 15 symbols',
-                        },
-                      })}
+                      {...register('newPassword')}
                     />
                     <div
                       className='absolute right-4 top-[45px] cursor-pointer'
@@ -289,6 +279,7 @@ const MyProfile = () => {
                       </p>
                     </div>
                   </div>
+
                   <div className='flex flex-col gap-2 relative'>
                     <label htmlFor='confNewPassword'>
                       Confirm New Password
@@ -297,29 +288,7 @@ const MyProfile = () => {
                       type={passConfVisbility ? 'text' : 'password'}
                       id='confNewPassword'
                       className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
-                      {...register('confNewPassword', {
-                        required: 'Confirm password field is required',
-                        minLength: {
-                          value: 8,
-                          message:
-                            'Confirm password  should contain min 8 symbols',
-                        },
-                        maxLength: {
-                          value: 15,
-                          message:
-                            'Confirm password  should contain max 15 symbols',
-                        },
-                        pattern: {
-                          value: /^[a-z0-9]*$/,
-                          message: 'Enter only lowercase letters ans numbers ',
-                        },
-                        validate: (value) => {
-                          const { newPassword } = getValues();
-                          return (
-                            newPassword === value || 'Passwords should match!'
-                          );
-                        },
-                      })}
+                      {...register('confNewPassword')}
                     />
                     <div
                       className='absolute right-4 top-[45px] cursor-pointer'

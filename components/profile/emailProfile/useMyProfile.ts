@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import useEmails from 'hooks/useEmails';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -10,6 +11,7 @@ import {
   updateUser,
   verifyEmail,
 } from 'services';
+import { Schema } from 'validations';
 
 const useMyProfile = () => {
   const { name, email, image } = useSelector((store: any) => store.user);
@@ -37,6 +39,7 @@ const useMyProfile = () => {
     formState: { errors },
   } = useForm({
     mode: 'all',
+    resolver: yupResolver(Schema),
   });
   const cancelButtonHandler = () => {
     setValue('name', name);

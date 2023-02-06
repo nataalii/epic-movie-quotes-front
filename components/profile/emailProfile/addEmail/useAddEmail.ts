@@ -1,18 +1,15 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { addEmail } from 'services';
 import { closeAddEmailModal } from 'stores/modalSlice';
+import { Schema } from 'validations';
 
 const useAddEmail = () => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm({ mode: 'all' });
+  const methods = useForm({ mode: 'all', resolver: yupResolver(Schema) });
 
   const { mutate: submitForm } = useMutation(addEmail, {
     onSuccess: () => {
@@ -21,7 +18,7 @@ const useAddEmail = () => {
     },
     onError: (error: any) => {
       const errors = error.response.data.errors;
-      setError('email', {
+      methods.setError('email', {
         type: 'emailExists',
         message: errors?.email[0],
       });
@@ -31,7 +28,7 @@ const useAddEmail = () => {
     submitForm(data);
   };
 
-  return { register, handleSubmit, onSubmit, errors, dispatch };
+  return { methods, onSubmit, dispatch };
 };
 
 export default useAddEmail;

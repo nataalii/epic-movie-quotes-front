@@ -31,7 +31,6 @@ export type profileInputTypes = {
   label: string;
   name: string;
   placeholder: string;
-  register: object;
   error?: any;
   serverError?: string;
 };

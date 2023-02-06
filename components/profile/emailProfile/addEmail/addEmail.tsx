@@ -24,9 +24,9 @@ const AddEmail = () => {
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             <ProfileInput
               label='New Email'
-              name='newEmail'
+              name='email'
               placeholder='Enter new email'
-              error={methods.formState.errors.newEmail}
+              error={methods.formState.errors.email}
               serverError='emailExists'
             />
 

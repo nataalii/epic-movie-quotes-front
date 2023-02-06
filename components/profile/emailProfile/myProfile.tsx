@@ -8,6 +8,8 @@ import {
   PrimaryEmail,
 } from 'components/icons';
 import NotVerifiedEmail from 'components/icons/NotVerifiedEmail';
+import { Message } from 'components/toasts';
+import { toast } from 'react-toastify';
 import { openAddEmailModal } from 'stores/modalSlice';
 import AddEmail from './addEmail/addEmail';
 import useMyProfile from './useMyProfile';
@@ -93,7 +95,7 @@ const MyProfile = () => {
                       : undefined,
                     minLength: {
                       value: 3,
-                      message: 'Username should contain min 3 symbols',
+                      message: 'name should contain min 3 symbols',
                     },
                   })}
                 />
@@ -153,7 +155,10 @@ const MyProfile = () => {
                     <h2>Not verified</h2>
                     <h2
                       className=' cursor-pointer'
-                      onClick={() => deleteEmail(email.id)}
+                      onClick={() => {
+                        deleteEmail(email.id);
+                        toast(<Message text='Your email Removed!' />);
+                      }}
                     >
                       Remove
                     </h2>
@@ -172,12 +177,20 @@ const MyProfile = () => {
                     />
                   </div>
                   <div className='mt-10  text-light-gray flex gap-4 cursor-pointer'>
-                    <h2 onClick={() => makePrimary(email.id)}>
+                    <h2
+                      onClick={() => {
+                        makePrimary(email.id);
+                        toast(<Message text='Email changed to Primary!' />);
+                      }}
+                    >
                       Make this Primary
                     </h2>
                     <h2
                       className=' cursor-pointer'
-                      onClick={() => deleteEmail(email.id)}
+                      onClick={() => {
+                        deleteEmail(email.id);
+                        toast(<Message text='Your email Removed!' />);
+                      }}
                     >
                       Remove
                     </h2>
@@ -263,7 +276,17 @@ const MyProfile = () => {
                       type={passwordVisibility ? 'text' : 'password'}
                       id='newPassword'
                       className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
-                      {...register('newPassword')}
+                      {...register('newPassword', {
+                        required: 'password field is required',
+                        minLength: {
+                          value: 8,
+                          message: 'password should contain min 8 symbols',
+                        },
+                        maxLength: {
+                          value: 15,
+                          message: 'password should contain max 15 symbols',
+                        },
+                      })}
                     />
                     <div
                       className='absolute right-4 top-[45px] cursor-pointer'
@@ -288,7 +311,15 @@ const MyProfile = () => {
                       type={passConfVisbility ? 'text' : 'password'}
                       id='confNewPassword'
                       className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
-                      {...register('confNewPassword')}
+                      {...register('confNewPassword', {
+                        required: 'Confirm password field is required',
+                        validate: (value) => {
+                          const { newPassword } = getValues();
+                          return (
+                            newPassword === value || 'Passwords should match!'
+                          );
+                        },
+                      })}
                     />
                     <div
                       className='absolute right-4 top-[45px] cursor-pointer'

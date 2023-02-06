@@ -38,7 +38,10 @@ export const getEmails = async () => {
   const response = await instance.get('/api/emails');
   return response;
 };
-
+export const verifyEmail = async (token: any) => {
+  const response = await instance.post('/api/secondary-email-verify', token);
+  return response;
+};
 export const removeEmail = async (id: string) => {
   const response = await instance.delete(`/api/email-destroy/${id}`);
   return response;

@@ -1,9 +1,10 @@
 import useEmails from 'hooks/useEmails';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeEmail, updateUser } from 'services';
+import { removeEmail, updateUser, verifyEmail } from 'services';
 
 const useMyProfile = () => {
   const { name, email, image } = useSelector((store: any) => store.user);
@@ -15,6 +16,8 @@ const useMyProfile = () => {
   const [resetPassword, setResetPassword] = useState(false);
   const [editAvatar, setEditAvatar] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
+  const queryClient = useQueryClient();
+  const router = useRouter();
 
   const handleEdit = () => {
     setIsReadOnly(false);
@@ -42,7 +45,6 @@ const useMyProfile = () => {
     setSelectedImage(image);
   };
   const { emails } = useEmails();
-  const queryClient = useQueryClient();
   const { mutate: submitForm } = useMutation(updateUser, {
     onSuccess: () => {
       queryClient.invalidateQueries('users');
@@ -67,6 +69,7 @@ const useMyProfile = () => {
 
     submitForm(data, {});
   };
+  // delete email
   const { mutate: remove } = useMutation(removeEmail, {
     onSuccess: () => {
       queryClient.invalidateQueries('emails');
@@ -75,6 +78,25 @@ const useMyProfile = () => {
   const deleteEmail = async (id: string) => {
     remove(id);
   };
+
+  //verify email
+  const { mutate: submit } = useMutation(verifyEmail, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('emails');
+      router.push('/profile');
+    },
+  });
+
+  useEffect(() => {
+    const verify = async () => {
+      if (router.query?.token) {
+        submit(router.query?.token);
+      }
+    };
+
+    verify();
+  }, [router, router.query, submit]);
+
   return {
     name,
     email,

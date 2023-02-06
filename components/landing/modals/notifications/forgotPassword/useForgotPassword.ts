@@ -39,7 +39,7 @@ const useForgotPassword = () => {
       hideForgotPasswordHandler();
       showCheckEmailHandler();
     } catch (error: any) {
-      const emailError = error.response.data.errors.email;
+      const emailError = error.response.data.errors?.email;
       setError('email', {
         type: 'notExist',
         message: emailError,

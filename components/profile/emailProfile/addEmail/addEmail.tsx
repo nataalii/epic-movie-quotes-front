@@ -1,28 +1,10 @@
 import { Button } from 'components/button';
 import ProfileInput from 'components/profile/profileInput/profileInput';
-import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from 'react-query';
-import { useDispatch } from 'react-redux';
-import { addEmail } from 'services';
 import { closeAddEmailModal } from 'stores/modalSlice';
+import useAddEmail from './useAddEmail';
 
 const AddEmail = () => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ mode: 'all' });
-  const { mutate: submitForm } = useMutation(addEmail, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('emails');
-      dispatch(closeAddEmailModal());
-    },
-  });
-  const onSubmit = async (data: any) => {
-    submitForm(data);
-  };
+  const { register, handleSubmit, onSubmit, errors, dispatch } = useAddEmail();
   return (
     <div
       className=' mt-20 flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '

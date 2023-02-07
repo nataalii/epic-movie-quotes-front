@@ -1,4 +1,4 @@
-import { Button, LocalSwitcher, Notification } from 'components';
+import { Burger, Button, LocalSwitcher, Notification } from 'components';
 import { deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -19,8 +19,11 @@ const NavBar = () => {
   return (
     <header className=' h-20 bg-[#24222F] flex sticky top-0 z-30'>
       <div className='flex justify-between items-center m-auto max-w-[120rem] w-[93%]'>
-        <h3 className=' text-[#DDCCAA] '>MOVIE QUOTES</h3>
-        <div className='flex justify-center items-center gap-10 '>
+        <h3 className='lg:block hidden text-[#DDCCAA] '>MOVIE QUOTES</h3>
+        <div className='lg:hidden block cursor-pointer'>
+          <Burger />
+        </div>
+        <div className='flex justify-center items-center lg:gap-10 gap-5 '>
           <Notification />
           <LocalSwitcher selected={selected} setSelected={setSelected} />
           <div className='hidden lg:block'>

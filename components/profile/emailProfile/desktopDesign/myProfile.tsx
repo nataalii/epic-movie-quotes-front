@@ -11,7 +11,7 @@ import NotVerifiedEmail from 'components/icons/NotVerifiedEmail';
 import { Message } from 'components/toasts';
 import { toast } from 'react-toastify';
 import { openAddEmailModal } from 'stores/modalSlice';
-import AddEmail from './addEmail/addEmail';
+import AddEmail from '../addEmail/addEmail';
 import useMyProfile from './useMyProfile';
 
 const MyProfile = () => {
@@ -43,7 +43,6 @@ const MyProfile = () => {
     deleteEmail,
     makePrimary,
   } = useMyProfile();
-
   return (
     <div className='w-[90rem] '>
       {addEmailModal && <AddEmail />}

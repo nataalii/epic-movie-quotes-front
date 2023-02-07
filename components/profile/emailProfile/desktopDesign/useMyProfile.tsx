@@ -112,11 +112,6 @@ const useMyProfile = () => {
     },
   });
 
-  //toasts
-  // const notify = () => {
-  //   toast(<Message text='Please check email to verify new address' />);
-  // };
-
   return {
     name,
     email,

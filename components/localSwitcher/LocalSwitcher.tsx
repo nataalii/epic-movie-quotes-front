@@ -15,9 +15,12 @@ const LocaleSwitcher = ({
   const languages = ['Eng', 'ქართ'];
 
   return (
-    <div className=' w-12 md:w-20 flex flex-col align-center text-white  cursor-pointer  '>
-      <div className=' flex items-center gap-2'>
-        <h1 onClick={() => setIsActive(!isActive)}>{selected}</h1>
+    <div className=' w-16 md:w-20 flex flex-col align-center text-white  cursor-pointer  '>
+      <div
+        className=' flex items-center gap-2 '
+        onClick={() => setIsActive(!isActive)}
+      >
+        <h1>{selected}</h1>
         <Arrow />
       </div>
 

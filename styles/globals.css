@@ -23,3 +23,12 @@ body {
     top: 7rem !important;
     margin-right: 10rem ;
 }
+
+@media only screen and (max-width: 680px) {
+    .toast-position {
+        margin-left: 1rem;
+        left: 1rem;
+        right: 5rem;
+
+    }
+}

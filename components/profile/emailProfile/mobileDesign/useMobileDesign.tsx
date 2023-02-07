@@ -27,7 +27,7 @@ const useMobileDesign = () => {
     await updateUser(formData);
     setEditAvatar(false);
     toast(<MobileMessage text='Image changed succsessfully' />, {
-      style: { maxWidth: '340px', width: '20px%', backgroundColor: '#D1E7DD' },
+      style: { maxWidth: '340px', backgroundColor: '#D1E7DD' },
     });
   };
   return {

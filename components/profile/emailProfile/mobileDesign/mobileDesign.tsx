@@ -2,6 +2,9 @@
 import { Button } from 'components/button';
 import { BackArrow, ForwardArrow } from 'components/icons';
 import { FormProvider } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUsername } from 'stores/modalSlice';
+import { UsernameUpdate } from '../usernameUpdate';
 import useMobileDesign from './useMobileDesign';
 
 const MobileDesign = () => {
@@ -16,9 +19,12 @@ const MobileDesign = () => {
     setImage,
     onSubmit,
   } = useMobileDesign();
+  const { updateUsernameModal } = useSelector((store: any) => store.modal);
+  const dispatch = useDispatch();
   return (
     <div className='w-[100%] flex flex-col'>
-      <div className='m-5 cursor-pointer'>
+      {updateUsernameModal && <UsernameUpdate />}
+      <div className='m-6 cursor-pointer'>
         <BackArrow />
       </div>
       <div className=' bg-blue-500'>
@@ -55,7 +61,12 @@ const MobileDesign = () => {
                 <h2 className=''>Username</h2>
                 <div className='flex justify-between '>
                   <h1 className=' text-lg'>{name}</h1>
-                  <h2 className='cursor-pointer text-[#CED4DA]'>Edit</h2>
+                  <h2
+                    className='cursor-pointer text-[#CED4DA]'
+                    onClick={() => dispatch(updateUsername())}
+                  >
+                    Edit
+                  </h2>
                 </div>
 
                 <hr className='h-px  bg-gray border-0 ' />

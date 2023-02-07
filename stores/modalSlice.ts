@@ -11,6 +11,8 @@ const initialState = {
   verificationVerify: false,
   addMovieModal: false,
   addEmailModal: false,
+  updateUsernameModal: false,
+  confirmUsernameModal: false,
 };
 
 const modalSlice = createSlice({
@@ -77,6 +79,12 @@ const modalSlice = createSlice({
     closeAddEmailModal: (state) => {
       state.addEmailModal = false;
     },
+    updateUsername: (state) => {
+      state.updateUsernameModal = !state.updateUsernameModal;
+    },
+    confirmUsername: (state) => {
+      state.confirmUsernameModal = !state.confirmUsernameModal;
+    },
   },
 });
 
@@ -101,6 +109,8 @@ export const {
   closeAddMovieModal,
   openAddEmailModal,
   closeAddEmailModal,
+  updateUsername,
+  confirmUsername,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

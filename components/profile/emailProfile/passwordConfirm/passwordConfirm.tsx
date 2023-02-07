@@ -1,9 +1,10 @@
 import { Button } from 'components/button';
-import { confirmUsername } from 'stores/modalSlice';
-import useUsernameConfirm from './useUsernameConfirm';
+import React from 'react';
+import { confirmPassword } from 'stores/modalSlice';
+import usePassworConfirm from './usePasswordConfirm';
 
-const UsernameConfirm = (name: { name: string }) => {
-  const { dispatch, onSubmit } = useUsernameConfirm();
+const PasswordConfirm = (password: { password: string }) => {
+  const { dispatch, onSubmit } = usePassworConfirm();
   return (
     <div className=' flex bg-[#181623] h-screen w-screen  backdrop-blur-md z-50 items-start justify-center fixed '>
       <div className='flex flex-col gap-5 py-5 m-10 mt-16  bg-gradient-to-r from-[#1b1922]  to-blue-500 items-center rounded-lg'>
@@ -12,7 +13,7 @@ const UsernameConfirm = (name: { name: string }) => {
         <div className='flex items-center justify-between px-10 w-full'>
           <h1
             className='cursor-pointer'
-            onClick={() => dispatch(confirmUsername())}
+            onClick={() => dispatch(confirmPassword())}
           >
             Cancel
           </h1>
@@ -20,12 +21,11 @@ const UsernameConfirm = (name: { name: string }) => {
             item='Confirm'
             color='red'
             size=''
-            onClick={() => onSubmit(name)}
+            onClick={() => onSubmit(password)}
           />
         </div>
       </div>
     </div>
   );
 };
-
-export default UsernameConfirm;
+export default PasswordConfirm;

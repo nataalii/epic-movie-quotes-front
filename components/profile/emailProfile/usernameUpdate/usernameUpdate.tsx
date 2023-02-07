@@ -7,7 +7,6 @@ import useUsernameUpdate from './useUsernameUpdate';
 const UsernameUpdate = () => {
   const { dispatch, methods, name, confirmUsernameModal, onSubmit } =
     useUsernameUpdate();
-  console.log(methods.formState.errors.name?.type);
   return (
     <div className='flex flex-col inset-0  bg-[#181623] mt-20 z-50 fixed '>
       <div

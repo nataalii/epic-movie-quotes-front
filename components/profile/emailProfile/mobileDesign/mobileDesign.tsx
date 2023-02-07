@@ -3,7 +3,8 @@ import { Button } from 'components/button';
 import { BackArrow, ForwardArrow } from 'components/icons';
 import { FormProvider } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUsername } from 'stores/modalSlice';
+import { updatePassword, updateUsername } from 'stores/modalSlice';
+import { PasswordUpdate } from '../passwordUpdate';
 import { UsernameUpdate } from '../usernameUpdate';
 import useMobileDesign from './useMobileDesign';
 
@@ -19,11 +20,14 @@ const MobileDesign = () => {
     setImage,
     onSubmit,
   } = useMobileDesign();
-  const { updateUsernameModal } = useSelector((store: any) => store.modal);
+  const { updateUsernameModal, updatePasswordModal } = useSelector(
+    (store: any) => store.modal
+  );
   const dispatch = useDispatch();
   return (
     <div className='w-[100%] flex flex-col'>
       {updateUsernameModal && <UsernameUpdate />}
+      {updatePasswordModal && <PasswordUpdate />}
       <div className='m-6 cursor-pointer'>
         <BackArrow />
       </div>
@@ -75,7 +79,12 @@ const MobileDesign = () => {
                 <h2>Password</h2>
                 <div className='flex justify-between '>
                   <h1 className=' text-lg'>••••••••••••</h1>
-                  <h2 className='cursor-pointer text-[#CED4DA]'>Edit</h2>
+                  <h2
+                    className='cursor-pointer text-[#CED4DA]'
+                    onClick={() => dispatch(updatePassword())}
+                  >
+                    Edit
+                  </h2>
                 </div>
 
                 <hr className='h-px  bg-gray border-0 ' />

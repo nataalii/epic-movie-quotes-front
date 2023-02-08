@@ -16,6 +16,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { openRegisterModal } from 'stores/modalSlice';
+import { RootState } from 'types/stateTypes';
 export default function Home() {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ export default function Home() {
     passwordChanged,
     verificationNotif,
     verificationVerify,
-  } = useSelector((store: any) => store.modal);
+  } = useSelector((store: RootState) => store.modal);
   return (
     <Fragment>
       <div className='bg-[#11101A] text-[#DDCCAA] font-helvetica '>

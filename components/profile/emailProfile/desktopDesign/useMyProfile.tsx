@@ -12,9 +12,10 @@ import {
   updateUser,
   verifyEmail,
 } from 'services';
+import { RootState } from 'types/stateTypes';
 
 const useMyProfile = () => {
-  const { name, email, image } = useSelector((store: any) => store.user);
+  const { name, email, image } = useSelector((store: RootState) => store.user);
   const { addEmailModal } = useSelector((store: any) => store.modal);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [passConfVisbility, setConfPassVisibility] = useState(false);

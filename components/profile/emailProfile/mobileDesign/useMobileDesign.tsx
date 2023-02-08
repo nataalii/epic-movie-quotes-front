@@ -4,9 +4,10 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { updateUser } from 'services';
+import { RootState } from 'types/stateTypes';
 
 const useMobileDesign = () => {
-  const { image, name } = useSelector((store: any) => store.user);
+  const { image, name } = useSelector((store: RootState) => store.user);
   const [selectedImage, setSelectedImage] = useState('');
   const [editAvatar, setEditAvatar] = useState(false);
   const methods = useForm({ mode: 'all' });
@@ -30,8 +31,9 @@ const useMobileDesign = () => {
       style: { maxWidth: '340px', backgroundColor: '#D1E7DD' },
     });
   };
+
   const { updateUsernameModal, updatePasswordModal } = useSelector(
-    (store: any) => store.modal
+    (store: RootState) => store.modal
   );
   const dispatch = useDispatch();
   return {

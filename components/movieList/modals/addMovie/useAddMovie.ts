@@ -3,10 +3,11 @@ import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMovie } from 'services';
 import { closeAddMovieModal } from 'stores/modalSlice';
+import { RootState } from 'types/stateTypes';
 const useAddMovie = () => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
-  const { name, image } = useSelector((store: any) => store.user);
+  const { name, image } = useSelector((store: RootState) => store.user);
   const {
     register,
     handleSubmit,

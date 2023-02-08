@@ -1,9 +1,9 @@
 import { Button } from 'components/button';
 import { BackArrow } from 'components/icons';
+import { ConfirmModal } from 'components';
 import React from 'react';
 import { FormProvider } from 'react-hook-form';
 import { addNewEmail } from 'stores/modalSlice';
-import { ConfirmModal } from '../confirmModal';
 import useAddNewEmail from './useAddNewEmail';
 const AddNewEmail = () => {
   const { dispatch, methods, email, confirmChangesModal, onSubmit } =

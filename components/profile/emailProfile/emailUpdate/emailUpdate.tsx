@@ -5,14 +5,15 @@ import {
   NotVerifiedEmail,
   PrimaryEmail,
 } from 'components/icons';
-import { Message, MobileMessage } from 'components/toasts';
+import { Message } from 'components/toasts';
 import { addNewEmail, updateEmails } from 'stores/modalSlice';
 import useEmailUpdate from './useEmailUpdate';
 import { toast } from 'react-toastify';
 import { useMyProfile } from '../desktopDesign';
 import { AddNewEmail } from '../emailAdd';
 const EmailUpdate = () => {
-  const { dispatch, addNewEmailModal, email, emails } = useEmailUpdate();
+  const { dispatch, addNewEmailModal, email, emails, notification } =
+    useEmailUpdate();
   const { deleteEmail, makePrimary } = useMyProfile();
   return (
     <div className='flex flex-col inset-0  bg-[#181623] mt-20 mb-10 z-50 fixed  overflow-y-scroll'>
@@ -78,16 +79,14 @@ const EmailUpdate = () => {
                   size=' text-sm px-3'
                   onClick={() => {
                     makePrimary(email.id);
-                    toast(
-                      <MobileMessage text='Primary email changed succsessfully!' />
-                    );
+                    notification('Primary email changed succsessfully!');
                   }}
                 />
                 <h2
                   className=' cursor-pointer  text-sm text-light-gray'
                   onClick={() => {
                     deleteEmail(email.id);
-                    toast(<MobileMessage text='Your email Removed!' />);
+                    notification('Your email Removed!!');
                   }}
                 >
                   Remove

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Button } from 'components/button';
 import { BackArrow, ForwardArrow } from 'components/icons';
+import { UsernameUpdate } from 'components';
 import { FormProvider } from 'react-hook-form';
 import {
   updateEmails,
@@ -9,8 +10,7 @@ import {
 } from 'stores/modalSlice';
 import { EmailUpdate } from '../emailUpdate';
 import { PasswordUpdate } from '../passwordUpdate';
-import { UsernameUpdate } from '../usernameUpdate';
-import useMobileDesign from './useMobileDesign';
+import { useMobileDesign } from 'hooks';
 
 const MobileDesign = () => {
   const {

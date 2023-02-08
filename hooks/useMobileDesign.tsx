@@ -1,16 +1,16 @@
-import { MobileMessage } from 'components/toasts';
+import { useMobileToast } from 'components';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 import { updateUser } from 'services';
 import { RootState } from 'types/stateTypes';
 
 const useMobileDesign = () => {
-  const { image, name } = useSelector((store: RootState) => store.user);
+  const { image, name, email } = useSelector((store: RootState) => store.user);
   const [selectedImage, setSelectedImage] = useState('');
   const [editAvatar, setEditAvatar] = useState(false);
   const methods = useForm({ mode: 'all' });
+  const { notification } = useMobileToast();
   const setImage = (event: any) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -27,9 +27,7 @@ const useMobileDesign = () => {
     formData.append('thumbnail', data.mobileAvatar[0]);
     await updateUser(formData);
     setEditAvatar(false);
-    toast(<MobileMessage text='Image changed succsessfully' />, {
-      style: { maxWidth: '340px', backgroundColor: '#D1E7DD' },
-    });
+    notification('Image changed succsessfully');
   };
 
   const { updateUsernameModal, updatePasswordModal, updateEmailsModal } =
@@ -38,6 +36,7 @@ const useMobileDesign = () => {
   return {
     image,
     name,
+    email,
     selectedImage,
     setSelectedImage,
     editAvatar,

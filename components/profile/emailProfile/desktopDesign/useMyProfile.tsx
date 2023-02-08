@@ -57,6 +57,7 @@ const useMyProfile = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('users');
       cancelButtonHandler();
+      toast(<Message text='Changes updated succsessfully!' />);
     },
     onError: (errors: any) => {
       const error = errors.response.data.errors?.name;
@@ -75,9 +76,20 @@ const useMyProfile = () => {
     };
     console.log(data);
     submitForm(data, {});
-    toast(<Message text='Changes updated succsessfully!' />);
   };
 
+  // Set Image
+  const setImage = (event: any) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      setSelectedImage(e.target.result);
+    };
+    if (file && file.type.match('image.*')) {
+      reader.readAsDataURL(file);
+    }
+    setEditAvatar(true);
+  };
   // delete email
   const { mutate: remove } = useMutation(removeEmail, {
     onSuccess: () => {
@@ -140,6 +152,7 @@ const useMyProfile = () => {
     emails,
     deleteEmail,
     makePrimary,
+    setImage,
   };
 };
 

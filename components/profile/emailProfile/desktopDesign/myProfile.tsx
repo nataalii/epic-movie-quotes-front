@@ -28,9 +28,7 @@ const MyProfile = () => {
     isReadOnly,
     resetPassword,
     editAvatar,
-    setEditAvatar,
     selectedImage,
-    setSelectedImage,
     handleEdit,
     register,
     handleSubmit,
@@ -42,6 +40,7 @@ const MyProfile = () => {
     emails,
     deleteEmail,
     makePrimary,
+    setImage,
   } = useMyProfile();
   return (
     <div className='w-[90rem] '>
@@ -61,16 +60,8 @@ const MyProfile = () => {
               className='hidden'
               id='avatar'
               {...register('avatar', {
-                onChange(event) {
-                  const file = event.target.files[0];
-                  const reader = new FileReader();
-                  reader.onload = (e: any) => {
-                    setSelectedImage(e.target.result);
-                  };
-                  if (file && file.type.match('image.*')) {
-                    reader.readAsDataURL(file);
-                  }
-                  setEditAvatar(true);
+                onChange: (e) => {
+                  setImage(e);
                 },
               })}
             />

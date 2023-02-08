@@ -1,3 +1,4 @@
+import { useMobileToast } from 'components/toasts';
 import useEmails from 'hooks/useEmails';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'types/stateTypes';
@@ -8,7 +9,15 @@ const useEmailUpdate = () => {
   );
   const { email } = useSelector((store: RootState) => store.user);
   const { emails } = useEmails();
-  return { dispatch, confirmPasswordModal, email, emails, addNewEmailModal };
+  const { notification } = useMobileToast();
+  return {
+    dispatch,
+    confirmPasswordModal,
+    email,
+    emails,
+    addNewEmailModal,
+    notification,
+  };
 };
 
 export default useEmailUpdate;

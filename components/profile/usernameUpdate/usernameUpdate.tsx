@@ -2,7 +2,7 @@ import { Button } from 'components/button';
 import { BackArrow } from 'components/icons';
 import { FormProvider } from 'react-hook-form';
 import { updateUsername } from 'stores/modalSlice';
-import { ConfirmModal } from '../confirmModal';
+import { ConfirmModal } from 'components';
 import useUsernameUpdate from './useUsernameUpdate';
 const UsernameUpdate = () => {
   const { dispatch, methods, name, confirmChangesModal, onSubmit } =

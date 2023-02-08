@@ -2,10 +2,11 @@
 import { CommentIcon, Like, ProfileIcon } from 'components/icons';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
+import { RootState } from 'types/stateTypes';
 import { Comment } from '../comment';
 
 const Post = () => {
-  const { name, image } = useSelector((store: any) => store.user);
+  const { name, image } = useSelector((store: RootState) => store.user);
   return (
     <div className='flex lg:ml-[500px] lg:mx-10 mx-5'>
       <div className=' lg:bg-[#11101A] lg:rounded-xl lg:mb-4 mt-10'>

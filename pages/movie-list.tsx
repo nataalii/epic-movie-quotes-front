@@ -4,10 +4,11 @@ import { NavBar } from 'components/navBar';
 import { SideNavBar } from 'components/sideNavBar';
 import useAuth from 'hooks/useAuth';
 import { useSelector } from 'react-redux';
+import { RootState } from 'types/stateTypes';
 
 export default function MovieList() {
   useAuth();
-  const { addMovieModal } = useSelector((store: any) => store.modal);
+  const { addMovieModal } = useSelector((store: RootState) => store.modal);
 
   return (
     <div className='text-white h-full'>

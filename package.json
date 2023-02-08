@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^2.9.10",
     "@next/font": "13.1.1",
     "@reduxjs/toolkit": "^1.9.1",
@@ -28,6 +29,7 @@
     "react-query": "^3.39.3",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.7.0",
+    "react-toastify": "^9.1.1",
     "typescript": "4.9.4",
     "yup": "^0.32.11"
   },

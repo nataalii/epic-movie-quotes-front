@@ -1,20 +1,21 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import useEmails from 'hooks/useEmails';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { Message } from 'components/toasts';
 import {
   makePrimaryEmail,
   removeEmail,
   updateUser,
   verifyEmail,
 } from 'services';
-import { schema } from 'validations';
+import { RootState } from 'types/stateTypes';
 
 const useMyProfile = () => {
-  const { name, email, image } = useSelector((store: any) => store.user);
+  const { name, email, image } = useSelector((store: RootState) => store.user);
   const { addEmailModal } = useSelector((store: any) => store.modal);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [passConfVisbility, setConfPassVisibility] = useState(false);
@@ -36,17 +37,16 @@ const useMyProfile = () => {
     getValues,
     setValue,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm({
     mode: 'all',
-    resolver: yupResolver(schema),
   });
   const cancelButtonHandler = () => {
     setValue('name', name);
     setValue('newPassword', '');
     setValue('confNewPassword', '');
-    setError('newPassword', {});
-    setError('confNewPassword', {});
+    clearErrors(['confNewPassword', 'newPassword', 'name']);
     setResetPassword(false);
     setIsReadOnly(true);
     setEditAvatar(false);
@@ -74,9 +74,10 @@ const useMyProfile = () => {
       thumbnail: getValues('avatar')[0],
     };
     console.log(data);
-
     submitForm(data, {});
+    toast(<Message text='Changes updated succsessfully!' />);
   };
+
   // delete email
   const { mutate: remove } = useMutation(removeEmail, {
     onSuccess: () => {
@@ -92,6 +93,7 @@ const useMyProfile = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('emails');
       router.push('/profile');
+      toast(<Message text='Email Verified Successfully!' />);
     },
   });
   useEffect(() => {

@@ -1,18 +1,19 @@
 import { Button } from 'components/button';
 import { BackArrow } from 'components/icons';
+import React from 'react';
 import { FormProvider } from 'react-hook-form';
-import { updateUsername } from 'stores/modalSlice';
+import { addNewEmail } from 'stores/modalSlice';
 import { ConfirmModal } from '../confirmModal';
-import useUsernameUpdate from './useUsernameUpdate';
-const UsernameUpdate = () => {
-  const { dispatch, methods, name, confirmChangesModal, onSubmit } =
-    useUsernameUpdate();
+import useAddNewEmail from './useAddNewEmail';
+const AddNewEmail = () => {
+  const { dispatch, methods, email, confirmChangesModal, onSubmit } =
+    useAddNewEmail();
   return (
     <div className='flex flex-col inset-0  bg-[#181623] mt-20 z-50 fixed '>
       <div
         className=' m-6 cursor-pointer w-14'
         onClick={() => {
-          dispatch(updateUsername());
+          dispatch(addNewEmail());
         }}
       >
         <BackArrow />
@@ -21,29 +22,33 @@ const UsernameUpdate = () => {
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             <div className=' bg-blue-500 flex flex-col gap-2 p-10 rounded-lg'>
-              <label htmlFor='password'>Enter New Username</label>
+              <label htmlFor='email'>Add new Email</label>
               <input
                 className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
-                {...methods.register('name', {
-                  required: 'Username field is required',
+                {...methods.register('email', {
+                  required: 'Email field is required',
                   minLength: {
                     value: 3,
-                    message: 'Username should contain min 3 symbols',
+                    message: 'Email should contain min 3 symbols',
+                  },
+                  pattern: {
+                    value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                    message: 'Email should be valid',
                   },
                 })}
               />
               <div className='relative'>
                 <p className=' text-danger h-1 font-normal text-base '>
-                  {(methods.formState.errors.name?.type === 'alreadyExists' &&
-                    (methods.formState.errors.name?.message as string)) ||
-                    (methods.formState.errors.name?.message as string)}
+                  {(methods.formState.errors.email?.type === 'alreadyExists' &&
+                    (methods.formState.errors.email?.message as string)) ||
+                    (methods.formState.errors.email?.message as string)}
                 </p>
               </div>
             </div>
             <div className='flex items-center justify-between px-10 mt-24'>
               <h1
                 onClick={() => {
-                  dispatch(updateUsername());
+                  dispatch(addNewEmail());
                 }}
                 className=' cursor-pointer text-[#CED4DA]'
               >
@@ -54,8 +59,8 @@ const UsernameUpdate = () => {
           </form>
         </FormProvider>
       </div>
-      {confirmChangesModal && <ConfirmModal name={name} />}
+      {confirmChangesModal && <ConfirmModal email={email} />}
     </div>
   );
 };
-export default UsernameUpdate;
+export default AddNewEmail;

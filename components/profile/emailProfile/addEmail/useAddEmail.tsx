@@ -36,7 +36,7 @@ const useAddEmail = () => {
     }, 3500);
   };
 
-  return { methods, onSubmit, dispatch };
+  return { methods, onSubmit, dispatch, submitForm };
 };
 
 export default useAddEmail;

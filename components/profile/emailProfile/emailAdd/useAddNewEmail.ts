@@ -1,21 +1,20 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { confirmChanges } from 'stores/modalSlice';
+import { useForm } from 'react-hook-form';
 import { RootState } from 'types/stateTypes';
-
-const useUsernameUpdate = () => {
+import { confirmChanges } from 'stores/modalSlice';
+const useAddNewEmail = () => {
   const dispatch = useDispatch();
   const methods = useForm({ mode: 'all' });
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const { confirmChangesModal } = useSelector(
     (store: RootState) => store.modal
   );
   const onSubmit = async () => {
-    setName(methods.getValues('name'));
+    setEmail(methods.getValues('email'));
     dispatch(confirmChanges());
   };
-  return { dispatch, methods, name, setName, confirmChangesModal, onSubmit };
+  return { dispatch, methods, email, setEmail, confirmChangesModal, onSubmit };
 };
 
-export default useUsernameUpdate;
+export default useAddNewEmail;

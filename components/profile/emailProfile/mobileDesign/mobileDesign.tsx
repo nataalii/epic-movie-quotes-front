@@ -2,7 +2,12 @@
 import { Button } from 'components/button';
 import { BackArrow, ForwardArrow } from 'components/icons';
 import { FormProvider } from 'react-hook-form';
-import { updatePassword, updateUsername } from 'stores/modalSlice';
+import {
+  updateEmails,
+  updatePassword,
+  updateUsername,
+} from 'stores/modalSlice';
+import { EmailUpdate } from '../emailUpdate';
 import { PasswordUpdate } from '../passwordUpdate';
 import { UsernameUpdate } from '../usernameUpdate';
 import useMobileDesign from './useMobileDesign';
@@ -20,6 +25,7 @@ const MobileDesign = () => {
     onSubmit,
     updateUsernameModal,
     updatePasswordModal,
+    updateEmailsModal,
     dispatch,
   } = useMobileDesign();
 
@@ -27,6 +33,7 @@ const MobileDesign = () => {
     <div className='w-[100%] flex flex-col'>
       {updateUsernameModal && <UsernameUpdate />}
       {updatePasswordModal && <PasswordUpdate />}
+      {updateEmailsModal && <EmailUpdate />}
       <div className='m-6 cursor-pointer'>
         <BackArrow />
       </div>
@@ -60,7 +67,7 @@ const MobileDesign = () => {
                   Upload new Photo
                 </label>
               </div>
-              <div className='flex flex-col w-[90%] sm:w-[80%] gap-2'>
+              <div className='flex flex-col w-[90%] sm:w-[70%] gap-2'>
                 <h2 className=''>Username</h2>
                 <div className='flex justify-between '>
                   <h1 className=' text-lg'>{name}</h1>
@@ -74,7 +81,7 @@ const MobileDesign = () => {
 
                 <hr className='h-px  bg-gray border-0 ' />
               </div>
-              <div className='flex flex-col w-[90%] sm:w-[80%] gap-2'>
+              <div className='flex flex-col w-[90%] sm:w-[70%] gap-2'>
                 <h2>Password</h2>
                 <div className='flex justify-between '>
                   <h1 className=' text-lg'>••••••••••••</h1>
@@ -88,9 +95,12 @@ const MobileDesign = () => {
 
                 <hr className='h-px  bg-gray border-0 ' />
               </div>
-              <div className='flex justify-between w-[90%] sm:w-[80%]'>
+              <div className='flex justify-between w-[90%] sm:w-[70%]'>
                 <h1 className=' text-sm'>EMAIL</h1>
-                <div className='cursor-pointer'>
+                <div
+                  className='cursor-pointer'
+                  onClick={() => dispatch(updateEmails())}
+                >
                   <ForwardArrow />
                 </div>
               </div>

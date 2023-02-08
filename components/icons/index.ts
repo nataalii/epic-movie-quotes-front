@@ -28,3 +28,4 @@ export { default as BackArrow } from './BackArrow';
 export { default as ForwardArrow } from './ForwardArrow';
 export { default as Checked } from './Checked';
 export { default as Burger } from './Burger';
+export { default as NotVerifiedEmail } from './NotVerifiedEmail';

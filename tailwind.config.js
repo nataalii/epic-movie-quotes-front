@@ -22,6 +22,7 @@ module.exports = {
         'light-gray': '#CED4DA',
         'blue-500': '#24222F',
         'blue-600': '#11101A',
+        'not-verified-yellow': '#EC9524',
       },
       borderColor: {
         'light-gray': '#CED4DA',

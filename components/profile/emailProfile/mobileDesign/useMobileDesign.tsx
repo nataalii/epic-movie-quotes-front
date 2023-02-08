@@ -32,9 +32,8 @@ const useMobileDesign = () => {
     });
   };
 
-  const { updateUsernameModal, updatePasswordModal } = useSelector(
-    (store: RootState) => store.modal
-  );
+  const { updateUsernameModal, updatePasswordModal, updateEmailsModal } =
+    useSelector((store: RootState) => store.modal);
   const dispatch = useDispatch();
   return {
     image,
@@ -49,6 +48,7 @@ const useMobileDesign = () => {
     updateUsernameModal,
     updatePasswordModal,
     dispatch,
+    updateEmailsModal,
   };
 };
 

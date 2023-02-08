@@ -1,7 +1,7 @@
 import { MobileMessage } from 'components/toasts';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { updateUser } from 'services';
 
@@ -30,6 +30,10 @@ const useMobileDesign = () => {
       style: { maxWidth: '340px', backgroundColor: '#D1E7DD' },
     });
   };
+  const { updateUsernameModal, updatePasswordModal } = useSelector(
+    (store: any) => store.modal
+  );
+  const dispatch = useDispatch();
   return {
     image,
     name,
@@ -40,6 +44,9 @@ const useMobileDesign = () => {
     methods,
     setImage,
     onSubmit,
+    updateUsernameModal,
+    updatePasswordModal,
+    dispatch,
   };
 };
 

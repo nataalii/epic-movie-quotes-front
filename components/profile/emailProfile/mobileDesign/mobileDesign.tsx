@@ -2,7 +2,6 @@
 import { Button } from 'components/button';
 import { BackArrow, ForwardArrow } from 'components/icons';
 import { FormProvider } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
 import { updatePassword, updateUsername } from 'stores/modalSlice';
 import { PasswordUpdate } from '../passwordUpdate';
 import { UsernameUpdate } from '../usernameUpdate';
@@ -19,11 +18,11 @@ const MobileDesign = () => {
     methods,
     setImage,
     onSubmit,
+    updateUsernameModal,
+    updatePasswordModal,
+    dispatch,
   } = useMobileDesign();
-  const { updateUsernameModal, updatePasswordModal } = useSelector(
-    (store: any) => store.modal
-  );
-  const dispatch = useDispatch();
+
   return (
     <div className='w-[100%] flex flex-col'>
       {updateUsernameModal && <UsernameUpdate />}

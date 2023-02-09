@@ -2,10 +2,10 @@ import { Button } from 'components/button';
 import { BackArrow } from 'components/icons';
 import { FormProvider } from 'react-hook-form';
 import { updateUsername } from 'stores/modalSlice';
-import { UsernameConfirm } from '../usernameConfirm';
+import { ConfirmModal } from 'components';
 import useUsernameUpdate from './useUsernameUpdate';
 const UsernameUpdate = () => {
-  const { dispatch, methods, name, confirmUsernameModal, onSubmit } =
+  const { dispatch, methods, name, confirmChangesModal, onSubmit } =
     useUsernameUpdate();
   return (
     <div className='flex flex-col inset-0  bg-[#181623] mt-20 z-50 fixed '>
@@ -17,7 +17,7 @@ const UsernameUpdate = () => {
       >
         <BackArrow />
       </div>
-      <div className='w-full'>
+      <div>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             <div className=' bg-blue-500 flex flex-col gap-2 p-10 rounded-lg'>
@@ -54,7 +54,7 @@ const UsernameUpdate = () => {
           </form>
         </FormProvider>
       </div>
-      {confirmUsernameModal && <UsernameConfirm name={name} />}
+      {confirmChangesModal && <ConfirmModal name={name} />}
     </div>
   );
 };

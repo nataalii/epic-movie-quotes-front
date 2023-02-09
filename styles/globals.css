@@ -21,14 +21,14 @@ body {
 
 .toast-position {
     top: 7rem !important;
-    margin-right: 10rem ;
+    margin-right: 10rem;}
+
+
+::-webkit-scrollbar {
+    width: 5px;
 }
 
-@media only screen and (max-width: 680px) {
-    .toast-position {
-        margin-left: 1rem;
-        left: 1rem;
-        right: 5rem;
-
-    }
+::-webkit-scrollbar-thumb {
+    background: darkgrey;
+    border-radius: 10px;
 }

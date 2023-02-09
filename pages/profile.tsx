@@ -1,8 +1,9 @@
 import { NavBar } from 'components/navBar';
-import { MobileDesign, MyProfile } from 'components';
+import { GoogleMobile } from 'components';
 import { SideNavBar } from 'components/sideNavBar';
 import useAuth from 'hooks/useAuth';
 import { ToastContainer } from 'react-toastify';
+import GoogleDektop from 'components/profile/googleProfile/googleDesktop';
 
 export default function Profile() {
   useAuth();
@@ -13,10 +14,12 @@ export default function Profile() {
         <SideNavBar />
       </div>
       <div className='hidden lg:ml-[27rem] mt-10 lg:flex justify-center items-center'>
-        <MyProfile />
+        {/* <MyProfile /> */}
+        <GoogleDektop />
       </div>
       <div className='lg:hidden'>
-        <MobileDesign />
+        {/* <MobileDesign /> */}
+        <GoogleMobile />
       </div>
       <ToastContainer
         toastStyle={{

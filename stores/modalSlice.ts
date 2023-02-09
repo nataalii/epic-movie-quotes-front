@@ -12,9 +12,11 @@ const initialState = {
   addMovieModal: false,
   addEmailModal: false,
   updateUsernameModal: false,
-  confirmUsernameModal: false,
+  confirmChangesModal: false,
   updatePasswordModal: false,
   confirmPasswordModal: false,
+  updateEmailsModal: false,
+  addNewEmailModal: false,
 };
 
 const modalSlice = createSlice({
@@ -84,14 +86,21 @@ const modalSlice = createSlice({
     updateUsername: (state) => {
       state.updateUsernameModal = !state.updateUsernameModal;
     },
-    confirmUsername: (state) => {
-      state.confirmUsernameModal = !state.confirmUsernameModal;
+    confirmChanges: (state) => {
+      state.confirmChangesModal = !state.confirmChangesModal;
     },
     updatePassword: (state) => {
       state.updatePasswordModal = !state.updatePasswordModal;
     },
     confirmPassword: (state) => {
       state.confirmPasswordModal = !state.confirmPasswordModal;
+    },
+
+    updateEmails: (state) => {
+      state.updateEmailsModal = !state.updateEmailsModal;
+    },
+    addNewEmail: (state) => {
+      state.addNewEmailModal = !state.addNewEmailModal;
     },
   },
 });
@@ -118,9 +127,11 @@ export const {
   openAddEmailModal,
   closeAddEmailModal,
   updateUsername,
-  confirmUsername,
+  confirmChanges,
   updatePassword,
   confirmPassword,
+  updateEmails,
+  addNewEmail,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

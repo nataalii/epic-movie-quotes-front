@@ -10,9 +10,11 @@ export interface ModalState {
   addMovieModal: boolean;
   addEmailModal: boolean;
   updateUsernameModal: boolean;
-  confirmUsernameModal: boolean;
+  confirmChangesModal: boolean;
   updatePasswordModal: boolean;
   confirmPasswordModal: boolean;
+  updateEmailsModal: boolean;
+  addNewEmailModal: boolean;
 }
 
 export interface UserState {

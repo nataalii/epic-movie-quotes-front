@@ -5,7 +5,6 @@ import useAuth from 'hooks/useAuth';
 
 const NewsFeed = () => {
   useAuth();
-
   return (
     <div className='text-white'>
       <NavBar />

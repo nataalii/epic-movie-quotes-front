@@ -9,6 +9,7 @@ const useAuth = () => {
   const router = useRouter();
   const [user, setUser] = useState('');
   const dispatch = useDispatch();
+
   useEffect(() => {
     const checkAuth = async () => {
       try {

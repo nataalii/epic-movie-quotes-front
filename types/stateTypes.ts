@@ -15,6 +15,7 @@ export interface ModalState {
   confirmPasswordModal: boolean;
   updateEmailsModal: boolean;
   addNewEmailModal: boolean;
+  burgerMenuModal: boolean;
 }
 
 export interface UserState {

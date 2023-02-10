@@ -17,6 +17,7 @@ const initialState = {
   confirmPasswordModal: false,
   updateEmailsModal: false,
   addNewEmailModal: false,
+  burgerMenuModal: false,
 };
 
 const modalSlice = createSlice({
@@ -102,6 +103,10 @@ const modalSlice = createSlice({
     addNewEmail: (state) => {
       state.addNewEmailModal = !state.addNewEmailModal;
     },
+
+    burgerMenu: (state) => {
+      state.burgerMenuModal = !state.burgerMenuModal;
+    },
   },
 });
 
@@ -132,6 +137,7 @@ export const {
   confirmPassword,
   updateEmails,
   addNewEmail,
+  burgerMenu,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

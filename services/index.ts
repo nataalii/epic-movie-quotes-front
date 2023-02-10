@@ -66,10 +66,6 @@ export const resetPassword = async (data: ResetPasswordTypes) => {
   return response;
 };
 
-export const handleGoogleCallback = async () => {
-  const response = await instance.get('api/google/auth/callback/');
-  return response;
-};
 export const getMovieList = async () => {
   const response = await instance.get('/api/movie-list');
   return response;

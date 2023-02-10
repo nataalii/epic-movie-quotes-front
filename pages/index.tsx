@@ -12,14 +12,10 @@ import {
   VerificationVerify,
 } from 'components';
 import VerificationNotice from 'components/landing/modals/notifications/verificationNotice';
-import useTranslation from 'next-translate/useTranslation';
+import { useLanding } from 'hooks';
 import { Fragment } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { openRegisterModal } from 'stores/modalSlice';
-import { RootState } from 'types/stateTypes';
 export default function Home() {
-  const { t } = useTranslation('common');
-  const dispatch = useDispatch();
   const {
     registerModal,
     loginModal,
@@ -29,7 +25,10 @@ export default function Home() {
     passwordChanged,
     verificationNotif,
     verificationVerify,
-  } = useSelector((store: RootState) => store.modal);
+    dispatch,
+    t,
+  } = useLanding();
+
   return (
     <Fragment>
       <div className='bg-[#11101A] text-[#DDCCAA] font-helvetica '>

@@ -22,6 +22,7 @@ export interface UserState {
   email: string;
   id: string;
   image: string;
+  google_id: string;
 }
 
 export interface RootState {

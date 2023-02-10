@@ -1,12 +1,17 @@
 import { NavBar } from 'components/navBar';
-import { GoogleMobile } from 'components';
+import {
+  GoogleDesktop,
+  GoogleMobile,
+  MobileDesign,
+  MyProfile,
+} from 'components';
 import { SideNavBar } from 'components/sideNavBar';
-import useAuth from 'hooks/useAuth';
 import { ToastContainer } from 'react-toastify';
-import GoogleDektop from 'components/profile/googleProfile/googleDesktop';
+import { useSelector } from 'react-redux';
+import { RootState } from 'types/stateTypes';
 
 export default function Profile() {
-  useAuth();
+  const { google_id } = useSelector((store: RootState) => store.user);
   return (
     <div className='text-white'>
       <NavBar />
@@ -14,12 +19,10 @@ export default function Profile() {
         <SideNavBar />
       </div>
       <div className='hidden lg:ml-[27rem] mt-10 lg:flex justify-center items-center'>
-        {/* <MyProfile /> */}
-        <GoogleDektop />
+        {google_id !== null ? <GoogleDesktop /> : <MyProfile />}
       </div>
       <div className='lg:hidden'>
-        {/* <MobileDesign /> */}
-        <GoogleMobile />
+        {google_id !== null ? <GoogleMobile /> : <MobileDesign />}
       </div>
       <ToastContainer
         toastStyle={{

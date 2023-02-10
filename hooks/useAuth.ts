@@ -1,4 +1,4 @@
-import { hasCookie } from 'cookies-next';
+import { hasCookie, setCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -16,11 +16,8 @@ const useAuth = () => {
         const { data } = await getUser();
         setUser(data);
         dispatch(setUserData(data.user));
-      } catch (error) {
-        if (router.pathname === '/news-feed') {
-          router.push('/');
-        }
-      }
+        setCookie('authenticated', 1);
+      } catch (error) {}
     };
     if (hasCookie('XSRF-TOKEN')) {
       checkAuth();

@@ -4,6 +4,7 @@ import useForgotPassword from './useForgotPassword';
 
 const ForgotPassword = () => {
   const {
+    t,
     register,
     getFieldState,
     handleSubmit,
@@ -25,10 +26,11 @@ const ForgotPassword = () => {
           }}
         >
           <div className='mt-28 sm:mt-10 flex flex-col justify-center items-center gap-5'>
-            <h1 className='text-3xl font-bold text-white '>Forgot password?</h1>
+            <h1 className='text-3xl font-bold text-white '>
+              {t('forgot_password?')}
+            </h1>
             <h2 className='text-gray text-center max-w-64 w-[80%]'>
-              Enter the email and we’ll send an email with instructions to reset
-              your password
+              {t('enter_email')}
             </h2>
 
             <form
@@ -37,8 +39,8 @@ const ForgotPassword = () => {
             >
               <TextInput
                 name='email'
-                placeholder='Enter Your email'
-                label={'Email'}
+                placeholder={t('email_placeholder')}
+                label={t('email')}
                 register={register('email', {
                   required: 'Email field is required',
                   pattern: {
@@ -53,7 +55,11 @@ const ForgotPassword = () => {
                   (errors.email?.type === 'notExist' && errors.email.message)
                 }
               />
-              <Button item='Send Instructions' color='red' size='w-[89%]  ' />
+              <Button
+                item={t('send_instructions')}
+                color='red'
+                size='w-[89%]  '
+              />
             </form>
             <div
               className='flex gap-4 justify-center items-center text-gray cursor-pointer '
@@ -65,7 +71,7 @@ const ForgotPassword = () => {
               <span>
                 <BackArrow />
               </span>
-              <p>Back to login</p>
+              <p>{t('back_to_login')}</p>
             </div>
           </div>
         </div>

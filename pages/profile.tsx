@@ -9,8 +9,10 @@ import { SideNavBar } from 'components/sideNavBar';
 import { ToastContainer } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { RootState } from 'types/stateTypes';
+import { useAuth } from 'hooks';
 
 export default function Profile() {
+  useAuth();
   const { google_id } = useSelector((store: RootState) => store.user);
   return (
     <div className='text-white'>

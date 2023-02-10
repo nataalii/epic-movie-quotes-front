@@ -1,7 +1,6 @@
 {
-    "sign_up": "Sign Up",
+    "sign_up": "Sign in",
     "log_in": "Log in",
-    "google_sign_up": "Sign up with Google",
     "interstellar_quote": "“You have to leave somethig behind to go forward”",
     "interstellar_title": "Interstellar, 2014",
     "tenenbaums_quote": "“I think we’re just gonna have to be secretly in love with earch other and leave it that“",
@@ -11,7 +10,9 @@
     "movie_quotes": "movie quotes",
     "welcome_text": "Find any quote in millions of movie lines",
     "get_started": "Get Started",
-    "footer_text": "© 2022 movie quotes. All rights reserved."
-    
-
+    "footer_text": "© 2022 movie quotes. All rights reserved.",
+    "edit_your_profile": "Edit Your Profile",
+    "log_out": "Log Out",
+    "news_feed": "News feed",
+    "list_of_movies": "List of Movies"
 }

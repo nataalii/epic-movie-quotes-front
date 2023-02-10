@@ -1,20 +1,22 @@
 import { Button, ModalLayout, Success } from 'components';
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 import { closeVerificationVerify } from 'stores/modalSlice';
 
 const VerificationVerify = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation('authorization');
   const closeVerificationVerifyHandler = () => {
     dispatch(closeVerificationVerify());
   };
   return (
     <ModalLayout
       image={<Success />}
-      title={'Thank you!'}
-      text={'Your account has been activated.'}
+      title={t('thank_you')}
+      text={t('activated')}
       button={
         <Button
-          item='Return Home'
+          item={t('Return Home')}
           color='red'
           size='sm:max-w-[25rem] w-[90%]  '
           onClick={closeVerificationVerifyHandler}

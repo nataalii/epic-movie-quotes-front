@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { burgerMenu } from 'stores/modalSlice';
 import useBurgerMenu from './useBurgerMenu';
 const BurgerMenu = () => {
-  const { router, dispatch, name, image, logoutHandler } = useBurgerMenu();
+  const { router, dispatch, name, image, logoutHandler, t } = useBurgerMenu();
   return (
     <div
       className=' flex inset-0 fixed '
@@ -45,7 +45,7 @@ const BurgerMenu = () => {
             <div>
               <p className='text-2xl'>{name}</p>
               <Link href='/profile'>
-                <p className='text-light-gray'>Edit your profile</p>
+                <p className='text-light-gray'>{t('edit_your_profile')}</p>
               </Link>
             </div>
           </div>
@@ -54,7 +54,7 @@ const BurgerMenu = () => {
               <Home
                 color={router.asPath === '/news-feed' ? '#E31221' : 'white'}
               />
-              <p>News Feed</p>
+              <p>{t('news_feed')}</p>
             </div>
           </Link>
           <Link href='/movie-list'>
@@ -62,13 +62,16 @@ const BurgerMenu = () => {
               <Movie
                 color={router.asPath === '/movie-list' ? '#E31221' : 'white'}
               />
-              <p>List of movies</p>
+              <p>{t('list_of_movies')}</p>
             </div>
           </Link>
           <Button
-            item='log out'
+            item={t('log_out')}
             color='transparent'
-            onClick={() => logoutHandler()}
+            onClick={() => {
+              logoutHandler();
+              dispatch(burgerMenu());
+            }}
           />
         </div>
       </div>

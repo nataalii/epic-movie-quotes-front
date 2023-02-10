@@ -33,15 +33,15 @@ const RegisterModal = () => {
         <form className=' sm:mt-[1rem]' onSubmit={handleSubmit(onSubmit)}>
           <div className='text-center p-1 '>
             <h1 className='text-white text-2xl sm:text-[2rem]  mb-3 mt-20 sm:mt-8 '>
-              Create an account
+              {t('create_an_account')}
             </h1>
-            <p className='text-gray'>Start your journey!</p>
+            <p className='text-gray'>{t('start_your_journey')}</p>
           </div>
           <div>
             <TextInput
               name='name'
-              placeholder='At least 3 & max.15 lower case characters'
-              label={'Name'}
+              placeholder={t('name_placeholder')}
+              label={t('name')}
               isDirty={getFieldState('name').isDirty}
               register={register('name', {
                 required: 'Field is required',
@@ -67,8 +67,8 @@ const RegisterModal = () => {
 
             <TextInput
               name='email'
-              placeholder='Enter your email'
-              label={'Email'}
+              placeholder={t('email_placeholder')}
+              label={t('email')}
               isDirty={getFieldState('email').isDirty}
               register={register('email', {
                 required: 'Email field is required',
@@ -86,8 +86,8 @@ const RegisterModal = () => {
 
             <TextInput
               name='password'
-              placeholder='At least 8 & max.15 lower case characters'
-              label={'Password'}
+              placeholder={t('password_placeholder')}
+              label={t('password')}
               type={passwordVisibility ? 'text' : 'password'}
               isDirty={getFieldState('password').isDirty}
               register={register('password', {
@@ -117,12 +117,12 @@ const RegisterModal = () => {
 
             <TextInput
               name='confirm_password'
-              placeholder='Password'
+              placeholder={t('password')}
               type={passConfVisbility ? 'text' : 'password'}
-              label={'Confirm password'}
+              label={t('confirm_password')}
               isDirty={getFieldState('confirm_password').isDirty}
               register={register('confirm_password', {
-                required: 'Password field is required',
+                required: 'Field is required',
                 minLength: {
                   value: 8,
                   message: 'Password should contain min 8 symbols',
@@ -164,7 +164,7 @@ const RegisterModal = () => {
             </a>
 
             <h1 className=' text-gray before:content-[url("../components/icons/Google.tsx")] before:w-10'>
-              Already have an account?
+              {t('already_have_account')}
               <a
                 className='text-[#0D6EFD] underline ml-2 cursor-pointer '
                 onClick={() => {
@@ -172,7 +172,7 @@ const RegisterModal = () => {
                   showLoginModalHandler();
                 }}
               >
-                Log In
+                {t('Login')}
               </a>
             </h1>
           </div>

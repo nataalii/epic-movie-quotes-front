@@ -5,6 +5,7 @@ import useResetPassword from './useResetPassword';
 
 const ResetPassword = () => {
   const {
+    t,
     register,
     getFieldState,
     getValues,
@@ -35,17 +36,17 @@ const ResetPassword = () => {
               className=' flex flex-col items-center sm:max-w-[23rem] w-[90%] '
               onSubmit={handleSubmit(onSubmit)}
             >
-              <h1 className='text-3xl font-bold text-white '>
-                Create new password
+              <h1 className='text-3xl font-bold text-white text-center '>
+                {t('create_new_password')}
               </h1>
               <h2 className='text-gray text-center mt-3 max-w-64 w-[80%]'>
-                Your new password must be different from previous used passwords
+                {t('different_password')}
               </h2>
               <div className=' w-full'>
                 <TextInput
                   name='password'
-                  placeholder='At least 8 & max.15 lower case characters'
-                  label={'Password'}
+                  placeholder={t('password_placeholder')}
+                  label={t('password')}
                   type={passwordVisibility ? 'text' : 'password'}
                   isDirty={getFieldState('password').isDirty}
                   register={register('password', {
@@ -80,9 +81,9 @@ const ResetPassword = () => {
               <div className='w-full'>
                 <TextInput
                   name='confirm_password'
-                  placeholder='Password'
+                  placeholder={t('password')}
                   type={passConfVisbility ? 'text' : 'password'}
-                  label={'Confirm password'}
+                  label={t('confirm_password')}
                   isDirty={getFieldState('confirm_password').isDirty}
                   register={register('confirm_password', {
                     validate: (value) => {
@@ -106,7 +107,7 @@ const ResetPassword = () => {
               </div>
 
               <Button
-                item='Reset Password'
+                item={t('reset_password')}
                 color='red'
                 size='sm:max-w-[23rem] w-[90%] mt-7 '
               />
@@ -122,7 +123,7 @@ const ResetPassword = () => {
               <span>
                 <BackArrow />
               </span>
-              <p>Back to login</p>
+              <p>{t('back_to_login')}</p>
             </div>
           </div>
         </div>

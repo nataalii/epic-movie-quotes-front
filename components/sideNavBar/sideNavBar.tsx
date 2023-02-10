@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Home, Movie } from 'components';
+import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -7,6 +8,7 @@ import { useSelector } from 'react-redux';
 const SideNavBar = () => {
   const router = useRouter();
   const { name, image } = useSelector((store: any) => store.user);
+  const { t } = useTranslation('common');
   return (
     <div>
       <div className='hidden lg:flex lg:flex-col h-20 fixed top-28 left-16 gap-8'>
@@ -29,7 +31,7 @@ const SideNavBar = () => {
           <div>
             <p className='text-2xl'>{name}</p>
             <Link href='/profile'>
-              <p className='text-light-gray'>Edit your profile</p>
+              <p className='text-light-gray'>{t('edit_your_profile')}</p>
             </Link>
           </div>
         </div>
@@ -38,7 +40,7 @@ const SideNavBar = () => {
             <Home
               color={router.asPath === '/news-feed' ? '#E31221' : 'white'}
             />
-            <p>News Feed</p>
+            <p>{t('news_feed')}</p>
           </div>
         </Link>
         <Link href='/movie-list'>
@@ -46,7 +48,7 @@ const SideNavBar = () => {
             <Movie
               color={router.asPath === '/movie-list' ? '#E31221' : 'white'}
             />
-            <p>List of movies</p>
+            <p>{t('list_of_movies')}</p>
           </div>
         </Link>
       </div>

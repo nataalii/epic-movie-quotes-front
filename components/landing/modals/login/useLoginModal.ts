@@ -14,7 +14,7 @@ import {
 import { useDispatch } from 'react-redux';
 import useAuth from 'hooks/useAuth';
 const useLoginModal = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('authorization');
   const router = useRouter();
   const dispatch = useDispatch();
   useAuth();

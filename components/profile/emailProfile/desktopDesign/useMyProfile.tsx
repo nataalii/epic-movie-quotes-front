@@ -13,20 +13,21 @@ import {
   verifyEmail,
 } from 'services';
 import { RootState } from 'types/stateTypes';
+import useTranslation from 'next-translate/useTranslation';
 
 const useMyProfile = () => {
   const { name, email, image } = useSelector((store: RootState) => store.user);
   const { addEmailModal } = useSelector((store: any) => store.modal);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [passConfVisbility, setConfPassVisibility] = useState(false);
-  const dispatch = useDispatch();
   const [isReadOnly, setIsReadOnly] = useState(true);
   const [resetPassword, setResetPassword] = useState(false);
   const [editAvatar, setEditAvatar] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const queryClient = useQueryClient();
   const router = useRouter();
-
+  const dispatch = useDispatch();
+  const { t } = useTranslation('profile');
   const handleEdit = () => {
     setIsReadOnly(false);
     setValue('name', name);
@@ -153,6 +154,7 @@ const useMyProfile = () => {
     deleteEmail,
     makePrimary,
     setImage,
+    t,
   };
 };
 

@@ -4,12 +4,14 @@ import { burgerMenu } from 'stores/modalSlice';
 import useNavBar from './useNavBar';
 
 const NavBar = () => {
-  const { burgerMenuModal, selected, setSelected, dispatch, logoutHandler } =
+  const { t, burgerMenuModal, selected, setSelected, dispatch, logoutHandler } =
     useNavBar();
   return (
     <header className=' h-20 bg-[#24222F] flex sticky top-0 z-30'>
       <div className='flex justify-between items-center m-auto max-w-[120rem] w-[93%]'>
-        <h3 className='lg:block hidden text-[#DDCCAA] '>MOVIE QUOTES</h3>
+        <h3 className='lg:block hidden text-[#DDCCAA] uppercase '>
+          {t('movie_quotes')}
+        </h3>
         <div className='lg:hidden block'>
           <div
             className=' cursor-pointer'
@@ -27,7 +29,7 @@ const NavBar = () => {
           <LocalSwitcher selected={selected} setSelected={setSelected} />
           <div className='hidden lg:block'>
             <Button
-              item='Log out'
+              item={t('log_out')}
               color='transparent'
               onClick={logoutHandler}
             ></Button>

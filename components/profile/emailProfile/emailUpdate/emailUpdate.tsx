@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import { useMyProfile } from '../desktopDesign';
 import { AddNewEmail } from '../emailAdd';
 const EmailUpdate = () => {
-  const { dispatch, addNewEmailModal, email, emails, notification } =
+  const { dispatch, addNewEmailModal, email, emails, notification, t } =
     useEmailUpdate();
   const { deleteEmail, makePrimary } = useMyProfile();
   return (
@@ -28,7 +28,7 @@ const EmailUpdate = () => {
       <div className=' bg-blue-500 flex flex-col gap-14 w-full items-center py-10'>
         <div className='flex flex-col md:w-[70%] w-[85%] gap-2 relative'>
           <label htmlFor='primaryEmail' className='text-light-gray text-xs'>
-            Primary Email
+            {t('primary_email')}
           </label>
           <input
             type='text'
@@ -48,20 +48,22 @@ const EmailUpdate = () => {
               className='flex flex-col  md:w-[70%] w-[85%] gap-4 '
               key={email.id}
             >
-              <h1 className=' uppercase text-xs'>Change primary email</h1>
+              <h1 className=' uppercase text-xs'>
+                {t('change_primary_email')}
+              </h1>
               <p>{email.email}</p>
               <div className='flex justify-between text-sm text-light-gray'>
                 <span className='italic flex items-center gap-2 text-not-verified-yellow'>
-                  <NotVerifiedEmail /> Not verified
+                  <NotVerifiedEmail /> {t('not_verified')}
                 </span>
                 <h2
                   className=' cursor-pointer'
                   onClick={() => {
                     deleteEmail(email.id);
-                    toast(<Message text='Your email Removed!' />);
+                    toast(<Message text={t('removed')} />);
                   }}
                 >
-                  Remove
+                  {t('remove')}
                 </h2>
               </div>
               <hr className='h-px bg-gray border-0 mt-3' />
@@ -74,22 +76,22 @@ const EmailUpdate = () => {
               <p>{email.email}</p>
               <div className='flex justify-between'>
                 <Button
-                  item='Make this primary'
+                  item={t('make_primary')}
                   color='transparent'
                   size=' text-sm px-3'
                   onClick={() => {
                     makePrimary(email.id);
-                    notification('Primary email changed succsessfully!');
+                    notification(t('primary_email_changed'));
                   }}
                 />
                 <h2
                   className=' cursor-pointer  text-sm text-light-gray'
                   onClick={() => {
                     deleteEmail(email.id);
-                    notification('Your email Removed!!');
+                    notification(t('removed'));
                   }}
                 >
-                  Remove
+                  {t('remove')}
                 </h2>
               </div>
               <hr className='h-px bg-gray border-0 mt-3' />
@@ -97,12 +99,12 @@ const EmailUpdate = () => {
           )
         )}
         <div className='flex flex-col md:w-[70%] w-[85%] gap-4 relative'>
-          <h1 className=' uppercase text-sm'>Add new Email</h1>
+          <h1 className=' uppercase text-sm'>{t('add_new_email')}</h1>
           <Button
             item={
               <div className='flex items-center justify-center gap-2 '>
                 <AddMovieIcon />
-                Add
+                {t('add')}
               </div>
             }
             color='transparent'

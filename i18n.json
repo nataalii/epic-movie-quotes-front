@@ -2,7 +2,7 @@
     "locales": ["en", "ge"],
     "defaultLocale": "en",
     "pages": {
-        "*": ["common", "authorization"]
+        "*": ["common", "authorization", "profile"]
     
     }
 }

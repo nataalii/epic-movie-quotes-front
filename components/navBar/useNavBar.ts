@@ -1,4 +1,5 @@
 import { deleteCookie } from 'cookies-next';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +13,7 @@ const useNavBar = () => {
     router.locale === 'en' ? 'Eng' : 'ქართ'
   );
   const dispatch = useDispatch();
+  const { t } = useTranslation('common');
   const logoutHandler = async () => {
     try {
       await logout();
@@ -21,6 +23,6 @@ const useNavBar = () => {
     } catch (error) {}
   };
 
-  return { burgerMenuModal, selected, setSelected, dispatch, logoutHandler };
+  return { burgerMenuModal, selected, setSelected, dispatch, logoutHandler, t };
 };
 export default useNavBar;

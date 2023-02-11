@@ -1,4 +1,5 @@
 import { useMobileToast } from 'components';
+import useTranslation from 'next-translate/useTranslation';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { updateUser } from 'services';
@@ -10,16 +11,17 @@ const useConfirmModal = () => {
   const dispatch = useDispatch();
   const { submitForm } = useAddEmail();
   const { notification } = useMobileToast();
+  const { t } = useTranslation('profile');
   const onSubmit = async (data: any) => {
     try {
       if (data?.name) {
         await updateUser(data);
-        notification('Username changed succsessfully');
+        notification(t('username_changed'));
         dispatch(updateUsername());
       } else if (data?.email) {
         submitForm(data);
         setTimeout(() => {
-          notification('Please check email to verify new address');
+          notification(t('check_email'));
         }, 3500);
         dispatch(addNewEmail());
       }
@@ -35,7 +37,7 @@ const useConfirmModal = () => {
       dispatch(confirmChanges());
     }
   };
-  return { dispatch, onSubmit };
+  return { dispatch, onSubmit, t };
 };
 
 export default useConfirmModal;

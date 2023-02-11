@@ -1,4 +1,5 @@
 import { useMobileToast } from 'components';
+import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +12,7 @@ const useMobileDesign = () => {
   const [editAvatar, setEditAvatar] = useState(false);
   const methods = useForm({ mode: 'all' });
   const { notification } = useMobileToast();
+  const { t } = useTranslation('profile');
   const setImage = (event: any) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -48,6 +50,7 @@ const useMobileDesign = () => {
     updatePasswordModal,
     dispatch,
     updateEmailsModal,
+    t,
   };
 };
 

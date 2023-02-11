@@ -6,7 +6,7 @@ import { FormProvider } from 'react-hook-form';
 import { addNewEmail } from 'stores/modalSlice';
 import useAddNewEmail from './useAddNewEmail';
 const AddNewEmail = () => {
-  const { dispatch, methods, email, confirmChangesModal, onSubmit } =
+  const { dispatch, methods, email, confirmChangesModal, onSubmit, t } =
     useAddNewEmail();
   return (
     <div className='flex flex-col inset-0  bg-[#181623] mt-20 z-50 fixed '>
@@ -22,7 +22,7 @@ const AddNewEmail = () => {
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             <div className=' bg-blue-500 flex flex-col gap-2 p-10 rounded-lg'>
-              <label htmlFor='email'>Add new Email</label>
+              <label htmlFor='email'>{t('add_new_email')}</label>
               <input
                 className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
                 {...methods.register('email', {
@@ -52,9 +52,9 @@ const AddNewEmail = () => {
                 }}
                 className=' cursor-pointer text-[#CED4DA]'
               >
-                Cancel
+                {t('cancel')}
               </h1>
-              <Button item='Add' color='red' />
+              <Button item={t('add')} color='red' />
             </div>
           </form>
         </FormProvider>

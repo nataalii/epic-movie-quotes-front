@@ -16,6 +16,7 @@ const PasswordUpdate = () => {
     setConfPassVisibility,
     passConfVisbility,
     onSubmit,
+    t,
   } = usePasswordUpdate();
   return (
     <div className='flex flex-col inset-0  bg-[#181623] mt-20 z-50 fixed '>
@@ -34,7 +35,7 @@ const PasswordUpdate = () => {
             className='w-full flex flex-col gap-5 items-center bg-blue-500 py-10'
           >
             <div className=' flex flex-col gap-3 w-[90%] bg-transparent border-[1px] border-gray border-opacity-70 rounded-md p-5 bg-blue-600'>
-              <h1>Passwords should contain:</h1>
+              <h1>{t('password_should_contain')}</h1>
               <ul>
                 <li
                   className={`flex items-center gap-2 text-sm ${
@@ -50,7 +51,7 @@ const PasswordUpdate = () => {
                         : 'gray'
                     }`}
                   />
-                  8 or more characters
+                  {t('8_or_more_char')}
                 </li>
                 <li
                   className={`flex items-center gap-2 text-sm ${
@@ -68,13 +69,13 @@ const PasswordUpdate = () => {
                         : 'gray'
                     }`}
                   />
-                  15 lowercase character
+                  {t('15_lowercase_char')}
                 </li>
               </ul>
             </div>
             <div className='flex flex-col w-[90%] '>
               <div className='flex flex-col gap-2 relative'>
-                <label htmlFor='newPassword'>New Password</label>
+                <label htmlFor='newPassword'>{t('new_password')}</label>
                 <input
                   type={passwordVisibility ? 'text' : 'password'}
                   className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
@@ -106,7 +107,9 @@ const PasswordUpdate = () => {
               </div>
 
               <div className='flex flex-col gap-2 relative'>
-                <label htmlFor='confNewPassword'>Confirm New Password</label>
+                <label htmlFor='confNewPassword'>
+                  {t('confirm_new_password')}
+                </label>
                 <input
                   type={passConfVisbility ? 'text' : 'password'}
                   className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
@@ -144,9 +147,9 @@ const PasswordUpdate = () => {
                   }}
                   className=' cursor-pointer text-[#CED4DA]'
                 >
-                  Cancel
+                  {t('cancel')}
                 </h1>
-                <Button item='Add' color='red' />
+                <Button item={t('add')} color='red' />
               </div>
             </div>
           </form>

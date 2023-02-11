@@ -5,7 +5,7 @@ import { closeAddEmailModal } from 'stores/modalSlice';
 import useAddEmail from './useAddEmail';
 
 const AddEmail = () => {
-  const { onSubmit, dispatch, methods } = useAddEmail();
+  const { onSubmit, dispatch, methods, t } = useAddEmail();
 
   return (
     <div
@@ -18,22 +18,24 @@ const AddEmail = () => {
           e.stopPropagation();
         }}
       >
-        <h1 className='w-[90%] m-auto mt-5'>Add New Email</h1>
+        <h1 className='w-[90%] m-auto mt-5'>{t('add_new_email')}</h1>
         <hr className='w-full border-[#efefef4d] ' />
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             <ProfileInput
-              label='New Email'
+              label={t('new_email')}
               name='email'
-              placeholder='Enter new email'
+              placeholder={t('enter_new_email')}
               error={methods.formState.errors.email}
               serverError='emailExists'
             />
 
             <div className=' relative mt-5'>
               <div className='flex items-center gap-4 absolute right-6 -top-1 cursor-pointer'>
-                <p onClick={() => dispatch(closeAddEmailModal())}>Cancel</p>
-                <Button item='Add' color='red' size='w-18' />
+                <p onClick={() => dispatch(closeAddEmailModal())}>
+                  {t('cancel')}
+                </p>
+                <Button item={t('add')} color='red' size='w-18' />
               </div>
             </div>
           </form>

@@ -11,7 +11,7 @@ import {
 import { RegisterModalTypes } from 'types';
 
 const useRegisterModal = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('authorization');
   const dispatch = useDispatch();
   const {
     register,

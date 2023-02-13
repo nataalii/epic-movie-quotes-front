@@ -1,22 +1,22 @@
 import { Button, EmailSent, ModalLayout } from 'components';
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 import { closeVerificationNotif } from 'stores/modalSlice';
 
 const VerificationNotice = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation('authorization');
   const hideVerificationNotiHandler = () => {
     dispatch(closeVerificationNotif());
   };
   return (
     <ModalLayout
       image={<EmailSent />}
-      title={'Thank you!'}
-      text={
-        'Please check your email and follow the instructions to activate your account'
-      }
+      title={t('thank_you')}
+      text={t('recover_instructions')}
       button={
         <Button
-          item='Go to my email'
+          item={t('go_to_my_email')}
           color='red'
           size='sm:max-w-[25rem] w-[90%]  '
           onClick={(e: { preventDefault: () => void }) => {

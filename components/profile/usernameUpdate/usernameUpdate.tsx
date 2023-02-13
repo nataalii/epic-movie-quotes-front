@@ -5,7 +5,7 @@ import { updateUsername } from 'stores/modalSlice';
 import { ConfirmModal } from 'components';
 import useUsernameUpdate from './useUsernameUpdate';
 const UsernameUpdate = () => {
-  const { dispatch, methods, name, confirmChangesModal, onSubmit } =
+  const { dispatch, methods, name, confirmChangesModal, onSubmit, t } =
     useUsernameUpdate();
   return (
     <div className='flex flex-col inset-0  bg-[#181623] mt-20 z-50 fixed '>
@@ -21,7 +21,7 @@ const UsernameUpdate = () => {
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             <div className=' bg-blue-500 flex flex-col gap-2 p-10 rounded-lg'>
-              <label htmlFor='password'>Enter New Username</label>
+              <label htmlFor='password'>{t('enter_new_username')}</label>
               <input
                 className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
                 {...methods.register('name', {
@@ -47,9 +47,9 @@ const UsernameUpdate = () => {
                 }}
                 className=' cursor-pointer text-[#CED4DA]'
               >
-                Cancel
+                {t('cancel')}
               </h1>
-              <Button item='Add' color='red' />
+              <Button item={t('add')} color='red' />
             </div>
           </form>
         </FormProvider>

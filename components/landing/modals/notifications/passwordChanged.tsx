@@ -1,10 +1,12 @@
 import { Button, ModalLayout, Success } from 'components';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { closePasswordChanged } from 'stores/modalSlice';
 
 const PasswordChanged = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation('authorization');
   const router = useRouter();
   const closePasswordChangedHandler = () => {
     dispatch(closePasswordChanged());
@@ -13,11 +15,11 @@ const PasswordChanged = () => {
   return (
     <ModalLayout
       image={<Success />}
-      title={'Success!'}
-      text={'Your password has changed successfuly'}
+      title={t('success')}
+      text={t('password_changed')}
       button={
         <Button
-          item='Return Home'
+          item={t('return_home')}
           color='red'
           size='sm:max-w-[22rem] w-[90%] '
           onClick={closePasswordChangedHandler}

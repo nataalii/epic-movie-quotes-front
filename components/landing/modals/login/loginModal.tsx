@@ -3,6 +3,7 @@ import useLoginModal from './useLoginModal';
 
 const LoginModal = () => {
   const {
+    t,
     register,
     getFieldState,
     handleSubmit,
@@ -14,7 +15,6 @@ const LoginModal = () => {
     showRegisterModalHandler,
     showForgotPasswordHandler,
   } = useLoginModal();
-
   return (
     <div
       className=' flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
@@ -29,17 +29,15 @@ const LoginModal = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='text-center p-1 '>
             <h1 className='text-white text-2xl sm:text-[2rem]  mb-3 mt-20 sm:mt-12 '>
-              Log in to your account
+              {t('log_in_your_account')}
             </h1>
-            <p className='text-gray'>
-              Welcome back! Please enter your details.
-            </p>
+            <p className='text-gray'>{t('welcome_back')}</p>
           </div>
           <div>
             <TextInput
               name='email'
-              placeholder='Enter Your email'
-              label={'Email'}
+              placeholder={t('email_placeholder')}
+              label={t('email')}
               register={register('email', {
                 required: 'Field is required',
                 minLength: {
@@ -58,9 +56,9 @@ const LoginModal = () => {
 
             <TextInput
               name='password'
-              placeholder='Password'
+              placeholder={t('password')}
               type={passwordVisibility ? 'text' : 'password'}
-              label={'Password'}
+              label={t('password')}
               register={register('password', {
                 required: 'Password field is required',
               })}
@@ -87,11 +85,11 @@ const LoginModal = () => {
             <div className='flex items-center'>
               <input
                 type='checkbox'
-                id='remember'
-                name='remember'
+                id='remember_me'
+                {...register('remember_me')}
                 className=' w-4 h-4 rounded-md cursor-pointer mr-2'
               />
-              <label htmlFor='remember'> Remeber me</label>
+              <label htmlFor='remember_me'> {t('remember_me')}</label>
             </div>
 
             <p
@@ -101,28 +99,28 @@ const LoginModal = () => {
                 showForgotPasswordHandler();
               }}
             >
-              Forgot password?
+              {t('forgot_password?')}
             </p>
           </div>
 
           <div className=' flex flex-col gap-4 mt-4 items-center relative'>
             <Button
-              item={'Sign in'}
+              item={t('sign_in')}
               color='red'
               size='sm:max-w-[22rem] w-[90%]'
             />
             <a
-              href='http://localhost:8000/api/google/auth/redirect'
-              className='sm:max-w-[22rem] w-[90%] '
+              className='sm:max-w-[22rem] w-[90%] cursor-pointer'
+              href={`${process.env.NEXT_PUBLIC_API_GOOGLE_URL}/redirect`}
             >
               <div className='flex justify-center gap-2 px-6 py-2 text-white rounded-md outline-1 outline-white outline -outline-offset-1'>
                 <Google />
-                Sign in With Google
+                {t('google_sign_in')}
               </div>
             </a>
 
             <h1 className=' text-gray'>
-              Dont have an account?
+              {t('dont_have_account')}
               <a
                 className='text-[#0D6EFD] underline ml-2 cursor-pointer'
                 onClick={() => {
@@ -130,7 +128,7 @@ const LoginModal = () => {
                   showRegisterModalHandler();
                 }}
               >
-                Sign up
+                {t('sign_up')}
               </a>
             </h1>
           </div>

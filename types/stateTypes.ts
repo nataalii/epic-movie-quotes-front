@@ -15,6 +15,7 @@ export interface ModalState {
   confirmPasswordModal: boolean;
   updateEmailsModal: boolean;
   addNewEmailModal: boolean;
+  burgerMenuModal: boolean;
 }
 
 export interface UserState {
@@ -22,6 +23,7 @@ export interface UserState {
   email: string;
   id: string;
   image: string;
+  google_id: string;
 }
 
 export interface RootState {

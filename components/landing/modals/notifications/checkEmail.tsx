@@ -1,4 +1,5 @@
 import { Button, ModalLayout, EmailSent } from 'components';
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 import { closeCheckEmail } from 'stores/modalSlice';
 
@@ -7,15 +8,16 @@ const CheckEmail = () => {
   const hideCheckEmailVerification = () => {
     dispatch(closeCheckEmail());
   };
+  const { t } = useTranslation('authorization');
   return (
     <ModalLayout
       image={<EmailSent />}
-      title={'Check your email'}
-      text={'We have sent a password recover instructions to your email'}
+      title={t('check_email')}
+      text={t('recover_instructions')}
       button={
         <div className='flex flex-col gap-5 sm:max-w-[25rem] w-[90%] text-center '>
           <Button
-            item='Go to my email'
+            item={t('go_to_my_email')}
             color='red'
             size=' '
             onClick={(e: { preventDefault: () => void }) => {
@@ -24,7 +26,7 @@ const CheckEmail = () => {
             }}
           />
           <a className=' text-gray' onClick={hideCheckEmailVerification}>
-            Skip, I&apos;ll confirm later
+            {t('skip')}
           </a>
         </div>
       }

@@ -16,6 +16,7 @@ import useMyProfile from './useMyProfile';
 
 const MyProfile = () => {
   const {
+    t,
     name,
     email,
     image,
@@ -45,7 +46,7 @@ const MyProfile = () => {
   return (
     <div className='w-[90rem] '>
       {addEmailModal && <AddEmail />}
-      <h1 className='text-2xl ml-20'>My Profile</h1>
+      <h1 className='text-2xl ml-20'>{t('my_profile')}</h1>
 
       <div className='max-w-[60rem] bg-blue-600 rounded-2xl my-28 m-10 pb-16'>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -66,13 +67,13 @@ const MyProfile = () => {
               })}
             />
             <label className='text-xl cursor-pointer' htmlFor='avatar'>
-              Upload new Photo
+              {t('upload_new_photo')}
             </label>
           </div>
           <div className='flex flex-col gap-7 ml-24 w-[90%]'>
             <div className='flex w-full items-center '>
               <div className='flex flex-col w-[55%] gap-2'>
-                <label htmlFor='name'>Username</label>
+                <label htmlFor='name'>{t('username')}</label>
                 <input
                   type='text'
                   id='name'
@@ -104,13 +105,13 @@ const MyProfile = () => {
                   className=' mx-6 -mt-4 text-light-gray cursor-pointer'
                   onClick={handleEdit}
                 >
-                  Edit
+                  {t('edit')}
                 </h1>
               )}
             </div>
             <div className='flex w-full gap-5 '>
               <div className='flex flex-col w-[55%] gap-2 relative'>
-                <label htmlFor='primaryEmail'>Email</label>
+                <label htmlFor='primaryEmail'>{t('email')}</label>
                 <input
                   type='text'
                   id='primaryEmail'
@@ -123,13 +124,13 @@ const MyProfile = () => {
                   <PrimaryEmail />
                 </div>
               </div>
-              <h2 className=' mt-10  text-light-gray'>Primary Email</h2>
+              <h2 className=' mt-10  text-light-gray'>{t('primary_email')}</h2>
             </div>
             {emails?.map((email: any) =>
               email.email_verified_at === null ? (
                 <div className='flex w-full gap-5  ' key={email.id}>
                   <div className='flex flex-col w-[55%] gap-2 relative'>
-                    <label>Email</label>
+                    <label>{t('email')}</label>
                     <input
                       type='text'
                       name='notVerifiedEmail'
@@ -142,22 +143,22 @@ const MyProfile = () => {
                     </div>
                   </div>
                   <div className=' mt-10 text-light-gray flex gap-5'>
-                    <h2>Not verified</h2>
+                    <h2>{t('not_verified')}</h2>
                     <h2
                       className=' cursor-pointer'
                       onClick={() => {
                         deleteEmail(email.id);
-                        toast(<Message text='Your email Removed!' />);
+                        toast(<Message text={t('removed')} />);
                       }}
                     >
-                      Remove
+                      {t('remove')}
                     </h2>
                   </div>
                 </div>
               ) : (
                 <div className='flex w-full gap-5 ' key={email.id}>
                   <div className='flex flex-col w-[55%] gap-2'>
-                    <label htmlFor='email'>Email</label>
+                    <label htmlFor='email'>{t('email')}</label>
                     <input
                       type='text'
                       name='email'
@@ -170,19 +171,19 @@ const MyProfile = () => {
                     <h2
                       onClick={() => {
                         makePrimary(email.id);
-                        toast(<Message text='Email changed to Primary!' />);
+                        toast(<Message text={t('email_primary')} />);
                       }}
                     >
-                      Make this Primary
+                      {t('make_this_primary')}
                     </h2>
                     <h2
                       className=' cursor-pointer'
                       onClick={() => {
                         deleteEmail(email.id);
-                        toast(<Message text='Your email Removed!' />);
+                        toast(<Message text={t('removed')} />);
                       }}
                     >
-                      Remove
+                      {t('remove')}
                     </h2>
                   </div>
                 </div>
@@ -191,17 +192,17 @@ const MyProfile = () => {
 
             <div className='flex flex-col w-[55%] gap-7'>
               <div
-                className='px-6 py-2 text-white rounded-md outline-1 outline-white outline -outline-offset-1 w-48 flex gap-2 cursor-pointer items-center'
+                className='px-6 py-2 text-white rounded-md outline-1 outline-white w-60 outline -outline-offset-1 justify-center flex gap-2 cursor-pointer items-center'
                 onClick={() => dispatch(openAddEmailModal())}
               >
                 <AddMovieIcon />
-                {'Add new email'}
+                {t('add_new_email')}
               </div>
               <hr className='h-px bg-gray border-0' />
             </div>
             <div className='flex w-full gap-5 '>
               <div className='flex flex-col w-[55%] gap-2'>
-                <label htmlFor='password'>Password</label>
+                <label htmlFor='password'>{t('password')}</label>
                 <input
                   type='password'
                   id='password'
@@ -213,7 +214,7 @@ const MyProfile = () => {
               </div>
               <div className='mt-10  text-light-gray flex gap-4 cursor-pointer'>
                 {!resetPassword && (
-                  <h2 onClick={() => setResetPassword(true)}>Edit</h2>
+                  <h2 onClick={() => setResetPassword(true)}>{t('edit')}</h2>
                 )}
               </div>
             </div>
@@ -221,7 +222,7 @@ const MyProfile = () => {
             {resetPassword && (
               <>
                 <div className=' flex flex-col gap-3 w-[55%] bg-transparent border-[1px] border-gray border-opacity-70 rounded-md p-5'>
-                  <h1>Passwords should contain:</h1>
+                  <h1>{t('password_should_contain')}</h1>
                   <ul>
                     <li
                       className={`flex items-center gap-2 text-sm ${
@@ -237,7 +238,7 @@ const MyProfile = () => {
                             : 'gray'
                         }`}
                       />
-                      8 or more characters
+                      {t('8_or_more_char')}
                     </li>
                     <li
                       className={`flex items-center gap-2 text-sm ${
@@ -255,13 +256,13 @@ const MyProfile = () => {
                             : 'gray'
                         }`}
                       />
-                      15 lowercase character
+                      {t('15_lowercase_char')}
                     </li>
                   </ul>
                 </div>
                 <div className='flex flex-col w-[55%] '>
                   <div className='flex flex-col gap-2 relative'>
-                    <label htmlFor='newPassword'>New Password</label>
+                    <label htmlFor='newPassword'>{t('new_password')}</label>
                     <input
                       type={passwordVisibility ? 'text' : 'password'}
                       id='newPassword'
@@ -295,7 +296,7 @@ const MyProfile = () => {
 
                   <div className='flex flex-col gap-2 relative'>
                     <label htmlFor='confNewPassword'>
-                      Confirm New Password
+                      {t('confirm_new_password')}
                     </label>
                     <input
                       type={passConfVisbility ? 'text' : 'password'}
@@ -331,8 +332,8 @@ const MyProfile = () => {
             {(resetPassword || !isReadOnly || editAvatar) && (
               <div className='relative '>
                 <div className='absolute right-0 mt-24 flex gap-5 items-center cursor-pointer'>
-                  <h1 onClick={() => cancelButtonHandler()}>Cancel</h1>
-                  <Button item='Save changes' color='red' />
+                  <h1 onClick={() => cancelButtonHandler()}>{t('cancel')}</h1>
+                  <Button item={t('save_changes')} color='red' />
                 </div>
               </div>
             )}

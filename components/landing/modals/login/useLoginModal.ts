@@ -7,13 +7,14 @@ import { fetchCSRFToken, login } from 'services';
 import { LoginModalTypes } from 'types';
 import {
   closeLoginModal,
+  openVerificationNotif,
   openForgotPassword,
   openRegisterModal,
 } from 'stores/modalSlice';
 import { useDispatch } from 'react-redux';
 import useAuth from 'hooks/useAuth';
 const useLoginModal = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('authorization');
   const router = useRouter();
   const dispatch = useDispatch();
   useAuth();
@@ -38,12 +39,14 @@ const useLoginModal = () => {
     formState: { errors },
   } = useForm<LoginModalTypes>({ mode: 'all' });
   const onSubmit = async (data: LoginModalTypes) => {
+    console.log(data);
     try {
       await fetchCSRFToken();
       await login(data);
       router.push('/news-feed');
     } catch (errors: any) {
       const error = errors.response.data.message;
+
       if (error) {
         setError('email', {
           type: 'invalidCredentials',
@@ -52,6 +55,10 @@ const useLoginModal = () => {
         setError('password', {
           type: 'invalidCredentials',
         });
+      }
+      if (error === 'Not verified') {
+        dispatch(closeLoginModal());
+        dispatch(openVerificationNotif());
       }
       deleteCookie('XSRF-TOKEN');
     }

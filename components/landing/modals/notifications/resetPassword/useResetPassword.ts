@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -24,6 +25,7 @@ const useResetPassword = () => {
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
   const router = useRouter();
+  const { t } = useTranslation('authorization');
   const dispatch = useDispatch();
 
   const hideResetPasswordHandler = () => {
@@ -68,6 +70,7 @@ const useResetPassword = () => {
     hideResetPasswordHandler,
     showPasswordChangedHandler,
     showLoginModalHandler,
+    t,
   };
 };
 

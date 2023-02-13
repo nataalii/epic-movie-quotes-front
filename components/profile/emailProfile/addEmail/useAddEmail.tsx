@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Message } from 'components/toasts';
+import useTranslation from 'next-translate/useTranslation';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch } from 'react-redux';
@@ -11,6 +12,7 @@ import { schema } from 'validations';
 const useAddEmail = () => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
+  const { t } = useTranslation('profile');
   const methods = useForm({
     mode: 'all',
     resolver: yupResolver(schema),
@@ -32,11 +34,11 @@ const useAddEmail = () => {
   const onSubmit = async (data: any) => {
     submitForm(data);
     setTimeout(() => {
-      toast(<Message text='Please check email to verify new address' />);
+      toast(<Message text={t('check_email')} />);
     }, 3500);
   };
 
-  return { methods, onSubmit, dispatch, submitForm };
+  return { methods, onSubmit, dispatch, submitForm, t };
 };
 
 export default useAddEmail;

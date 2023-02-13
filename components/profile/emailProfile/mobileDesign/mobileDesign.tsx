@@ -27,6 +27,7 @@ const MobileDesign = () => {
     updatePasswordModal,
     updateEmailsModal,
     dispatch,
+    t,
   } = useMobileDesign();
 
   return (
@@ -44,7 +45,7 @@ const MobileDesign = () => {
             className='flex flex-col'
           >
             <div className=' flex flex-col  gap-10 items-center pt-10 pb-24'>
-              <div>
+              <div className='flex flex-col justify-center items-center'>
                 <img
                   src={selectedImage || `${image}`}
                   alt='avatar'
@@ -64,39 +65,39 @@ const MobileDesign = () => {
                   className='text-xl cursor-pointer'
                   htmlFor='mobileAvatar'
                 >
-                  Upload new Photo
+                  {t('upload_new_photo')}
                 </label>
               </div>
               <div className='flex flex-col w-[90%] sm:w-[70%] gap-2'>
-                <h2 className=''>Username</h2>
+                <h2 className=''>{t('username')}</h2>
                 <div className='flex justify-between '>
                   <h1 className=' text-lg'>{name}</h1>
                   <h2
                     className='cursor-pointer text-[#CED4DA]'
                     onClick={() => dispatch(updateUsername())}
                   >
-                    Edit
+                    {t('edit')}
                   </h2>
                 </div>
 
                 <hr className='h-px  bg-gray border-0 ' />
               </div>
               <div className='flex flex-col w-[90%] sm:w-[70%] gap-2'>
-                <h2>Password</h2>
+                <h2>{t('password')}</h2>
                 <div className='flex justify-between '>
                   <h1 className=' text-lg'>••••••••••••</h1>
                   <h2
                     className='cursor-pointer text-[#CED4DA]'
                     onClick={() => dispatch(updatePassword())}
                   >
-                    Edit
+                    {t('edit')}
                   </h2>
                 </div>
 
                 <hr className='h-px  bg-gray border-0 ' />
               </div>
               <div className='flex justify-between w-[90%] sm:w-[70%]'>
-                <h1 className=' text-sm'>EMAIL</h1>
+                <h1 className=' text-sm'>{t('email')}</h1>
                 <div
                   className='cursor-pointer'
                   onClick={() => dispatch(updateEmails())}
@@ -115,7 +116,7 @@ const MobileDesign = () => {
                       setSelectedImage(image);
                     }}
                   >
-                    Cancel
+                    {t('cancel')}
                   </h1>
                   <Button item='Save changes' color='red' />
                 </div>

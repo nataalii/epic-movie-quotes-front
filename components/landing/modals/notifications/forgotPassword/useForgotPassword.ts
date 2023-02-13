@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation';
 import { useForm, useWatch } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { fetchCSRFToken, forgotPassword } from 'services';
@@ -16,6 +17,7 @@ const useForgotPassword = () => {
     setError,
     formState: { errors },
   } = useForm({ mode: 'all' });
+  const { t } = useTranslation('authorization');
   const dispatch = useDispatch();
   const hideForgotPasswordHandler = () => {
     dispatch(closeForgotPassword());
@@ -55,6 +57,7 @@ const useForgotPassword = () => {
     onSubmit,
     hideForgotPasswordHandler,
     showLoginModalHandler,
+    t,
   };
 };
 

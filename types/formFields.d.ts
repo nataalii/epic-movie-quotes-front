@@ -8,11 +8,12 @@ export type RegisterModalTypes = {
 export type LoginModalTypes = {
   email: string;
   password: string;
+  remember_me: string;
 };
 
 export type ResetPasswordTypes = {
-  email: string;
-  token: string;
-  password: string;
-  confirm_password: string;
+  email?: string;
+  token?: string;
+  password?: string;
+  confirm_password?: string;
 };

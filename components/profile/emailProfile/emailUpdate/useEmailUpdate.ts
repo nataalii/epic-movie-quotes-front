@@ -1,5 +1,6 @@
 import { useMobileToast } from 'components/toasts';
 import useEmails from 'hooks/useEmails';
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'types/stateTypes';
 const useEmailUpdate = () => {
@@ -9,6 +10,7 @@ const useEmailUpdate = () => {
   );
   const { email } = useSelector((store: RootState) => store.user);
   const { emails } = useEmails();
+  const { t } = useTranslation('profile');
   const { notification } = useMobileToast();
   return {
     dispatch,
@@ -17,6 +19,7 @@ const useEmailUpdate = () => {
     emails,
     addNewEmailModal,
     notification,
+    t,
   };
 };
 

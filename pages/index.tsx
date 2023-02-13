@@ -11,11 +11,15 @@ import {
   PasswordChanged,
   VerificationVerify,
 } from 'components';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import VerificationNotice from 'components/landing/modals/notifications/verificationNotice';
 import { useLanding } from 'hooks';
 import { Fragment } from 'react';
 import { openRegisterModal } from 'stores/modalSlice';
+import { useRouter } from 'next/router';
 export default function Home() {
+  const { locale } = useRouter();
+  console.log(locale);
   const {
     registerModal,
     loginModal,
@@ -71,4 +75,12 @@ export default function Home() {
       </div>
     </Fragment>
   );
+}
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'authorization'])),
+    },
+  };
 }

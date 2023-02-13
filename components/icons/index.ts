@@ -29,3 +29,5 @@ export { default as ForwardArrow } from './ForwardArrow';
 export { default as Checked } from './Checked';
 export { default as Burger } from './Burger';
 export { default as NotVerifiedEmail } from './NotVerifiedEmail';
+export { default as Delete } from './Delete';
+export { default as Edit } from './Edit';

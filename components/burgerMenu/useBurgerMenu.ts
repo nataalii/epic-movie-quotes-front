@@ -1,5 +1,5 @@
 import { useNavBar } from 'components/navBar';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'types/stateTypes';

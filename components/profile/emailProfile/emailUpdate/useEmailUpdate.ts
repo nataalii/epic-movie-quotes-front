@@ -1,6 +1,6 @@
 import { useMobileToast } from 'components/toasts';
 import useEmails from 'hooks/useEmails';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'types/stateTypes';
 const useEmailUpdate = () => {

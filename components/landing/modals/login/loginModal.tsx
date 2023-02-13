@@ -61,6 +61,10 @@ const LoginModal = () => {
               label={t('password')}
               register={register('password', {
                 required: 'Password field is required',
+                minLength: {
+                  value: 3,
+                  message: 'Password should contain min 3 symbols',
+                },
               })}
               isDirty={getFieldState('password').isDirty}
               errors={errors.password}

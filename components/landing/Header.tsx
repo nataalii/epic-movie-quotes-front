@@ -1,5 +1,5 @@
 import { Button } from 'components';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { LocalSwitcher } from 'components';

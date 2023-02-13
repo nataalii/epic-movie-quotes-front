@@ -13,7 +13,7 @@ import {
   verifyEmail,
 } from 'services';
 import { RootState } from 'types/stateTypes';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 const useMyProfile = () => {
   const { name, email, image } = useSelector((store: RootState) => store.user);
@@ -58,7 +58,7 @@ const useMyProfile = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('users');
       cancelButtonHandler();
-      toast(<Message text='Changes updated succsessfully!' />);
+      toast(<Message text={t('changes_updated')} />);
     },
     onError: (errors: any) => {
       const error = errors.response.data.errors?.name;
@@ -106,7 +106,7 @@ const useMyProfile = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('emails');
       router.push('/profile');
-      toast(<Message text='Email Verified Successfully!' />);
+      toast(<Message text={t('email_verified')} />);
     },
   });
   useEffect(() => {

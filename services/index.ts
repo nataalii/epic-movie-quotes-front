@@ -67,7 +67,11 @@ export const resetPassword = async (data: ResetPasswordTypes) => {
 };
 
 export const getMovieList = async () => {
-  const response = await instance.get('/api/movie-list');
+  const response = await instance.get('/api/movie-list', {
+    // headers: {
+    //   Cookie: cookies,
+    // },
+  });
   return response;
 };
 
@@ -80,13 +84,14 @@ export const addMovie = async (data: any) => {
 
   return response;
 };
-export const getMovie = async (movie: any) => {
-  const response = await instance.get(`/api/movies/${movie.id}`, movie);
-
+export const getMovie = async (id: any, cookies?: string) => {
+  const response = await instance.get(`/api/movie/${id}`, {
+    headers: { Cookie: cookies },
+  });
   return response;
 };
 export const updateMovie = async (movie: any) => {
-  const response = await instance.post(`/api/movies/${movie.id}`, movie, {
+  const response = await instance.post(`/api/movie/${movie.id}`, movie, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -96,6 +101,6 @@ export const updateMovie = async (movie: any) => {
 };
 
 export const deleteMovie = async (id: any) => {
-  const response = await instance.post(`/api/movies/${id}`);
+  const response = await instance.delete(`/api/movie/${id}`);
   return response;
 };

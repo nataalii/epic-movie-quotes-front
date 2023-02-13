@@ -1,19 +1,23 @@
 import { Photo } from 'components/icons';
+import useTranslation from 'next-translate/useTranslation';
 
 const InputFile = ({ register, errors }: { register: Object; errors: any }) => {
+  const { t } = useTranslation('movies');
+
   return (
     <>
-      <div className='border flex-col md:flex-row gap-6 p-3 flex md:justify-between'>
-        <div className='flex gap-6 items-center text-white'>
+      <div className='border md:gap-6 p-3 flex justify-between'>
+        <div className='flex gap-3 md:gap-6 items-center text-white'>
           <Photo />
-          <p>Drag & drop your image here or</p>
+          <p className='hidden lg:block'>{t('drag_and_drop')}</p>
+          <p className='lg:hidden'>{t('upload_image')}</p>
         </div>
         <div>
           <label
             htmlFor='input'
             className='bg-[#462676]  text-white rounded-sm p-2 cursor-pointer'
           >
-            Choose file
+            {t('choose_file')}
           </label>
 
           <input

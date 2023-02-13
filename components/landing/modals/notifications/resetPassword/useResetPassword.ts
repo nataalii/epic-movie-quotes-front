@@ -47,7 +47,6 @@ const useResetPassword = () => {
     try {
       data['token'] = token;
       data['email'] = email;
-      console.log(data);
       await fetchCSRFToken();
       await resetPassword(data);
       hideResetPasswordHandler();

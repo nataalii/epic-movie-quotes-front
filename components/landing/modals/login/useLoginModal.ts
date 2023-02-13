@@ -39,7 +39,6 @@ const useLoginModal = () => {
     formState: { errors },
   } = useForm<LoginModalTypes>({ mode: 'all' });
   const onSubmit = async (data: LoginModalTypes) => {
-    console.log(data);
     try {
       await fetchCSRFToken();
       await login(data);

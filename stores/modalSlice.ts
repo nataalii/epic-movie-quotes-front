@@ -10,6 +10,7 @@ const initialState = {
   verificationNotif: false,
   verificationVerify: false,
   addMovieModal: false,
+  addQuoteModal: false,
   addEmailModal: false,
   updateUsernameModal: false,
   confirmChangesModal: false,
@@ -107,6 +108,9 @@ const modalSlice = createSlice({
     burgerMenu: (state) => {
       state.burgerMenuModal = !state.burgerMenuModal;
     },
+    addQoute: (state) => {
+      state.addQuoteModal = !state.addQuoteModal;
+    },
   },
 });
 
@@ -138,6 +142,7 @@ export const {
   updateEmails,
   addNewEmail,
   burgerMenu,
+  addQoute,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

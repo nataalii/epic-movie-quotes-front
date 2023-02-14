@@ -6,7 +6,7 @@ const InputFile = ({ register, errors }: { register: Object; errors: any }) => {
 
   return (
     <>
-      <div className='border md:gap-6 p-3 flex justify-between'>
+      <div className=' bg-transparent px-4 text-lg relative w-full rounded-[4px] outline outline-1 outline-[#6C757D] md:gap-6 p-3 flex justify-between'>
         <div className='flex gap-3 md:gap-6 items-center text-white'>
           <Photo />
           <p className='hidden lg:block'>{t('drag_and_drop')}</p>

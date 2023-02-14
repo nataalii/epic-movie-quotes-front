@@ -1,14 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import { AddMovieIcon, Button, Delete, Edit, Layout } from 'components';
+import { AddQuote } from 'components/addQuote';
 import { useAuth, useMovieDetail } from 'hooks';
 import { Key } from 'react';
+import { addQoute } from 'stores/modalSlice';
 
 const Description = () => {
   useAuth();
-  const { movie, t, removeMovie, router } = useMovieDetail();
+  const { movie, t, removeMovie, router, dispatch, addQuoteModal } =
+    useMovieDetail();
   const locale = router.locale;
   return (
     <Layout>
+      {addQuoteModal && <AddQuote />}
       <div className=' lg:ml-[27rem] mt-10 lg:flex flex-col gap-7 '>
         <h1 className='hidden lg:block text-2xl'>{t('movie_description')}</h1>
         <div className='flex lg:flex-row lg:items-start flex-col items-center gap-7 '>
@@ -86,6 +90,9 @@ const Description = () => {
               </div>
             }
             color='red'
+            onClick={() => {
+              dispatch(addQoute());
+            }}
           />
         </div>
         <hr className='lg:hidden h-px  bg-gray border-0 w-[80%] m-auto mt-10 ' />

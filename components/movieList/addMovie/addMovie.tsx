@@ -118,10 +118,6 @@ const AddMovie = () => {
                           ...styles,
                           backgroundColor: '#11101A',
                         }),
-                        placeholder: (styles) => ({
-                          ...styles,
-                          color: 'white',
-                        }),
                       }}
                     />
                   )}

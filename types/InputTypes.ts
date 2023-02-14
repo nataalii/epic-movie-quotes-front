@@ -1,3 +1,5 @@
+import { DefaultTFuncReturn } from 'i18next';
+
 export type TextInput = {
   label: string;
   name: string;
@@ -10,7 +12,7 @@ export type TextInput = {
 };
 
 export type TextAreaInput = {
-  language?: string;
+  language?: DefaultTFuncReturn;
   placeholder: string;
   name?: string;
   register: object;
@@ -19,7 +21,7 @@ export type TextAreaInput = {
 };
 
 export type addMovieInputTypes = {
-  language?: string;
+  language?: DefaultTFuncReturn;
   placeholder: string;
   name?: string;
   register: object;

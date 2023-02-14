@@ -56,13 +56,14 @@ const useAddMovie = () => {
     },
   });
   const onSubmit = async (data: any) => {
+    console.log(data);
+
     const updatedData = {
       ...data,
       image: data.image[0],
       genre: data.genres.map((genre: any) => genre.value),
     };
     delete data.genres;
-
     submitForm(updatedData, {
       onError: () => {},
     });

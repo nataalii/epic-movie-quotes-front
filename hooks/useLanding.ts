@@ -1,4 +1,4 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +27,7 @@ const useLanding = () => {
 
     if (verification) {
       dispatch(openVerificationVerify());
-      router.push('/');
+      router.replace('/');
     }
   }, [dispatch, router, router.query]);
 

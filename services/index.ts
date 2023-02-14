@@ -80,13 +80,14 @@ export const addMovie = async (data: any) => {
 
   return response;
 };
-export const getMovie = async (movie: any) => {
-  const response = await instance.get(`/api/movies/${movie.id}`, movie);
-
+export const getMovie = async (id: string, cookies?: string) => {
+  const response = await instance.get(`/api/movie/${id}`, {
+    headers: { Cookie: cookies },
+  });
   return response;
 };
 export const updateMovie = async (movie: any) => {
-  const response = await instance.post(`/api/movies/${movie.id}`, movie, {
+  const response = await instance.post(`/api/movie/${movie.id}`, movie, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -95,7 +96,17 @@ export const updateMovie = async (movie: any) => {
   return response;
 };
 
-export const deleteMovie = async (id: any) => {
-  const response = await instance.post(`/api/movies/${id}`);
+export const deleteMovie = async (id: string) => {
+  const response = await instance.delete(`/api/movie/${id}`);
+  return response;
+};
+
+export const addQuote = async (data: any) => {
+  const response = await instance.post('/api/quote', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
   return response;
 };

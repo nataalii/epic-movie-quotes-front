@@ -1,0 +1,18 @@
+{
+    "movie_description": "Movie Description",
+    "quotes": "Quotes",
+    "total": "total ",
+    "add_quote": "Add quote",
+    "add_movie": "Add Movie",
+    "director": "Director: ",
+    "budget": "Budget: ",
+    "choose_file": "Choose file",
+    "upload_image": "Upload image",
+    "drag_and_drop": "Drag & drop your image here or",
+    "genres": "Genres",
+    "ka": "Ka",
+    "eng": "Eng",
+    "write_new_quote": "Add Quote",
+    "post": "Post"
+
+}

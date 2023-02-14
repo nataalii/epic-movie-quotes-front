@@ -12,8 +12,9 @@ const Movies = () => {
   return (
     <div className=' flex flex-col justify-between lg:items-center max-w-[90rem] w-[90%]'>
       <div className='flex w-full justify-between '>
-        <div className='flex lg:flex-row flex-col  gap-3'>
+        <div className='flex lg:flex-row flex-col lg:items-center  lg:gap-3'>
           <h1 className='lg:text-2xl text-xl'>My list of Movies</h1>
+          <h1>(total {movies?.length})</h1>
         </div>
         <div className=' flex gap-3 lg:items-center'>
           <div className=' lg:flex lg:gap-2 lg:items-center hidden'>
@@ -38,16 +39,16 @@ const Movies = () => {
           </div>
         </div>
       </div>
-      <div className=' flex flex-wrap gap-16  max-w-[90rem]  '>
+      <div className=' flex flex-wrap justify-around gap-x-10 max-w-[90rem] lg:w-full w-[90%] m-auto'>
         {movies?.map((movie: any) => (
           <div key={movie.id}>
-            <div className='flex flex-col gap-3 w-96 h-[450px] mt-14'>
+            <div className='flex flex-col gap-3 max-w-96 h-[27rem] mt-14'>
               <img
                 src={`${movie.image}`}
                 alt='movie image'
-                className='w-96 h-[27rem] object-cover rounded-lg'
+                className='w-96 h-[20rem] object-cover rounded-lg'
               />
-              <Link className='' href={`/movie/${movie.id}`}>
+              <Link href='/movie-list/[id]' as={`/movie-list/${movie.id}`}>
                 {`${movie.title.en} (${movie.year})`}
               </Link>
               <div className='flex items-center gap-3 '>

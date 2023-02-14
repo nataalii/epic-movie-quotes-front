@@ -1,5 +1,5 @@
 import { Button, ModalLayout, Success } from 'components';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useDispatch } from 'react-redux';
 import { closeVerificationVerify } from 'stores/modalSlice';
 

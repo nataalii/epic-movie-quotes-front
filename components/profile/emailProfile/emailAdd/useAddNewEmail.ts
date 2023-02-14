@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { RootState } from 'types/stateTypes';
 import { confirmChanges } from 'stores/modalSlice';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 const useAddNewEmail = () => {
   const dispatch = useDispatch();
   const methods = useForm({ mode: 'all' });

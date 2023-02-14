@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { RootState } from 'types/stateTypes';
 import { useAuth } from 'hooks';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function Profile() {
   useAuth();
@@ -44,4 +45,12 @@ export default function Profile() {
       />
     </div>
   );
+}
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'profile'])),
+    },
+  };
 }

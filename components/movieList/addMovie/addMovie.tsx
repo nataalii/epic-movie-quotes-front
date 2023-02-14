@@ -4,18 +4,32 @@ import { Exit } from 'components/icons';
 import { InputFile, InputText, InputTextArea } from 'components/movieList/form';
 import { closeAddMovieModal } from 'stores/modalSlice';
 import useAddMovie from './useAddMovie';
-
+import Select from 'react-select';
+import { Controller } from 'react-hook-form';
 const AddMovie = () => {
-  const { dispatch, errors, onSubmit, handleSubmit, register, name, image } =
-    useAddMovie();
+  const {
+    dispatch,
+    errors,
+    onSubmit,
+    handleSubmit,
+    register,
+    name,
+    image,
+    t,
+    setImage,
+    selectedImage,
+    genres,
+    control,
+    locale,
+  } = useAddMovie();
 
   return (
     <div
-      className=' mt-20 flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
+      className=' lg:mt-20 flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
       onClick={() => dispatch(closeAddMovieModal())}
     >
       <div
-        className=' relative sm:w-[55rem] sm:h-auto sm:pb-14 w-screen h-screen  bg-blue-600 m-auto rounded-xl max-h-[90%] overflow-auto'
+        className=' relative sm:w-[55rem] sm:h-auto pb-14 w-screen h-screen  bg-blue-600 m-auto rounded-xl lg:max-h-[90%] overflow-auto'
         onClick={(e) => {
           e.stopPropagation();
         }}
@@ -27,7 +41,7 @@ const AddMovie = () => {
           <Exit />
         </div>
         <div className='flex flex-col items-center gap-6 mt-6'>
-          <h2 className='text-white'>Add Movie</h2>
+          <h2 className='text-white'>{t('add_movie')}</h2>
           <hr className='w-full border-[#efefef4d] ' />
         </div>
 
@@ -51,7 +65,7 @@ const AddMovie = () => {
                 <InputText
                   placeholder='Movie name'
                   name='title_en'
-                  language='Eng'
+                  language={t('eng')}
                   errors={errors.title_en}
                   register={register('title_en', {
                     required: 'Field is required',
@@ -61,28 +75,63 @@ const AddMovie = () => {
               <div className='relative'>
                 <InputText
                   placeholder='ფილმის სახელი'
-                  language='ქარ'
-                  name='title_ka'
-                  register={register('title_ka', {
+                  language={t('ka')}
+                  name='title_ge'
+                  register={register('title_ge', {
                     required: 'Field is required',
                   })}
-                  errors={errors.title_ka}
+                  errors={errors.title_ge}
                 />
               </div>
-              <div className='relative'>
-                <InputText
-                  placeholder='Genre'
-                  name='genre'
-                  errors={errors.genre}
-                  register={register('genre', {
-                    required: 'Field is required',
-                  })}
+              <div>
+                <Controller
+                  control={control}
+                  name='genres'
+                  rules={{ required: 'Field is required' }}
+                  render={({ field: { onChange, ref } }) => (
+                    <Select
+                      options={genres(locale)}
+                      placeholder={t('genres')}
+                      onChange={onChange}
+                      isMulti
+                      ref={ref}
+                      closeMenuOnSelect
+                      styles={{
+                        control: (baseStyles) => ({
+                          ...baseStyles,
+                          borderColor: '#6C757D',
+                          backgroundColor: '',
+                          height: '48px',
+                        }),
+                        multiValue: (styles) => {
+                          return {
+                            ...styles,
+                            backgroundColor: '#6C757D',
+                            color: 'white',
+                          };
+                        },
+                        multiValueLabel: (styles) => ({
+                          ...styles,
+                          color: 'white',
+                        }),
+                        option: (styles) => ({
+                          ...styles,
+                          backgroundColor: '#11101A',
+                        }),
+                      }}
+                    />
+                  )}
                 />
+                <div className='relative'>
+                  <p className=' text-danger h-5 font-normal text-base my-1 '>
+                    {errors?.genres?.message as string}
+                  </p>
+                </div>
               </div>
               <div className='relative'>
                 <InputText
                   placeholder='Director'
-                  language='Eng'
+                  language={t('eng')}
                   name='director_en'
                   errors={errors.director_en}
                   register={register('director_en', {
@@ -93,10 +142,10 @@ const AddMovie = () => {
               <div className='relative'>
                 <InputText
                   placeholder='რეჟისორი'
-                  language='Ka'
-                  name='director_ka'
-                  errors={errors.director_ka}
-                  register={register('director_ka', {
+                  language={t('ka')}
+                  name='director_ge'
+                  errors={errors.director_ge}
+                  register={register('director_ge', {
                     required: 'Field is required',
                   })}
                 />
@@ -104,7 +153,7 @@ const AddMovie = () => {
               <div className='relative'>
                 <InputTextArea
                   placeholder='Movie description'
-                  language='En'
+                  language={t('eng')}
                   name='description_en'
                   errors={errors.description_en}
                   register={register('description_en', {
@@ -115,10 +164,10 @@ const AddMovie = () => {
               <div className='relative'>
                 <InputTextArea
                   placeholder='ფილმის აღწერა'
-                  language='ქარ'
-                  name='description_ka'
-                  errors={errors.description_ka}
-                  register={register('description_ka', {
+                  language={t('ka')}
+                  name='description_ge'
+                  errors={errors.description_ge}
+                  register={register('description_ge', {
                     required: 'Field is required',
                   })}
                 />
@@ -145,16 +194,28 @@ const AddMovie = () => {
                   })}
                 />
               </div>
-              <div className='relative'>
+              <div className='relative '>
                 <InputFile
                   errors={errors.image}
                   register={register('image', {
                     required: 'Field is required',
+                    onChange: (e) => {
+                      setImage(e);
+                    },
                   })}
                 />
+                {selectedImage ? (
+                  <img
+                    src={selectedImage}
+                    className='h-96 w-full object-cover mb-5'
+                    alt='movie image'
+                  />
+                ) : (
+                  ''
+                )}
               </div>
 
-              <Button item='Add Movie' color='red' />
+              <Button item={t('add_movie')} color='red' />
             </div>
           </form>
         </div>

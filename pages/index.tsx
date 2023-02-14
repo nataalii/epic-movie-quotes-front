@@ -11,6 +11,7 @@ import {
   PasswordChanged,
   VerificationVerify,
 } from 'components';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import VerificationNotice from 'components/landing/modals/notifications/verificationNotice';
 import { useLanding } from 'hooks';
 import { Fragment } from 'react';
@@ -71,4 +72,12 @@ export default function Home() {
       </div>
     </Fragment>
   );
+}
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'authorization'])),
+    },
+  };
 }

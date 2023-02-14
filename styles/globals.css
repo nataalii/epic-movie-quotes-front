@@ -21,7 +21,8 @@ body {
 
 .toast-position {
     top: 7rem !important;
-    margin-right: 10rem;}
+    margin-right: 10rem;
+}
 
 
 ::-webkit-scrollbar {
@@ -31,4 +32,12 @@ body {
 ::-webkit-scrollbar-thumb {
     background: darkgrey;
     border-radius: 10px;
+}
+
+.css-1hb7zxy-IndicatorsContainer .css-1xc3v61-indicatorContainer {
+    display: none;
+}
+
+.css-1u9des2-indicatorSeparator {
+    display: none;
 }

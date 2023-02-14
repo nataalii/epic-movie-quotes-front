@@ -21,7 +21,7 @@ const TextInput = ({
         placeholder={placeholder}
         type={type}
         className={
-          'bg-[#CED4DA] pl-3 border-solid border-[0.15rem] p-[0.44rem] rounded-md placeholder:text-sm ' +
+          'bg-[#CED4DA] pl-3 border-solid border-[0.15rem] p-[0.44rem] rounded-md placeholder:text-sm outline-none ' +
           (errors
             ? 'border-danger'
             : isDirty && !errors

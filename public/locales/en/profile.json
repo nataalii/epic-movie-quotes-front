@@ -33,5 +33,7 @@
   "primary_email_changed": "Primary email changed succsessfully!",
   "change_primary_email": "Change primary email",
   "are_you_sure": "Are you sure to make changes ?",
-  "username_changed": "Username changed succsessfully"
+  "username_changed": "Username changed succsessfully",
+  "changes_updated": "Changes Updated Successfully!",
+  "email_verified": "Email Verified Successfully!"
 }

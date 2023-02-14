@@ -4,9 +4,9 @@ import { Provider } from 'react-redux';
 import { store } from 'stores/store';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-
+import { appWithTranslation } from 'next-i18next';
 const queryClient = new QueryClient();
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
@@ -15,4 +15,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </Provider>
     </QueryClientProvider>
   );
-}
+};
+
+export default appWithTranslation(App);

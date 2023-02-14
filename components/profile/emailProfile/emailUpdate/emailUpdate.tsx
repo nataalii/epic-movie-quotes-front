@@ -76,7 +76,7 @@ const EmailUpdate = () => {
               <p>{email.email}</p>
               <div className='flex justify-between'>
                 <Button
-                  item={t('make_primary')}
+                  item={t('make_this_primary')}
                   color='transparent'
                   size=' text-sm px-3'
                   onClick={() => {

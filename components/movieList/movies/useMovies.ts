@@ -8,9 +8,7 @@ const useMovies = () => {
     isError,
     error,
   } = useQuery('movies', getMovieList, {
-    onSuccess: (data) => {
-      console.log(data);
-    },
+    onSuccess: () => {},
   });
 
   return { movies: response?.data, isLoading, isError, error };

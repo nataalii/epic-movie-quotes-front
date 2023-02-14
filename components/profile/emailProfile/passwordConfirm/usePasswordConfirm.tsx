@@ -1,5 +1,5 @@
 import { useMobileToast } from 'components/toasts';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useDispatch } from 'react-redux';
 import { updateUser } from 'services';
 import { confirmPassword, updatePassword } from 'stores/modalSlice';

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Home, Movie } from 'components';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';

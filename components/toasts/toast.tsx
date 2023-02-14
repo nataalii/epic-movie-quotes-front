@@ -1,5 +1,5 @@
 import { Checked } from 'components/icons';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 const Message = (props: { text: string }) => {

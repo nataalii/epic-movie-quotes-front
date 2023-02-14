@@ -20,10 +20,10 @@ const MovieList = () => {
 };
 
 export default MovieList;
-export async function getStaticProps({ locale }: { locale: string }) {
+export const getStaticProps = async ({ locale }: { locale: string }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'profile'])),
+      ...(await serverSideTranslations(locale, ['common', 'movies'])),
     },
   };
-}
+};

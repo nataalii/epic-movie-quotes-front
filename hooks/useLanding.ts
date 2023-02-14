@@ -27,7 +27,7 @@ const useLanding = () => {
 
     if (verification) {
       dispatch(openVerificationVerify());
-      router.push('/');
+      router.replace('/');
     }
   }, [dispatch, router, router.query]);
 

@@ -67,11 +67,7 @@ export const resetPassword = async (data: ResetPasswordTypes) => {
 };
 
 export const getMovieList = async () => {
-  const response = await instance.get('/api/movie-list', {
-    // headers: {
-    //   Cookie: cookies,
-    // },
-  });
+  const response = await instance.get('/api/movie-list');
   return response;
 };
 

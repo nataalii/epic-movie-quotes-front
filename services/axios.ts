@@ -7,7 +7,6 @@ const instance = axios.create({
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
-    // referer: 'http://localhost:3000',
   },
   withCredentials: true,
 });

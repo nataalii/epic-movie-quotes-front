@@ -105,7 +105,7 @@ const useMyProfile = () => {
   const { mutate: submit } = useMutation(verifyEmail, {
     onSuccess: () => {
       queryClient.invalidateQueries('emails');
-      router.push('/profile');
+      router.replace('/profile');
       toast(<Message text={t('email_verified')} />);
     },
   });

@@ -27,8 +27,8 @@ const Description = () => {
                 <span className=' w-[0.3px] h-[60%] bg-gray' />
                 <span
                   onClick={() => {
-                    removeMovie;
-                    router.push('/movie-list');
+                    removeMovie(movie?.id);
+                    router.replace('/movie-list');
                   }}
                 >
                   <Delete />
@@ -95,3 +95,26 @@ const Description = () => {
 };
 
 export default Description;
+
+// export async function getStaticPaths() {
+// const data = await getMovieList();
+// const movies = data.data;
+// return {
+// paths: movies.map((movie: { id: { toString: () => any } }) => {
+//   return {
+//     params: {
+//       id: movie.id,
+//     },
+//   };
+// }),
+//   fallback: true,
+// };
+// }
+
+// export async function getStaticProps({ locale }: { locale: string }) {
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale, ['common', 'movies'])),
+//     },
+//   };
+// }

@@ -16,10 +16,7 @@ import VerificationNotice from 'components/landing/modals/notifications/verifica
 import { useLanding } from 'hooks';
 import { Fragment } from 'react';
 import { openRegisterModal } from 'stores/modalSlice';
-import { useRouter } from 'next/router';
 export default function Home() {
-  const { locale } = useRouter();
-  console.log(locale);
   const {
     registerModal,
     loginModal,

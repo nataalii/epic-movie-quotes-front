@@ -1,5 +1,5 @@
 import { Photo } from 'components/icons';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 const InputFile = ({ register, errors }: { register: Object; errors: any }) => {
   const { t } = useTranslation('movies');

@@ -19,7 +19,7 @@ const useNavBar = () => {
       await logout();
       deleteCookie('XSRF-TOKEN');
       deleteCookie('authenticated');
-      router.push('/');
+      router.replace('/');
     } catch (error) {}
   };
 

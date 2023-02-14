@@ -18,15 +18,17 @@ const useMovieDetail = () => {
       console.log(error);
     },
   });
-
+  // delete movie
   const { mutate: deleteMovieMutation } = useMutation(deleteMovie, {
     onSuccess: () => {
-      queryClient.invalidateQueries('movies');
+      queryClient.invalidateQueries('delete movies');
     },
   });
   const removeMovie = async (id: string) => {
     deleteMovieMutation(id);
   };
+
+  // get Quotes
 
   return {
     movie: movie?.data,

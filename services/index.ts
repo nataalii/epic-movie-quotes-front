@@ -80,7 +80,10 @@ export const addMovie = async (data: any) => {
 
   return response;
 };
-export const getMovie = async (id: string, cookies?: string) => {
+export const getMovie = async (
+  id: string | string[] | undefined,
+  cookies?: string
+) => {
   const response = await instance.get(`/api/movie/${id}`, {
     headers: { Cookie: cookies },
   });
@@ -108,5 +111,10 @@ export const addQuote = async (data: any) => {
     },
   });
 
+  return response;
+};
+
+export const getUserQuotes = async () => {
+  const response = await instance.get('/api/quotes');
   return response;
 };

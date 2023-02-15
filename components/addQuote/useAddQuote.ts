@@ -21,9 +21,11 @@ const useAddQuote = () => {
   const { mutate: addQuoteMutation } = useMutation(addQuote, {
     onSuccess: () => {
       queryClient.invalidateQueries('quotes');
+      queryClient.invalidateQueries('movies');
       dispatch(addQoute());
     },
   });
+
   const onSubmit = async (data: any) => {
     const updatedData = {
       ...data,

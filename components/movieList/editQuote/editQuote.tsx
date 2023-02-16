@@ -32,7 +32,7 @@ const EditQuote = (movieQuote: { quote: QuoteType }) => {
         }}
       >
         <Delete />
-        Delete
+        <h1 className='sm:block hidden'>Delete</h1>
       </span>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -57,7 +57,7 @@ const EditQuote = (movieQuote: { quote: QuoteType }) => {
             <img
               src={selectedImage || quote.image}
               alt='Quote Image'
-              className=' w-full h-[30rem] object-cover'
+              className=' w-full h-[19rem] sm:h-[30rem] object-cover rounded-xl'
             />
             <div className='bg-[#181623] opacity-70 rounded-lg p-3 absolute '>
               <label

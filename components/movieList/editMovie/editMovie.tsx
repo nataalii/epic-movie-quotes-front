@@ -21,7 +21,6 @@ const EditMovie = () => {
     genres,
     defaultGenres,
   } = useEditMovie();
-
   return (
     <QuotesModalLayout
       title={t('edit_movie')}
@@ -55,8 +54,8 @@ const EditMovie = () => {
                 rules={{ required: 'Field is required' }}
                 render={({ field: { onChange, ref } }) => (
                   <Select
-                    options={genres(locale)}
                     defaultValue={defaultGenres(locale)}
+                    options={genres(locale)}
                     placeholder={t('genres')}
                     onChange={onChange}
                     isMulti
@@ -67,7 +66,7 @@ const EditMovie = () => {
                         ...baseStyles,
                         borderColor: '#6C757D',
                         backgroundColor: '',
-                        height: '48px',
+                        padding: '5px',
                       }),
                       multiValue: (styles) => {
                         return {

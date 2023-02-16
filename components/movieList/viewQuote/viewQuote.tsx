@@ -47,7 +47,7 @@ const ViewQuote = (movieQuote: { quote: QuoteType }) => {
       <img
         src={quote.image}
         alt='Quote Image'
-        className=' h-[30rem] object-cover'
+        className=' h-[19rem] sm:h-[30rem] object-cover rounded-xl'
       />
       <div className='flex gap-6'>
         <div className='flex gap-3 items-center'>

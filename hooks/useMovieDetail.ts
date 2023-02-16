@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -85,6 +85,22 @@ const useMovieDetail = () => {
       setQuoteSelected(true);
     }
   };
+
+  const selectedQuoteRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        selectedQuoteRef.current &&
+        !selectedQuoteRef.current.contains(event.target as Node)
+      ) {
+        setQuoteSelected(false);
+      }
+    };
+    window.addEventListener('click', handleClickOutside);
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, [selectedQuoteRef, setQuoteSelected]);
   return {
     movie: movie?.data,
     isError,
@@ -105,6 +121,7 @@ const useMovieDetail = () => {
     quoteSelected,
     setQuoteSelected,
     editMovieModal,
+    selectedQuoteRef,
   };
 };
 

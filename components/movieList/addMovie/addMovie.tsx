@@ -59,7 +59,7 @@ const AddMovie = () => {
                         ...baseStyles,
                         borderColor: '#6C757D',
                         backgroundColor: '',
-                        height: '48px',
+                        padding: '5px',
                       }),
                       multiValue: (styles) => {
                         return {

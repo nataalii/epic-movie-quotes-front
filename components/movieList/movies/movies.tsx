@@ -24,7 +24,7 @@ const Movies = () => {
             ({t('total')} {movies?.length})
           </h1>
         </div>
-        <div className=' flex gap-3 lg:items-center'>
+        <div className=' flex lg:items-center'>
           <div className=' lg:flex lg:gap-2 lg:items-center hidden'>
             <SearchIcon />
             <input
@@ -36,7 +36,7 @@ const Movies = () => {
           <div>
             <Button
               item={
-                <div className='flex items-center gap-2'>
+                <div className='flex items-center gap-2 text-sm sm:text-base'>
                   <AddMovieIcon />
                   {t('add_movie')}
                 </div>
@@ -47,7 +47,7 @@ const Movies = () => {
           </div>
         </div>
       </div>
-      <div className='grid grid-flow-row gap-14 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  '>
+      <div className='grid grid-flow-row md:gap-14 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  '>
         {movies?.map((movie: any) => (
           <div key={movie.id}>
             <Link href='/movie-list/[id]' as={`/movie-list/${movie.id}`}>
@@ -55,7 +55,7 @@ const Movies = () => {
                 <img
                   src={`${movie.image}`}
                   alt='movie image'
-                  className=' h-[21rem] object-cover rounded-2xl'
+                  className='h-[19rem] md:h-[21rem] object-cover rounded-2xl'
                 />
 
                 <p className=' lg:text-2xl'>{`${movie.title[locale]} (${movie.year})`}</p>

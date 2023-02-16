@@ -12,10 +12,11 @@ export type TextInput = {
 };
 
 export type TextAreaInput = {
-  language?: DefaultTFuncReturn;
-  placeholder: string;
+  language: DefaultTFuncReturn;
+  placeholder?: string;
+  defaultValue?: string;
   name?: string;
-  register: object;
+  register?: object;
   type?: string;
   errors?: any;
 };
@@ -24,7 +25,6 @@ export type addMovieInputTypes = {
   language?: DefaultTFuncReturn;
   placeholder: string;
   name?: string;
-  register: object;
   type?: string;
   errors?: any;
 };

@@ -10,3 +10,12 @@ export type QuoteType = {
     ge: string;
   };
 };
+
+export type UpdateQuoteType = {
+  quote: {
+    en: string;
+    ge: string;
+  };
+  image: FileList;
+  id: string;
+};

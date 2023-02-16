@@ -113,8 +113,25 @@ export const addQuote = async (data: any) => {
 
   return response;
 };
+export const updateQuote = async (data: any) => {
+  const response = await instance.post('/api/quote-update', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 
-export const getUserQuotes = async () => {
-  const response = await instance.get('/api/quotes');
+  return response;
+};
+export const getQuote = async (id: string) => {
+  const response = await instance.get(`/api/quote/${id}`);
+  return response;
+};
+export const getUserQuotes = async (id: string) => {
+  const response = await instance.get(`/api/quotes/${id}`);
+  return response;
+};
+
+export const deleteQuote = async (id: string) => {
+  const response = await instance.delete(`/api/quote/${id}`);
   return response;
 };

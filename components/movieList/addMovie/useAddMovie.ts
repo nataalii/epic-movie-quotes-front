@@ -38,17 +38,7 @@ const useAddMovie = () => {
       reader.readAsDataURL(file);
     }
   };
-
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    setValue,
-    control,
-    formState: { errors },
-  } = useForm({
-    mode: 'all',
-  });
+  const methods = useForm({ mode: 'all' });
   const { mutate: submitForm } = useMutation(addMovie, {
     onSuccess: () => {
       queryClient.invalidateQueries('movies');
@@ -71,19 +61,14 @@ const useAddMovie = () => {
 
   return {
     dispatch,
-    errors,
-    register,
+    methods,
     onSubmit,
-    handleSubmit,
     name,
     image,
     t,
     selectedImage,
     setImage,
-    getValues,
-    setValue,
     genres,
-    control,
     locale,
   };
 };

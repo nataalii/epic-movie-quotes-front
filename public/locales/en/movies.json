@@ -17,5 +17,7 @@
     "post": "Post",
     "view_quote": "View Quote",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "quote_in_english": "”Quote in English”",
+    "quote_in_georgian": "”Quote in Georgian”"
 }

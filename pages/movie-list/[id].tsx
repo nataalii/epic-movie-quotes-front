@@ -9,31 +9,39 @@ import {
   Like,
   Eye,
   ThreeDots,
+  ViewQuote,
+  AddQuote,
 } from 'components';
-import { AddQuote } from 'components/addQuote';
+import { EditQuote } from 'components/movieList/editQuote';
 import { useAuth, useMovieDetail } from 'hooks';
-import { Key, useState } from 'react';
-import { addQoute } from 'stores/modalSlice';
+import { Key } from 'react';
+import { addQoute, editQuote, viewQuote } from 'stores/modalSlice';
 import { QuoteType } from 'types';
 
 const Description = () => {
   useAuth();
-  const { movie, t, removeMovie, router, dispatch, addQuoteModal, userQuotes } =
-    useMovieDetail();
-  const locale = router.locale as 'en' | 'ge';
-  const [selectedQuoteId, setSelectedQuoteId] = useState<string | null>();
-
-  const handleThreeDotsClick = (quoteId: string) => {
-    if (selectedQuoteId === quoteId) {
-      setSelectedQuoteId(null);
-    } else {
-      setSelectedQuoteId(quoteId);
-    }
-  };
+  const {
+    movie,
+    t,
+    removeMovie,
+    router,
+    dispatch,
+    addQuoteModal,
+    viewQuoteModal,
+    editQuoteModal,
+    quotes,
+    removeQuote,
+    handleThreeDotsClick,
+    locale,
+    selectedQuoteId,
+    quote,
+  } = useMovieDetail();
   return (
     <Layout>
       {addQuoteModal && <AddQuote />}
-      <div className=' lg:ml-[27rem] mt-10 lg:flex flex-col gap-7 '>
+      {viewQuoteModal && <ViewQuote quote={quote?.[0]} />}
+      {editQuoteModal && <EditQuote quote={quote?.[0]} />}
+      <div className=' lg:ml-[27rem] my-10 lg:flex flex-col gap-7 '>
         <h1 className='hidden lg:block text-2xl'>{t('movie_description')}</h1>
         <div className='flex lg:flex-row lg:items-start flex-col items-center gap-7 '>
           <img
@@ -116,22 +124,33 @@ const Description = () => {
           />
         </div>
         <hr className='lg:hidden h-px  bg-gray border-0 w-[80%] m-auto my-10 ' />
-        {userQuotes?.map((quote: QuoteType) => (
+        {quotes?.data.map((quote: QuoteType) => (
           <div
             key={quote.id}
             className='max-w-[50rem] w-[80%] h-[16rem] bg-blue-600 rounded-lg m-auto mb-5 lg:m-0 relative '
           >
             {selectedQuoteId === quote.id && (
               <div className='flex flex-col gap-7 p-8 pr-20 text-sm rounded-xl bg-blue-500 absolute -right-44 top-10'>
-                <div className='flex gap-4 cursor-pointer'>
+                <div
+                  className='flex gap-4 cursor-pointer'
+                  onClick={() => {
+                    dispatch(viewQuote());
+                  }}
+                >
                   <Eye />
                   <h2>{t('view_quote')}</h2>
                 </div>
-                <div className='flex gap-4 cursor-pointer'>
+                <div
+                  className='flex gap-4 cursor-pointer'
+                  onClick={() => dispatch(editQuote())}
+                >
                   <Edit />
                   <h2>{t('edit')}</h2>
                 </div>
-                <div className='flex gap-4 cursor-pointer'>
+                <div
+                  className='flex gap-4 cursor-pointer'
+                  onClick={() => removeQuote(quote.id)}
+                >
                   <Delete />
                   <h2>{t('delete')}</h2>
                 </div>
@@ -139,7 +158,7 @@ const Description = () => {
             )}
             <div className='flex flex-col items-center gap-5 p-5 max-w-96'>
               <div
-                className='absolute right-6 bottom-6 lg:top-6 z-50 cursor-pointer h-10'
+                className='absolute right-6 bottom-6 lg:top-6 cursor-pointer h-10'
                 onClick={() => handleThreeDotsClick(quote.id)}
               >
                 <ThreeDots />

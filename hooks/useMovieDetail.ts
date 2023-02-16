@@ -20,10 +20,9 @@ const useMovieDetail = () => {
   const dispatch = useDispatch();
   const locale = router.locale as 'en' | 'ge';
   const [selectedQuoteId, setSelectedQuoteId] = useState<string | null>();
-
-  const { addQuoteModal, viewQuoteModal, editQuoteModal } = useSelector(
-    (store: RootState) => store.modal
-  );
+  const [quoteSelected, setQuoteSelected] = useState(false);
+  const { addQuoteModal, viewQuoteModal, editQuoteModal, editMovieModal } =
+    useSelector((store: RootState) => store.modal);
   const {
     data: movie,
     isError,
@@ -36,7 +35,6 @@ const useMovieDetail = () => {
     refetchOnWindowFocus: false,
     retry: 0,
   });
-
   // delete movie
   const { mutate: deleteMovieMutation } = useMutation(deleteMovie, {
     onSuccess: () => {
@@ -46,6 +44,7 @@ const useMovieDetail = () => {
   const removeMovie = async (id: string) => {
     deleteMovieMutation(id);
   };
+
   // get Quotes
   const { data: quotes } = useQuery({
     queryKey: ['quotes', movie],
@@ -80,8 +79,10 @@ const useMovieDetail = () => {
   const handleThreeDotsClick = (quoteId: string) => {
     if (selectedQuoteId === quoteId) {
       setSelectedQuoteId(null);
+      setQuoteSelected(false);
     } else {
       setSelectedQuoteId(quoteId);
+      setQuoteSelected(true);
     }
   };
   return {
@@ -101,6 +102,9 @@ const useMovieDetail = () => {
     handleThreeDotsClick,
     locale,
     selectedQuoteId,
+    quoteSelected,
+    setQuoteSelected,
+    editMovieModal,
   };
 };
 

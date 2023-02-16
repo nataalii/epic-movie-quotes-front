@@ -1,26 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
 import { Button } from 'components/button';
-import { InputFile, InputText, InputTextArea } from 'components/movieList/form';
-import { closeAddMovieModal } from 'stores/modalSlice';
-import useAddMovie from './useAddMovie';
-import Select from 'react-select';
-import { Controller, FormProvider } from 'react-hook-form';
+import { Photo } from 'components/icons';
 import { QuotesModalLayout } from 'components/layout';
-const AddMovie = () => {
+import { Controller, FormProvider } from 'react-hook-form';
+import Select from 'react-select';
+import { editMovie } from 'stores/modalSlice';
+import { InputText, InputTextArea } from '../form';
+import useEditMovie from './useEditMovie';
+
+const EditMovie = () => {
   const {
-    dispatch,
     onSubmit,
     t,
+    dispatch,
+    movie,
+    methods,
     setImage,
     selectedImage,
-    genres,
-    methods,
     locale,
-  } = useAddMovie();
+    genres,
+    defaultGenres,
+  } = useEditMovie();
+
   return (
     <QuotesModalLayout
-      title={t('add_movie')}
-      onClose={() => dispatch(closeAddMovieModal())}
+      title={t('edit_movie')}
+      onClose={() => dispatch(editMovie())}
     >
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -28,6 +33,7 @@ const AddMovie = () => {
             <div className='relative'>
               <InputText
                 placeholder='Movie name'
+                defaultValue={movie.title.en}
                 name='title_en'
                 language={t('eng')}
                 errors={methods.formState.errors.title_en}
@@ -36,6 +42,7 @@ const AddMovie = () => {
             <div className='relative'>
               <InputText
                 placeholder='ფილმის სახელი'
+                defaultValue={movie.title.ge}
                 language={t('ka')}
                 name='title_ge'
                 errors={methods.formState.errors.title_ge}
@@ -49,6 +56,7 @@ const AddMovie = () => {
                 render={({ field: { onChange, ref } }) => (
                   <Select
                     options={genres(locale)}
+                    defaultValue={defaultGenres(locale)}
                     placeholder={t('genres')}
                     onChange={onChange}
                     isMulti
@@ -89,6 +97,7 @@ const AddMovie = () => {
             <div className='relative'>
               <InputText
                 placeholder='Director'
+                defaultValue={movie.director.en}
                 language={t('eng')}
                 name='director_en'
                 errors={methods.formState.errors.director_en}
@@ -97,6 +106,7 @@ const AddMovie = () => {
             <div className='relative'>
               <InputText
                 placeholder='რეჟისორი'
+                defaultValue={movie.director.ge}
                 language={t('ka')}
                 name='director_ge'
                 errors={methods.formState.errors.director_ge}
@@ -105,6 +115,7 @@ const AddMovie = () => {
             <div className='relative'>
               <InputTextArea
                 placeholder='Movie description'
+                defaultValue={movie.description.en}
                 language={t('eng')}
                 name='description_en'
                 errors={methods.formState.errors.description_en}
@@ -113,6 +124,7 @@ const AddMovie = () => {
             <div className='relative'>
               <InputTextArea
                 placeholder='ფილმის აღწერა'
+                defaultValue={movie.director.ge}
                 language={t('ka')}
                 name='description_ge'
                 errors={methods.formState.errors.description_ge}
@@ -121,6 +133,7 @@ const AddMovie = () => {
             <div className='relative'>
               <InputText
                 placeholder='Year'
+                defaultValue={movie.year}
                 name='year'
                 type='number'
                 errors={methods.formState.errors.year}
@@ -129,33 +142,40 @@ const AddMovie = () => {
             <div className='relative'>
               <InputText
                 placeholder='Budget'
+                defaultValue={movie.budget}
                 name='budget'
                 type='number'
                 errors={methods.formState.errors.budget}
               />
             </div>
-            <div className='relative '>
-              <InputFile
-                errors={methods.formState.errors.image}
-                register={methods.register('image', {
-                  required: 'Field is required',
-                  onChange: (e) => {
-                    setImage(e);
-                  },
-                })}
+            <div className='relative flex justify-center items-center mb-5 '>
+              <img
+                src={selectedImage || movie.image}
+                alt='Quote Image'
+                className=' w-full h-[30rem] object-cover'
               />
-              {selectedImage ? (
-                <img
-                  src={selectedImage}
-                  className='h-96 w-full object-cover mb-5'
-                  alt='movie image'
+              <div className='bg-[#181623] opacity-70 rounded-lg p-3 absolute '>
+                <label
+                  htmlFor='input'
+                  className='flex flex-col items-center cursor-pointer text-white'
+                >
+                  <Photo />
+                  {t('change_photo')}
+                </label>
+                <input
+                  id='input'
+                  type='file'
+                  className='hidden'
+                  {...methods.register('image', {
+                    onChange: (e) => {
+                      setImage(e);
+                    },
+                  })}
                 />
-              ) : (
-                ''
-              )}
+              </div>
             </div>
 
-            <Button item={t('add_movie')} color='red' />
+            <Button item={t('edit_movie')} color='red' />
           </div>
         </form>
       </FormProvider>
@@ -163,4 +183,4 @@ const AddMovie = () => {
   );
 };
 
-export default AddMovie;
+export default EditMovie;

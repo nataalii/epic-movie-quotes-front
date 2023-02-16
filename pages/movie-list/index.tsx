@@ -11,7 +11,7 @@ const MovieList = () => {
   const { addMovieModal } = useSelector((store: RootState) => store.modal);
   return (
     <Layout>
-      <div className=' lg:ml-96 mt-8 flex justify-center items-center'>
+      <div className=' lg:ml-80 my-8 flex justify-center items-center'>
         <Movies />
       </div>
       {addMovieModal && <AddMovie />}

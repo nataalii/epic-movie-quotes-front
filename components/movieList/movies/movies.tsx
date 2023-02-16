@@ -29,7 +29,7 @@ const Movies = () => {
             <SearchIcon />
             <input
               type='text'
-              // placeholder={t('search')}
+              placeholder={t('search') as string}
               className=' bg-transparent w-20 outline-none text-xl'
             />
           </div>
@@ -47,25 +47,26 @@ const Movies = () => {
           </div>
         </div>
       </div>
-      <div className=' flex flex-wrap justify-around gap-x-10 max-w-[90rem] lg:w-full w-[90%] m-auto'>
+      <div className='grid grid-flow-row gap-14 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  '>
         {movies?.map((movie: any) => (
           <div key={movie.id}>
-            <div className='flex flex-col gap-3 max-w-96 h-[27rem] mt-14'>
-              <img
-                src={`${movie.image}`}
-                alt='movie image'
-                className='w-96 h-[20rem] object-cover rounded-lg'
-              />
-              <Link href='/movie-list/[id]' as={`/movie-list/${movie.id}`}>
-                {`${movie.title[locale]} (${movie.year})`}
-              </Link>
-              <div className='flex items-center gap-3 '>
-                <h1 className=' text-xl'>
-                  {movie.quotes === null ? 0 : movie.quotes.length}
-                </h1>
-                <Quotes />
+            <Link href='/movie-list/[id]' as={`/movie-list/${movie.id}`}>
+              <div className='flex flex-col gap-3 mt-14 md:max-w-[27rem] max-w-full'>
+                <img
+                  src={`${movie.image}`}
+                  alt='movie image'
+                  className=' h-[21rem] object-cover rounded-2xl'
+                />
+
+                <p className=' lg:text-2xl'>{`${movie.title[locale]} (${movie.year})`}</p>
+                <div className='flex items-center gap-3 '>
+                  <h1 className=' text-xl'>
+                    {movie.quotes === null ? 0 : movie.quotes.length}
+                  </h1>
+                  <Quotes />
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         ))}
       </div>

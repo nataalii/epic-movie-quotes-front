@@ -1,18 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import { Exit } from 'components/icons';
-import { MouseEventHandler } from 'react';
 import { useSelector } from 'react-redux';
+import { ModalLayoutTypes } from 'types';
 import { RootState } from 'types/stateTypes';
 
-const QuotesModalLayout = (props: {
-  title: string;
-  children: any;
-  onClose: MouseEventHandler<HTMLDivElement> | undefined;
-}) => {
+const QuotesModalLayout: React.FC<ModalLayoutTypes> = (props) => {
   const { name, image } = useSelector((store: RootState) => store.user);
   return (
     <div
-      className=' lg:mt-20 flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
+      className=' flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
       onClick={props.onClose}
     >
       <div

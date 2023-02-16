@@ -27,6 +27,7 @@ export type addMovieInputTypes = {
   name?: string;
   type?: string;
   errors?: any;
+  defaultValue?: string;
 };
 
 export type profileInputTypes = {

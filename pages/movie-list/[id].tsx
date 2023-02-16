@@ -11,11 +11,12 @@ import {
   ThreeDots,
   ViewQuote,
   AddQuote,
+  EditMovie,
 } from 'components';
 import { EditQuote } from 'components/movieList/editQuote';
 import { useAuth, useMovieDetail } from 'hooks';
 import { Key } from 'react';
-import { addQoute, editQuote, viewQuote } from 'stores/modalSlice';
+import { addQoute, editMovie, editQuote, viewQuote } from 'stores/modalSlice';
 import { QuoteType } from 'types';
 
 const Description = () => {
@@ -29,19 +30,23 @@ const Description = () => {
     addQuoteModal,
     viewQuoteModal,
     editQuoteModal,
+    editMovieModal,
     quotes,
     removeQuote,
     handleThreeDotsClick,
     locale,
     selectedQuoteId,
     quote,
+    quoteSelected,
+    setQuoteSelected,
   } = useMovieDetail();
   return (
     <Layout>
       {addQuoteModal && <AddQuote />}
       {viewQuoteModal && <ViewQuote quote={quote?.[0]} />}
       {editQuoteModal && <EditQuote quote={quote?.[0]} />}
-      <div className=' lg:ml-[27rem] my-10 lg:flex flex-col gap-7 '>
+      {editMovieModal && <EditMovie />}
+      <div className=' lg:ml-[26rem] my-10 lg:flex flex-col gap-7 '>
         <h1 className='hidden lg:block text-2xl'>{t('movie_description')}</h1>
         <div className='flex lg:flex-row lg:items-start flex-col items-center gap-7 '>
           <img
@@ -55,7 +60,13 @@ const Description = () => {
                 {movie?.title[locale as string]} ({movie?.year})
               </h2>
               <div className='bg-blue-500 flex items-center justify-evenly w-28 cursor-pointer rounded-lg'>
-                <Edit />
+                <span
+                  onClick={() => {
+                    dispatch(editMovie());
+                  }}
+                >
+                  <Edit />
+                </span>
                 <span className=' w-[0.3px] h-[60%] bg-gray' />
                 <span
                   onClick={() => {
@@ -129,12 +140,13 @@ const Description = () => {
             key={quote.id}
             className='max-w-[50rem] w-[80%] h-[16rem] bg-blue-600 rounded-lg m-auto mb-5 lg:m-0 relative '
           >
-            {selectedQuoteId === quote.id && (
+            {selectedQuoteId === quote.id && quoteSelected && (
               <div className='flex flex-col gap-7 p-8 pr-20 text-sm rounded-xl bg-blue-500 absolute -right-44 top-10'>
                 <div
                   className='flex gap-4 cursor-pointer'
                   onClick={() => {
                     dispatch(viewQuote());
+                    setQuoteSelected(false);
                   }}
                 >
                   <Eye />
@@ -142,7 +154,10 @@ const Description = () => {
                 </div>
                 <div
                   className='flex gap-4 cursor-pointer'
-                  onClick={() => dispatch(editQuote())}
+                  onClick={() => {
+                    dispatch(editQuote());
+                    setQuoteSelected(false);
+                  }}
                 >
                   <Edit />
                   <h2>{t('edit')}</h2>

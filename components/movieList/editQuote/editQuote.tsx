@@ -59,9 +59,12 @@ const EditQuote = (movieQuote: { quote: QuoteType }) => {
               alt='Quote Image'
               className=' w-full h-[30rem] object-cover'
             />
-            <div className='bg-[#181623] opacity-70 flex flex-col items-center  cursor-pointer rounded-lg p-3 absolute '>
-              <Photo />
-              <label htmlFor='input' className=' text-white'>
+            <div className='bg-[#181623] opacity-70 rounded-lg p-3 absolute '>
+              <label
+                htmlFor='input'
+                className='flex flex-col items-center cursor-pointer text-white'
+              >
+                <Photo />
                 {t('change_photo')}
               </label>
               <input

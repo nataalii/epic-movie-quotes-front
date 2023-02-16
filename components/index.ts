@@ -8,3 +8,4 @@ export * from './landing/modals';
 export * from './newsFeed';
 export * from './profile';
 export * from './toasts';
+export * from './movieList';

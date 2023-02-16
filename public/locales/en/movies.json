@@ -6,6 +6,7 @@
     "add_movie": "Add Movie",
     "director": "Director: ",
     "budget": "Budget: ",
+    "my_list_of_movies": "My list of movies",
     "choose_file": "Choose file",
     "upload_image": "Upload image",
     "drag_and_drop": "Drag & drop your image here or",
@@ -13,6 +14,10 @@
     "ka": "Ka",
     "eng": "Eng",
     "write_new_quote": "Add Quote",
-    "post": "Post"
-
+    "post": "Post",
+    "view_quote": "View Quote",
+    "edit": "Edit",
+    "delete": "Delete",
+    "quote_in_english": "”Quote in English”",
+    "quote_in_georgian": "”Quote in Georgian”"
 }

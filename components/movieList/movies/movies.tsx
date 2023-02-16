@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { Button } from 'components/button';
 import { AddMovieIcon, Quotes, SearchIcon } from 'components/icons';
+import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { openAddMovieModal } from 'stores/modalSlice';
 import useMovies from './useMovies';
@@ -9,19 +11,25 @@ import useMovies from './useMovies';
 const Movies = () => {
   const { movies } = useMovies();
   const dispatch = useDispatch();
+  const { t } = useTranslation('movies');
+  const router = useRouter();
+  const locale = router.locale as 'en' | 'ge';
+
   return (
     <div className=' flex flex-col justify-between lg:items-center max-w-[90rem] w-[90%]'>
       <div className='flex w-full justify-between '>
         <div className='flex lg:flex-row flex-col lg:items-center  lg:gap-3'>
-          <h1 className='lg:text-2xl text-xl'>My list of Movies</h1>
-          <h1>(total {movies?.length})</h1>
+          <h1 className='lg:text-2xl text-xl'>{t('my_list_of_movies')}</h1>
+          <h1>
+            ({t('total')} {movies?.length})
+          </h1>
         </div>
         <div className=' flex gap-3 lg:items-center'>
           <div className=' lg:flex lg:gap-2 lg:items-center hidden'>
             <SearchIcon />
             <input
               type='text'
-              placeholder='Search'
+              // placeholder={t('search')}
               className=' bg-transparent w-20 outline-none text-xl'
             />
           </div>
@@ -30,7 +38,7 @@ const Movies = () => {
               item={
                 <div className='flex items-center gap-2'>
                   <AddMovieIcon />
-                  {'Add Movie'}
+                  {t('add_movie')}
                 </div>
               }
               color='red'
@@ -49,7 +57,7 @@ const Movies = () => {
                 className='w-96 h-[20rem] object-cover rounded-lg'
               />
               <Link href='/movie-list/[id]' as={`/movie-list/${movie.id}`}>
-                {`${movie.title.en} (${movie.year})`}
+                {`${movie.title[locale]} (${movie.year})`}
               </Link>
               <div className='flex items-center gap-3 '>
                 <h1 className=' text-xl'>

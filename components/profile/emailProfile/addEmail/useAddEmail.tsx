@@ -22,6 +22,9 @@ const useAddEmail = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('emails');
       dispatch(closeAddEmailModal());
+      setTimeout(() => {
+        toast(<Message text={t('check_email')} />);
+      }, 3500);
     },
     onError: (error: any) => {
       const errors = error.response.data.errors;
@@ -33,9 +36,6 @@ const useAddEmail = () => {
   });
   const onSubmit = async (data: any) => {
     submitForm(data);
-    setTimeout(() => {
-      toast(<Message text={t('check_email')} />);
-    }, 3500);
   };
 
   return { methods, onSubmit, dispatch, submitForm, t };

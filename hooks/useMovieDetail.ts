@@ -1,8 +1,15 @@
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteMovie, getMovie } from 'services';
+import {
+  deleteMovie,
+  deleteQuote,
+  getMovie,
+  getQuote,
+  getUserQuotes,
+} from 'services';
 import { RootState } from 'types/stateTypes';
 
 const useMovieDetail = () => {
@@ -11,29 +18,72 @@ const useMovieDetail = () => {
   const { id } = router.query;
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
+  const locale = router.locale as 'en' | 'ge';
+  const [selectedQuoteId, setSelectedQuoteId] = useState<string | null>();
 
-  const { addQuoteModal } = useSelector((store: RootState) => store.modal);
+  const { addQuoteModal, viewQuoteModal, editQuoteModal } = useSelector(
+    (store: RootState) => store.modal
+  );
   const {
     data: movie,
     isError,
     error,
-  } = useQuery(['movies', id], () => getMovie(id), {
-    onError: (error) => {
-      console.log(error);
-    },
+  } = useQuery({
+    queryKey: ['movies', id],
+    queryFn: () => getMovie(id as string),
+    enabled: !!id,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    retry: 0,
   });
+
   // delete movie
   const { mutate: deleteMovieMutation } = useMutation(deleteMovie, {
     onSuccess: () => {
-      queryClient.invalidateQueries('delete movies');
+      queryClient.invalidateQueries('movies');
     },
   });
   const removeMovie = async (id: string) => {
     deleteMovieMutation(id);
   };
-
   // get Quotes
+  const { data: quotes } = useQuery({
+    queryKey: ['quotes', movie],
+    queryFn: () => getUserQuotes(movie?.data.id as string),
+    enabled: !!movie,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    retry: 0,
+  });
 
+  // delete quote
+  const { mutate: deleteQuoteMutation } = useMutation(deleteQuote, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('quotes');
+      queryClient.invalidateQueries('movies');
+    },
+  });
+
+  const removeQuote = async (id: string) => {
+    deleteQuoteMutation(id);
+  };
+
+  // get quote
+  const { data: quote } = useQuery({
+    queryKey: ['quotes', selectedQuoteId],
+    queryFn: () => getQuote(selectedQuoteId as string),
+    enabled: !!selectedQuoteId,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    retry: 0,
+  });
+  const handleThreeDotsClick = (quoteId: string) => {
+    if (selectedQuoteId === quoteId) {
+      setSelectedQuoteId(null);
+    } else {
+      setSelectedQuoteId(quoteId);
+    }
+  };
   return {
     movie: movie?.data,
     isError,
@@ -43,6 +93,14 @@ const useMovieDetail = () => {
     removeMovie,
     dispatch,
     addQuoteModal,
+    viewQuoteModal,
+    editQuoteModal,
+    quotes,
+    removeQuote,
+    quote: quote?.data,
+    handleThreeDotsClick,
+    locale,
+    selectedQuoteId,
   };
 };
 

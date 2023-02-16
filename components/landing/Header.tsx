@@ -18,7 +18,6 @@ const Header = () => {
   const showLoginModalHandler = () => {
     dispatch(openLoginModal());
   };
-
   const { t } = useTranslation('common');
   return (
     <header className=' w-5/6 m-auto font-helvetica md:sticky top-0 z-40'>

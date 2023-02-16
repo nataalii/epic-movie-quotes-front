@@ -101,7 +101,6 @@ const useMyProfile = () => {
     remove(id);
   };
 
-  //verify email
   const { mutate: submit } = useMutation(verifyEmail, {
     onSuccess: () => {
       queryClient.invalidateQueries('emails');
@@ -109,15 +108,20 @@ const useMyProfile = () => {
       toast(<Message text={t('email_verified')} />);
     },
   });
+
   useEffect(() => {
     const verify = async () => {
       if (router.query?.token) {
-        submit(router.query?.token);
+        submit(router.query?.token, {
+          onError: () => {
+            router.replace('/403');
+          },
+        });
       }
     };
 
     verify();
-  }, [router, router.query, submit]);
+  }, [router, router.query, submit, t]);
 
   //make email primary
   const { mutate: makePrimary } = useMutation(makePrimaryEmail, {

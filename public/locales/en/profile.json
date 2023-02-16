@@ -25,7 +25,6 @@
   "enter_new_email": "Enter new email",
   "add": "Add",
   "new_email_added_successfully": "New email added successfully",
-  "please_check_email_to_verify_new_address": "Please check email to verify new address",
   "removed": "Your email Removed!",
   "email_primary": "Email changed to Primary!",
   "alert": "A simple alert—check it out!",
@@ -35,5 +34,6 @@
   "are_you_sure": "Are you sure to make changes ?",
   "username_changed": "Username changed succsessfully",
   "changes_updated": "Changes Updated Successfully!",
-  "email_verified": "Email Verified Successfully!"
+  "email_verified": "Email Verified Successfully!",
+  "email_already_verified": "Email is already Verified!"
 }

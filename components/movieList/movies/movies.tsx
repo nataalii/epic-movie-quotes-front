@@ -25,7 +25,7 @@ const Movies = () => {
           </h1>
         </div>
         <div className=' flex lg:items-center'>
-          <div className=' lg:flex lg:gap-2 lg:items-center hidden'>
+          <div className=' lg:flex lg:gap-2 lg:items-center hidden' id='search'>
             <SearchIcon />
             <input
               type='text'

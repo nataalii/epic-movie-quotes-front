@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMovie } from 'services';
@@ -45,9 +45,7 @@ const useAddMovie = () => {
       dispatch(closeAddMovieModal());
     },
   });
-  const onSubmit = async (data: any) => {
-    console.log(data);
-
+  const onSubmit = async (data: FieldValues) => {
     const updatedData = {
       ...data,
       image: data.image[0],

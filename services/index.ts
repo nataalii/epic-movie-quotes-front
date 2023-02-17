@@ -130,8 +130,16 @@ export const getUserQuotes = async (id: string) => {
   const response = await instance.get(`/api/quotes/${id}`);
   return response;
 };
-
+export const getAllQuotes = async () => {
+  const response = await instance.get('api/quotes');
+  return response;
+};
 export const deleteQuote = async (id: string) => {
   const response = await instance.delete(`/api/quote/${id}`);
+  return response;
+};
+
+export const addComment = async (id: string, data: any) => {
+  const response = await instance.post(`api/quotes/${id}/comment`, data);
   return response;
 };

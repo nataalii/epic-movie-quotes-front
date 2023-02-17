@@ -54,7 +54,6 @@ const useMovieDetail = () => {
     refetchOnWindowFocus: false,
     retry: 0,
   });
-
   // delete quote
   const { mutate: deleteQuoteMutation } = useMutation(deleteQuote, {
     onSuccess: () => {

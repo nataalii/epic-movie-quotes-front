@@ -197,7 +197,7 @@ const Description = () => {
               <hr className='h-px bg-gray border-0  w-[95%]' />
               <div className='flex gap-6 w-[95%] items-center'>
                 <div className='flex gap-3 items-center'>
-                  <h2>3</h2>
+                  <h2>{quote?.comments?.length}</h2>
                   <CommentIcon />
                 </div>
                 <div className='flex gap-3 items-center'>

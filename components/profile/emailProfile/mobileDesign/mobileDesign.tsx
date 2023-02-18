@@ -28,6 +28,7 @@ const MobileDesign = () => {
     updateEmailsModal,
     dispatch,
     t,
+    router,
   } = useMobileDesign();
 
   return (
@@ -35,7 +36,10 @@ const MobileDesign = () => {
       {updateUsernameModal && <UsernameUpdate />}
       {updatePasswordModal && <PasswordUpdate />}
       {updateEmailsModal && <EmailUpdate />}
-      <div className='m-6 cursor-pointer'>
+      <div
+        className='m-6 cursor-pointer'
+        onClick={() => router.replace('/news-feed')}
+      >
         <BackArrow />
       </div>
       <div className=' bg-blue-500'>

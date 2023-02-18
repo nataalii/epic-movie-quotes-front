@@ -9,6 +9,7 @@ export type QuoteType = {
     en: string;
     ge: string;
   };
+  comments: any;
 };
 
 export type UpdateQuoteType = {

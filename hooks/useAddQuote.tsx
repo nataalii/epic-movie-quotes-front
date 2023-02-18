@@ -22,7 +22,6 @@ const useAddQuote = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('quotes');
       queryClient.invalidateQueries('movies');
-      dispatch(addQoute());
     },
   });
 
@@ -32,7 +31,11 @@ const useAddQuote = () => {
       image: data.image[0],
     };
     console.log(updatedData);
-    addQuoteMutation(updatedData);
+    addQuoteMutation(updatedData, {
+      onSuccess: () => {
+        dispatch(addQoute());
+      },
+    });
   };
   const setImage = (event: any) => {
     const file = event.target.files[0];
@@ -56,6 +59,7 @@ const useAddQuote = () => {
     onSubmit,
     setImage,
     movie,
+    addQuoteMutation,
   };
 };
 export default useAddQuote;

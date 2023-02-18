@@ -13,6 +13,7 @@ const initialState = {
   editMovieModal: false,
   addQuoteModal: false,
   viewQuoteModal: false,
+  writeQuoteModal: false,
   editQuoteModal: false,
   addEmailModal: false,
   updateUsernameModal: false,
@@ -120,6 +121,9 @@ const modalSlice = createSlice({
     editQuote: (state) => {
       state.editQuoteModal = !state.editQuoteModal;
     },
+    writeQuote: (state) => {
+      state.writeQuoteModal = !state.writeQuoteModal;
+    },
     editMovie: (state) => {
       state.editMovieModal = !state.editMovieModal;
     },
@@ -158,6 +162,7 @@ export const {
   viewQuote,
   editQuote,
   editMovie,
+  writeQuote,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

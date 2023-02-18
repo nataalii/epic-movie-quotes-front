@@ -47,7 +47,7 @@ const useMovieDetail = () => {
 
   // get Quotes
   const { data: quotes } = useQuery({
-    queryKey: ['quotes', movie],
+    queryKey: ['quotes', `movie id: ${movie?.data.id}`],
     queryFn: () => getUserQuotes(movie?.data.id as string),
     enabled: !!movie,
     refetchOnMount: false,

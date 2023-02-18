@@ -14,27 +14,27 @@ const AddComment = ({ quoteId }: { quoteId: string }) => {
 
   const { mutate: addCommentMutation } = useMutation(addComment, {
     onSuccess: () => {
-      queryClient.invalidateQueries('comments');
+      queryClient.invalidateQueries('quotes');
     },
   });
   const onSubmit = async (data: FieldValues, id: string) => {
-    addCommentMutation(id, data);
+    addCommentMutation({ data, id });
     methods.setValue('body', '');
   };
   return (
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit((data) => onSubmit(data, quoteId))}
-        className='flex w-full'
+        className='flex items-center w-full sm:gap-5'
       >
         <img
           src={`${image}`}
           alt='user avatar'
-          className='w-[3.5rem] h-[3.5rem] rounded-full object-cover'
+          className='w-10 h-10 sm:w-[3.3rem] sm:h-[3.3rem] rounded-full object-cover'
         />
         <input
-          placeholder={t('write_a_comment') as string}
-          className='outline-none block ml-3 pl-4 w-full bg-[#24222F] rounded-lg'
+          placeholder={t('write') as string}
+          className='outline-none block ml-3 pl-4 w-full bg-[#24222F] rounded-lg h-10 sm:h-[3.3rem]'
           {...methods.register('body', {
             required: ' Field is required',
           })}

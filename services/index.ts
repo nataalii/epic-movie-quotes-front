@@ -130,8 +130,8 @@ export const getUserQuotes = async (id: string) => {
   const response = await instance.get(`/api/quotes/${id}`);
   return response;
 };
-export const getAllQuotes = async () => {
-  const response = await instance.get('api/quotes');
+export const getAllQuotes = async (page = 1) => {
+  const response = await instance.get(`api/quotes?page=${page}`);
   return response;
 };
 export const deleteQuote = async (id: string) => {

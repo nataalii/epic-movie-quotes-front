@@ -1,19 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { Button } from 'components/button';
 import { AddMovieIcon, Quotes, SearchIcon } from 'components/icons';
-import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
 import { openAddMovieModal } from 'stores/modalSlice';
 import useMovies from './useMovies';
 
 const Movies = () => {
-  const { movies } = useMovies();
-  const dispatch = useDispatch();
-  const { t } = useTranslation('movies');
-  const router = useRouter();
-  const locale = router.locale as 'en' | 'ge';
+  const { movies, locale, dispatch, t } = useMovies();
 
   return (
     <div className=' flex flex-col justify-between lg:items-center max-w-[90rem] w-[90%]'>
@@ -24,15 +17,21 @@ const Movies = () => {
             ({t('total')} {movies?.length})
           </h1>
         </div>
-        <div className=' flex lg:items-center'>
-          <div className=' lg:flex lg:gap-2 lg:items-center hidden' id='search'>
-            <SearchIcon />
-            <input
-              type='text'
-              placeholder={t('search') as string}
-              className=' bg-transparent w-20 outline-none text-xl'
-            />
+        <div className=' flex gap-3 lg:items-center'>
+          <div className='flex flex-col gap-2 '>
+            <div
+              className=' lg:flex lg:gap-3 lg:items-center hidden'
+              id='search'
+            >
+              <SearchIcon />
+              <input
+                type='text'
+                placeholder={t('search') as string}
+                className=' bg-transparent w-20 focus:w-80 transition-all duration-500 outline-none text-xl cursor-pointer'
+              />
+            </div>
           </div>
+
           <div>
             <Button
               item={
@@ -55,7 +54,7 @@ const Movies = () => {
                 <img
                   src={`${movie.image}`}
                   alt='movie image'
-                  className='h-[19rem] md:h-[21rem] object-cover rounded-2xl'
+                  className='h-[19rem] md:w-[27rem] md:h-[21rem] object-cover rounded-2xl'
                 />
 
                 <p className=' lg:text-2xl'>{`${movie.title[locale]} (${movie.year})`}</p>

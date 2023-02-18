@@ -6,7 +6,8 @@ import { Comment } from '../comment';
 import usePost from './usePost';
 
 const Post = () => {
-  const { quotes, locale, t } = usePost();
+  const { locale, t, quotes } = usePost();
+
   return (
     <div className='flex flex-col items-center max-w-[60rem] xl:ml-[31rem] lg:ml-[25rem]  lg:mx-10 sm:mx-5 mb-10 -mt-4 '>
       {quotes?.map((quote: any) => {
@@ -15,7 +16,7 @@ const Post = () => {
             className=' bg-[#11101A] sm:rounded-xl sm:mb-4 sm:mt-10 mt-7'
             key={quote.id}
           >
-            <div className='m-6'>
+            <div className=' my-6 lg:my-0 mx-6'>
               <div className='flex items-center gap-4 lg:pt-6'>
                 <img
                   src={`${quote.user.thumbnail}`}

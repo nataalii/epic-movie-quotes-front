@@ -1,20 +1,19 @@
 import { AddQuoteIcon, SearchIcon } from 'components/icons';
-import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { writeQuote } from 'stores/modalSlice';
-import { RootState } from 'types/stateTypes';
 import { WriteQuote } from '../writeQuote';
+import useSearch from './useSearch';
 
 const Search = () => {
-  const { t } = useTranslation('news-feed');
-  const dispatch = useDispatch();
-  const { writeQuoteModal } = useSelector((store: RootState) => store.modal);
-  const [isActive, setIsActive] = useState(false);
-
-  // const handleClick = () => {
-  //   setIsActive(!isActive);
-  // };
+  const {
+    t,
+    dispatch,
+    writeQuoteModal,
+    isActive,
+    methods,
+    onSubmit,
+    searchRef,
+    setIsActive,
+  } = useSearch();
 
   return (
     <div className='flex gap-5 items-center  xl:ml-[31.7rem] lg:ml-[25rem]  lg:mx-10  mx-5 mt-5'>
@@ -32,20 +31,24 @@ const Search = () => {
         className={` hidden lg:flex flex-col gap-3 ${
           isActive ? '  lg:w-[690px]' : ' max-w-[110px] w-full'
         }`}
-        onClick={() => setIsActive(!isActive)}
+        onClick={() => setIsActive(true)}
       >
-        <div className='flex items-center gap-2 search-input'>
-          <SearchIcon />
-          <input
-            type='text'
-            placeholder={
-              isActive
-                ? (t('search_placeholder') as string)
-                : (t('search_by') as string)
-            }
-            className=' w-full bg-transparent outline-none '
-          />
-        </div>
+        <form action='' onSubmit={methods.handleSubmit(onSubmit)}>
+          <div className='flex items-center gap-2 search-input' ref={searchRef}>
+            <SearchIcon />
+            <input
+              type='text'
+              {...methods.register('search', { required: true })}
+              placeholder={
+                isActive
+                  ? (t('search_placeholder') as string)
+                  : (t('search_by') as string)
+              }
+              className=' w-full bg-transparent outline-none '
+            />
+          </div>
+        </form>
+
         {isActive && <hr className='h-px bg-gray border-0 ' />}
       </div>
     </div>

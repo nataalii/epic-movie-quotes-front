@@ -3,7 +3,6 @@ import { SideNavBar } from 'components/sideNavBar';
 import { Post, Search } from 'components/';
 import useAuth from 'hooks/useAuth';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
 const NewsFeed = () => {
   useAuth();
   return (
@@ -21,7 +20,10 @@ export default NewsFeed;
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common'])),
+      ...(await serverSideTranslations(locale, ['common', 'news-feed'], null, [
+        'en',
+        'ge',
+      ])),
     },
   };
 }

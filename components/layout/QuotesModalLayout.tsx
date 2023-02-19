@@ -1,22 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import { Exit } from 'components/icons';
-import { MouseEventHandler } from 'react';
 import { useSelector } from 'react-redux';
+import { ModalLayoutTypes } from 'types';
 import { RootState } from 'types/stateTypes';
 
-const QuotesModalLayout = (props: {
-  title: string;
-  children: any;
-  onClose: MouseEventHandler<HTMLDivElement> | undefined;
-}) => {
+const QuotesModalLayout: React.FC<ModalLayoutTypes> = (props) => {
   const { name, image } = useSelector((store: RootState) => store.user);
   return (
     <div
-      className=' lg:mt-20 flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
+      className=' flex inset-0 bg-[#181623] bg-opacity-60 z-50 items-center fixed '
       onClick={props.onClose}
     >
       <div
-        className=' relative sm:w-[55rem] sm:h-auto pb-14 w-screen h-screen  bg-blue-600 m-auto rounded-xl lg:max-h-[90%] overflow-auto'
+        className=' relative sm:w-[55rem] sm:h-auto pb-10 w-screen h-screen  bg-blue-600 m-auto rounded-xl lg:max-h-[90%] overflow-auto'
         onClick={(e) => {
           e.stopPropagation();
         }}
@@ -27,8 +23,20 @@ const QuotesModalLayout = (props: {
         >
           <Exit />
         </div>
-        <div className='flex flex-col items-center gap-6 mt-6'>
-          <h2 className='text-white'>{props.title}</h2>
+        <div
+          className={`${
+            props.title === 'view_quote'
+              ? ' gap-10 mt-[4.5rem] sm:gap-6 sm:mt-6'
+              : 'gap-6 mt-6'
+          } flex flex-col items-center`}
+        >
+          <h2
+            className={`${
+              props.title === 'view_quote' ? 'sm:block hidden ' : ''
+            }`}
+          >
+            {props.title}
+          </h2>
           <hr className='w-full border-[#efefef4d] ' />
         </div>
         <div className=' w-[90%] m-auto'>
@@ -36,7 +44,7 @@ const QuotesModalLayout = (props: {
             <img
               src={`${image}`}
               alt='user avatar'
-              className=' w-16 h-16 rounded-full object-cover'
+              className=' w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover'
             />
             <h1>{name}</h1>
           </div>

@@ -23,19 +23,22 @@ const AddQuote = () => {
       title={t('add_quote')}
       onClose={() => dispatch(addQoute())}
     >
-      <div className='flex gap-5'>
+      <div className='flex bg-black p-5 sm:bg-transparent sm:p-0 gap-5'>
         <img
           src={movie?.image}
           alt='movie image'
-          className=' max-w-[18rem] w-[80%] h-[10rem] object-cover rounded-lg'
+          className=' max-w-[18rem] w-[60%] sm:w-[80%] sm:h-[10rem] h-[6rem] object-cover rounded-lg'
         />
-        <div className='flex flex-col lg:max-w-[35rem]  w-[80%] lg:mr-10 items-start gap-4'>
+        <div className='flex flex-col lg:max-w-[35rem]  w-[80%] lg:mr-10 items-start sm:gap-4 gap-1'>
           <div className='flex w-full justify-between'>
-            <h2 className=' text-2xl text-[#DDCCAA]'>
+            <h2 className=' sm:text-2xl text-base text-[#DDCCAA]'>
               {movie?.title[locale as string]} ({movie?.year})
             </h2>
           </div>
-          <div className='flex gap-3 flex-wrap'>
+          <h1 className=' sm:hidden'>
+            {t('director')} <span>{movie?.director[locale as string]}</span>
+          </h1>
+          <div className='flex sm:gap-3 gap-2 flex-wrap'>
             {movie?.genre.map(
               (
                 movieGenre: {
@@ -45,7 +48,7 @@ const AddQuote = () => {
               ) => {
                 return (
                   <span
-                    className=' bg-[#6C757D] font-bold px-3 text-center rounded-md text-lg'
+                    className=' bg-[#6C757D] font-bold py-[2px] px-3 text-center rounded-[4px] sm:rounded-md sm:text-lg text-xs'
                     key={index}
                   >
                     {movieGenre[locale as string]}
@@ -54,7 +57,7 @@ const AddQuote = () => {
               }
             )}
           </div>
-          <h1>
+          <h1 className='hidden sm:block'>
             {t('director')} <span>{movie?.director[locale as string]}</span>
           </h1>
         </div>
@@ -91,14 +94,12 @@ const AddQuote = () => {
                   },
                 })}
               />
-              {selectedImage ? (
+              {selectedImage && (
                 <img
                   src={selectedImage}
-                  className='h-96 w-full object-cover mb-5'
+                  className='sm:h-96 h-72 w-full object-cover mb-5'
                   alt='movie image'
                 />
-              ) : (
-                ''
               )}
             </div>
             <div className='relative hidden'>

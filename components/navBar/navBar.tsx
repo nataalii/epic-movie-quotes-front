@@ -4,12 +4,22 @@ import { burgerMenu } from 'stores/modalSlice';
 import useNavBar from './useNavBar';
 
 const NavBar = () => {
-  const { t, burgerMenuModal, selected, setSelected, dispatch, logoutHandler } =
-    useNavBar();
+  const {
+    t,
+    router,
+    burgerMenuModal,
+    selected,
+    setSelected,
+    dispatch,
+    logoutHandler,
+  } = useNavBar();
   return (
     <header className=' h-20 bg-[#24222F] flex sticky top-0 z-30'>
       <div className='flex justify-between items-center m-auto max-w-[120rem] w-[93%]'>
-        <h3 className='lg:block hidden text-[#DDCCAA] uppercase '>
+        <h3
+          className='lg:block hidden text-[#DDCCAA] uppercase cursor-pointer '
+          onClick={() => router.replace('/news-feed')}
+        >
           {t('movie_quotes')}
         </h3>
         <div className='lg:hidden block'>

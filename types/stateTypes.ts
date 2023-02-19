@@ -11,6 +11,8 @@ export interface ModalState {
   addQuoteModal: boolean;
   viewQuoteModal: boolean;
   editQuoteModal: boolean;
+  writeQuoteModal: boolean;
+  editMovieModal: boolean;
   addEmailModal: boolean;
   updateUsernameModal: boolean;
   confirmChangesModal: boolean;

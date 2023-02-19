@@ -5,3 +5,4 @@ export { default as useLanding } from './useLanding';
 export { default as useToasts } from './useToasts';
 export { default as useMovieDetail } from './useMovieDetail';
 export { default as useAddQuote } from './useAddQuote';
+export { default as useLike } from './useLike';

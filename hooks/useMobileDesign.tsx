@@ -1,5 +1,6 @@
 import { useMobileToast } from 'components';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +14,7 @@ const useMobileDesign = () => {
   const methods = useForm({ mode: 'all' });
   const { notification } = useMobileToast();
   const { t } = useTranslation('profile');
+  const router = useRouter();
   const setImage = (event: any) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -51,6 +53,7 @@ const useMobileDesign = () => {
     dispatch,
     updateEmailsModal,
     t,
+    router,
   };
 };
 

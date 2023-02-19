@@ -14,5 +14,8 @@
     "edit_your_profile": "Edit Your Profile",
     "log_out": "Log Out",
     "news_feed": "News feed",
-    "list_of_movies": "List of Movies"
+    "list_of_movies": "List of Movies",
+        "choose_file": "Choose file",
+    "upload_image": "Upload image",
+    "drag_and_drop": "Drag & drop your image here or"
 }

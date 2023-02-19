@@ -1,11 +1,11 @@
 import { useAddQuote, useMovieDetail } from 'hooks';
 import { useTranslation } from 'next-i18next';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { updateQuote } from 'services';
 import { editQuote } from 'stores/modalSlice';
-import { QuoteType, UpdateQuoteType } from 'types';
+import { QuoteType } from 'types';
 
 const useEditQuotes = (quote: QuoteType) => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const useEditQuotes = (quote: QuoteType) => {
       console.log(errors);
     },
   });
-  const onSubmit: SubmitHandler<UpdateQuoteType> = (data) => {
+  const onSubmit = (data: FieldValues) => {
     const updatedData = {
       ...data,
       image: data.image[0],

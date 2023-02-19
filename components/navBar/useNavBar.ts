@@ -23,6 +23,14 @@ const useNavBar = () => {
     } catch (error) {}
   };
 
-  return { burgerMenuModal, selected, setSelected, dispatch, logoutHandler, t };
+  return {
+    burgerMenuModal,
+    router,
+    selected,
+    setSelected,
+    dispatch,
+    logoutHandler,
+    t,
+  };
 };
 export default useNavBar;

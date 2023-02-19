@@ -46,7 +46,9 @@ const SideNavBar = () => {
         <Link href='/movie-list'>
           <div className='flex items-center gap-10 text-lg ml-3'>
             <Movie
-              color={router.asPath === '/movie-list' ? '#E31221' : 'white'}
+              color={
+                router.asPath.includes('/movie-list') ? '#E31221' : 'white'
+              }
             />
             <p>{t('list_of_movies')}</p>
           </div>

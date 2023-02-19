@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { CommentIcon, Delete, Edit, Like } from 'components/icons';
 import { QuotesModalLayout } from 'components/layout';
+import { AddComment, Comment } from 'components/newsFeed';
 import { useMovieDetail } from 'hooks';
 import { useTranslation } from 'next-i18next';
 import { useDispatch } from 'react-redux';
@@ -47,11 +48,11 @@ const ViewQuote = (movieQuote: { quote: QuoteType }) => {
       <img
         src={quote.image}
         alt='Quote Image'
-        className=' h-[30rem] object-cover'
+        className=' h-[19rem] sm:h-[30rem] object-cover rounded-xl'
       />
       <div className='flex gap-6'>
         <div className='flex gap-3 items-center'>
-          <h2>3</h2>
+          <h2>{quote.comments.length}</h2>
           <CommentIcon />
         </div>
         <div className='flex gap-3 items-center'>
@@ -59,6 +60,18 @@ const ViewQuote = (movieQuote: { quote: QuoteType }) => {
           <Like />
         </div>
       </div>
+      <section className='flex flex-col max-w-[60rem] w-full max-h-[15rem] overflow-auto'>
+        {quote.comments?.map((comment: { id: string }) => {
+          return (
+            <div key={comment.id}>
+              <Comment comment={comment} />
+            </div>
+          );
+        })}
+      </section>
+      <section className=''>
+        <AddComment quoteId={quote.id} />
+      </section>
     </QuotesModalLayout>
   );
 };

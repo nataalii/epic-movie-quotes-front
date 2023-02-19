@@ -1,0 +1,13 @@
+{
+    "movie": "movie",
+    "write": "Write a comment",
+    "write_quote": "Write new Quote",
+    "choose_file": "Choose file",
+    "choose_movie": "Choose movie",
+    "upload_image": "Upload image",
+    "post": "post",
+    "search_placeholder": "Enter @ to search movies, Enter # to search quotes ",
+    "search_by": "search by",
+    "add_quote": "Write new Quote"
+
+}

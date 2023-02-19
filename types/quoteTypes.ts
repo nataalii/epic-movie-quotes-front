@@ -20,3 +20,7 @@ export type UpdateQuoteType = {
   image: FileList;
   id: string;
 };
+
+export type QuoteId = {
+  quoteId: string;
+};

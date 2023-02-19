@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { search } from 'services';
 import { RootState } from 'types/stateTypes';
-
 const useSearch = () => {
   const { t } = useTranslation('news-feed');
   const dispatch = useDispatch();

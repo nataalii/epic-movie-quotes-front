@@ -11,12 +11,12 @@ export function middleware(request: NextRequest) {
 
   for (const regex of AUTH_ROUTES) {
     if (regex.test(pathname) && !authenticated) {
-      response = NextResponse.redirect(new URL('/', request.url));
+      response = NextResponse.rewrite(new URL('/', request.url));
     }
   }
   for (const regex of GUEST_ROUTES) {
     if (regex.test(pathname) && authenticated) {
-      response = NextResponse.redirect(new URL('/news-feed', request.url));
+      response = NextResponse.rewrite(new URL('/news-feed', request.url));
     }
   }
   return response;

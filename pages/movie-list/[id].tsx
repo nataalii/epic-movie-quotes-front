@@ -53,9 +53,9 @@ const Description = () => {
           <img
             src={movie?.image}
             alt='movie image'
-            className=' max-w-[50rem] w-[80%] h-[19rem] sm:h-[25rem] object-cover rounded-lg'
+            className=' max-w-[50rem] w-[80%] 2xl:w-[100%] h-[19rem] sm:h-[25rem] object-cover rounded-lg'
           />
-          <div className='flex flex-col lg:max-w-[30rem] w-[80%] lg:mr-10 items-start gap-4'>
+          <div className='flex flex-col lg:max-w-[50rem] w-[80%] lg:mr-10 items-start gap-4'>
             <div className='flex w-full justify-between'>
               <h2 className=' text-2xl text-[#DDCCAA]'>
                 {movie?.title[locale as string]} ({movie?.year})

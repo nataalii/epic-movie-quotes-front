@@ -148,3 +148,8 @@ export const addComment = async ({ data, id }: { data: any; id: string }) => {
   const response = await instance.post(`api/quotes/${id}/comment`, data);
   return response;
 };
+
+export const toggleLike = async (id: any) => {
+  const response = await instance.post(`api/quotes/${id}/like`);
+  return response;
+};

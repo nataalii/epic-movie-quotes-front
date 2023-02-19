@@ -1,13 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import { CommentIcon, Like } from 'components/icons';
+import useLike from 'hooks/useLike';
 import { FieldValues } from 'react-hook-form';
 import { AddComment } from '../addComment';
 import { Comment } from '../comment';
 import usePost from './usePost';
 
 const Post = () => {
+  const { likeMutation } = useLike();
   const { locale, t, quotes } = usePost();
-
+  const handleLike = async (id: string) => {
+    likeMutation(id);
+  };
   return (
     <div className='flex flex-col items-center max-w-[60rem] xl:ml-[31rem] lg:ml-[25rem]  lg:mx-10 sm:mx-5 mb-10 -mt-4 '>
       {quotes?.map((quote: any) => {
@@ -47,9 +51,12 @@ const Post = () => {
                   <span>{quote.comments?.length}</span>
                   <CommentIcon />
                 </div>
-                <div className='flex gap-4 ml-5'>
-                  <span className='ml-6'>10</span>
-                  <Like />
+                <div
+                  className='flex gap-4 ml-5 cursor-pointer'
+                  onClick={() => handleLike(quote.id)}
+                >
+                  <span className='ml-6'>{quote.likes.length}</span>
+                  <Like color={'white'} />
                 </div>
               </section>
               <hr className='h-px my-8 bg-gray border-0' />

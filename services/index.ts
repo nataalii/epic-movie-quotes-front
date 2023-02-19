@@ -139,6 +139,11 @@ export const deleteQuote = async (id: string) => {
   return response;
 };
 
+export const search = async (data: { search: string }) => {
+  const response = await instance.post('/api/quotes/search', data);
+  return response;
+};
+
 export const addComment = async ({ data, id }: { data: any; id: string }) => {
   const response = await instance.post(`api/quotes/${id}/comment`, data);
   return response;

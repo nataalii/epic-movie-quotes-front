@@ -1,14 +1,40 @@
 /* eslint-disable @next/next/no-img-element */
+import { useEffect } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { QuoteId } from 'types';
 import useAddComments from './useAddComment';
+import { useQueryClient } from 'react-query';
+import usePusher from 'hooks/usePusher';
 
-const AddComment: React.FC<QuoteId> = ({ quoteId }) => {
+const AddComment: React.FC<QuoteId> = ({ quoteId, quoteAuthorId }) => {
   const { image, t, methods, onSubmit } = useAddComments();
+  const queryClient = useQueryClient();
+  const echo = usePusher();
+  useEffect(() => {
+    if (window.Echo) {
+      // console.log(window.Echo);
+      window.Echo.channel('likes').listen('AddLike', (e: any) => {
+        console.log('likes had been updated');
+        console.log(e);
+        queryClient.invalidateQueries('quotes');
+      });
+      window.Echo.channel('comments').listen('new-comment', (e: any) => {
+        console.log('comments had been updated');
+        console.log(e);
+        queryClient.invalidateQueries('quotes');
+      });
+      return () => {
+        // console.log('washa');
+        window.Echo.leave('comments');
+      };
+    }
+  }, [echo, queryClient]);
   return (
     <FormProvider {...methods}>
       <form
-        onSubmit={methods.handleSubmit((data) => onSubmit(data, quoteId))}
+        onSubmit={methods.handleSubmit((data) =>
+          onSubmit(data, quoteId, quoteAuthorId)
+        )}
         className='flex items-center w-full sm:gap-5'
       >
         <img

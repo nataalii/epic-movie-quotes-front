@@ -2,16 +2,24 @@
 import { CommentIcon, Like } from 'components/icons';
 import useLike from 'hooks/useLike';
 import { FieldValues } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { RootState } from 'types/stateTypes';
 import { AddComment } from '../addComment';
 import { Comment } from '../comment';
 import usePost from './usePost';
 
 const Post = () => {
   const { likeMutation } = useLike();
+  const { id: userId } = useSelector((store: RootState) => store.user);
   const { locale, t, quotes } = usePost();
-  const handleLike = async (id: string) => {
-    likeMutation(id);
+  const handleLike = async (id: string, likeReceiver: string) => {
+    const data = {
+      from: userId,
+      to: likeReceiver,
+    };
+    likeMutation({ id, data });
   };
+
   return (
     <div className='flex flex-col items-center max-w-[60rem] xl:ml-[31rem] lg:ml-[25rem]  lg:mx-10 sm:mx-5 mb-10 -mt-4 '>
       {quotes?.map((quote: any) => {
@@ -53,13 +61,13 @@ const Post = () => {
                 </div>
                 <div
                   className='flex gap-4 ml-5 cursor-pointer'
-                  onClick={() => handleLike(quote.id)}
+                  onClick={() => handleLike(quote.id, quote.user.id)}
                 >
                   <span className='ml-6'>{quote.likes.length}</span>
                   <Like color={'white'} />
                 </div>
               </section>
-              <hr className='h-px my-8 bg-gray border-0' />
+              <hr className='h-px my-8 bg-gray border-0 bg-opacity-50' />
               <section className='flex flex-col max-w-[60rem] w-full max-h-[15rem] overflow-auto'>
                 {quote.comments?.map((comment: FieldValues) => {
                   return (
@@ -70,7 +78,7 @@ const Post = () => {
                 })}
               </section>
               <section className='mt-4 flex  mb-4 lg:pb-6'>
-                <AddComment quoteId={quote.id} />
+                <AddComment quoteId={quote.id} quoteAuthorId={quote.user.id} />
               </section>
             </div>
           </div>

@@ -1,6 +1,10 @@
 import { Burger, Button, LocalSwitcher, Notification } from 'components';
 import BurgerMenu from 'components/burgerMenu/burgerMenu';
-import { burgerMenu } from 'stores/modalSlice';
+import Notifications from 'components/newsFeed/notifications/notifications';
+import { useQueryClient } from 'react-query';
+import { useSelector } from 'react-redux';
+import { burgerMenu, notifications } from 'stores/modalSlice';
+import { RootState } from 'types/stateTypes';
 import useNavBar from './useNavBar';
 
 const NavBar = () => {
@@ -13,8 +17,11 @@ const NavBar = () => {
     dispatch,
     logoutHandler,
   } = useNavBar();
+  const queryClient = useQueryClient();
+  const { notificationsModal } = useSelector((store: RootState) => store.modal);
   return (
     <header className=' h-20 bg-[#24222F] flex sticky top-0 z-30'>
+      {notificationsModal && <Notifications />}
       <div className='flex justify-between items-center m-auto max-w-[120rem] w-[93%]'>
         <h3
           className='lg:block hidden text-[#DDCCAA] uppercase cursor-pointer '
@@ -35,7 +42,15 @@ const NavBar = () => {
         </div>
 
         <div className='flex justify-center items-center lg:gap-10 gap-5 '>
-          <Notification />
+          <div
+            className='cursor-pointer'
+            onClick={() => {
+              dispatch(notifications());
+              queryClient.invalidateQueries('notifications');
+            }}
+          >
+            <Notification />
+          </div>
           <LocalSwitcher selected={selected} setSelected={setSelected} />
           <div className='hidden lg:block'>
             <Button

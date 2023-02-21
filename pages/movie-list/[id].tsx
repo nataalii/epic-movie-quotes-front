@@ -201,8 +201,8 @@ const Description = () => {
                   <CommentIcon />
                 </div>
                 <div className='flex gap-3 items-center'>
-                  <h2>5</h2>
-                  <Like />
+                  <h2>{quote?.likes.length}</h2>
+                  <Like color='white' />
                 </div>
               </div>
             </div>

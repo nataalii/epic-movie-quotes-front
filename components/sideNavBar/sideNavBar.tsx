@@ -38,7 +38,7 @@ const SideNavBar = () => {
         <Link href='/news-feed'>
           <div className='flex items-center gap-10 text-lg ml-3'>
             <Home
-              color={router.asPath === '/news-feed' ? '#E31221' : 'white'}
+              color={router.asPath.includes('/news-feed') ? '#E31221' : 'white'}
             />
             <p>{t('news_feed')}</p>
           </div>

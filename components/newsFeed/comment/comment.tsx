@@ -12,7 +12,7 @@ const Comment = ({ comment }: { comment: any }) => {
         <div className='flex flex-col sm:gap-4 my-2 sm:my-5 sm:text-xl  max-w-[50rem] w-full'>
           <p className=' font-semibold'>{comment.user.name}</p>
           <p className='break-all hidden sm:block'>{comment.body}</p>
-          <hr className='h-px bg-gray border-0 hidden sm:block' />
+          <hr className='h-px hidden sm:block bg-gray border-0 bg-opacity-50' />
         </div>
       </div>
       <div className=' sm:hidden my-3 flex flex-col gap-3'>

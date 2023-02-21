@@ -107,21 +107,21 @@ const useMyProfile = () => {
       router.replace('/profile');
       toast(<Message text={t('email_verified')} />);
     },
+    onError: () => {
+      router.replace('/403');
+    },
   });
 
   useEffect(() => {
     const verify = async () => {
+      console.log('kjhk');
       if (router.query?.token) {
-        submit(router.query?.token, {
-          onError: () => {
-            router.replace('/403');
-          },
-        });
+        submit(router.query.token);
       }
     };
 
     verify();
-  }, [router, router.query, submit, t]);
+  }, []);
 
   //make email primary
   const { mutate: makePrimary } = useMutation(makePrimaryEmail, {

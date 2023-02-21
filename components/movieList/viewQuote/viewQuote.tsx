@@ -56,8 +56,8 @@ const ViewQuote = (movieQuote: { quote: QuoteType }) => {
           <CommentIcon />
         </div>
         <div className='flex gap-3 items-center'>
-          <h2>5</h2>
-          <Like />
+          <h2>{quote.likes.length}</h2>
+          <Like color='white' />
         </div>
       </div>
       <section className='flex flex-col max-w-[60rem] w-full max-h-[15rem] overflow-auto'>

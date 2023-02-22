@@ -15,8 +15,8 @@ const usePusher = () => {
     if (!window.Echo) {
       window.Echo = new Echo({
         broadcaster: 'pusher',
-        key: '5d517eab955462fafb08',
-        cluster: 'ap2',
+        key: process.env.NEXT_PUBLIC_PUSHER_APP_KEY,
+        cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
         forceTLS: true,
         encrypted: true,
         enabledTransports: ['ws', 'wss'],

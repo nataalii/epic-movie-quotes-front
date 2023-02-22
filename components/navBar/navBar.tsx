@@ -3,10 +3,10 @@ import {
   Button,
   LocalSwitcher,
   Notification,
+  Notifications,
   useNotifications,
 } from 'components';
 import BurgerMenu from 'components/burgerMenu/burgerMenu';
-import Notifications from 'components/newsFeed/notifications/notifications';
 import { useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import { burgerMenu, notifications } from 'stores/modalSlice';

@@ -2,23 +2,25 @@
 import { CommentIcon, Like } from 'components/icons';
 import { FieldValues } from 'react-hook-form';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { getAllQuotes } from 'services';
 import { AddComment } from '../addComment';
 import { Comment } from '../comment';
 import usePost from './usePost';
 
 const Post = () => {
-  const { locale, t, quotes, handleLike, userId } = usePost();
+  const { locale, t, handleLike, userId, movieQuotes, setRange, quoteData } =
+    usePost();
   return (
     <div className='flex flex-col items-center max-w-[60rem] xl:ml-[31rem] lg:ml-[25rem]  lg:mx-10 sm:mx-5 mb-10 -mt-4 '>
-      {quotes !== undefined && (
+      {quoteData !== undefined && (
         <InfiniteScroll
-          dataLength={quotes?.length}
-          next={() => getAllQuotes({ range: quotes.length })}
-          hasMore={true}
+          dataLength={quoteData?.length}
+          next={() => {
+            setRange(quoteData.length);
+          }}
+          hasMore={quoteData.length !== movieQuotes?.data.quote_count}
           loader={<h4>Loading...</h4>}
         >
-          {quotes?.map((quote: any) => {
+          {quoteData?.map((quote: any) => {
             return (
               <div
                 className=' bg-[#11101A] sm:rounded-xl sm:mb-4 sm:mt-10 mt-7'

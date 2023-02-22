@@ -5,6 +5,7 @@ import { store } from 'stores/store';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { appWithTranslation } from 'next-i18next';
+
 const queryClient = new QueryClient();
 const App = ({ Component, pageProps }: AppProps) => {
   return (

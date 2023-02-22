@@ -1,5 +1,6 @@
 import { Button, EyeClosed, EyeOpen, TextInput } from 'components';
 import Google from 'components/icons/Google';
+import { REGEX_EMAIL } from 'config';
 import useRegisterModal from './useRegisterModal';
 
 const RegisterModal = () => {
@@ -33,18 +34,18 @@ const RegisterModal = () => {
         <form className=' sm:mt-[1rem]' onSubmit={handleSubmit(onSubmit)}>
           <div className='text-center p-1 '>
             <h1 className='text-white text-2xl sm:text-[2rem]  mb-3 mt-20 sm:mt-8 '>
-              {t('create_an_account')}
+              {t('authorization:create_an_account')}
             </h1>
-            <p className='text-gray'>{t('start_your_journey')}</p>
+            <p className='text-gray'>{t('authorization:start_your_journey')}</p>
           </div>
           <div>
             <TextInput
               name='name'
-              placeholder={t('name_placeholder')}
-              label={t('name')}
+              placeholder={t('authorization:name_placeholder')}
+              label={t('authorization:name')}
               isDirty={getFieldState('name').isDirty}
               register={register('name', {
-                required: 'Field is required',
+                required: t('error:required') as string,
                 minLength: {
                   value: 3,
                   message: 'Name should contain min 3 symbols',
@@ -67,13 +68,13 @@ const RegisterModal = () => {
 
             <TextInput
               name='email'
-              placeholder={t('email_placeholder')}
-              label={t('email')}
+              placeholder={t('authorization:email_placeholder')}
+              label={t('authorization:email')}
               isDirty={getFieldState('email').isDirty}
               register={register('email', {
-                required: 'Email field is required',
+                required: t('error:required') as string,
                 pattern: {
-                  value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                  value: REGEX_EMAIL,
                   message: 'Email should be valid',
                 },
               })}
@@ -86,12 +87,12 @@ const RegisterModal = () => {
 
             <TextInput
               name='password'
-              placeholder={t('password_placeholder')}
-              label={t('password')}
+              placeholder={t('authorization:password_placeholder')}
+              label={t('authorization:password')}
               type={passwordVisibility ? 'text' : 'password'}
               isDirty={getFieldState('password').isDirty}
               register={register('password', {
-                required: 'password field is required',
+                required: t('error:required') as string,
                 minLength: {
                   value: 8,
                   message: 'Password should contain min 8 symbols',
@@ -117,12 +118,12 @@ const RegisterModal = () => {
 
             <TextInput
               name='confirm_password'
-              placeholder={t('password')}
+              placeholder={t('authorization:password')}
               type={passConfVisbility ? 'text' : 'password'}
-              label={t('confirm_password')}
+              label={t('authorization:confirm_password')}
               isDirty={getFieldState('confirm_password').isDirty}
               register={register('confirm_password', {
-                required: 'Field is required',
+                required: t('error:required') as string,
                 minLength: {
                   value: 8,
                   message: 'Password should contain min 8 symbols',
@@ -149,7 +150,7 @@ const RegisterModal = () => {
 
           <div className=' flex flex-col gap-4 mt-6 items-center'>
             <Button
-              item={t('get_started')}
+              item={t('authorization:get_started')}
               color='red'
               size='sm:max-w-[22rem] w-[90%]'
             />
@@ -159,12 +160,12 @@ const RegisterModal = () => {
             >
               <div className='flex justify-center gap-2 px-6 py-2 text-white rounded-md outline-1 outline-white outline -outline-offset-1'>
                 <Google />
-                {t('google_sign_up')}
+                {t('authorization:google_sign_up')}
               </div>
             </a>
 
             <h1 className=' text-gray before:content-[url("../components/icons/Google.tsx")] before:w-10'>
-              {t('already_have_account')}
+              {t('authorization:already_have_account')}
               <a
                 className='text-[#0D6EFD] underline ml-2 cursor-pointer '
                 onClick={() => {
@@ -172,7 +173,7 @@ const RegisterModal = () => {
                   showLoginModalHandler();
                 }}
               >
-                {t('Login')}
+                {t('authorization:Login')}
               </a>
             </h1>
           </div>

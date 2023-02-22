@@ -8,7 +8,7 @@ const BurgerMenu = () => {
   const { router, dispatch, name, image, logoutHandler, t } = useBurgerMenu();
   return (
     <div
-      className=' flex inset-0 fixed '
+      className=' flex inset-0 fixed z-50 '
       onClick={() => dispatch(burgerMenu())}
     >
       <div

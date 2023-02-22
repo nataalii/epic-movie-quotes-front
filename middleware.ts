@@ -7,15 +7,17 @@ export function middleware(request: NextRequest) {
   const authenticated = cookies.some(
     (cookie) => cookie.name === 'authenticated'
   );
+  const token = cookies.some((cookie) => cookie.name === 'XSRF-TOKEN');
+
   const pathname = request.nextUrl.pathname;
 
   for (const regex of AUTH_ROUTES) {
-    if (regex.test(pathname) && !authenticated) {
+    if (regex.test(pathname) && !authenticated && !token) {
       response = NextResponse.redirect(new URL('/', request.url));
     }
   }
   for (const regex of GUEST_ROUTES) {
-    if (regex.test(pathname) && authenticated) {
+    if (regex.test(pathname) && authenticated && token) {
       response = NextResponse.redirect(new URL('/news-feed', request.url));
     }
   }

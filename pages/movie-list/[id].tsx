@@ -15,6 +15,7 @@ import {
 } from 'components';
 import { EditQuote } from 'components/movieList/editQuote';
 import { useAuth, useMovieDetail } from 'hooks';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Key } from 'react';
 import { addQoute, editMovie, editQuote, viewQuote } from 'stores/modalSlice';
 import { QuoteType } from 'types';
@@ -197,12 +198,12 @@ const Description = () => {
               <hr className='h-px bg-gray border-0  w-[95%]' />
               <div className='flex gap-6 w-[95%] items-center'>
                 <div className='flex gap-3 items-center'>
-                  <h2>{quote?.comments?.length}</h2>
+                  <h2>{quote?.comments.length}</h2>
                   <CommentIcon />
                 </div>
                 <div className='flex gap-3 items-center'>
-                  <h2>5</h2>
-                  <Like />
+                  <h2>{quote?.likes.length}</h2>
+                  <Like color='white' />
                 </div>
               </div>
             </div>
@@ -215,25 +216,15 @@ const Description = () => {
 
 export default Description;
 
-// export async function getStaticPaths() {
-// const data = await getMovieList();
-// const movies = data.data;
-// return {
-// paths: movies.map((movie: { id: { toString: () => any } }) => {
-//   return {
-//     params: {
-//       id: movie.id,
-//     },
-//   };
-// }),
-//   fallback: true,
-// };
-// }
-
-// export async function getStaticProps({ locale }: { locale: string }) {
-//   return {
-//     props: {
-//       ...(await serverSideTranslations(locale, ['common', 'movies'])),
-//     },
-//   };
-// }
+export async function getServerSideProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [
+        'common',
+        'movies',
+        'notifications',
+        'errors',
+      ])),
+    },
+  };
+}

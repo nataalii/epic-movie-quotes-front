@@ -6,6 +6,7 @@ const useLike = () => {
   const { mutate: likeMutation } = useMutation(toggleLike, {
     onSuccess: () => {
       queryClient.invalidateQueries('quotes');
+      queryClient.invalidateQueries('all quotes');
       queryClient.invalidateQueries('movies');
     },
   });

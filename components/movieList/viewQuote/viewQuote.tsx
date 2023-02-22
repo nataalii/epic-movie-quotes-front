@@ -2,17 +2,21 @@
 import { CommentIcon, Delete, Edit, Like } from 'components/icons';
 import { QuotesModalLayout } from 'components/layout';
 import { AddComment, Comment } from 'components/newsFeed';
+import usePost from 'components/newsFeed/post/usePost';
 import { useMovieDetail } from 'hooks';
 import { useTranslation } from 'next-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editQuote, viewQuote } from 'stores/modalSlice';
 import { QuoteType } from 'types';
+import { RootState } from 'types/stateTypes';
 
 const ViewQuote = (movieQuote: { quote: QuoteType }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation('movies');
   const quote = movieQuote.quote;
   const { removeQuote } = useMovieDetail();
+  const { id: userId } = useSelector((store: RootState) => store.user);
+  const { handleLike } = usePost();
   return (
     <QuotesModalLayout
       title={t('view_quote')}
@@ -56,12 +60,25 @@ const ViewQuote = (movieQuote: { quote: QuoteType }) => {
           <CommentIcon />
         </div>
         <div className='flex gap-3 items-center'>
-          <h2>5</h2>
-          <Like />
+          <h2>{quote.likes.length}</h2>
+          <div
+            className='cursor-pointer'
+            onClick={() => handleLike(quote.id, quote.user_id)}
+          >
+            <Like
+              color={`${
+                quote.likes.some(
+                  (like: { user_id: string }) => like.user_id === userId
+                )
+                  ? '#E31221'
+                  : 'white'
+              }`}
+            />
+          </div>
         </div>
       </div>
       <section className='flex flex-col max-w-[60rem] w-full max-h-[15rem] overflow-auto'>
-        {quote.comments?.map((comment: { id: string }) => {
+        {quote.comments.map((comment: { id: string }) => {
           return (
             <div key={comment.id}>
               <Comment comment={comment} />
@@ -70,7 +87,7 @@ const ViewQuote = (movieQuote: { quote: QuoteType }) => {
         })}
       </section>
       <section className=''>
-        <AddComment quoteId={quote.id} />
+        <AddComment quoteId={quote.id} quoteAuthorId={userId} />
       </section>
     </QuotesModalLayout>
   );

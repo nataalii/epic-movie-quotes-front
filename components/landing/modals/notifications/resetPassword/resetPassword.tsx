@@ -50,7 +50,7 @@ const ResetPassword = () => {
                   type={passwordVisibility ? 'text' : 'password'}
                   isDirty={getFieldState('password').isDirty}
                   register={register('password', {
-                    required: 'password field is required',
+                    required: t('required') as string,
                     minLength: {
                       value: 8,
                       message: 'Password should contain min 8 symbols',

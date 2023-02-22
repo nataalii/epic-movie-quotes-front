@@ -23,6 +23,8 @@ const initialState = {
   updateEmailsModal: false,
   addNewEmailModal: false,
   burgerMenuModal: false,
+  searchModal: false,
+  notificationsModal: false,
 };
 
 const modalSlice = createSlice({
@@ -127,6 +129,12 @@ const modalSlice = createSlice({
     editMovie: (state) => {
       state.editMovieModal = !state.editMovieModal;
     },
+    searchModal: (state) => {
+      state.searchModal = !state.searchModal;
+    },
+    notifications: (state) => {
+      state.notificationsModal = !state.notificationsModal;
+    },
   },
 });
 
@@ -163,6 +171,8 @@ export const {
   editQuote,
   editMovie,
   writeQuote,
+  searchModal,
+  notifications,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

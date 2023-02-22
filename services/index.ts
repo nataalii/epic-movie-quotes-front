@@ -130,8 +130,8 @@ export const getUserQuotes = async (id: string) => {
   const response = await instance.get(`/api/quotes/${id}`);
   return response;
 };
-export const getAllQuotes = async (page = 1) => {
-  const response = await instance.get(`api/quotes?page=${page}`);
+export const getAllQuotes = async (data: any) => {
+  const response = await instance.post(`api/quotes`, data);
   return response;
 };
 export const deleteQuote = async (id: string) => {
@@ -149,7 +149,17 @@ export const addComment = async ({ data, id }: { data: any; id: string }) => {
   return response;
 };
 
-export const toggleLike = async (id: any) => {
-  const response = await instance.post(`api/quotes/${id}/like`);
+export const toggleLike = async ({ data, id }: { data: any; id: string }) => {
+  const response = await instance.post(`api/quotes/${id}/like`, data);
+  return response;
+};
+
+export const getNotifications = async () => {
+  const response = await instance.get('api/notifications');
+  return response;
+};
+
+export const markAsRead = async () => {
+  const response = await instance.get('api/notifications/read');
   return response;
 };

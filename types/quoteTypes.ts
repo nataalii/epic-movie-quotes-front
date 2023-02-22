@@ -10,6 +10,7 @@ export type QuoteType = {
     ge: string;
   };
   comments: any;
+  likes: any;
 };
 
 export type UpdateQuoteType = {
@@ -23,4 +24,5 @@ export type UpdateQuoteType = {
 
 export type QuoteId = {
   quoteId: string;
+  quoteAuthorId: string;
 };

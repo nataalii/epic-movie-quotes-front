@@ -33,3 +33,5 @@ export { default as Delete } from './Delete';
 export { default as Edit } from './Edit';
 export { default as ThreeDots } from './ThreeDots';
 export { default as Eye } from './Eye';
+export { default as Heart } from './Heart';
+export { default as Polygon } from './Polygon';

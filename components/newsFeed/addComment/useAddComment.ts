@@ -6,7 +6,7 @@ import { addComment } from 'services';
 import { RootState } from 'types/stateTypes';
 
 const useAddComments = () => {
-  const { image } = useSelector((store: RootState) => store.user);
+  const { image, id: userId } = useSelector((store: RootState) => store.user);
   const methods = useForm({ mode: 'all' });
   const { t } = useTranslation('news-feed');
   const queryClient = useQueryClient();
@@ -14,9 +14,19 @@ const useAddComments = () => {
   const { mutate: addCommentMutation } = useMutation(addComment, {
     onSuccess: () => {
       queryClient.invalidateQueries('quotes');
+      queryClient.invalidateQueries('notifications');
     },
   });
-  const onSubmit = async (data: FieldValues, id: string) => {
+  const onSubmit = async (
+    values: FieldValues,
+    id: string,
+    quoteAuthorId: string
+  ) => {
+    const data = {
+      ...values,
+      from: userId,
+      to: quoteAuthorId,
+    };
     addCommentMutation({ data, id });
     methods.setValue('body', '');
   };

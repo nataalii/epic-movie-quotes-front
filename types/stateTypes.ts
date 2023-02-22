@@ -21,6 +21,8 @@ export interface ModalState {
   updateEmailsModal: boolean;
   addNewEmailModal: boolean;
   burgerMenuModal: boolean;
+  notificationsModal: boolean;
+  searchModal: boolean;
 }
 
 export interface UserState {

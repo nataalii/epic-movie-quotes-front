@@ -82,7 +82,7 @@ const MyProfile = () => {
                   defaultValue={name}
                   {...register('name', {
                     required: !isReadOnly
-                      ? 'Username field is required'
+                      ? (t('required') as string)
                       : undefined,
                     minLength: {
                       value: 3,

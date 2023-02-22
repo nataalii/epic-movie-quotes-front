@@ -1,38 +1,32 @@
+import { useLike } from 'hooks';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import { useSelector } from 'react-redux';
 import { getAllQuotes } from 'services';
+import { RootState } from 'types/stateTypes';
 
 const usePost = () => {
-  const [page, setPage] = useState<number>(1);
-  const { data: movieQuotes, isFetching } = useQuery({
-    queryKey: ['quotes', page],
-    queryFn: () => getAllQuotes(page),
-    refetchOnMount: false,
+  const { data: movieQuotes } = useQuery({
+    queryKey: ['quotes'],
+    queryFn: () => getAllQuotes({ range: 0 }),
     refetchOnWindowFocus: false,
     retry: 0,
   });
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolledToBottom =
-        window.innerHeight + window.scrollY >= document.body.offsetHeight * 0.9; // Check if user scrolled to 90% of the page
-
-      if (scrolledToBottom && !isFetching) {
-        setPage(page + 1);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isFetching, page]);
-
   const quotes = movieQuotes?.data;
   const { t } = useTranslation('news-feed');
   const locale = useRouter().locale as 'en' | 'ge';
-
-  return { locale, t, quotes };
+  const { likeMutation } = useLike();
+  const { id: userId } = useSelector((store: RootState) => store.user);
+  const handleLike = async (id: string, likeReceiver: string) => {
+    const data = {
+      from: userId,
+      to: likeReceiver,
+    };
+    likeMutation({ id, data });
+  };
+  return { locale, t, quotes, handleLike, userId };
 };
 
 export default usePost;

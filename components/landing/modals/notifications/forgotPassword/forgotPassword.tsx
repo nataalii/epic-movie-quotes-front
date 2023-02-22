@@ -1,4 +1,5 @@
 import { BackArrow, Button, TextInput } from 'components';
+import { REGEX_EMAIL } from 'config';
 import { Fragment } from 'react';
 import useForgotPassword from './useForgotPassword';
 
@@ -42,9 +43,9 @@ const ForgotPassword = () => {
                 placeholder={t('email_placeholder')}
                 label={t('email')}
                 register={register('email', {
-                  required: 'Email field is required',
+                  required: t('required') as string,
                   pattern: {
-                    value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                    value: REGEX_EMAIL,
                     message: 'Email should be valid',
                   },
                 })}

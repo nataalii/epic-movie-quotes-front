@@ -1,3 +1,4 @@
+import { REGEX_EMAIL } from 'config';
 import * as yup from 'yup';
 
 const schema = yup
@@ -6,10 +7,7 @@ const schema = yup
     email: yup
       .string()
       .required('Email Field is required!')
-      .matches(
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-        'Email should be valid'
-      ),
+      .matches(REGEX_EMAIL, 'Email should be valid'),
   })
   .required();
 

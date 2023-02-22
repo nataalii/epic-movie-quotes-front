@@ -1,0 +1,7 @@
+{
+    "required": "Field is Required",
+    "email_min_symbols": "Email should contain min 3 symbols",
+    "fill_in_english": "Fill in English",
+    "fill_in_georgian": "Fill in Georgian",
+    "email_valid": "Email should be valid"
+}

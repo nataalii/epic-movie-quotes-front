@@ -39,10 +39,10 @@ const LoginModal = () => {
               placeholder={t('email_placeholder')}
               label={t('email')}
               register={register('email', {
-                required: 'Field is required',
+                required: t('required') as string,
                 minLength: {
                   value: 3,
-                  message: 'Email should contain min 3 symbols',
+                  message: t('email_min_symbols'),
                 },
               })}
               isDirty={getFieldState('email').isDirty}
@@ -60,7 +60,7 @@ const LoginModal = () => {
               type={passwordVisibility ? 'text' : 'password'}
               label={t('password')}
               register={register('password', {
-                required: 'Password field is required',
+                required: t('required') as string,
                 minLength: {
                   value: 3,
                   message: 'Password should contain min 3 symbols',

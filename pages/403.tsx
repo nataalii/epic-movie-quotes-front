@@ -1,4 +1,5 @@
 import { Button, Gendolf, Union } from 'components';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 export default function Forbidden() {
@@ -30,4 +31,11 @@ export default function Forbidden() {
       </div>
     </Fragment>
   );
+}
+export async function getServerSideProps({ locale }: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['errors'])),
+    },
+  };
 }

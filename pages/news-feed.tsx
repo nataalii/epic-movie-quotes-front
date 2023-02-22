@@ -24,6 +24,7 @@ export async function getStaticProps({ locale }: { locale: string }) {
         'common',
         'news-feed',
         'notifications',
+        'errors',
       ])),
     },
   };

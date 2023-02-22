@@ -50,7 +50,11 @@ export default function Profile() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'profile'])),
+      ...(await serverSideTranslations(locale, [
+        'common',
+        'profile',
+        'errors',
+      ])),
     },
   };
 }

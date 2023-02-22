@@ -5,6 +5,7 @@ import React from 'react';
 import { FormProvider } from 'react-hook-form';
 import { addNewEmail } from 'stores/modalSlice';
 import useAddNewEmail from './useAddNewEmail';
+import { REGEX_EMAIL } from 'config';
 const AddNewEmail = () => {
   const { dispatch, methods, email, confirmChangesModal, onSubmit, t } =
     useAddNewEmail();
@@ -32,7 +33,7 @@ const AddNewEmail = () => {
                     message: 'Email should contain min 3 symbols',
                   },
                   pattern: {
-                    value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                    value: REGEX_EMAIL,
                     message: 'Email should be valid',
                   },
                 })}

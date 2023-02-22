@@ -223,6 +223,7 @@ export async function getServerSideProps({ locale }: { locale: string }) {
         'common',
         'movies',
         'notifications',
+        'errors',
       ])),
     },
   };

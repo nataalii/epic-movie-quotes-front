@@ -3,6 +3,7 @@ import { Button } from 'components/button';
 import { Movie } from 'components/icons';
 import { QuotesModalLayout } from 'components/layout';
 import { InputFile, InputTextArea, useMovies } from 'components/movieList';
+import { REGEX_ENG, REGEX_GEO } from 'config';
 import { useAddQuote } from 'hooks';
 import { FieldValues, FormProvider } from 'react-hook-form';
 import { writeQuote } from 'stores/modalSlice';
@@ -30,7 +31,10 @@ const WriteQuote = () => {
                 language={t('eng')}
                 errors={methods.formState.errors.quote_en}
                 register={methods.register('quote_en', {
-                  required: 'Field is required',
+                  pattern: {
+                    value: REGEX_ENG,
+                    message: t('fill_in_english'),
+                  },
                 })}
               />
             </div>
@@ -41,7 +45,10 @@ const WriteQuote = () => {
                 language={t('ka')}
                 errors={methods.formState.errors.quote_ge}
                 register={methods.register('quote_ge', {
-                  required: 'Field is required',
+                  pattern: {
+                    value: REGEX_GEO,
+                    message: t('fill_in_georgian'),
+                  },
                 })}
               />
             </div>
@@ -49,7 +56,7 @@ const WriteQuote = () => {
               <InputFile
                 errors={methods.formState.errors.image}
                 register={methods.register('image', {
-                  required: 'Field is required',
+                  required: t('required') as string,
                   onChange: (e) => {
                     setImage(e);
                   },
@@ -69,7 +76,7 @@ const WriteQuote = () => {
               </div>
               <select
                 {...methods.register('movie_id', {
-                  required: 'Field is required',
+                  required: t('required') as string,
                 })}
                 className='bg-black text-white rounded-lg block w-full px-16 h-16 outline-none'
                 defaultValue=''

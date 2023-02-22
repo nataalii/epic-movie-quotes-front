@@ -1,8 +1,10 @@
+import { useTranslation } from 'next-i18next';
 import { useFormContext } from 'react-hook-form';
 import { TextAreaInput } from 'types';
 
 const InputTextArea: React.FC<TextAreaInput> = (props) => {
   const form = useFormContext();
+  const { t } = useTranslation('errors');
   return (
     <div>
       <textarea
@@ -10,7 +12,7 @@ const InputTextArea: React.FC<TextAreaInput> = (props) => {
         placeholder={props.placeholder}
         defaultValue={props.defaultValue}
         {...form.register(props.name as string, {
-          required: 'Field is required',
+          required: t('required') as string,
         })}
         className=' italic bg-transparent pl-4 pt-2 placeholder:text-[#6C757D] placeholder:italic relative w-full rounded-[4px] outline outline-1 outline-gray
       '

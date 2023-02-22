@@ -12,7 +12,7 @@ const QuotesModalLayout: React.FC<ModalLayoutTypes> = (props) => {
       onClick={props.onClose}
     >
       <div
-        className=' relative sm:w-[55rem] sm:h-auto pb-10 w-screen h-screen  bg-blue-600 m-auto rounded-xl lg:max-h-[90%] overflow-auto'
+        className=' relative md:w-[55rem] md:h-auto pb-10 w-screen h-screen  bg-blue-600 m-auto rounded-xl lg:max-h-[90%] overflow-auto'
         onClick={(e) => {
           e.stopPropagation();
         }}

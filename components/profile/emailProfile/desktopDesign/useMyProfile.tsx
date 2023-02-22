@@ -114,7 +114,6 @@ const useMyProfile = () => {
 
   useEffect(() => {
     const verify = async () => {
-      console.log('kjhk');
       if (router.query?.token) {
         submit(router.query.token);
       }

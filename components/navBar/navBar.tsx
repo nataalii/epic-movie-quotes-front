@@ -1,4 +1,10 @@
-import { Burger, Button, LocalSwitcher, Notification } from 'components';
+import {
+  Burger,
+  Button,
+  LocalSwitcher,
+  Notification,
+  useNotifications,
+} from 'components';
 import BurgerMenu from 'components/burgerMenu/burgerMenu';
 import Notifications from 'components/newsFeed/notifications/notifications';
 import { useQueryClient } from 'react-query';
@@ -19,6 +25,12 @@ const NavBar = () => {
   } = useNavBar();
   const queryClient = useQueryClient();
   const { notificationsModal } = useSelector((store: RootState) => store.modal);
+  const { notifications: usernotifications } = useNotifications();
+
+  const notificationAmount = usernotifications?.data.filter(
+    (notification: { is_read: number }) => notification.is_read !== 1
+  ).length;
+
   return (
     <header className=' h-20 bg-[#24222F] flex sticky top-0 z-30'>
       {notificationsModal && <Notifications />}
@@ -43,13 +55,20 @@ const NavBar = () => {
 
         <div className='flex justify-center items-center lg:gap-10 gap-5 '>
           <div
-            className='cursor-pointer'
+            className='cursor-pointer relative'
             onClick={() => {
               dispatch(notifications());
               queryClient.invalidateQueries('notifications');
             }}
           >
             <Notification />
+            {notificationAmount !== 0 ? (
+              <h1 className='absolute -top-2 -right-2 h-6 w-6 rounded-full bg-[#E33812] text-center'>
+                {notificationAmount}
+              </h1>
+            ) : (
+              ''
+            )}
           </div>
           <LocalSwitcher selected={selected} setSelected={setSelected} />
           <div className='hidden lg:block'>

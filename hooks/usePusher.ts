@@ -21,7 +21,6 @@ const usePusher = () => {
         encrypted: true,
         enabledTransports: ['ws', 'wss'],
         authorizer: (channel: { name: string }) => {
-          console.log('jhjh');
           return {
             authorize: (socketId: number, callback: Function) => {
               instance
@@ -30,7 +29,6 @@ const usePusher = () => {
                   channel_name: channel.name,
                 })
                 .then((response) => {
-                  console.log('asdasdasdasds');
                   callback(null, response.data);
                 })
                 .catch((error) => {

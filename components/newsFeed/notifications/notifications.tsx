@@ -1,28 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { useQuery } from 'react-query';
 import { Heart, Polygon, Quotes } from 'components/icons';
-import { useTranslation } from 'next-i18next';
-import { getNotifications, markAsRead } from 'services';
+import { useNotifications } from '.';
 
 const Notifications = () => {
-  const { t } = useTranslation('notifications');
-  const { data: notifications } = useQuery('notifications', getNotifications, {
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    retry: 0,
-  });
-  const formatTime = (input: any) => {
-    const date = new Date(input);
-    const nowDate = new Date().getTime();
-    const formatted = Math.floor((nowDate - date.getTime()) / 1000 / 60);
-    return formatted;
-  };
-  const onSubmit = async () => {
-    const resp = await markAsRead();
-    console.log(resp);
-  };
+  const { formatTime, t, notifications, onSubmit } = useNotifications();
   return (
-    <>
+    <div>
       <div className='absolute right-[5.8rem] md:right-32 lg:right-[19rem] 2xl:right-[20.5rem] top-16'>
         <Polygon />
       </div>
@@ -95,7 +78,7 @@ const Notifications = () => {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

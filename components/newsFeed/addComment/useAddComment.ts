@@ -27,7 +27,6 @@ const useAddComments = () => {
       from: userId,
       to: quoteAuthorId,
     };
-    console.log(data);
     addCommentMutation({ data, id });
     methods.setValue('body', '');
   };

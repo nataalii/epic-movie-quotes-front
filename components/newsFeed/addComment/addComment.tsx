@@ -12,23 +12,18 @@ const AddComment: React.FC<QuoteId> = ({ quoteId, quoteAuthorId }) => {
   const echo = usePusher();
   useEffect(() => {
     if (window.Echo) {
-      // console.log(window.Echo);
-      window.Echo.channel('likes').listen('AddLike', (e: any) => {
-        console.log('likes had been updated');
-        console.log(e);
+      window.Echo.channel('likes').listen('AddLikeEvent', () => {
         queryClient.invalidateQueries('quotes');
       });
-      window.Echo.channel('comments').listen('new-comment', (e: any) => {
-        console.log('comments had been updated');
-        console.log(e);
+      window.Echo.channel('comments').listen('AddComment', () => {
         queryClient.invalidateQueries('quotes');
       });
       return () => {
-        // console.log('washa');
         window.Echo.leave('comments');
       };
     }
   }, [echo, queryClient]);
+
   return (
     <FormProvider {...methods}>
       <form

@@ -10,7 +10,7 @@ export type QuoteType = {
     ge: string;
   };
   comments: any;
-  likes: string;
+  likes: any;
 };
 
 export type UpdateQuoteType = {

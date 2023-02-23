@@ -1,4 +1,4 @@
-import { BackArrow, Button, TextInput } from 'components';
+import { BackArrow, Button, Exit, TextInput } from 'components';
 import { REGEX_EMAIL } from 'config';
 import { Fragment } from 'react';
 import useForgotPassword from './useForgotPassword';
@@ -26,6 +26,12 @@ const ForgotPassword = () => {
             e.stopPropagation();
           }}
         >
+          <div
+            className=' absolute mt-7 right-10 cursor-pointer sm:hidden block '
+            onClick={hideForgotPasswordHandler}
+          >
+            <Exit />
+          </div>
           <div className='mt-28 sm:mt-10 flex flex-col justify-center items-center gap-5'>
             <h1 className='text-3xl font-bold text-white '>
               {t('forgot_password?')}

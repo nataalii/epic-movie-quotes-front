@@ -42,6 +42,7 @@ const MyProfile = () => {
     deleteEmail,
     makePrimary,
     setImage,
+    user,
   } = useMyProfile();
   return (
     <div className='w-[90rem] '>
@@ -52,7 +53,7 @@ const MyProfile = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className=' flex flex-col gap-2 items-center justify-center -translate-y-16 z-0'>
             <img
-              src={selectedImage || `${image}`}
+              src={selectedImage || `${user?.thumbnail}`}
               alt='avatar'
               className=' w-40 h-40 rounded-full object-cover'
             />
@@ -79,7 +80,7 @@ const MyProfile = () => {
                   id='name'
                   className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
                   readOnly={isReadOnly}
-                  defaultValue={name}
+                  defaultValue={user?.name}
                   {...register('name', {
                     required: !isReadOnly
                       ? (t('errors:required') as string)
@@ -118,7 +119,7 @@ const MyProfile = () => {
                   name='primaryEmail'
                   className=' p-2 border-[#198754] border bg-green-700 bg-opacity-20 rounded-md  outline-none'
                   readOnly
-                  value={email}
+                  value={user?.email}
                 />
                 <div className='absolute right-4 top-[47px]'>
                   <PrimaryEmail />

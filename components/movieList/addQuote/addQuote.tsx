@@ -101,7 +101,7 @@ const AddQuote = () => {
               <InputFile
                 errors={methods.formState.errors.image}
                 register={methods.register('image', {
-                  required: 'Field is required',
+                  required: t('errors:required') as string,
                   onChange: (e) => {
                     setImage(e);
                   },

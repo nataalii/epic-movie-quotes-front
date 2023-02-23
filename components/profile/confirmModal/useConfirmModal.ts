@@ -3,8 +3,9 @@ import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch } from 'react-redux';
-import { addEmail, updateUser } from 'services';
+import { addEmail, getUser, updateUser } from 'services';
 import { addNewEmail, confirmChanges, updateUsername } from 'stores/modalSlice';
+import { setUserData } from 'stores/userDataSlice';
 
 const useConfirmModal = () => {
   const methods = useForm();
@@ -40,6 +41,9 @@ const useConfirmModal = () => {
         const resp = submitForm(data);
         console.log(resp);
       }
+      const { data: response } = await getUser();
+      dispatch(setUserData(response.user));
+      queryClient.invalidateQueries('user');
       dispatch(confirmChanges());
     } catch (error: any) {
       const errors = error.response.data.message;

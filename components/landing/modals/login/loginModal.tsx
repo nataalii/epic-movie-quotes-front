@@ -1,4 +1,11 @@
-import { Button, EyeClosed, EyeOpen, TextInput, Google } from 'components';
+import {
+  Button,
+  EyeClosed,
+  EyeOpen,
+  TextInput,
+  Google,
+  Exit,
+} from 'components';
 import useLoginModal from './useLoginModal';
 
 const LoginModal = () => {
@@ -26,6 +33,12 @@ const LoginModal = () => {
           e.stopPropagation();
         }}
       >
+        <div
+          className=' absolute mt-7 right-10 cursor-pointer sm:hidden block '
+          onClick={hideLoginModalHandler}
+        >
+          <Exit />
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='text-center p-1 '>
             <h1 className='text-white text-2xl sm:text-[2rem]  mb-3 mt-20 sm:mt-12 '>

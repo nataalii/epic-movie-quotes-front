@@ -17,6 +17,7 @@ const useAuth = () => {
         const { data } = await getUser();
         setUser(data);
         dispatch(setUserData(data.user));
+
         setCookie('authenticated', 1);
       } catch (error) {}
     };

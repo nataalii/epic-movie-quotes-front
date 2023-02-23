@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from 'services';
 import { RootState } from 'types/stateTypes';
@@ -15,6 +16,7 @@ const useMobileDesign = () => {
   const { notification } = useMobileToast();
   const { t } = useTranslation('profile');
   const router = useRouter();
+  const queryClient = useQueryClient();
   const setImage = (event: any) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -54,6 +56,7 @@ const useMobileDesign = () => {
     updateEmailsModal,
     t,
     router,
+    queryClient,
   };
 };
 

@@ -12,9 +12,9 @@ import { toast } from 'react-toastify';
 import { useMyProfile } from '../desktopDesign';
 import { AddNewEmail } from '../emailAdd';
 const EmailUpdate = () => {
-  const { dispatch, addNewEmailModal, email, emails, notification, t } =
+  const { dispatch, addNewEmailModal, emails, notification, t } =
     useEmailUpdate();
-  const { deleteEmail, makePrimary } = useMyProfile();
+  const { deleteEmail, makePrimary, user } = useMyProfile();
   return (
     <div className='flex flex-col inset-0  bg-[#181623] mt-20 mb-10 z-50 fixed  overflow-y-scroll'>
       <div
@@ -35,7 +35,7 @@ const EmailUpdate = () => {
             name='primaryEmail'
             className=' p-2 border-[#198754] border bg-green-700 bg-opacity-20 rounded-md  outline-none'
             readOnly
-            value={email}
+            value={user?.email}
           />
           <div className='absolute right-4 top-[40px]'>
             <PrimaryEmail />

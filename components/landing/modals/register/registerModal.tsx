@@ -1,4 +1,4 @@
-import { Button, EyeClosed, EyeOpen, TextInput } from 'components';
+import { Button, Exit, EyeClosed, EyeOpen, TextInput } from 'components';
 import Google from 'components/icons/Google';
 import { REGEX_EMAIL } from 'config';
 import useRegisterModal from './useRegisterModal';
@@ -31,6 +31,12 @@ const RegisterModal = () => {
           e.stopPropagation();
         }}
       >
+        <div
+          className=' absolute mt-7 right-10 cursor-pointer sm:hidden block '
+          onClick={hideRegisterModalHandler}
+        >
+          <Exit />
+        </div>
         <form className=' sm:mt-[1rem]' onSubmit={handleSubmit(onSubmit)}>
           <div className='text-center p-1 '>
             <h1 className='text-white text-2xl sm:text-[2rem]  mb-3 mt-20 sm:mt-8 '>

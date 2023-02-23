@@ -82,11 +82,11 @@ const MyProfile = () => {
                   defaultValue={name}
                   {...register('name', {
                     required: !isReadOnly
-                      ? (t('required') as string)
+                      ? (t('errors:required') as string)
                       : undefined,
                     minLength: {
                       value: 3,
-                      message: 'name should contain min 3 symbols',
+                      message: t('errors:name_min_3'),
                     },
                   })}
                 />

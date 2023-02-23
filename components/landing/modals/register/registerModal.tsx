@@ -45,18 +45,18 @@ const RegisterModal = () => {
               label={t('authorization:name')}
               isDirty={getFieldState('name').isDirty}
               register={register('name', {
-                required: t('error:required') as string,
+                required: t('errors:required') as string,
                 minLength: {
                   value: 3,
-                  message: 'Name should contain min 3 symbols',
+                  message: t('errors:name_min_3'),
                 },
                 maxLength: {
                   value: 15,
-                  message: 'Name should contain max 15 symbols',
+                  message: t('errors:name_min_15'),
                 },
                 pattern: {
                   value: /^[a-z]*$/,
-                  message: 'Name should contain only lowercase letters',
+                  message: t('errors:lowercase_letters'),
                 },
               })}
               errors={errors.name}
@@ -72,10 +72,10 @@ const RegisterModal = () => {
               label={t('authorization:email')}
               isDirty={getFieldState('email').isDirty}
               register={register('email', {
-                required: t('error:required') as string,
+                required: t('errors:required') as string,
                 pattern: {
                   value: REGEX_EMAIL,
-                  message: 'Email should be valid',
+                  message: t('errors:email_valid'),
                 },
               })}
               errors={errors.email}
@@ -92,14 +92,14 @@ const RegisterModal = () => {
               type={passwordVisibility ? 'text' : 'password'}
               isDirty={getFieldState('password').isDirty}
               register={register('password', {
-                required: t('error:required') as string,
+                required: t('errors:required') as string,
                 minLength: {
                   value: 8,
-                  message: 'Password should contain min 8 symbols',
+                  message: t('errors:password_min_8'),
                 },
                 maxLength: {
                   value: 15,
-                  message: 'Password should contain max 15 symbols',
+                  message: t('errors:password_max_15'),
                 },
               })}
               errors={errors.password}
@@ -123,14 +123,17 @@ const RegisterModal = () => {
               label={t('authorization:confirm_password')}
               isDirty={getFieldState('confirm_password').isDirty}
               register={register('confirm_password', {
-                required: t('error:required') as string,
+                required: t('errors:required') as string,
                 minLength: {
                   value: 8,
-                  message: 'Password should contain min 8 symbols',
+                  message: t('errors:password_min_8'),
                 },
                 validate: (value) => {
                   const { password } = getValues();
-                  return password === value || 'Passwords should match!';
+                  return (
+                    password === value ||
+                    (t('errors:passwords_should_match') as string)
+                  );
                 },
               })}
               errors={errors.confirm_password}

@@ -26,9 +26,7 @@ const usePost = () => {
     retry: 0,
     keepPreviousData: true,
   });
-  console.log(quoteData);
 
-  const quotes = movieQuotes?.data.quotes;
   const { t } = useTranslation('news-feed');
   const locale = useRouter().locale as 'en' | 'ge';
   const { likeMutation } = useLike();
@@ -43,7 +41,6 @@ const usePost = () => {
   return {
     locale,
     t,
-    quotes,
     handleLike,
     userId,
     movieQuotes,

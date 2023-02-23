@@ -48,13 +48,13 @@ const useRegisterModal = () => {
       if (errors?.name) {
         setError('name', {
           type: 'nameExists',
-          message: errors.name[0],
+          message: t('errors:name_exists') as string,
         });
       }
       if (errors?.email) {
         setError('email', {
           type: 'emailExists',
-          message: errors.email[0],
+          message: t('errors:email_exists') as string,
         });
       }
     }

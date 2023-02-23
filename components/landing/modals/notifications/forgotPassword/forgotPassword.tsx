@@ -43,10 +43,10 @@ const ForgotPassword = () => {
                 placeholder={t('email_placeholder')}
                 label={t('email')}
                 register={register('email', {
-                  required: t('required') as string,
+                  required: t('errors:required') as string,
                   pattern: {
                     value: REGEX_EMAIL,
-                    message: 'Email should be valid',
+                    message: t('errors:email_valid'),
                   },
                 })}
                 isDirty={getFieldState('email').isDirty}

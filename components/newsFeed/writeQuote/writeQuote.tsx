@@ -33,7 +33,7 @@ const WriteQuote = () => {
                 register={methods.register('quote_en', {
                   pattern: {
                     value: REGEX_ENG,
-                    message: t('fill_in_english'),
+                    message: t('errors:fill_in_english'),
                   },
                 })}
               />
@@ -47,7 +47,7 @@ const WriteQuote = () => {
                 register={methods.register('quote_ge', {
                   pattern: {
                     value: REGEX_GEO,
-                    message: t('fill_in_georgian'),
+                    message: t('errors:fill_in_georgian'),
                   },
                 })}
               />

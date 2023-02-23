@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import useEmails from 'hooks/useEmails';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -56,7 +57,6 @@ const useMyProfile = () => {
   const { emails } = useEmails();
   const { mutate: submitForm } = useMutation(updateUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries('users');
       cancelButtonHandler();
       toast(<Message text={t('changes_updated')} />);
     },
@@ -128,7 +128,6 @@ const useMyProfile = () => {
       queryClient.invalidateQueries('emails');
     },
   });
-
   return {
     name,
     email,

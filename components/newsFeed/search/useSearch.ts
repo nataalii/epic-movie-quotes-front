@@ -37,6 +37,7 @@ const useSearch = () => {
 
   const { mutate: submitForm } = useMutation(search, {
     onSuccess: () => {
+      console.log(search);
       queryClient.invalidateQueries({ queryKey: 'quotes' });
     },
   });

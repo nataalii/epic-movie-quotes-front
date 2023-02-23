@@ -42,10 +42,12 @@ const useForgotPassword = () => {
       showCheckEmailHandler();
     } catch (error: any) {
       const emailError = error.response.data.errors?.email;
-      setError('email', {
-        type: 'notExist',
-        message: emailError,
-      });
+      if (emailError) {
+        setError('email', {
+          type: 'notExist',
+          message: t('errors:email_invalid') as string,
+        });
+      }
     }
   };
 

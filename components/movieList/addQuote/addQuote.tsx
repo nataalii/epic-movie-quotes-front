@@ -6,6 +6,7 @@ import { InputFile, InputTextArea } from '../form';
 import { FormProvider } from 'react-hook-form';
 import { addQoute } from 'stores/modalSlice';
 import { Key } from 'react';
+import { REGEX_ENG, REGEX_GEO } from 'config';
 
 const AddQuote = () => {
   const {
@@ -74,6 +75,12 @@ const AddQuote = () => {
                 name='quote_en'
                 language={t('eng')}
                 errors={methods.formState.errors.quote_en}
+                register={methods.register('quote_en', {
+                  pattern: {
+                    value: REGEX_ENG,
+                    message: t('errors:fill_in_english'),
+                  },
+                })}
               />
             </div>
             <div className='relative'>
@@ -82,6 +89,12 @@ const AddQuote = () => {
                 name='quote_ge'
                 language={t('ka')}
                 errors={methods.formState.errors.quote_ge}
+                register={methods.register('quote_ge', {
+                  pattern: {
+                    value: REGEX_GEO,
+                    message: t('errors:fill_in_english'),
+                  },
+                })}
               />
             </div>
             <div className='relative '>

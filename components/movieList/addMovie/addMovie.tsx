@@ -16,6 +16,7 @@ const AddMovie = () => {
     genres,
     methods,
     locale,
+    onDrop,
   } = useAddMovie();
   return (
     <QuotesModalLayout
@@ -134,7 +135,13 @@ const AddMovie = () => {
                 errors={methods.formState.errors.budget}
               />
             </div>
-            <div className='relative '>
+            <div
+              className='relative '
+              onDragOver={(e) => {
+                e.preventDefault();
+              }}
+              onDrop={onDrop}
+            >
               <InputFile
                 errors={methods.formState.errors.image}
                 register={methods.register('image', {

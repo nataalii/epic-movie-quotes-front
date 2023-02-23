@@ -18,6 +18,7 @@ const AddQuote = () => {
     onSubmit,
     setImage,
     movie,
+    onDrop,
   } = useAddQuote();
   return (
     <QuotesModalLayout
@@ -97,7 +98,13 @@ const AddQuote = () => {
                 })}
               />
             </div>
-            <div className='relative '>
+            <div
+              className='relative '
+              onDragOver={(e) => {
+                e.preventDefault();
+              }}
+              onDrop={onDrop}
+            >
               <InputFile
                 errors={methods.formState.errors.image}
                 register={methods.register('image', {

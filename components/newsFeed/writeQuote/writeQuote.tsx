@@ -11,8 +11,10 @@ import useWriteQuote from './useWriteQuote';
 
 const WriteQuote = () => {
   const { movies } = useMovies();
-  const { methods, selectedImage, locale, setImage } = useAddQuote();
+  const { methods, selectedImage, onDrop, locale, setImage } = useAddQuote();
+
   const { dispatch, t, onSubmit } = useWriteQuote();
+
   return (
     <QuotesModalLayout
       title={t('write_quote')}
@@ -38,7 +40,7 @@ const WriteQuote = () => {
                 })}
               />
             </div>
-            <div className='relative'>
+            <div className='relative '>
               <InputTextArea
                 placeholder='ახალი ციტატა'
                 name='quote_ge'
@@ -52,11 +54,17 @@ const WriteQuote = () => {
                 })}
               />
             </div>
-            <div className='relative '>
+            <div
+              className=' relative '
+              onDragOver={(e) => {
+                e.preventDefault();
+              }}
+              onDrop={onDrop}
+            >
               <InputFile
                 errors={methods.formState.errors.image}
                 register={methods.register('image', {
-                  required: t('required') as string,
+                  required: t('errors:required') as string,
                   onChange: (e) => {
                     setImage(e);
                   },
@@ -76,7 +84,7 @@ const WriteQuote = () => {
               </div>
               <select
                 {...methods.register('movie_id', {
-                  required: t('required') as string,
+                  required: t('errors:required') as string,
                 })}
                 className='bg-black text-white rounded-lg block w-full px-16 h-16 outline-none'
                 defaultValue=''

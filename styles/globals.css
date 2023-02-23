@@ -41,3 +41,18 @@ body {
 .css-1u9des2-indicatorSeparator {
     display: none;
 }
+.drop-file-input:hover, .drop-file-input.dragover {
+    opacity: 0.6;
+}
+
+.drop-file-input {
+    border-color: #6c757d;
+}
+
+.drop-file-input.dragging {
+    border-color: #3490dc;
+}
+
+.drop-file-input.dropped {
+    background-color: #f8f9fa;
+}

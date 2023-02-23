@@ -39,6 +39,16 @@ const useAddMovie = () => {
     }
   };
   const methods = useForm({ mode: 'all' });
+  const onDrop = (e: any) => {
+    e.preventDefault();
+    const reader = new FileReader();
+    const file = e.dataTransfer.files[0];
+    methods.setValue('image', e.dataTransfer.files);
+    reader.onload = (e: any) => {
+      setSelectedImage(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
   const { mutate: submitForm } = useMutation(addMovie, {
     onSuccess: () => {
       queryClient.invalidateQueries('movies');
@@ -52,9 +62,7 @@ const useAddMovie = () => {
       genre: data.genres.map((genre: any) => genre.value),
     };
     delete data.genres;
-    submitForm(updatedData, {
-      onError: () => {},
-    });
+    submitForm(updatedData);
   };
 
   return {
@@ -68,6 +76,7 @@ const useAddMovie = () => {
     setImage,
     genres,
     locale,
+    onDrop,
   };
 };
 

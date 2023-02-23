@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from 'services';
+import { setUserData } from 'stores/userDataSlice';
 import { RootState } from 'types/stateTypes';
 
 const useMobileDesign = () => {
@@ -31,8 +32,11 @@ const useMobileDesign = () => {
   const onSubmit = async (data: any) => {
     const formData = new FormData();
     formData.append('thumbnail', data.mobileAvatar[0]);
-    await updateUser(formData);
+    await updateUser(formData).then((res) => {
+      dispatch(setUserData(res.data));
+    });
     setEditAvatar(false);
+    queryClient.invalidateQueries('user');
     notification('Image changed succsessfully');
   };
 

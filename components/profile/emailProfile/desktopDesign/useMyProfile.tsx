@@ -40,7 +40,6 @@ const useMyProfile = () => {
     handleSubmit,
     getValues,
     setValue,
-    setError,
     clearErrors,
     formState: { errors },
   } = useForm({
@@ -63,32 +62,20 @@ const useMyProfile = () => {
     retry: 0,
   });
   const user = userData?.data.user;
-  const { mutate: submitForm } = useMutation(updateUser, {
-    onSuccess: async () => {
-      console.log('aajaj');
-      cancelButtonHandler();
-      toast(<Message text={t('changes_updated')} />);
-      const { data: response } = await getUser();
-      dispatch(setUserData(response.user));
-      setValue('name', response.user.name);
-      queryClient.invalidateQueries('user');
-    },
-    onError: (errors: any) => {
-      const error = errors.response.data.errors?.name;
-      setError('name', {
-        type: 'nameExists',
-        message: error[0],
-      });
-    },
-  });
-
   const onSubmit = async () => {
     const data = {
       name: getValues('name'),
       password: getValues('newPassword'),
       thumbnail: getValues('avatar')[0],
     };
-    submitForm(data, {});
+    await updateUser(data).then((res) => {
+      dispatch(setUserData(res.data));
+    });
+    setResetPassword(false);
+    setIsReadOnly(true);
+    setEditAvatar(false);
+    queryClient.invalidateQueries('user');
+    toast(<Message text={t('changes_updated')} />);
   };
 
   // Set Image

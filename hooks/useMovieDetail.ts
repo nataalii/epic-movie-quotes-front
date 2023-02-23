@@ -38,6 +38,7 @@ const useMovieDetail = () => {
   // delete movie
   const { mutate: deleteMovieMutation } = useMutation(deleteMovie, {
     onSuccess: () => {
+      console.log('dfs');
       queryClient.invalidateQueries('movies');
     },
   });

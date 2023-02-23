@@ -17,9 +17,6 @@ import useMyProfile from './useMyProfile';
 const MyProfile = () => {
   const {
     t,
-    name,
-    email,
-    image,
     passwordVisibility,
     setPasswordVisibility,
     passConfVisbility,

@@ -15,8 +15,6 @@ import { useMobileDesign } from 'hooks';
 const MobileDesign = () => {
   const {
     image,
-    name,
-    queryClient,
     selectedImage,
     setSelectedImage,
     editAvatar,

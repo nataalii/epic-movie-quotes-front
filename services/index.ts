@@ -163,3 +163,8 @@ export const markAsRead = async () => {
   const response = await instance.get('api/notifications/read');
   return response;
 };
+
+export const oauthLogin = async (data: any) => {
+  await fetchCSRFToken();
+  await instance.post('api/google/auth/login', data);
+};

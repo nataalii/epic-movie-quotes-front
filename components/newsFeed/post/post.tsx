@@ -7,17 +7,25 @@ import { Comment } from '../comment';
 import usePost from './usePost';
 
 const Post = () => {
-  const { locale, t, handleLike, userId, movieQuotes, setRange, quoteData } =
-    usePost();
+  const {
+    locale,
+    t,
+    handleLike,
+    userId,
+    quoteData,
+    fetchNextPage,
+    hasNextPage,
+  } = usePost();
   return (
     <div className='flex flex-col items-center max-w-[60rem] xl:ml-[31rem] lg:ml-[25rem]  lg:mx-10 sm:mx-5 mb-10 -mt-4 '>
-      {quoteData !== undefined && (
+      {quoteData && (
         <InfiniteScroll
-          dataLength={quoteData?.length}
+          dataLength={quoteData.length}
           next={() => {
-            setRange(quoteData.length);
+            fetchNextPage();
           }}
-          hasMore={quoteData.length !== movieQuotes?.data.quote_count}
+          scrollThreshold={0.9}
+          hasMore={hasNextPage as boolean}
           loader={<h4>Loading...</h4>}
         >
           {quoteData?.map((quote: any) => {

@@ -16,6 +16,7 @@ const Post = () => {
     fetchNextPage,
     hasNextPage,
   } = usePost();
+
   return (
     <div className='flex flex-col items-center max-w-[60rem] xl:ml-[31rem] lg:ml-[25rem]  lg:mx-10 sm:mx-5 mb-10 -mt-4 '>
       {quoteData && (
@@ -69,10 +70,10 @@ const Post = () => {
                       className='flex gap-4 ml-5 cursor-pointer'
                       onClick={() => handleLike(quote.id, quote.user.id)}
                     >
-                      <span className='ml-6'>{quote.likes.length}</span>
+                      <span className='ml-6'>{quote.likes?.length}</span>
                       <Like
                         color={`${
-                          quote.likes.some(
+                          quote.likes?.some(
                             (like: { user_id: string }) =>
                               like.user_id === userId
                           )

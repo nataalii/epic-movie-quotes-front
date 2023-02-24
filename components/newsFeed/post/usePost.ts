@@ -38,6 +38,7 @@ const usePost = () => {
     };
     likeMutation({ id, data });
   };
+
   return {
     locale,
     t,

@@ -2,9 +2,9 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { search } from 'services';
+import { setSearchedQuote } from 'stores/quoteSlice';
 import { RootState } from 'types/stateTypes';
 const useSearch = () => {
   const { t } = useTranslation('news-feed');
@@ -33,16 +33,13 @@ const useSearch = () => {
       search: '',
     },
   });
-  const queryClient = useQueryClient();
 
-  const { mutate: submitForm } = useMutation(search, {
-    onSuccess: () => {
-      console.log(search);
-      queryClient.invalidateQueries({ queryKey: 'quotes' });
-    },
-  });
-  const onSubmit = async (data: { search: string }) => {
-    submitForm(data);
+  const handleSearch = async (data: { search: string }) => {
+    try {
+      const resp = await search(data);
+      const quotes = resp.data;
+      dispatch(setSearchedQuote(quotes));
+    } catch {}
     replace({ query: data });
     methods.setValue('search', '');
   };
@@ -53,7 +50,7 @@ const useSearch = () => {
     writeQuoteModal,
     isActive,
     methods,
-    onSubmit,
+    handleSearch,
     searchRef,
     setIsActive,
   };

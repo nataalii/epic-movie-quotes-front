@@ -2,12 +2,14 @@
 import { Button } from 'components/button';
 import { AddMovieIcon, Quotes, SearchIcon } from 'components/icons';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 import { openAddMovieModal } from 'stores/modalSlice';
 import useMovies from './useMovies';
 
 const Movies = () => {
-  const { movies, locale, dispatch, t } = useMovies();
-
+  const { movies, locale, dispatch, t, methods, handleSearch } = useMovies();
+  const searchMovies = useSelector((state: any) => state.movies.searchMovies);
+  const dataToSearch = searchMovies.length !== 0 ? searchMovies : movies;
   return (
     <div className=' flex flex-col justify-between lg:items-center max-w-[90rem] w-[90%]'>
       <div className='flex w-full justify-between '>
@@ -19,17 +21,18 @@ const Movies = () => {
         </div>
         <div className=' flex gap-3 lg:items-center'>
           <div className='flex flex-col gap-2 '>
-            <div
+            <form
               className=' lg:flex lg:gap-3 lg:items-center hidden'
-              id='search'
+              onSubmit={methods.handleSubmit(handleSearch)}
             >
               <SearchIcon />
               <input
                 type='text'
                 placeholder={t('search') as string}
-                className=' bg-transparent w-20 focus:w-80 transition-all duration-500 outline-none text-xl cursor-pointer'
+                {...methods.register('search')}
+                className=' bg-transparent w-20 xl:focus:w-80 transition-all duration-500 outline-none text-xl cursor-pointer'
               />
-            </div>
+            </form>
           </div>
 
           <div>
@@ -47,7 +50,7 @@ const Movies = () => {
         </div>
       </div>
       <div className='grid grid-flow-row md:gap-14 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  '>
-        {movies?.map((movie: any) => (
+        {dataToSearch?.map((movie: any) => (
           <div key={movie.id}>
             <Link href='/movie-list/[id]' as={`/movie-list/${movie.id}`}>
               <div className='flex flex-col gap-3 mt-14 md:max-w-[27rem] max-w-full'>
@@ -60,7 +63,7 @@ const Movies = () => {
                 <p className=' lg:text-2xl'>{`${movie.title[locale]} (${movie.year})`}</p>
                 <div className='flex items-center gap-3 '>
                   <h1 className=' text-xl'>
-                    {movie.quotes === null ? 0 : movie.quotes.length}
+                    {movie.quotes === null ? 0 : movie.quotes?.length}
                   </h1>
                   <Quotes />
                 </div>

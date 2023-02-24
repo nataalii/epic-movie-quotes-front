@@ -11,12 +11,17 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'types/stateTypes';
 import { useAuth } from 'hooks';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Head from 'next/head';
 
 export default function Profile() {
   useAuth();
   const { google_id } = useSelector((store: RootState) => store.user);
   return (
     <div className='text-white'>
+      <Head>
+        <title>Profile</title>
+        <meta property='og:title' content='My page title' key='title' />
+      </Head>
       <NavBar />
       <div className='flex'>
         <SideNavBar />
@@ -54,6 +59,7 @@ export async function getStaticProps({ locale }: { locale: string }) {
         'common',
         'profile',
         'errors',
+        'notifications',
       ])),
     },
   };

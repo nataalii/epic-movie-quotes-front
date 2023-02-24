@@ -1,9 +1,14 @@
 import { Button, Gendolf, Union } from 'components';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 export default function Forbidden() {
+  <Head>
+    <title>Forbidden</title>
+    <meta property='og:title' content='My page title' key='title' />
+  </Head>;
   const router = useRouter();
   const { t } = useTranslation('errors');
   return (

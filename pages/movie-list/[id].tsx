@@ -16,6 +16,7 @@ import {
 import { EditQuote } from 'components/movieList/editQuote';
 import { useAuth, useMovieDetail } from 'hooks';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Head from 'next/head';
 import { Key } from 'react';
 import { addQoute, editMovie, editQuote, viewQuote } from 'stores/modalSlice';
 import { QuoteType } from 'types';
@@ -44,6 +45,9 @@ const Description = () => {
   } = useMovieDetail();
   return (
     <Layout>
+      <Head>
+        <title>Movie List</title>
+      </Head>
       {addQuoteModal && <AddQuote />}
       {viewQuoteModal && <ViewQuote quote={quote?.[0]} />}
       {editQuoteModal && <EditQuote quote={quote?.[0]} />}

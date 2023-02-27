@@ -33,11 +33,11 @@ export interface UserState {
   google_id: string;
 }
 export interface MoviesState {
-  searchMovies: any[];
+  searchMovies: { data: string }[];
 }
 
 export interface QuotesState {
-  searchQuotes: any[];
+  searchQuotes: string[];
 }
 export interface RootState {
   modal: ModalState;

@@ -17,5 +17,5 @@ export type ResetPasswordTypes = {
   token?: string;
   password?: string;
   confirm_password?: string;
-  local: string;
+  local?: string;
 };

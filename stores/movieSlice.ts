@@ -1,8 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface MoviesState {
-  searchMovies: any[];
-}
+import { createSlice } from '@reduxjs/toolkit';
+import { MoviesState } from 'types/stateTypes';
 
 const initialState: MoviesState = {
   searchMovies: [],
@@ -12,7 +9,7 @@ const moviesSlice = createSlice({
   name: 'movies',
   initialState,
   reducers: {
-    setSearchedMovies(state, action: PayloadAction<any[]>) {
+    setSearchedMovies(state, action) {
       state.searchMovies = action.payload;
     },
   },

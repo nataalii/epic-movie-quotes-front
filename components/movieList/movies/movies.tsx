@@ -9,14 +9,14 @@ import useMovies from './useMovies';
 const Movies = () => {
   const { movies, locale, dispatch, t, methods, handleSearch } = useMovies();
   const searchMovies = useSelector((state: any) => state.movies.searchMovies);
-  const dataToSearch = searchMovies.length !== 0 ? searchMovies : movies;
+  const dataToSearch = searchMovies?.length !== 0 ? searchMovies?.data : movies;
   return (
     <div className=' flex flex-col justify-between lg:items-center max-w-[90rem] w-[90%]'>
       <div className='flex w-full justify-between '>
         <div className='flex lg:flex-row flex-col lg:items-center  lg:gap-3'>
           <h1 className='lg:text-2xl text-xl'>{t('my_list_of_movies')}</h1>
           <h1>
-            ({t('total')} {movies?.length})
+            ({t('total')} {dataToSearch?.length})
           </h1>
         </div>
         <div className=' flex gap-3 lg:items-center'>

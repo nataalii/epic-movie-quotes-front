@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { i18n, useTranslation } from 'next-i18next';
 import { useForm, useWatch } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { fetchCSRFToken, forgotPassword } from 'services';
@@ -37,7 +37,7 @@ const useForgotPassword = () => {
   const onSubmit = async () => {
     try {
       await fetchCSRFToken();
-      await forgotPassword({ email: email });
+      await forgotPassword({ email: email, local: i18n?.language });
       hideForgotPasswordHandler();
       showCheckEmailHandler();
     } catch (error: any) {

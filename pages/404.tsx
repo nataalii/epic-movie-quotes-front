@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { Button, Error, ErrorElipse } from 'components';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -8,12 +7,11 @@ import { Fragment } from 'react';
 export default function Forbidden() {
   const router = useRouter();
   const { t } = useTranslation('errors');
-  <Head>
-    <title>Not Found</title>
-    <meta property='og:title' content='My page title' key='title' />
-  </Head>;
   return (
     <Fragment>
+      <Head>
+        <title>Not Found</title>
+      </Head>
       <div className='h-screen w-screen flex flex-col items-center text-center pt-60 gap-8'>
         <div className=' flex flex-col gap-6'>
           <Error />

@@ -1,9 +1,11 @@
 import { BackArrow } from 'components/icons';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { FieldValues, FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { searchQuotes } from 'services';
 import { searchModal } from 'stores/modalSlice';
+import { setSearchedQuote } from 'stores/quoteSlice';
 
 const SearchMobile = () => {
   const { t } = useTranslation('news-feed');
@@ -11,10 +13,12 @@ const SearchMobile = () => {
   const { replace } = useRouter();
   const methods = useForm({ mode: 'all', defaultValues: { search: '' } });
 
-  const handleSearch = (data: FieldValues) => {
-    console.log(data);
+  const handleSearch = async (data: { search: string }) => {
+    try {
+      const resp = await searchQuotes(data);
+      dispatch(setSearchedQuote(resp.data));
+    } catch {}
     replace({ query: data });
-    methods.setValue('search', '');
     dispatch(searchModal());
   };
   return (

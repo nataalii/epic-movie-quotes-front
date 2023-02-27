@@ -26,11 +26,12 @@ const usePost = () => {
   );
 
   const quoteData = data?.pages.flatMap((page) => page.quotes);
-
   const { t } = useTranslation('news-feed');
   const locale = useRouter().locale as 'en' | 'ge';
+
   const { likeMutation } = useLike();
   const { id: userId } = useSelector((store: RootState) => store.user);
+
   const handleLike = async (id: string, likeReceiver: string) => {
     const data = {
       from: userId,

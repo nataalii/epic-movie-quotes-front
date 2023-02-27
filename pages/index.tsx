@@ -56,12 +56,12 @@ export default function Home() {
           movieName={t('interstellar_title')}
         />
         <BackgroundImage
-          img='bg-tenebaums lg:bg-fixed'
+          img='bg-tenebaums md:bg-fixed'
           quote={t('tenenbaums_quote')}
           movieName={t('tenenbaums_title')}
         />
         <BackgroundImage
-          img='bg-lord-of-rings  lg:bg-fixed'
+          img='bg-lord-of-rings  md:bg-fixed'
           quote={t('lotr_quote')}
           movieName={t('lotr_title')}
         />

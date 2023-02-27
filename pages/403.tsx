@@ -5,14 +5,13 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 export default function Forbidden() {
-  <Head>
-    <title>Forbidden</title>
-    <meta property='og:title' content='My page title' key='title' />
-  </Head>;
   const router = useRouter();
   const { t } = useTranslation('errors');
   return (
     <Fragment>
+      <Head>
+        <title>Forbidden</title>
+      </Head>
       <div className='h-screen w-screen flex flex-col items-center pt-40 gap-12  text-center'>
         <div className=' relative'>
           <div className='absolute ml-[0.8rem]'>

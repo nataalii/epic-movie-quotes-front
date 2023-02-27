@@ -2,6 +2,7 @@
 import { CommentIcon, Like } from 'components/icons';
 import { FieldValues } from 'react-hook-form';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useSelector } from 'react-redux';
 import { AddComment } from '../addComment';
 import { Comment } from '../comment';
 import usePost from './usePost';
@@ -16,20 +17,22 @@ const Post = () => {
     fetchNextPage,
     hasNextPage,
   } = usePost();
+  const searchQuotes = useSelector((state: any) => state.quotes.searchQuotes);
+  const dataToSearch = searchQuotes?.length !== 0 ? searchQuotes : quoteData;
 
   return (
     <div className='flex flex-col items-center max-w-[60rem] xl:ml-[31rem] lg:ml-[25rem]  lg:mx-10 sm:mx-5 mb-10 -mt-4 '>
-      {quoteData && (
+      {dataToSearch && (
         <InfiniteScroll
-          dataLength={quoteData.length}
+          dataLength={dataToSearch.length}
           next={() => {
             fetchNextPage();
           }}
           scrollThreshold={0.9}
           hasMore={hasNextPage as boolean}
-          loader={<h4>Loading...</h4>}
+          loader={<h4 className=' mt-10'>Loading...</h4>}
         >
-          {quoteData?.map((quote: any) => {
+          {dataToSearch?.map((quote: any) => {
             return (
               <div
                 className=' bg-[#11101A] sm:rounded-xl sm:mb-4 sm:mt-10 mt-7'
@@ -48,7 +51,7 @@ const Post = () => {
                     <h4 className='text-sm sm:text-xl mb-4'>
                       &quot;{quote.quote[locale]}&quot;. {t('movie')} -
                       <span className='text-[#DDCCAA]'>
-                        &nbsp;{quote.movie.title[locale]}.
+                        &nbsp;{quote.title[locale]}.
                       </span>
                       <span className=' text-white'>
                         &nbsp;({quote.movie.year})

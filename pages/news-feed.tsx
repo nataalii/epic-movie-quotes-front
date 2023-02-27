@@ -4,8 +4,16 @@ import { Post, Search } from 'components/';
 import useAuth from 'hooks/useAuth';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
+import { useEffect } from 'react';
 const NewsFeed = () => {
   useAuth();
+  useEffect(() => {
+    const searchQuery = window.location.search;
+    console.log(searchQuery);
+    if (searchQuery !== '') {
+      window.location.href = '/news-feed';
+    }
+  }, []);
 
   return (
     <div className='text-white'>

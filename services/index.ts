@@ -1,3 +1,4 @@
+import { i18n } from 'next-i18next';
 import { LoginModalTypes, RegisterModalTypes, ResetPasswordTypes } from 'types';
 import instance from './axios';
 
@@ -29,8 +30,8 @@ export const updateUser = async (data: any) => {
   return response;
 };
 
-export const addEmail = async (email: string) => {
-  const response = await instance.post('/api/email-create', email);
+export const addEmail = async (email: string, local = i18n?.language) => {
+  const response = await instance.post('/api/email-create', { email, local });
   return response;
 };
 
@@ -139,7 +140,7 @@ export const deleteQuote = async (id: string) => {
   return response;
 };
 
-export const search = async (data: { search: string }) => {
+export const searchQuotes = async (data: { search: string }) => {
   const response = await instance.post('/api/quotes/search', data);
   return response;
 };

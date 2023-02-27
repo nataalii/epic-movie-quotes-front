@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { search } from 'services';
+import { searchQuotes } from 'services';
 import { setSearchedQuote } from 'stores/quoteSlice';
 import { RootState } from 'types/stateTypes';
 const useSearch = () => {
@@ -11,7 +11,7 @@ const useSearch = () => {
   const dispatch = useDispatch();
   const { writeQuoteModal } = useSelector((store: RootState) => store.modal);
   const [isActive, setIsActive] = useState(false);
-  const { replace } = useRouter();
+  const { replace, query } = useRouter();
   const searchRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -36,12 +36,10 @@ const useSearch = () => {
 
   const handleSearch = async (data: { search: string }) => {
     try {
-      const resp = await search(data);
-      const quotes = resp.data;
-      dispatch(setSearchedQuote(quotes));
+      const resp = await searchQuotes(data);
+      dispatch(setSearchedQuote(resp.data));
     } catch {}
     replace({ query: data });
-    methods.setValue('search', '');
   };
 
   return {
@@ -53,6 +51,7 @@ const useSearch = () => {
     handleSearch,
     searchRef,
     setIsActive,
+    query,
   };
 };
 

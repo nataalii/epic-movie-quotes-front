@@ -1,8 +1,10 @@
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
-import { useSelector } from 'react-redux';
-import { addComment } from 'services';
+import { useDispatch, useSelector } from 'react-redux';
+import { addComment, searchQuotes } from 'services';
+import { setSearchedQuote } from 'stores/quoteSlice';
 import { RootState } from 'types/stateTypes';
 
 const useAddComments = () => {
@@ -10,11 +12,18 @@ const useAddComments = () => {
   const methods = useForm({ mode: 'all' });
   const { t } = useTranslation('news-feed');
   const queryClient = useQueryClient();
-
+  const { query } = useRouter();
+  const search = query.search as string;
+  const dispatch = useDispatch();
   const { mutate: addCommentMutation } = useMutation(addComment, {
-    onSuccess: () => {
+    onSuccess: async () => {
       queryClient.invalidateQueries('quotes');
       queryClient.invalidateQueries('notifications');
+      if (search) {
+        await searchQuotes({ search }).then((res) => {
+          dispatch(setSearchedQuote(res.data));
+        });
+      }
     },
   });
   const onSubmit = async (

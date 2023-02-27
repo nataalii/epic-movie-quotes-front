@@ -18,5 +18,9 @@
     "edit": "რედაქტირება",
     "delete": "წაშლა",
     "quote_in_english": "ციტატა ინგლისურ ენაზე",
-    "quote_in_georgian": "ციტატა ქართულ ენაზე"
+    "quote_in_georgian": "ციტატა ქართულ ენაზე",
+    "save_changes": "ცვლილებების შენახვა",
+    "edit_quote": "ციტატის რედაქტირება",
+    "change_photo": "შეცვალეთ სურათი"
+
 }

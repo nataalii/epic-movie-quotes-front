@@ -3,10 +3,10 @@ import { toggleLike } from 'services';
 
 const useLike = () => {
   const queryClient = useQueryClient();
+
   const { mutate: likeMutation } = useMutation(toggleLike, {
-    onSuccess: () => {
+    onSuccess: async () => {
       queryClient.invalidateQueries('quotes');
-      queryClient.invalidateQueries('all quotes');
       queryClient.invalidateQueries('movies');
     },
   });

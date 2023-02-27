@@ -4,12 +4,14 @@ import {
   LocalSwitcher,
   Notification,
   Notifications,
+  SearchIcon,
   useNotifications,
 } from 'components';
 import BurgerMenu from 'components/burgerMenu/burgerMenu';
+import { SearchMobile } from 'components/newsFeed';
 import { useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
-import { burgerMenu, notifications } from 'stores/modalSlice';
+import { burgerMenu, notifications, searchModal } from 'stores/modalSlice';
 import { RootState } from 'types/stateTypes';
 import useNavBar from './useNavBar';
 
@@ -24,7 +26,9 @@ const NavBar = () => {
     logoutHandler,
   } = useNavBar();
   const queryClient = useQueryClient();
-  const { notificationsModal } = useSelector((store: RootState) => store.modal);
+  const { notificationsModal, searchModal: openSearchModla } = useSelector(
+    (store: RootState) => store.modal
+  );
   const { notifications: usernotifications } = useNotifications();
 
   const notificationAmount = usernotifications?.data.filter(
@@ -34,6 +38,7 @@ const NavBar = () => {
   return (
     <header className=' h-20 bg-[#24222F] flex sticky top-0 z-30'>
       {notificationsModal && <Notifications />}
+      {openSearchModla && <SearchMobile />}
       <div className='flex justify-between items-center m-auto max-w-[120rem] w-[93%]'>
         <h3
           className='lg:block hidden text-[#DDCCAA] uppercase cursor-pointer '
@@ -55,6 +60,12 @@ const NavBar = () => {
 
         <div className='flex justify-center items-center lg:gap-10 gap-5 '>
           <div
+            className=' sm:hidden block cursor-pointer relative'
+            onClick={() => dispatch(searchModal())}
+          >
+            <SearchIcon />
+          </div>
+          <div
             className='cursor-pointer relative'
             onClick={() => {
               dispatch(notifications());
@@ -63,7 +74,7 @@ const NavBar = () => {
           >
             <Notification />
             {notificationAmount !== 0 ? (
-              <h1 className='absolute -top-2 -right-2 h-6 w-6 rounded-full bg-[#E33812] text-center'>
+              <h1 className='absolute -top-3 -right-2  w-6 rounded-full bg-[#E33812] text-center'>
                 {notificationAmount}
               </h1>
             ) : (

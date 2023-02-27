@@ -21,10 +21,14 @@ const GoogleMobile = () => {
     editAvatar,
     setEditAvatar,
     updateUsernameModal,
+    router,
   } = useMobileDesign();
   return (
     <div className='flex flex-col inset-0  bg-[#181623] mt-20 z-100 fixed '>
-      <div className=' m-6 cursor-pointer w-14'>
+      <div
+        className=' m-6 cursor-pointer w-14'
+        onClick={() => router.replace('/news-feed')}
+      >
         <BackArrow />
       </div>
       <div>

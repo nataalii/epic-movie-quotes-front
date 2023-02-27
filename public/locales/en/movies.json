@@ -17,5 +17,8 @@
     "edit": "Edit",
     "delete": "Delete",
     "quote_in_english": "”Quote in English”",
-    "quote_in_georgian": "”Quote in Georgian”"
+    "quote_in_georgian": "”Quote in Georgian”",
+    "save_changes": "Save Changes",
+    "edit_quote": "Edit Quote",
+    "change_photo": "Change Photo"
 }

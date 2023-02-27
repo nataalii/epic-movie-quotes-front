@@ -1,7 +1,25 @@
 {
+    "you_shall_not_pass": "You shall not pass!",
+    "permission_denied": "Sorry, but you don’t have permission to access this page",
+    "return_home": "Return Home",
+    "whoops": "Whoops!",
+    "not_found": "We can't see the page you are looking for",
     "required": "Field is Required",
-    "email_min_symbols": "Email should contain min 3 symbols",
+    "name_min_3": "Name should contain min 3 symbols",
+    "name_min_15": "Name should contain max 15 symbols",
+    "name_exists": "The name has already been taken.",
+    "email_min_3": "The email should contain min 3 symbols",
+    "email_exists": "The email has already been taken.",
+    "email_valid": "Email should be valid",
+    "email_invalid": "The selected email is invalid",
+    "password_min_8": "Password should contain min 8 symbols",
+    "password_max_15": "Password should contain max 15 symbols",
+    "passwords_should_match": "Passwords should match!",
+    "lowercase_letters": "Field should contain only lowercase letters",
+    "invalid_credentials": "Invalid Credentials",
+
     "fill_in_english": "Fill in English",
-    "fill_in_georgian": "Fill in Georgian",
-    "email_valid": "Email should be valid"
+    "fill_in_georgian": "Fill in Georgian"
+    
+    
 }

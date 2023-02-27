@@ -1,8 +1,10 @@
+import { useTranslation } from 'next-i18next';
 import { useFormContext } from 'react-hook-form';
 import { addMovieInputTypes } from 'types';
 
 const InputText: React.FC<addMovieInputTypes> = (props) => {
   const form = useFormContext();
+  const { t } = useTranslation('errors');
   return (
     <div>
       <input
@@ -12,7 +14,7 @@ const InputText: React.FC<addMovieInputTypes> = (props) => {
         defaultValue={props.defaultValue}
         type={props.type}
         {...form.register(props.name as string, {
-          required: 'Field is required',
+          required: t('errors:required') as string,
         })}
       />
       <span className='absolute  text-white top-3 right-5'>

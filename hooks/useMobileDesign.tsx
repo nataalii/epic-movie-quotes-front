@@ -3,8 +3,10 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from 'services';
+import { setUserData } from 'stores/userDataSlice';
 import { RootState } from 'types/stateTypes';
 
 const useMobileDesign = () => {
@@ -15,6 +17,7 @@ const useMobileDesign = () => {
   const { notification } = useMobileToast();
   const { t } = useTranslation('profile');
   const router = useRouter();
+  const queryClient = useQueryClient();
   const setImage = (event: any) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -29,8 +32,11 @@ const useMobileDesign = () => {
   const onSubmit = async (data: any) => {
     const formData = new FormData();
     formData.append('thumbnail', data.mobileAvatar[0]);
-    await updateUser(formData);
+    await updateUser(formData).then((res) => {
+      dispatch(setUserData(res.data));
+    });
     setEditAvatar(false);
+    queryClient.invalidateQueries('user');
     notification('Image changed succsessfully');
   };
 
@@ -54,6 +60,7 @@ const useMobileDesign = () => {
     updateEmailsModal,
     t,
     router,
+    queryClient,
   };
 };
 

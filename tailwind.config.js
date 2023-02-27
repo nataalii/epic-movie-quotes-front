@@ -11,7 +11,7 @@ module.exports = {
       },
       backgroundImage: {
         interstellar: "url('../public/assets/images/interstellar.jpeg')",
-        'lord-of-rings': "url('../public/assets/images/lord-of-rings.jpg')",
+        'lord-of-rings': "url('../public/assets/images/lord-of-rings.png')",
         tenebaums: "url('../public/assets/images/The-Royal-Tenebaums.png')",
       },
 

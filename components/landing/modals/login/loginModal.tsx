@@ -1,4 +1,11 @@
-import { Button, EyeClosed, EyeOpen, TextInput, Google } from 'components';
+import {
+  Button,
+  EyeClosed,
+  EyeOpen,
+  TextInput,
+  Google,
+  Exit,
+} from 'components';
 import useLoginModal from './useLoginModal';
 
 const LoginModal = () => {
@@ -26,6 +33,12 @@ const LoginModal = () => {
           e.stopPropagation();
         }}
       >
+        <div
+          className=' absolute mt-7 right-10 cursor-pointer sm:hidden block '
+          onClick={hideLoginModalHandler}
+        >
+          <Exit />
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='text-center p-1 '>
             <h1 className='text-white text-2xl sm:text-[2rem]  mb-3 mt-20 sm:mt-12 '>
@@ -39,10 +52,10 @@ const LoginModal = () => {
               placeholder={t('email_placeholder')}
               label={t('email')}
               register={register('email', {
-                required: t('required') as string,
+                required: t('errors:required') as string,
                 minLength: {
                   value: 3,
-                  message: t('email_min_symbols'),
+                  message: t('errors:email_min_3'),
                 },
               })}
               isDirty={getFieldState('email').isDirty}
@@ -60,10 +73,10 @@ const LoginModal = () => {
               type={passwordVisibility ? 'text' : 'password'}
               label={t('password')}
               register={register('password', {
-                required: t('required') as string,
+                required: t('errors:required') as string,
                 minLength: {
-                  value: 3,
-                  message: 'Password should contain min 3 symbols',
+                  value: 8,
+                  message: t('errors:password_min_8'),
                 },
               })}
               isDirty={getFieldState('password').isDirty}

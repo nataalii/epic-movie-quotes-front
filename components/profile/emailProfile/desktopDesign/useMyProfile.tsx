@@ -1,12 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import useEmails from 'hooks/useEmails';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { Message } from 'components/toasts';
 import {
+  getUser,
   makePrimaryEmail,
   removeEmail,
   updateUser,
@@ -14,6 +16,7 @@ import {
 } from 'services';
 import { RootState } from 'types/stateTypes';
 import { useTranslation } from 'next-i18next';
+import { setUserData } from 'stores/userDataSlice';
 
 const useMyProfile = () => {
   const { name, email, image } = useSelector((store: RootState) => store.user);
@@ -37,7 +40,6 @@ const useMyProfile = () => {
     handleSubmit,
     getValues,
     setValue,
-    setError,
     clearErrors,
     formState: { errors },
   } = useForm({
@@ -54,29 +56,26 @@ const useMyProfile = () => {
     setSelectedImage(image);
   };
   const { emails } = useEmails();
-  const { mutate: submitForm } = useMutation(updateUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('users');
-      cancelButtonHandler();
-      toast(<Message text={t('changes_updated')} />);
-    },
-    onError: (errors: any) => {
-      const error = errors.response.data.errors?.name;
-      setError('name', {
-        type: 'nameExists',
-        message: error[0],
-      });
-    },
+  const { data: userData } = useQuery('user', getUser, {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    retry: 0,
   });
-
+  const user = userData?.data.user;
   const onSubmit = async () => {
     const data = {
       name: getValues('name'),
       password: getValues('newPassword'),
       thumbnail: getValues('avatar')[0],
     };
-    console.log(data);
-    submitForm(data, {});
+    await updateUser(data).then((res) => {
+      dispatch(setUserData(res.data));
+    });
+    setResetPassword(false);
+    setIsReadOnly(true);
+    setEditAvatar(false);
+    queryClient.invalidateQueries('user');
+    toast(<Message text={t('changes_updated')} />);
   };
 
   // Set Image
@@ -126,13 +125,14 @@ const useMyProfile = () => {
   const { mutate: makePrimary } = useMutation(makePrimaryEmail, {
     onSuccess: () => {
       queryClient.invalidateQueries('emails');
+      queryClient.invalidateQueries('user');
     },
   });
-
   return {
     name,
     email,
     image,
+    user,
     passwordVisibility,
     setPasswordVisibility,
     passConfVisbility,

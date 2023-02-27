@@ -1,4 +1,5 @@
-import { useTranslation } from 'next-i18next';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { i18n, useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -41,8 +42,8 @@ const useResetPassword = () => {
     const { email, token } = router.query;
     setEmail(email as string);
     setToken(token as string);
-  }, [router.query]);
-
+    router.replace('/' + i18n?.language);
+  }, []);
   const onSubmit = async (data: ResetPasswordTypes) => {
     try {
       data['token'] = token;

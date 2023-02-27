@@ -25,10 +25,10 @@ const UsernameUpdate = () => {
               <input
                 className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
                 {...methods.register('name', {
-                  required: 'Username field is required',
+                  required: t('errors:required') as string,
                   minLength: {
                     value: 3,
-                    message: 'Username should contain min 3 symbols',
+                    message: t('errors:name_min_3'),
                   },
                 })}
               />

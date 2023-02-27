@@ -1,5 +1,4 @@
 import axios from 'axios';
-import useToasts from 'hooks/useToasts';
 import { useRouter } from 'next/router';
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -21,8 +20,6 @@ instance.interceptors.response.use(
     if (status === 403) {
       const router = useRouter();
       router.push('/403');
-    } else if (status === 422) {
-      useToasts(error.response.data.message);
     }
 
     return Promise.reject(error);

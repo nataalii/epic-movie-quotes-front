@@ -50,7 +50,6 @@ const useMovieDetail = () => {
     queryKey: ['quotes', `movie id: ${movie?.data.id}`],
     queryFn: () => getUserQuotes(movie?.data.id as string),
     enabled: !!movie,
-    refetchOnMount: false,
     refetchOnWindowFocus: false,
     retry: 0,
   });

@@ -2,16 +2,16 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { search } from 'services';
+import { searchQuotes } from 'services';
+import { setSearchedQuote } from 'stores/quoteSlice';
 import { RootState } from 'types/stateTypes';
 const useSearch = () => {
   const { t } = useTranslation('news-feed');
   const dispatch = useDispatch();
   const { writeQuoteModal } = useSelector((store: RootState) => store.modal);
   const [isActive, setIsActive] = useState(false);
-  const { replace } = useRouter();
+  const { replace, query } = useRouter();
   const searchRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -33,17 +33,13 @@ const useSearch = () => {
       search: '',
     },
   });
-  const queryClient = useQueryClient();
 
-  const { mutate: submitForm } = useMutation(search, {
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: 'quotes' });
-    },
-  });
-  const onSubmit = async (data: { search: string }) => {
-    submitForm(data);
+  const handleSearch = async (data: { search: string }) => {
+    try {
+      const resp = await searchQuotes(data);
+      dispatch(setSearchedQuote(resp.data));
+    } catch {}
     replace({ query: data });
-    methods.setValue('search', '');
   };
 
   return {
@@ -52,9 +48,10 @@ const useSearch = () => {
     writeQuoteModal,
     isActive,
     methods,
-    onSubmit,
+    handleSearch,
     searchRef,
     setIsActive,
+    query,
   };
 };
 

@@ -13,7 +13,7 @@ const Notifications = () => {
         <div className='flex justify-between items-center text-white px-6 pt-12'>
           <h1 className=' lg:text-[2rem] text-xl'>{t('notifications')}</h1>
           {notifications?.data.length === 0 ? (
-            <h2 className='text-white'>{t('no_notifications_yet')}</h2>
+            <h2 className='text-white'>{t('nothing_to_show')}</h2>
           ) : (
             <h2 className='underline cursor-pointer' onClick={() => onSubmit()}>
               {t('mark_as_all_read')}

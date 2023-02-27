@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { i18n, useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -39,6 +39,7 @@ const useRegisterModal = () => {
   };
   const onSubmit: SubmitHandler<RegisterModalTypes> = async (data) => {
     try {
+      data['local'] = i18n?.language as string;
       await fetchCSRFToken();
       await registerRequest(data);
       hideRegisterModalHandler();
@@ -48,13 +49,13 @@ const useRegisterModal = () => {
       if (errors?.name) {
         setError('name', {
           type: 'nameExists',
-          message: errors.name[0],
+          message: t('errors:name_exists') as string,
         });
       }
       if (errors?.email) {
         setError('email', {
           type: 'emailExists',
-          message: errors.email[0],
+          message: t('errors:email_exists') as string,
         });
       }
     }

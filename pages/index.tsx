@@ -16,6 +16,7 @@ import VerificationNotice from 'components/landing/modals/notifications/verifica
 import { useLanding } from 'hooks';
 import { Fragment } from 'react';
 import { openRegisterModal } from 'stores/modalSlice';
+import Head from 'next/head';
 export default function Home() {
   const {
     registerModal,
@@ -32,6 +33,10 @@ export default function Home() {
 
   return (
     <Fragment>
+      <Head>
+        <title>Epic Movies</title>
+        <meta property='og:title' content='My page title' key='title' />
+      </Head>
       <div className='bg-[#11101A] text-[#DDCCAA] font-helvetica '>
         <Header />
         <div className='flex justify-center items-center gap-6 flex-col h-[42rem]  '>
@@ -51,12 +56,12 @@ export default function Home() {
           movieName={t('interstellar_title')}
         />
         <BackgroundImage
-          img='bg-tenebaums lg:bg-fixed'
+          img='bg-tenebaums md:bg-fixed'
           quote={t('tenenbaums_quote')}
           movieName={t('tenenbaums_title')}
         />
         <BackgroundImage
-          img='bg-lord-of-rings  lg:bg-fixed'
+          img='bg-lord-of-rings  md:bg-fixed'
           quote={t('lotr_quote')}
           movieName={t('lotr_title')}
         />

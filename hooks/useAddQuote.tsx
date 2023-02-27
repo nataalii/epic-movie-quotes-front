@@ -47,12 +47,23 @@ const useAddQuote = () => {
       reader.readAsDataURL(file);
     }
   };
+  const onDrop = (e: any) => {
+    e.preventDefault();
+    const reader = new FileReader();
+    const file = e.dataTransfer.files[0];
+    methods.setValue('image', e.dataTransfer.files);
+    reader.onload = (e: any) => {
+      setSelectedImage(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
   const { movie } = useMovieDetail();
   return {
     dispatch,
     t,
     methods,
     selectedImage,
+    setSelectedImage,
     locale,
     name,
     image,
@@ -60,6 +71,7 @@ const useAddQuote = () => {
     setImage,
     movie,
     addQuoteMutation,
+    onDrop,
   };
 };
 export default useAddQuote;

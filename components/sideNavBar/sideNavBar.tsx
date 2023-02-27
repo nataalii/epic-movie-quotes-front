@@ -3,12 +3,15 @@ import { Home, Movie } from 'components';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchedMovies } from 'stores/movieSlice';
+import { setSearchedQuote } from 'stores/quoteSlice';
 
 const SideNavBar = () => {
   const router = useRouter();
   const { name, image } = useSelector((store: any) => store.user);
   const { t } = useTranslation('common');
+  const dispatch = useDispatch();
   return (
     <div>
       <div className='hidden lg:flex lg:flex-col h-20 fixed top-28 left-16 gap-8'>
@@ -35,7 +38,7 @@ const SideNavBar = () => {
             </Link>
           </div>
         </div>
-        <Link href='/news-feed'>
+        <Link href='/news-feed' onClick={() => dispatch(setSearchedQuote([]))}>
           <div className='flex items-center gap-10 text-lg ml-3'>
             <Home
               color={router.asPath.includes('/news-feed') ? '#E31221' : 'white'}
@@ -43,7 +46,10 @@ const SideNavBar = () => {
             <p>{t('news_feed')}</p>
           </div>
         </Link>
-        <Link href='/movie-list'>
+        <Link
+          href='/movie-list'
+          onClick={() => dispatch(setSearchedMovies([]))}
+        >
           <div className='flex items-center gap-10 text-lg ml-3'>
             <Movie
               color={

@@ -1,4 +1,3 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { Message } from 'components/toasts';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
@@ -7,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { addEmail } from 'services';
 import { closeAddEmailModal } from 'stores/modalSlice';
-import { schema } from 'validations';
 
 const useAddEmail = () => {
   const dispatch = useDispatch();
@@ -15,7 +13,6 @@ const useAddEmail = () => {
   const { t } = useTranslation('profile');
   const methods = useForm({
     mode: 'all',
-    resolver: yupResolver(schema),
   });
 
   const { mutate: submitForm } = useMutation(addEmail, {
@@ -28,10 +25,12 @@ const useAddEmail = () => {
     },
     onError: (error: any) => {
       const errors = error.response.data.errors;
-      methods.setError('email', {
-        type: 'emailExists',
-        message: errors?.email[0],
-      });
+      if (errors) {
+        methods.setError('email', {
+          type: 'emailExists',
+          message: t('errors:email_exists') as string,
+        });
+      }
     },
   });
   const onSubmit = async (data: any) => {

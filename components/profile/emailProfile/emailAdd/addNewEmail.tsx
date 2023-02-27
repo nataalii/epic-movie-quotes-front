@@ -27,20 +27,20 @@ const AddNewEmail = () => {
               <input
                 className=' p-2 bg-light-gray rounded-md text-[#212529] outline-none'
                 {...methods.register('email', {
-                  required: 'Email field is required',
+                  required: t('errors:required') as string,
                   minLength: {
                     value: 3,
-                    message: 'Email should contain min 3 symbols',
+                    message: t('errors:email_min_3'),
                   },
                   pattern: {
                     value: REGEX_EMAIL,
-                    message: 'Email should be valid',
+                    message: t('errors:email_valid'),
                   },
                 })}
               />
               <div className='relative'>
                 <p className=' text-danger h-1 font-normal text-base '>
-                  {(methods.formState.errors.email?.type === 'alreadyExists' &&
+                  {(methods.formState.errors.email?.type === 'emailExists' &&
                     (methods.formState.errors.email?.message as string)) ||
                     (methods.formState.errors.email?.message as string)}
                 </p>

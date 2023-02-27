@@ -10,7 +10,7 @@ const Search = () => {
     writeQuoteModal,
     isActive,
     methods,
-    onSubmit,
+    handleSearch,
     searchRef,
     setIsActive,
   } = useSearch();
@@ -33,7 +33,7 @@ const Search = () => {
         }`}
         onClick={() => setIsActive(true)}
       >
-        <form action='' onSubmit={methods.handleSubmit(onSubmit)}>
+        <form action='' onSubmit={methods.handleSubmit(handleSearch)}>
           <div className='flex items-center gap-2 search-input' ref={searchRef}>
             <SearchIcon />
             <input

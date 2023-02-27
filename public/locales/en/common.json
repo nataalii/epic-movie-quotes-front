@@ -1,11 +1,11 @@
 {
-    "sign_up": "Sign in",
+    "sign_up": "Sign up",
     "log_in": "Log in",
     "interstellar_quote": "“You have to leave somethig behind to go forward”",
     "interstellar_title": "Interstellar, 2014",
     "tenenbaums_quote": "“I think we’re just gonna have to be secretly in love with earch other and leave it that“",
     "tenenbaums_title": "The Royal Tenenbaums, 2001",
-    "lotr_quote": "“Even the smallest person can change the course of the future”",
+    "lotr_quote": "“I see in your eyes the same fear that would take the heart of me....”",
     "lotr_title": "The Lord of the Rings, 2001",
     "movie_quotes": "movie quotes",
     "welcome_text": "Find any quote in millions of movie lines",
@@ -15,7 +15,7 @@
     "log_out": "Log Out",
     "news_feed": "News feed",
     "list_of_movies": "List of Movies",
-        "choose_file": "Choose file",
+    "choose_file": "Choose file",
     "upload_image": "Upload image",
     "drag_and_drop": "Drag & drop your image here or"
 }

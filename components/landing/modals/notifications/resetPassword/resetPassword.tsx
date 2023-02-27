@@ -50,18 +50,18 @@ const ResetPassword = () => {
                   type={passwordVisibility ? 'text' : 'password'}
                   isDirty={getFieldState('password').isDirty}
                   register={register('password', {
-                    required: t('required') as string,
+                    required: t('errors:required') as string,
                     minLength: {
                       value: 8,
-                      message: 'Password should contain min 8 symbols',
+                      message: t('errors:password_min_8'),
                     },
                     maxLength: {
                       value: 15,
-                      message: 'Password should contain max 15 symbols',
+                      message: t('errors:password_max_15'),
                     },
                     pattern: {
                       value: /^[a-z0-9]*$/,
-                      message: 'Enter only lowercase letters ans numbers ',
+                      message: t('errors:passwords_should_match'),
                     },
                   })}
                   errors={errors.password}
@@ -88,7 +88,10 @@ const ResetPassword = () => {
                   register={register('confirm_password', {
                     validate: (value) => {
                       const { password } = getValues();
-                      return password === value || 'Passwords should match!';
+                      return (
+                        password === value ||
+                        (t('errors:passwords_should_match') as string)
+                      );
                     },
                   })}
                   errors={errors.confirm_password}

@@ -16,6 +16,7 @@ const AddMovie = () => {
     genres,
     methods,
     locale,
+    onDrop,
   } = useAddMovie();
   return (
     <QuotesModalLayout
@@ -45,7 +46,7 @@ const AddMovie = () => {
               <Controller
                 control={methods.control}
                 name='genres'
-                rules={{ required: 'Field is required' }}
+                rules={{ required: t('errors:required') as string }}
                 render={({ field: { onChange, ref } }) => (
                   <Select
                     options={genres(locale)}
@@ -134,11 +135,17 @@ const AddMovie = () => {
                 errors={methods.formState.errors.budget}
               />
             </div>
-            <div className='relative '>
+            <div
+              className='relative '
+              onDragOver={(e) => {
+                e.preventDefault();
+              }}
+              onDrop={onDrop}
+            >
               <InputFile
                 errors={methods.formState.errors.image}
                 register={methods.register('image', {
-                  required: 'Field is required',
+                  required: t('errors:required') as string,
                   onChange: (e) => {
                     setImage(e);
                   },

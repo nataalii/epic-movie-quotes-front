@@ -49,7 +49,7 @@ const useLoginModal = () => {
       if (error) {
         setError('email', {
           type: 'invalidCredentials',
-          message: error,
+          message: t('errors:invalid_credentials') as string,
         });
         setError('password', {
           type: 'invalidCredentials',

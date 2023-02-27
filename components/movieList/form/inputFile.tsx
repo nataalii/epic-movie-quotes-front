@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Photo } from 'components/icons';
 import { useTranslation } from 'next-i18next';
 
@@ -6,7 +7,7 @@ const InputFile = ({ register, errors }: { register: Object; errors: any }) => {
 
   return (
     <>
-      <div className=' bg-transparent px-4 text-lg relative w-full rounded-[4px] outline outline-1 outline-[#6C757D] md:gap-6 p-3 flex items-center justify-between'>
+      <div className=' bg-transparent px-4 text-lg relative w-full rounded-[4px] outline outline-1 outline-[#6C757D] md:gap-6 p-3 flex items-center justify-between drop-file-input cursor-pointer'>
         <div className='flex gap-3 md:gap-6 items-center text-white'>
           <Photo />
           <p className='hidden lg:block'>{t('drag_and_drop')}</p>

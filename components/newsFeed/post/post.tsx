@@ -3,6 +3,7 @@ import { CommentIcon, Like } from 'components/icons';
 import { FieldValues } from 'react-hook-form';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSelector } from 'react-redux';
+import { RootState } from 'types/stateTypes';
 import { AddComment } from '../addComment';
 import { Comment } from '../comment';
 import usePost from './usePost';
@@ -17,7 +18,9 @@ const Post = () => {
     fetchNextPage,
     hasNextPage,
   } = usePost();
-  const searchQuotes = useSelector((state: any) => state.quotes.searchQuotes);
+  const searchQuotes = useSelector(
+    (state: RootState) => state.quotes.searchQuotes
+  );
   const dataToSearch = searchQuotes?.length !== 0 ? searchQuotes : quoteData;
 
   return (

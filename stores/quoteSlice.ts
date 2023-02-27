@@ -1,10 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { QuotesState } from 'types/stateTypes';
 
-interface QuoteState {
-  searchQuotes: any[];
-}
-
-const initialState: QuoteState = {
+const initialState: QuotesState = {
   searchQuotes: [],
 };
 
@@ -12,7 +9,7 @@ const quoteSlice = createSlice({
   name: 'quotes',
   initialState,
   reducers: {
-    setSearchedQuote(state, action: PayloadAction<any[]>) {
+    setSearchedQuote(state, action) {
       state.searchQuotes = action.payload;
     },
   },

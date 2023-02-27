@@ -33,12 +33,15 @@ export interface UserState {
   google_id: string;
 }
 export interface MoviesState {
-  title: string;
-  image: string;
+  searchMovies: { data: string }[];
 }
 
+export interface QuotesState {
+  searchQuotes: string[];
+}
 export interface RootState {
   modal: ModalState;
   user: UserState;
   movies: MoviesState;
+  quotes: QuotesState;
 }

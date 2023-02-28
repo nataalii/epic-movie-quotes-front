@@ -13,18 +13,13 @@ const useNotification = () => {
     refetchOnWindowFocus: false,
     retry: 0,
   });
-  // const formatTime = (input: Date) => {
-  //   const date = new Date(input);
-  //   const nowDate = new Date().getTime();
-  //   const formatted = Math.floor((nowDate - date.getTime()) / 1000 / 60);
-  //   return formatted;
-  // };
+  console.log(notifications);
   const formatTime = (input: Date) => {
     const date = new Date(input);
     const now = new Date();
     const diff = Math.floor((now.getTime() - date.getTime()) / 1000);
     if (diff < 60) {
-      return `${diff} seconds ago`;
+      return `${diff} ${t('seconds_ago')}`;
     } else if (diff < 60 * 60) {
       const minutes = Math.floor(diff / 60);
       return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;

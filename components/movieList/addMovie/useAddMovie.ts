@@ -43,9 +43,7 @@ const useAddMovie = () => {
     e.preventDefault();
     const reader = new FileReader();
     const file = e.dataTransfer.files[0];
-    console.log(methods.getValues('image'));
     methods.setValue('image', e.dataTransfer.files);
-    console.log(methods.getValues('image'));
     reader.onload = (e: any) => {
       setSelectedImage(e.target.result);
     };

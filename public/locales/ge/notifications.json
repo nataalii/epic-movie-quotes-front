@@ -5,6 +5,12 @@
     "reacted_to_your_quote": "რეაქცია გამოხატა პოსტზე",
     "commented_to_your_movie_quote": "დააკომენტარა თქვენს ციტატაზე",
     "new": "ახალი",
-    "minutes_ago": " წუთის წინ"
-
+    "seconds_ago": "წამის წინ",
+    "minute": "წუთის",
+    "minutes": "წუთის",
+    "hour": "საათის",
+    "hours": "საათის",
+    "day": "დღის",
+    "days": "დღის",
+    "ago": "წინ"
 }

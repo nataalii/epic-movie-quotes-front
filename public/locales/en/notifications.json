@@ -5,5 +5,13 @@
     "reacted_to_your_quote": "Reacted to your quote",
     "commented_to_your_movie_quote": "Commented to your movie quote",
     "new": "New",
-    "minutes_ago": " min ago"
+    "seconds_ago": "seconds ago",
+    "minute": "minute",
+    "minutes": "minutes",
+    "hour": "hour",
+    "hours": "hours",
+    "day": "day",
+    "days": "days",
+    "ago": "ago"
+
 }

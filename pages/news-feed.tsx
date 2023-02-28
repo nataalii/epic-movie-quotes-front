@@ -31,6 +31,7 @@ export async function getStaticProps({ locale }: { locale: string }) {
         'news-feed',
         'notifications',
         'errors',
+        'movies',
       ])),
     },
   };

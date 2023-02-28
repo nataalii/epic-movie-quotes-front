@@ -13,7 +13,7 @@ const usePassworConfirm = () => {
       await updateUser(password);
       dispatch(confirmPassword());
       dispatch(updatePassword());
-      notification('Password changed succsessfully');
+      notification(t('password_changed'));
     } catch (error: any) {
       console.log(error);
       dispatch(confirmPassword());

@@ -17,11 +17,17 @@ const Post = () => {
     quoteData,
     fetchNextPage,
     hasNextPage,
+    query,
   } = usePost();
   const searchQuotes = useSelector(
     (state: RootState) => state.quotes.searchQuotes
   );
-  const dataToSearch = searchQuotes?.length !== 0 ? searchQuotes : quoteData;
+  const dataToSearch =
+    searchQuotes?.length !== 0
+      ? searchQuotes
+      : searchQuotes?.length === 0 && query.search
+      ? []
+      : quoteData;
 
   return (
     <div className='flex flex-col items-center max-w-[60rem] xl:ml-[31rem] lg:ml-[25rem]  lg:mx-10 sm:mx-5 mb-10 -mt-4 '>

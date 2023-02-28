@@ -33,7 +33,7 @@ export interface UserState {
   google_id: string;
 }
 export interface MoviesState {
-  searchMovies: { data: string }[];
+  searchMovies: string[];
 }
 
 export interface QuotesState {

@@ -13,7 +13,7 @@ const CheckEmail = () => {
     <ModalLayout
       image={<EmailSent />}
       title={t('check_email')}
-      text={t('recover_instructions')}
+      text={t('please_check_email')}
       button={
         <div className='flex flex-col gap-5 sm:max-w-[25rem] w-[90%] text-center '>
           <Button

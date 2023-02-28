@@ -37,7 +37,7 @@ const useMobileDesign = () => {
     });
     setEditAvatar(false);
     queryClient.invalidateQueries('user');
-    notification('Image changed succsessfully');
+    notification(t('image_changes'));
   };
 
   const { updateUsernameModal, updatePasswordModal, updateEmailsModal } =

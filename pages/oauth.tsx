@@ -7,7 +7,7 @@ const OAuth = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
-    const params = new URLSearchParams(context.req.url);
+    const params = new URLSearchParams(context.query);
     const data = Object.fromEntries(params.entries());
     await oauthLogin(data);
     return {

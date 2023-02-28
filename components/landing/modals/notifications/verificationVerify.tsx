@@ -16,7 +16,7 @@ const VerificationVerify = () => {
       text={t('activated')}
       button={
         <Button
-          item={t('Return Home')}
+          item={t('return_home')}
           color='red'
           size='sm:max-w-[25rem] w-[90%]  '
           onClick={closeVerificationVerifyHandler}

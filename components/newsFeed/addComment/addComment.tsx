@@ -38,6 +38,7 @@ const AddComment: React.FC<QuoteId> = ({ quoteId, quoteAuthorId }) => {
       });
       return () => {
         window.Echo.leave('comments');
+        window.Echo.leave('likes');
       };
     }
   }, [dispatch, echo, search]);

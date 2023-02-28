@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { NavBar } from 'components/navBar';
 import { SideNavBar } from 'components/sideNavBar';
 import { Post, Search } from 'components/';
@@ -5,13 +6,14 @@ import useAuth from 'hooks/useAuth';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 const NewsFeed = () => {
   useAuth();
+  const { replace } = useRouter();
   useEffect(() => {
     const searchQuery = window.location.search;
-    console.log(searchQuery);
     if (searchQuery !== '') {
-      window.location.href = '/news-feed';
+      replace('/news-feed');
     }
   }, []);
 

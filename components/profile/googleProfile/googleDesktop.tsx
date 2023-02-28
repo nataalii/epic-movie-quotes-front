@@ -17,10 +17,11 @@ const GoogleDektop = () => {
     register,
     errors,
     setImage,
+    t,
   } = useMyProfile();
   return (
     <div className='w-[90rem] '>
-      <h1 className='text-2xl ml-20'>My Profile</h1>
+      <h1 className='text-2xl ml-20'>{t('my_profile')}</h1>
 
       <div className='max-w-[60rem] bg-blue-600 rounded-2xl my-28 m-10 pb-16'>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -41,13 +42,13 @@ const GoogleDektop = () => {
               })}
             />
             <label className='text-xl cursor-pointer' htmlFor='avatar'>
-              Upload new Photo
+              {t('upload_new_photo')}
             </label>
           </div>
           <div className='flex flex-col gap-7 ml-24 w-[90%]'>
             <div className='flex w-full items-center '>
               <div className='flex flex-col w-[55%] gap-2'>
-                <label htmlFor='name'>Username</label>
+                <label htmlFor='name'>{t('username')}</label>
                 <input
                   type='text'
                   id='name'
@@ -56,11 +57,11 @@ const GoogleDektop = () => {
                   defaultValue={name}
                   {...register('name', {
                     required: !isReadOnly
-                      ? 'Username field is required'
+                      ? (t('errors:required') as string)
                       : undefined,
                     minLength: {
                       value: 3,
-                      message: 'name should contain min 3 symbols',
+                      message: t('errors:name_min_3'),
                     },
                   })}
                 />
@@ -79,12 +80,12 @@ const GoogleDektop = () => {
                   className=' mx-6 -mt-4 text-light-gray cursor-pointer'
                   onClick={handleEdit}
                 >
-                  Edit
+                  {t('edit')}
                 </h1>
               )}
             </div>
             <div className='flex flex-col w-[55%] gap-2 relative'>
-              <label htmlFor='email'>Email</label>
+              <label htmlFor='email'>{t('email')}</label>
               <input
                 type='text'
                 name='email'
@@ -97,8 +98,8 @@ const GoogleDektop = () => {
             {(!isReadOnly || editAvatar) && (
               <div className='relative '>
                 <div className='absolute right-0 mt-24 flex gap-5 items-center cursor-pointer'>
-                  <h1 onClick={() => cancelButtonHandler()}>Cancel</h1>
-                  <Button item='Save changes' color='red' />
+                  <h1 onClick={() => cancelButtonHandler()}>{t('cancel')}</h1>
+                  <Button item={t('save_changes')} color='red' />
                 </div>
               </div>
             )}

@@ -14,10 +14,8 @@ const useConfirmModal = () => {
   const { mutate: submitForm } = useMutation(addEmail, {
     onSuccess: () => {
       queryClient.invalidateQueries('emails');
-      setTimeout(() => {
-        notification(t('check_email'));
-      }, 3500);
       dispatch(addNewEmail());
+      notification(t('check_email'));
     },
     onError: (error: any) => {
       const errors = error.response.data.errors;

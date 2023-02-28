@@ -21,7 +21,7 @@ const useAddEmail = () => {
       dispatch(closeAddEmailModal());
       setTimeout(() => {
         toast(<Message text={t('check_email')} />);
-      }, 3500);
+      }, 2000);
     },
     onError: (error: any) => {
       const errors = error.response.data.errors;

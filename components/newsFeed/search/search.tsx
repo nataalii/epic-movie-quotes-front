@@ -38,7 +38,7 @@ const Search = () => {
             <SearchIcon />
             <input
               type='text'
-              {...methods.register('search', { required: true })}
+              {...methods.register('search')}
               placeholder={
                 isActive
                   ? (t('search_placeholder') as string)

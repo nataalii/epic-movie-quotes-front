@@ -65,9 +65,7 @@ const Notifications = () => {
                     </h2>
                   </div>
                   <div className='hidden lg:flex flex-col gap-6'>
-                    <h2>
-                      {formatTime(notification.created_at)} {t('minutes_ago')}
-                    </h2>
+                    <h2>{formatTime(notification.created_at)}</h2>
                     {!notification.is_read && (
                       <h2 className='text-[#198754] pl-10'>{t('new')}</h2>
                     )}

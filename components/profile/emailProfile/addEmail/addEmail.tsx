@@ -9,7 +9,7 @@ const AddEmail = () => {
 
   return (
     <div
-      className=' mt-20 flex inset-0  bg-opacity-30 backdrop-blur-sm z-50 items-center fixed '
+      className=' mt-20 flex inset-0  bg-opacity-30 backdrop-blur-sm z-40 items-center fixed '
       onClick={() => dispatch(closeAddEmailModal())}
     >
       <div

@@ -24,7 +24,7 @@ const LocaleSwitcher = ({
         <Arrow />
       </div>
 
-      <div className='relative top-2 right-5 z-40'>
+      <div className='relative top-2 right-5 z-50'>
         {isActive && (
           <ul className='absolute bg-slate-700 rounded-md p-1'>
             {router.locales?.map((locale, index) => (

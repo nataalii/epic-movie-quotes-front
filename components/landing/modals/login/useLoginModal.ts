@@ -42,6 +42,7 @@ const useLoginModal = () => {
     try {
       await fetchCSRFToken();
       await login(data);
+      hideLoginModalHandler();
       router.push('/news-feed');
     } catch (errors: any) {
       const error = errors.response.data.message;

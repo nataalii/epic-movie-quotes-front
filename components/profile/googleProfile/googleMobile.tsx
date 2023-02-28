@@ -22,6 +22,7 @@ const GoogleMobile = () => {
     setEditAvatar,
     updateUsernameModal,
     router,
+    t,
   } = useMobileDesign();
   return (
     <div className='flex flex-col inset-0  bg-[#181623] mt-20 z-100 fixed '>
@@ -41,7 +42,7 @@ const GoogleMobile = () => {
               className='flex flex-col'
             >
               <div className=' flex flex-col  gap-10 items-center pt-10 pb-24'>
-                <div>
+                <div className='flex flex-col  items-center'>
                   <img
                     src={selectedImage || `${image}`}
                     alt='avatar'
@@ -61,18 +62,18 @@ const GoogleMobile = () => {
                     className='text-xl cursor-pointer'
                     htmlFor='mobileAvatar'
                   >
-                    Upload new Photo
+                    {t('upload_new_photo')}
                   </label>
                 </div>
                 <div className='flex flex-col w-[90%] sm:w-[70%] gap-2'>
-                  <h2 className=''>Username</h2>
+                  <h2 className=''>{t('username')}</h2>
                   <div className='flex justify-between '>
                     <h1 className=' text-lg'>{name}</h1>
                     <h2
                       className='cursor-pointer text-[#CED4DA]'
                       onClick={() => dispatch(updateUsername())}
                     >
-                      Edit
+                      {t('edit')}
                     </h2>
                   </div>
 
@@ -80,7 +81,7 @@ const GoogleMobile = () => {
                 </div>
 
                 <div className='flex flex-col gap-3 justify-between w-[90%] sm:w-[70%]'>
-                  <h1 className=' text-sm'>EMAIL</h1>
+                  <h1 className=' text-sm'>{t('email')}</h1>
                   <h2>{email}</h2>
                   <hr className='h-px  bg-gray border-0 ' />
                 </div>
@@ -95,9 +96,9 @@ const GoogleMobile = () => {
                         setSelectedImage(image);
                       }}
                     >
-                      Cancel
+                      {t('cancel')}
                     </h1>
-                    <Button item='Save changes' color='red' />
+                    <Button item={t('save_changes')} color='red' />
                   </div>
                 </div>
               )}

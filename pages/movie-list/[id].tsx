@@ -12,13 +12,22 @@ import {
   ViewQuote,
   AddQuote,
   EditMovie,
+  DeleteMovieConfirm,
 } from 'components';
+import { DeleteQuoteConfirm } from 'components/DeleteQuoteConfirm';
 import { EditQuote } from 'components/movieList/editQuote';
 import { useAuth, useMovieDetail } from 'hooks';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { Key } from 'react';
-import { addQoute, editMovie, editQuote, viewQuote } from 'stores/modalSlice';
+import {
+  addQoute,
+  deleteMovieConfirm,
+  deleteQuoteConfirm,
+  editMovie,
+  editQuote,
+  viewQuote,
+} from 'stores/modalSlice';
 import { QuoteType } from 'types';
 
 const Description = () => {
@@ -26,15 +35,14 @@ const Description = () => {
   const {
     movie,
     t,
-    removeMovie,
-    router,
+    deleteMovieModal,
+    deleteQuoteModal,
     dispatch,
     addQuoteModal,
     viewQuoteModal,
     editQuoteModal,
     editMovieModal,
     quotes,
-    removeQuote,
     handleThreeDotsClick,
     locale,
     selectedQuoteId,
@@ -52,6 +60,8 @@ const Description = () => {
       {viewQuoteModal && <ViewQuote quote={quote?.[0]} />}
       {editQuoteModal && <EditQuote quote={quote?.[0]} />}
       {editMovieModal && <EditMovie />}
+      {deleteMovieModal && <DeleteMovieConfirm id={movie?.id} />}
+      {deleteQuoteModal && <DeleteQuoteConfirm id={quote?.[0].id} />}
       {movie && (
         <div className=' lg:ml-[26rem] my-10 2xl:flex flex-col gap-7 '>
           <h1 className='hidden 2xl:block text-2xl'>
@@ -79,8 +89,7 @@ const Description = () => {
                   <span className=' w-[0.3px] h-[60%] bg-gray' />
                   <span
                     onClick={() => {
-                      removeMovie(movie?.id);
-                      router.replace('/movie-list');
+                      dispatch(deleteMovieConfirm());
                     }}
                   >
                     <Delete />
@@ -178,7 +187,7 @@ const Description = () => {
                   </div>
                   <div
                     className='flex gap-4 cursor-pointer'
-                    onClick={() => removeQuote(quote.id)}
+                    onClick={() => dispatch(deleteQuoteConfirm())}
                   >
                     <Delete />
                     <h2>{t('delete')}</h2>

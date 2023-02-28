@@ -9,3 +9,4 @@ export * from './newsFeed';
 export * from './profile';
 export * from './toasts';
 export * from './movieList';
+export * from './DeleteMovieConfirm';

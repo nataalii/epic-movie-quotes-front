@@ -21,6 +21,7 @@ const EditMovie = () => {
     genres,
     defaultGenres,
   } = useEditMovie();
+
   return (
     <QuotesModalLayout
       title={t('edit_movie')}
@@ -52,6 +53,7 @@ const EditMovie = () => {
                 control={methods.control}
                 name='genres'
                 rules={{ required: 'Field is required' }}
+                defaultValue={defaultGenres(locale)}
                 render={({ field: { onChange, ref } }) => (
                   <Select
                     defaultValue={defaultGenres(locale)}

@@ -20,5 +20,8 @@
     "quote_in_georgian": "”Quote in Georgian”",
     "save_changes": "Save Changes",
     "edit_quote": "Edit Quote",
-    "change_photo": "Change Photo"
+    "change_photo": "Change Photo",
+    "delete_movie_confirmation": "Are You sure you want to delete the movie?",
+    "delete_quote_confirmation": "Are You sure you want to delete the quote?",
+    "cancel": "Cancel"
 }

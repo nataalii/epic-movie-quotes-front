@@ -2,6 +2,7 @@
 import { Button } from 'components/button';
 import { AddMovieIcon, Quotes, SearchIcon } from 'components/icons';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { openAddMovieModal } from 'stores/modalSlice';
 import { RootState } from 'types/stateTypes';
@@ -12,8 +13,14 @@ const Movies = () => {
   const searchMovies = useSelector(
     (state: RootState) => state.movies.searchMovies
   );
+
+  const { query } = useRouter();
   const dataToSearch =
-    searchMovies?.length !== 0 ? searchMovies[0].data : movies;
+    searchMovies?.length !== 0
+      ? searchMovies
+      : searchMovies?.length === 0 && query.search
+      ? []
+      : movies;
   return (
     <div className=' flex flex-col justify-between lg:items-center max-w-[90rem] w-[90%]'>
       <div className='flex w-full justify-between '>

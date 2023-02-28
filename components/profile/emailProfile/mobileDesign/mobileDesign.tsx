@@ -121,7 +121,7 @@ const MobileDesign = () => {
                   >
                     {t('cancel')}
                   </h1>
-                  <Button item='Save changes' color='red' />
+                  <Button item={t('save_changes')} color='red' />
                 </div>
               </div>
             )}

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Layout } from 'components';
 import { AddMovie } from 'components/movieList';
 import Movies from 'components/movieList/movies/movies';
@@ -6,9 +7,18 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'types/stateTypes';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const MovieList = () => {
   useAuth();
+  const { replace } = useRouter();
+  useEffect(() => {
+    const searchQuery = window.location.search;
+    if (searchQuery !== '') {
+      replace('/movie-list');
+    }
+  }, []);
   const { addMovieModal } = useSelector((store: RootState) => store.modal);
   return (
     <Layout>

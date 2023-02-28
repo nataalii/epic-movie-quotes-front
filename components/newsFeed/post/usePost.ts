@@ -28,6 +28,7 @@ const usePost = () => {
   const quoteData = data?.pages.flatMap((page) => page.quotes);
   const { t } = useTranslation('news-feed');
   const locale = useRouter().locale as 'en' | 'ge';
+  const { query } = useRouter();
 
   const { likeMutation } = useLike();
   const { id: userId } = useSelector((store: RootState) => store.user);
@@ -48,6 +49,7 @@ const usePost = () => {
     fetchNextPage,
     hasNextPage,
     quoteData,
+    query,
   };
 };
 

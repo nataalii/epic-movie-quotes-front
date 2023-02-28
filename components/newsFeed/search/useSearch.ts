@@ -38,8 +38,8 @@ const useSearch = () => {
     try {
       const resp = await searchQuotes(data);
       dispatch(setSearchedQuote(resp.data));
+      replace({ query: data });
     } catch {}
-    replace({ query: data });
   };
 
   return {

@@ -21,6 +21,7 @@
     "sign_in": "Sign in",
     "forgot_password": "Forgot Password",
     "forgot_password?": "Forgot Password?",
+    "please_check_email": "Please check your email and follow the instructions to activate your account",
     "enter_email": "Enter the email and we’ll send an email with instructions to reset your password",
     "send_instructions": "Send Instructions",
     "back_to_login": "Back to Login",

@@ -24,9 +24,9 @@ const useMovies = () => {
     try {
       const resp = await searchMovie(data);
       const movies = resp.data;
-      dispatch(setSearchedMovies(movies));
+      dispatch(setSearchedMovies(movies.data));
+      router.replace({ query: data });
     } catch {}
-    methods.setValue('search', '');
   };
 
   return {

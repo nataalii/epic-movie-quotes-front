@@ -13,7 +13,7 @@ const VerificationNotice = () => {
     <ModalLayout
       image={<EmailSent />}
       title={t('thank_you')}
-      text={t('recover_instructions')}
+      text={t('please_check_email')}
       button={
         <Button
           item={t('go_to_my_email')}

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import useEmails from 'hooks/useEmails';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -119,7 +118,7 @@ const useMyProfile = () => {
     };
 
     verify();
-  }, []);
+  }, [router.query.token, submit]);
 
   //make email primary
   const { mutate: makePrimary } = useMutation(makePrimaryEmail, {

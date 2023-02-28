@@ -21,6 +21,9 @@
     "quote_in_georgian": "ციტატა ქართულ ენაზე",
     "save_changes": "ცვლილებების შენახვა",
     "edit_quote": "ციტატის რედაქტირება",
-    "change_photo": "შეცვალეთ სურათი"
+    "change_photo": "შეცვალეთ სურათი",
+    "delete_movie_confirmation": "დარწმუნებული ხართ რომ გსურთ ფილმის წაშლა?",
+    "delete_quote_confirmation": "დარწმუნებული ხართ რომ გსურთ ციტატის წაშლა?",
+    "cancel": "დახურვა"
 
 }

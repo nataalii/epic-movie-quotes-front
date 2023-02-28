@@ -1,11 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 import { Heart, Polygon, Quotes } from 'components/icons';
+import { EditQuote, ViewQuote } from 'components/movieList';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { viewQuote } from 'stores/modalSlice';
+import { RootState } from 'types/stateTypes';
 import { useNotifications } from '.';
 
 const Notifications = () => {
   const { formatTime, t, notifications, onSubmit } = useNotifications();
+  const dispatch = useDispatch();
+  const [notificationQuote, setNotificationQuote] = useState() as any;
+  const { viewQuoteModal, editQuoteModal } = useSelector(
+    (store: RootState) => store.modal
+  );
   return (
     <div>
+      {editQuoteModal && <EditQuote quote={notificationQuote} />}
+      {viewQuoteModal && <ViewQuote quote={notificationQuote} />}
       <div className='absolute right-[5.8rem] md:right-32 lg:right-[19rem] 2xl:right-[20.5rem] top-16'>
         <Polygon />
       </div>
@@ -24,8 +36,12 @@ const Notifications = () => {
           {notifications?.data.map((notification: any) => {
             return (
               <div
-                className='flex md:flex-row gap-2 flex-col justify-between md:items-center text-white mx-6 mt-6 px-4 py-2 border border-gray border-opacity-50 rounded-md'
+                className='flex md:flex-row gap-2 flex-col justify-between md:items-center cursor-pointer text-white mx-6 mt-6 px-4 py-2 border border-gray border-opacity-50 rounded-md'
                 key={notification.id}
+                onClick={() => {
+                  setNotificationQuote(notification.quote);
+                  dispatch(viewQuote());
+                }}
               >
                 <div className='flex gap-6'>
                   <img
@@ -65,9 +81,7 @@ const Notifications = () => {
                     </h2>
                   </div>
                   <div className='hidden lg:flex flex-col gap-6'>
-                    <h2>
-                      {formatTime(notification.created_at)} {t('minutes_ago')}
-                    </h2>
+                    <h2>{formatTime(notification.created_at)}</h2>
                     {!notification.is_read && (
                       <h2 className='text-[#198754] pl-10'>{t('new')}</h2>
                     )}

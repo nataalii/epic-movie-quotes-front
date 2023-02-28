@@ -25,6 +25,8 @@ const initialState = {
   burgerMenuModal: false,
   searchModal: false,
   notificationsModal: false,
+  deleteMovieModal: false,
+  deleteQuoteModal: false,
 };
 
 const modalSlice = createSlice({
@@ -135,9 +137,14 @@ const modalSlice = createSlice({
     notifications: (state) => {
       state.notificationsModal = !state.notificationsModal;
     },
+    deleteMovieConfirm: (state) => {
+      state.deleteMovieModal = !state.deleteMovieModal;
+    },
+    deleteQuoteConfirm: (state) => {
+      state.deleteQuoteModal = !state.deleteQuoteModal;
+    },
   },
 });
-
 export const {
   openRegisterModal,
   closeRegisterModal,
@@ -173,6 +180,8 @@ export const {
   writeQuote,
   searchModal,
   notifications,
+  deleteMovieConfirm,
+  deleteQuoteConfirm,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

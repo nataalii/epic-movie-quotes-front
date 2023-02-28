@@ -13,11 +13,23 @@ const useNotification = () => {
     refetchOnWindowFocus: false,
     retry: 0,
   });
+  console.log(notifications);
   const formatTime = (input: Date) => {
     const date = new Date(input);
-    const nowDate = new Date().getTime();
-    const formatted = Math.floor((nowDate - date.getTime()) / 1000 / 60);
-    return formatted;
+    const now = new Date();
+    const diff = Math.floor((now.getTime() - date.getTime()) / 1000);
+    if (diff < 60) {
+      return `${diff} ${t('seconds_ago')}`;
+    } else if (diff < 60 * 60) {
+      const minutes = Math.floor(diff / 60);
+      return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+    } else if (diff < 24 * 60 * 60) {
+      const hours = Math.floor(diff / (60 * 60));
+      return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+    } else {
+      const days = Math.floor(diff / (24 * 60 * 60));
+      return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+    }
   };
   const queryClient = useQueryClient();
   const onSubmit = async () => {

@@ -23,6 +23,8 @@ export interface ModalState {
   burgerMenuModal: boolean;
   notificationsModal: boolean;
   searchModal: boolean;
+  deleteMovieModal: boolean;
+  deleteQuoteModal: boolean;
 }
 
 export interface UserState {

@@ -21,8 +21,14 @@ const useMovieDetail = () => {
   const locale = router.locale as 'en' | 'ge';
   const [selectedQuoteId, setSelectedQuoteId] = useState<string | null>();
   const [quoteSelected, setQuoteSelected] = useState(false);
-  const { addQuoteModal, viewQuoteModal, editQuoteModal, editMovieModal } =
-    useSelector((store: RootState) => store.modal);
+  const {
+    addQuoteModal,
+    viewQuoteModal,
+    editQuoteModal,
+    editMovieModal,
+    deleteMovieModal,
+    deleteQuoteModal,
+  } = useSelector((store: RootState) => store.modal);
   const {
     data: movie,
     isError,
@@ -120,6 +126,8 @@ const useMovieDetail = () => {
     setQuoteSelected,
     editMovieModal,
     selectedQuoteRef,
+    deleteMovieModal,
+    deleteQuoteModal,
   };
 };
 

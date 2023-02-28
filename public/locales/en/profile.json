@@ -30,12 +30,14 @@
   "alert": "A simple alert—check it out!",
   "check_email": "Please check email to verify new address",
   "primary_email_changed": "Primary email changed succsessfully!",
-  "email_changed": "Image changed succsessfully",
+  "email_changed": "Email changed succsessfully",
   "password_changed": "Password changed succsessfully",
   "change_primary_email": "Change primary email",
   "are_you_sure": "Are you sure to make changes ?",
   "username_changed": "Username changed succsessfully",
   "changes_updated": "Changes Updated Successfully!",
   "email_verified": "Email Verified Successfully!",
-  "email_already_verified": "Email is already Verified!"
+  "email_already_verified": "Email is already Verified!",
+  "image_changed": "Image changed successfully"
+
 }

@@ -1,29 +1,27 @@
-import { GetServerSideProps } from 'next';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
 import { oauthLogin } from 'services';
+import { useRouter } from 'next/router';
 
 const OAuth = () => {
-  return <div></div>;
-};
+  const router = useRouter();
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    const params = new URLSearchParams(context.query);
-    const data = Object.fromEntries(params.entries());
-    await oauthLogin(data);
-    return {
-      redirect: {
-        destination: '/news-feed',
-        permanent: false,
-      },
-    };
-  } catch (e) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
+  const login = async () => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const data = Object.fromEntries(params.entries());
+      await oauthLogin(data);
+      router.push('/news-feed');
+    } catch (e) {
+      router.push('/');
+    }
+  };
+
+  useEffect(() => {
+    login();
+  }, []);
+
+  return <div></div>;
 };
 
 export default OAuth;

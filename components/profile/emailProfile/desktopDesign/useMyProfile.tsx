@@ -112,7 +112,7 @@ const useMyProfile = () => {
   });
 
   useEffect(() => {
-    const verify = async () => {
+    const verify = () => {
       if (router.query?.token) {
         submit(router.query.token);
       }

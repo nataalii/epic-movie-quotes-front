@@ -164,7 +164,7 @@ const RegisterModal = () => {
               size='sm:max-w-[22rem] w-[90%]'
             />
             <a
-              href='http://localhost:8000/api/google/auth/redirect'
+              href={`${process.env.NEXT_PUBLIC_API_GOOGLE_URL}/redirect`}
               className='sm:max-w-[22rem] w-[90%] '
             >
               <div className='flex justify-center gap-2 px-6 py-2 text-white rounded-md outline-1 outline-white outline -outline-offset-1'>

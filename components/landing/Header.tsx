@@ -20,7 +20,7 @@ const Header = () => {
   };
   const { t } = useTranslation('common');
   return (
-    <header className=' w-5/6 m-auto font-helvetica md:sticky top-0 z-40'>
+    <header className=' w-[93%] m-auto font-helvetica md:sticky top-0 z-40'>
       <div className='flex justify-between items-center py-6 '>
         <h2 className='uppercase font-bold '>{t('movie_quotes')}</h2>
         <div className='flex justify-center items-center gap-4 '>

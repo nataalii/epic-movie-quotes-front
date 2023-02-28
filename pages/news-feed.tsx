@@ -2,21 +2,11 @@
 import { NavBar } from 'components/navBar';
 import { SideNavBar } from 'components/sideNavBar';
 import { Post, Search } from 'components/';
-import useAuth from 'hooks/useAuth';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useNewsFeed } from 'hooks';
 const NewsFeed = () => {
-  useAuth();
-  const { replace } = useRouter();
-  useEffect(() => {
-    const searchQuery = window.location.search;
-    if (searchQuery !== '') {
-      replace('/news-feed');
-    }
-  }, []);
-
+  useNewsFeed();
   return (
     <div className='text-white'>
       <Head>
